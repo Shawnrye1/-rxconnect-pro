@@ -1246,6 +1246,132 @@
             }
         };
 
+        // Show Dashboard (fixed version)
+        function showDashboard() {
+            // Hide main website
+            document.querySelector('header').style.display = 'none';
+            document.querySelector('.hero').style.display = 'none';
+            document.querySelector('.stats').style.display = 'none';
+            document.querySelector('.features').style.display = 'none';
+            document.querySelector('.demo').style.display = 'none';
+            document.querySelector('.cta-section').style.display = 'none';
+            document.querySelector('footer').style.display = 'none';
+            
+            // Show dashboard
+            document.getElementById('dashboard').style.display = 'block';
+            
+            // Load dashboard data and create charts
+            loadDashboardData();
+            
+            // Animate progress bars
+            setTimeout(() => {
+                animateProgressBars();
+            }, 500);
+        }
+
+        // Handle Signup (fixed version)
+        function handleSignup(event) {
+            event.preventDefault();
+            
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const email = document.getElementById('signupEmail').value;
+            const company = document.getElementById('company').value;
+            const role = document.getElementById('role').value;
+            const patients = document.getElementById('patients').value;
+            const password = document.getElementById('signupPassword').value;
+            
+            if (firstName && lastName && email && company && role && patients && password) {
+                const user = {
+                    name: firstName + ' ' + lastName,
+                    email: email,
+                    company: company,
+                    role: role
+                };
+                
+                // Store session info
+                sessionStorage.setItem('userLoggedIn', 'true');
+                sessionStorage.setItem('userEmail', email);
+                sessionStorage.setItem('userName', user.name);
+                sessionStorage.setItem('userCompany', company);
+                sessionStorage.setItem('userRole', role);
+                
+                // Close modal and show dashboard
+                closeModal('signupModal');
+                showDashboard();
+                
+                // Update welcome message
+                document.getElementById('userWelcome').textContent = `Welcome, ${firstName}!`;
+                
+                // Show success message
+                setTimeout(() => {
+                    showNotification('Account created successfully! Welcome to RxConnect Pro Dashboard.', 'success');
+                }, 500);
+            }
+        }
+
+        // Logout (fixed version)
+        function logout() {
+            // Clear session
+            sessionStorage.clear();
+            
+            // Hide dashboard and show main site
+            document.getElementById('dashboard').style.display = 'none';
+            document.querySelector('header').style.display = 'block';
+            document.querySelector('.hero').style.display = 'block';
+            document.querySelector('.stats').style.display = 'block';
+            document.querySelector('.features').style.display = 'block';
+            document.querySelector('.demo').style.display = 'block';
+            document.querySelector('.cta-section').style.display = 'block';
+            document.querySelector('footer').style.display = 'block';
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Animate progress bars
+        function animateProgressBars() {
+            const progressBars = document.querySelectorAll('.progress-fill');
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 100);
+            });
+        }
+
+        // Check if user is logged in on page load
+        window.addEventListener('load', () => {
+            if (sessionStorage.getItem('userLoggedIn') === 'true') {
+                const userName = sessionStorage.getItem('userName');
+                if (document.getElementById('userWelcome')) {
+                    document.getElementById('userWelcome').textContent = `Welcome, ${userName}!`;
+                }
+                showDashboard();
+            }
+        });
+
+        // Demo data animation (simulate real-time updates)
+        function updateDashboardMetrics() {
+            if (document.getElementById('dashboard') && document.getElementById('dashboard').style.display === 'block') {
+                // Simulate metric updates
+                const metrics = document.querySelectorAll('.metric-value');
+                metrics.forEach(metric => {
+                    if (metric.classList.contains('metric-positive')) {
+                        // Add subtle pulse animation
+                        metric.style.transform = 'scale(1.02)';
+                        setTimeout(() => {
+                            metric.style.transform = 'scale(1)';
+                        }, 200);
+                    }
+                });
+            }
+        }
+
+        // Update metrics every 30 seconds for demo purposes
+        setInterval(updateDashboardMetrics, 30000);
+
         // Create Charts Function
         function createCharts() {
             createEnrollmentChart();
