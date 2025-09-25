@@ -1019,13 +1019,12 @@
                 
                 <div class="chart-container">
                     <h3>Enrollment Trends (Last 30 Days)</h3>
-                    <div style="height: 300px; display: flex; align-items: center; justify-content: center; background: #f8f9fa; border-radius: 10px;">
-                        <div style="text-align: center; color: #7f8c8d;">
-                            <div style="font-size: 3rem; margin-bottom: 10px;">📊</div>
-                            <p>Interactive Chart: Daily enrollment volume, success rates, and savings trends</p>
-                            <small>Real-time data visualization powered by your CAP/PAP automation</small>
-                        </div>
-                    </div>
+                    <canvas id="enrollmentChart" width="800" height="300"></canvas>
+                </div>
+                
+                <div class="chart-container">
+                    <h3>Patient Savings Over Time</h3>
+                    <canvas id="savingsChart" width="800" height="300"></canvas>
                 </div>
                 
                 <div class="recent-activity">
@@ -1145,7 +1144,7 @@
             }
         };
 
-        // Enhanced Dashboard Data
+        // Enhanced Dashboard Data with Chart Data
         const dashboardData = {
             monthlyMetrics: {
                 totalEnrollments: 147,
@@ -1213,16 +1212,725 @@
             ],
             chartData: {
                 enrollmentTrends: [
-                    { date: '2025-01-01', enrollments: 12, successRate: 85 },
-                    { date: '2025-01-02', enrollments: 18, successRate: 89 },
-                    { date: '2025-01-03', enrollments: 15, successRate: 91 },
-                    { date: '2025-01-04', enrollments: 22, successRate: 87 },
-                    { date: '2025-01-05', enrollments: 19, successRate: 93 },
-                    { date: '2025-01-06', enrollments: 25, successRate: 88 },
-                    { date: '2025-01-07', enrollments: 21, successRate: 90 }
+                    { date: 'Jan 1', enrollments: 12, successRate: 85, savings: 180000 },
+                    { date: 'Jan 8', enrollments: 18, successRate: 89, savings: 270000 },
+                    { date: 'Jan 15', enrollments: 15, successRate: 91, savings: 225000 },
+                    { date: 'Jan 22', enrollments: 22, successRate: 87, savings: 330000 },
+                    { date: 'Jan 29', enrollments: 19, successRate: 93, savings: 285000 },
+                    { date: 'Feb 5', enrollments: 25, successRate: 88, savings: 375000 },
+                    { date: 'Feb 12', enrollments: 21, successRate: 90, savings: 315000 },
+                    { date: 'Feb 19', enrollments: 28, successRate: 92, savings: 420000 },
+                    { date: 'Feb 26', enrollments: 24, successRate: 89, savings: 360000 },
+                    { date: 'Mar 5', enrollments: 31, successRate: 91, savings: 465000 }
+                ]
+            },
+            developmentNeeds: {
+                coreFeatures: [
+                    { item: 'Patient Management System', status: 'needed', description: 'Search, view, and manage individual patient records and enrollment history' },
+                    { item: 'Advanced Reporting Suite', status: 'needed', description: 'Custom reports, data exports, executive summaries' },
+                    { item: 'EHR Integration APIs', status: 'needed', description: 'Direct integration with Epic, Cerner, Allscripts' },
+                    { item: 'Mobile Application', status: 'needed', description: 'iOS/Android app for field coordinators and pharmacists' }
+                ],
+                dataCapture: [
+                    { item: 'Real Pharmaceutical Program APIs', status: 'needed', description: 'Live connections to manufacturer databases for real-time program status' },
+                    { item: 'Insurance Verification System', status: 'needed', description: 'Real-time insurance eligibility and benefits checking' },
+                    { item: 'Pharmacy Network Integration', status: 'needed', description: 'Direct connections to pharmacy management systems' },
+                    { item: 'Clinical Decision Support', status: 'needed', description: 'Drug interaction checking, contraindication alerts' }
+                ],
+                analytics: [
+                    { item: 'Predictive Analytics Engine', status: 'needed', description: 'Predict enrollment success probability and optimal timing' },
+                    { item: 'Financial Impact Modeling', status: 'needed', description: 'ROI calculations, budget forecasting, cost-benefit analysis' },
+                    { item: 'Population Health Analytics', status: 'needed', description: 'Demographic analysis, outcome tracking, adherence patterns' },
+                    { item: 'Competitive Intelligence', status: 'needed', description: 'Market analysis, program performance benchmarking' }
                 ]
             }
         };
+
+        // Create Charts Function
+        function createCharts() {
+            createEnrollmentChart();
+            createSavingsChart();
+        }
+
+        // Enrollment Trends Chart
+        function createEnrollmentChart() {
+            const canvas = document.getElementById('enrollmentChart');
+            const ctx = canvas.getContext('2d');
+            const data = dashboardData.chartData.enrollmentTrends;
+            
+            // Clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Chart dimensions
+            const padding = 60;
+            const chartWidth = canvas.width - 2 * padding;
+            const chartHeight = canvas.height - 2 * padding;
+            
+            // Find max values
+            const maxEnrollments = Math.max(...data.map(d => d.enrollments));
+            const maxSuccessRate = 100;
+            
+            // Set up gradients
+            const enrollmentGradient = ctx.createLinearGradient(0, padding, 0, padding + chartHeight);
+            enrollmentGradient.addColorStop(0, 'rgba(52, 152, 219, 0.8)');
+            enrollmentGradient.addColorStop(1, 'rgba(52, 152, 219, 0.1)');
+            
+            // Draw background
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw grid lines
+            ctx.strokeStyle = '#ecf0f1';
+            ctx.lineWidth = 1;
+            for (let i = 1; i <= 5; i++) {
+                const y = padding + (chartHeight / 5) * i;
+                ctx.beginPath();
+                ctx.moveTo(padding, y);
+                ctx.lineTo(padding + chartWidth, y);
+                ctx.stroke();
+            }
+            
+            // Draw enrollment bars
+            ctx.fillStyle = enrollmentGradient;
+            const barWidth = chartWidth / data.length * 0.7;
+            
+            data.forEach((item, index) => {
+                const x = padding + (chartWidth / data.length) * index + (chartWidth / data.length - barWidth) / 2;
+                const height = (item.enrollments / maxEnrollments) * chartHeight;
+                const y = padding + chartHeight - height;
+                
+                ctx.fillRect(x, y, barWidth, height);
+                
+                // Draw value labels
+                ctx.fillStyle = '#2c3e50';
+                ctx.font = '12px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText(item.enrollments.toString(), x + barWidth/2, y - 5);
+                ctx.fillText(item.date, x + barWidth/2, padding + chartHeight + 20);
+            });
+            
+            // Draw success rate line
+            ctx.strokeStyle = '#e74c3c';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            
+            data.forEach((item, index) => {
+                const x = padding + (chartWidth / data.length) * index + (chartWidth / data.length) / 2;
+                const y = padding + chartHeight - (item.successRate / maxSuccessRate) * chartHeight;
+                
+                if (index === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+                
+                // Draw dots
+                ctx.fillStyle = '#e74c3c';
+                ctx.beginPath();
+                ctx.arc(x, y, 4, 0, 2 * Math.PI);
+                ctx.fill();
+            });
+            ctx.stroke();
+            
+            // Draw legend
+            ctx.fillStyle = '#2c3e50';
+            ctx.font = '14px Arial';
+            ctx.textAlign = 'left';
+            ctx.fillText('📊 Enrollments', padding, 30);
+            ctx.fillText('📈 Success Rate %', padding + 150, 30);
+            
+            // Draw Y-axis labels
+            ctx.font = '12px Arial';
+            ctx.textAlign = 'right';
+            for (let i = 0; i <= 5; i++) {
+                const value = Math.round((maxEnrollments / 5) * (5 - i));
+                const y = padding + (chartHeight / 5) * i;
+                ctx.fillText(value.toString(), padding - 10, y + 4);
+            }
+        }
+
+        // Patient Savings Chart
+        function createSavingsChart() {
+            const canvas = document.getElementById('savingsChart');
+            const ctx = canvas.getContext('2d');
+            const data = dashboardData.chartData.enrollmentTrends;
+            
+            // Clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Chart dimensions
+            const padding = 60;
+            const chartWidth = canvas.width - 2 * padding;
+            const chartHeight = canvas.height - 2 * padding;
+            
+            // Calculate cumulative savings
+            let cumulativeSavings = 0;
+            const savingsData = data.map(item => {
+                cumulativeSavings += item.savings;
+                return { ...item, cumulative: cumulativeSavings };
+            });
+            
+            const maxSavings = Math.max(...savingsData.map(d => d.cumulative));
+            
+            // Set up gradients
+            const savingsGradient = ctx.createLinearGradient(0, padding, 0, padding + chartHeight);
+            savingsGradient.addColorStop(0, 'rgba(39, 174, 96, 0.8)');
+            savingsGradient.addColorStop(1, 'rgba(39, 174, 96, 0.1)');
+            
+            // Draw background
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw grid lines
+            ctx.strokeStyle = '#ecf0f1';
+            ctx.lineWidth = 1;
+            for (let i = 1; i <= 5; i++) {
+                const y = padding + (chartHeight / 5) * i;
+                ctx.beginPath();
+                ctx.moveTo(padding, y);
+                ctx.lineTo(padding + chartWidth, y);
+                ctx.stroke();
+            }
+            
+            // Draw area chart
+            ctx.fillStyle = savingsGradient;
+            ctx.beginPath();
+            ctx.moveTo(padding, padding + chartHeight);
+            
+            savingsData.forEach((item, index) => {
+                const x = padding + (chartWidth / data.length) * index;
+                const y = padding + chartHeight - (item.cumulative / maxSavings) * chartHeight;
+                ctx.lineTo(x, y);
+            });
+            
+            ctx.lineTo(padding + chartWidth, padding + chartHeight);
+            ctx.closePath();
+            ctx.fill();
+            
+            // Draw line
+            ctx.strokeStyle = '#27ae60';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            
+            savingsData.forEach((item, index) => {
+                const x = padding + (chartWidth / data.length) * index;
+                const y = padding + chartHeight - (item.cumulative / maxSavings) * chartHeight;
+                
+                if (index === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+                
+                // Draw dots
+                ctx.fillStyle = '#27ae60';
+                ctx.beginPath();
+                ctx.arc(x, y, 4, 0, 2 * Math.PI);
+                ctx.fill();
+            });
+            ctx.stroke();
+            
+            // Draw labels
+            ctx.fillStyle = '#2c3e50';
+            ctx.font = '14px Arial';
+            ctx.textAlign = 'left';
+            ctx.fillText('💰 Cumulative Patient Savings', padding, 30);
+            
+            // Draw Y-axis labels (in millions)
+            ctx.font = '12px Arial';
+            ctx.textAlign = 'right';
+            for (let i = 0; i <= 5; i++) {
+                const value = (maxSavings / 5) * (5 - i) / 1000000;
+                const y = padding + (chartHeight / 5) * i;
+                ctx.fillText('
+
+        // Handle Login with Demo Accounts
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            // Check against demo accounts
+            if (demoAccounts[email] && demoAccounts[email].password === password) {
+                const user = demoAccounts[email];
+                
+                // Store session info
+                sessionStorage.setItem('userLoggedIn', 'true');
+                sessionStorage.setItem('userEmail', email);
+                sessionStorage.setItem('userName', user.name);
+                sessionStorage.setItem('userCompany', user.company);
+                sessionStorage.setItem('userRole', user.role);
+                
+                // Close modal and show dashboard
+                closeModal('loginModal');
+                loadDashboardData();
+                showDashboard();
+                
+                // Update welcome message
+                document.getElementById('userWelcome').textContent = `Welcome, ${user.name}!`;
+                
+                // Show success message
+                setTimeout(() => {
+                    showNotification('Login successful! Welcome to your dashboard.', 'success');
+                }, 500);
+            } else {
+                showNotification('Invalid credentials. Try demo@rxconnectpro.com / demo123', 'error');
+            }
+        }
+
+        // Load Dashboard Data
+        function loadDashboardData() {
+            const data = dashboardData;
+            
+            // Update monthly metrics
+            document.querySelector('[data-metric="enrollments"]').textContent = data.monthlyMetrics.totalEnrollments;
+            document.querySelector('[data-metric="success-rate"]').textContent = data.monthlyMetrics.successRate + '%';
+            document.querySelector('[data-metric="processing-time"]').textContent = data.monthlyMetrics.avgProcessingTime + ' min';
+            document.querySelector('[data-metric="total-savings"]').textContent = '
+
+        // Handle Signup
+        function handleSignup(event) {
+            event.preventDefault();
+            
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const email = document.getElementById('signupEmail').value;
+            const company = document.getElementById('company').value;
+            const role = document.getElementById('role').value;
+            const patients = document.getElementById('patients').value;
+            const password = document.getElementById('signupPassword').value;
+            
+            if (firstName && lastName && email && company && role && patients && password) {
+                // Simulate account creation (replace with real API call)
+                sessionStorage.setItem('userLoggedIn', 'true');
+                sessionStorage.setItem('userEmail', email);
+                sessionStorage.setItem('userName', firstName + ' ' + lastName);
+                sessionStorage.setItem('userCompany', company);
+                sessionStorage.setItem('userRole', role);
+                
+                // Close modal and show dashboard
+                closeModal('signupModal');
+                showDashboard();
+                
+                // Update welcome message
+                document.getElementById('userWelcome').textContent = `Welcome, ${firstName}!`;
+                
+                // Show success message
+                setTimeout(() => {
+                    alert('Account created successfully! Welcome to RxConnect Pro Dashboard.');
+                }, 500);
+            }
+        }
+
+        // Show Dashboard
+        function showDashboard() {
+            // Hide main website
+            document.querySelector('header').style.display = 'none';
+            document.querySelector('.hero').style.display = 'none';
+            document.querySelector('.stats').style.display = 'none';
+            document.querySelector('.features').style.display = 'none';
+            document.querySelector('.demo').style.display = 'none';
+            document.querySelector('.cta-section').style.display = 'none';
+            document.querySelector('footer').style.display = 'none';
+            
+            // Show dashboard
+            document.getElementById('dashboard').style.display = 'block';
+            
+            // Animate progress bars
+            setTimeout(() => {
+                animateProgressBars();
+            }, 500);
+        }
+
+        // Logout
+        function logout() {
+            // Clear session
+            sessionStorage.clear();
+            
+            // Hide dashboard and show main site
+            document.getElementById('dashboard').style.display = 'none';
+            document.querySelector('header').style.display = 'block';
+            document.querySelector('.hero').style.display = 'block';
+            document.querySelector('.stats').style.display = 'block';
+            document.querySelector('.features').style.display = 'block';
+            document.querySelector('.demo').style.display = 'block';
+            document.querySelector('.cta-section').style.display = 'block';
+            document.querySelector('footer').style.display = 'block';
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Animate progress bars
+        function animateProgressBars() {
+            const progressBars = document.querySelectorAll('.progress-fill');
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 100);
+            });
+        }
+
+        // Check if user is logged in on page load
+        window.addEventListener('load', () => {
+            if (sessionStorage.getItem('userLoggedIn') === 'true') {
+                const userName = sessionStorage.getItem('userName');
+                document.getElementById('userWelcome').textContent = `Welcome, ${userName}!`;
+                showDashboard();
+            }
+        });
+
+        // Demo data animation (simulate real-time updates)
+        function updateDashboardMetrics() {
+            if (document.getElementById('dashboard').style.display === 'block') {
+                // Simulate metric updates
+                const metrics = document.querySelectorAll('.metric-value');
+                metrics.forEach(metric => {
+                    if (metric.classList.contains('metric-positive')) {
+                        // Add subtle pulse animation
+                        metric.style.transform = 'scale(1.02)';
+                        setTimeout(() => {
+                            metric.style.transform = 'scale(1)';
+                        }, 200);
+                    }
+                });
+            }
+        }
+
+        // Update metrics every 30 seconds for demo purposes
+        setInterval(updateDashboardMetrics, 30000);
+    </script>
+</body>
+</html> + (data.monthlyMetrics.totalSavings / 1000000).toFixed(1) + 'M';
+            document.querySelector('[data-metric="avg-patient"]').textContent = '
+
+        // Handle Signup
+        function handleSignup(event) {
+            event.preventDefault();
+            
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const email = document.getElementById('signupEmail').value;
+            const company = document.getElementById('company').value;
+            const role = document.getElementById('role').value;
+            const patients = document.getElementById('patients').value;
+            const password = document.getElementById('signupPassword').value;
+            
+            if (firstName && lastName && email && company && role && patients && password) {
+                // Simulate account creation (replace with real API call)
+                sessionStorage.setItem('userLoggedIn', 'true');
+                sessionStorage.setItem('userEmail', email);
+                sessionStorage.setItem('userName', firstName + ' ' + lastName);
+                sessionStorage.setItem('userCompany', company);
+                sessionStorage.setItem('userRole', role);
+                
+                // Close modal and show dashboard
+                closeModal('signupModal');
+                showDashboard();
+                
+                // Update welcome message
+                document.getElementById('userWelcome').textContent = `Welcome, ${firstName}!`;
+                
+                // Show success message
+                setTimeout(() => {
+                    alert('Account created successfully! Welcome to RxConnect Pro Dashboard.');
+                }, 500);
+            }
+        }
+
+        // Show Dashboard
+        function showDashboard() {
+            // Hide main website
+            document.querySelector('header').style.display = 'none';
+            document.querySelector('.hero').style.display = 'none';
+            document.querySelector('.stats').style.display = 'none';
+            document.querySelector('.features').style.display = 'none';
+            document.querySelector('.demo').style.display = 'none';
+            document.querySelector('.cta-section').style.display = 'none';
+            document.querySelector('footer').style.display = 'none';
+            
+            // Show dashboard
+            document.getElementById('dashboard').style.display = 'block';
+            
+            // Animate progress bars
+            setTimeout(() => {
+                animateProgressBars();
+            }, 500);
+        }
+
+        // Logout
+        function logout() {
+            // Clear session
+            sessionStorage.clear();
+            
+            // Hide dashboard and show main site
+            document.getElementById('dashboard').style.display = 'none';
+            document.querySelector('header').style.display = 'block';
+            document.querySelector('.hero').style.display = 'block';
+            document.querySelector('.stats').style.display = 'block';
+            document.querySelector('.features').style.display = 'block';
+            document.querySelector('.demo').style.display = 'block';
+            document.querySelector('.cta-section').style.display = 'block';
+            document.querySelector('footer').style.display = 'block';
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Animate progress bars
+        function animateProgressBars() {
+            const progressBars = document.querySelectorAll('.progress-fill');
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 100);
+            });
+        }
+
+        // Check if user is logged in on page load
+        window.addEventListener('load', () => {
+            if (sessionStorage.getItem('userLoggedIn') === 'true') {
+                const userName = sessionStorage.getItem('userName');
+                document.getElementById('userWelcome').textContent = `Welcome, ${userName}!`;
+                showDashboard();
+            }
+        });
+
+        // Demo data animation (simulate real-time updates)
+        function updateDashboardMetrics() {
+            if (document.getElementById('dashboard').style.display === 'block') {
+                // Simulate metric updates
+                const metrics = document.querySelectorAll('.metric-value');
+                metrics.forEach(metric => {
+                    if (metric.classList.contains('metric-positive')) {
+                        // Add subtle pulse animation
+                        metric.style.transform = 'scale(1.02)';
+                        setTimeout(() => {
+                            metric.style.transform = 'scale(1)';
+                        }, 200);
+                    }
+                });
+            }
+        }
+
+        // Update metrics every 30 seconds for demo purposes
+        setInterval(updateDashboardMetrics, 30000);
+    </script>
+</body>
+</html> + data.monthlyMetrics.avgPerPatient.toLocaleString();
+            document.querySelector('[data-metric="roi"]').textContent = data.monthlyMetrics.roi + '%';
+            document.querySelector('[data-metric="callback-rate"]').textContent = data.systemIntelligence.callbackRecognition + '%';
+            document.querySelector('[data-metric="maximizer-risk"]').textContent = data.systemIntelligence.maximizerRisk;
+            document.querySelector('[data-metric="database"]').textContent = data.systemIntelligence.databaseCoverage + '+ drugs';
+            
+            // Update top programs
+            const programsContainer = document.querySelector('[data-section="top-programs"]');
+            programsContainer.innerHTML = '';
+            data.topPrograms.slice(0, 3).forEach(program => {
+                const programHtml = `
+                    <div class="metric">
+                        <span class="metric-label">${program.name} (${program.manufacturer})</span>
+                        <span class="metric-value">${program.enrollments} enrollments</span>
+                    </div>
+                `;
+                programsContainer.innerHTML += programHtml;
+            });
+            
+            // Update recent activity
+            const activityContainer = document.querySelector('[data-section="recent-activity"]');
+            activityContainer.innerHTML = '';
+            data.recentActivity.forEach(activity => {
+                const activityHtml = `
+                    <div class="activity-item">
+                        <div class="activity-icon">${activity.icon}</div>
+                        <div class="activity-content">
+                            <div class="activity-title">${activity.title}</div>
+                            <div class="activity-subtitle">${activity.subtitle}</div>
+                        </div>
+                        <div class="activity-time">${activity.time}</div>
+                    </div>
+                `;
+                activityContainer.innerHTML += activityHtml;
+            });
+            
+            // Update progress bars
+            document.querySelector('[data-progress="success-rate"]').style.width = data.monthlyMetrics.successRate + '%';
+            document.querySelector('[data-progress="callback-rate"]').style.width = data.systemIntelligence.callbackRecognition + '%';
+        }
+
+        // Show Notification
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#27ae60' : type === 'error' ? '#e74c3c' : '#3498db'};
+                color: white;
+                padding: 15px 20px;
+                border-radius: 5px;
+                z-index: 3000;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+                animation: slideIn 0.3s ease;
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+
+        // Add CSS for notifications
+        const notificationStyles = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+        `;
+        const styleSheet = document.createElement('style');
+        styleSheet.textContent = notificationStyles;
+        document.head.appendChild(styleSheet);
+
+        // Handle Signup
+        function handleSignup(event) {
+            event.preventDefault();
+            
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const email = document.getElementById('signupEmail').value;
+            const company = document.getElementById('company').value;
+            const role = document.getElementById('role').value;
+            const patients = document.getElementById('patients').value;
+            const password = document.getElementById('signupPassword').value;
+            
+            if (firstName && lastName && email && company && role && patients && password) {
+                // Simulate account creation (replace with real API call)
+                sessionStorage.setItem('userLoggedIn', 'true');
+                sessionStorage.setItem('userEmail', email);
+                sessionStorage.setItem('userName', firstName + ' ' + lastName);
+                sessionStorage.setItem('userCompany', company);
+                sessionStorage.setItem('userRole', role);
+                
+                // Close modal and show dashboard
+                closeModal('signupModal');
+                showDashboard();
+                
+                // Update welcome message
+                document.getElementById('userWelcome').textContent = `Welcome, ${firstName}!`;
+                
+                // Show success message
+                setTimeout(() => {
+                    alert('Account created successfully! Welcome to RxConnect Pro Dashboard.');
+                }, 500);
+            }
+        }
+
+        // Show Dashboard
+        function showDashboard() {
+            // Hide main website
+            document.querySelector('header').style.display = 'none';
+            document.querySelector('.hero').style.display = 'none';
+            document.querySelector('.stats').style.display = 'none';
+            document.querySelector('.features').style.display = 'none';
+            document.querySelector('.demo').style.display = 'none';
+            document.querySelector('.cta-section').style.display = 'none';
+            document.querySelector('footer').style.display = 'none';
+            
+            // Show dashboard
+            document.getElementById('dashboard').style.display = 'block';
+            
+            // Animate progress bars
+            setTimeout(() => {
+                animateProgressBars();
+            }, 500);
+        }
+
+        // Logout
+        function logout() {
+            // Clear session
+            sessionStorage.clear();
+            
+            // Hide dashboard and show main site
+            document.getElementById('dashboard').style.display = 'none';
+            document.querySelector('header').style.display = 'block';
+            document.querySelector('.hero').style.display = 'block';
+            document.querySelector('.stats').style.display = 'block';
+            document.querySelector('.features').style.display = 'block';
+            document.querySelector('.demo').style.display = 'block';
+            document.querySelector('.cta-section').style.display = 'block';
+            document.querySelector('footer').style.display = 'block';
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Animate progress bars
+        function animateProgressBars() {
+            const progressBars = document.querySelectorAll('.progress-fill');
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 100);
+            });
+        }
+
+        // Check if user is logged in on page load
+        window.addEventListener('load', () => {
+            if (sessionStorage.getItem('userLoggedIn') === 'true') {
+                const userName = sessionStorage.getItem('userName');
+                document.getElementById('userWelcome').textContent = `Welcome, ${userName}!`;
+                showDashboard();
+            }
+        });
+
+        // Demo data animation (simulate real-time updates)
+        function updateDashboardMetrics() {
+            if (document.getElementById('dashboard').style.display === 'block') {
+                // Simulate metric updates
+                const metrics = document.querySelectorAll('.metric-value');
+                metrics.forEach(metric => {
+                    if (metric.classList.contains('metric-positive')) {
+                        // Add subtle pulse animation
+                        metric.style.transform = 'scale(1.02)';
+                        setTimeout(() => {
+                            metric.style.transform = 'scale(1)';
+                        }, 200);
+                    }
+                });
+            }
+        }
+
+        // Update metrics every 30 seconds for demo purposes
+        setInterval(updateDashboardMetrics, 30000);
+    </script>
+</body>
+</html> + value.toFixed(1) + 'M', padding - 10, y + 4);
+            }
+            
+            // Draw X-axis labels
+            ctx.textAlign = 'center';
+            data.forEach((item, index) => {
+                const x = padding + (chartWidth / data.length) * index;
+                ctx.fillText(item.date, x, padding + chartHeight + 20);
+            });
+        }
 
         // Handle Login with Demo Accounts
         function handleLogin(event) {
