@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RxConnect Pro - AI-Powered CAP/PAP Enrollment Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .demo-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #ecf0f1;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+        
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn-secondary:hover {
+            background: white;
+            color: #667eea;
+        }
+        
+        /* Stats Section */
+        .stats {
+            background: #ecf0f1;
+            padding: 60px 0;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #3498db;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #2c3e50;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+        
+        .feature-card {
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: white;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+        
+        /* Demo Section */
+        .demo {
+            background: #f8f9fa;
+            padding: 80px 0;
+        }
+        
+        .demo-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .demo-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #2c3e50;
+        }
+        
+        .demo-features {
+            list-style: none;
+            margin: 2rem 0;
+        }
+        
+        .demo-features li {
+            padding: 0.5rem 0;
+            padding-left: 2rem;
+            position: relative;
+        }
+        
+        .demo-features li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .demo-video {
+            background: #2c3e50;
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            color: white;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1rem;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section a {
+            color: #ecf0f1;
+            text-decoration: none;
+        }
+        
+        .footer-section a:hover {
+            color: #3498db;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .btn-login, .btn-signup {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.3);
+            transition: all 0.3s;
+        }
+        
+        .btn-login:hover, .btn-signup:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-1px);
+        }
+        
+        .btn-signup {
+            background: #e74c3c;
+            border: 1px solid #e74c3c;
+        }
+        
+        .btn-signup:hover {
+            background: #c0392b;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            animation: modalSlideIn 0.3s ease;
+        }
+        
+        @keyframes modalSlideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .modal-header {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 20px;
+            border-radius: 15px 15px 0 0;
+            position: relative;
+        }
+        
+        .modal-header h2 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+        
+        .close {
+            color: white;
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+        
+        .close:hover {
+            opacity: 0.7;
+        }
+        
+        .modal-body {
+            padding: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ecf0f1;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+        
+        .form-footer {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #ecf0f1;
+        }
+        
+        .form-footer a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        /* Dashboard Styles */
+        .dashboard {
+            display: none;
+            min-height: 100vh;
+            background: #f8f9fa;
+        }
+        
+        .dashboard-header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 20px 0;
+        }
+        
+        .dashboard-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .dashboard-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logout-btn {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .logout-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .dashboard-content {
+            padding: 40px 0;
+        }
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .dashboard-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .dashboard-card h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .metric-label {
+            color: #7f8c8d;
+            font-weight: 500;
+        }
+        
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .metric-positive {
+            color: #27ae60;
+        }
+        
+        .metric-warning {
+            color: #f39c12;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #ecf0f1;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            transition: width 0.3s ease;
+        }
+        
+        .chart-container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .recent-activity {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .activity-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #ecf0f1;
+        }
+        
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+        
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 0.9rem;
+        }
+        
+        .activity-content {
+            flex: 1;
+        }
+        
+        .activity-title {
+            font-weight: 500;
+            color: #2c3e50;
+        }
+        
+        .activity-subtitle {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
+        .activity-time {
+            color: #bdc3c7;
+            font-size: 0.8rem;
+        }
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .demo-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">RxConnect Pro</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#demo">Demo</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#" onclick="showLogin()" class="btn-login">Login</a></li>
+                <li><a href="#" onclick="showSignup()" class="btn-signup">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <h1>AI-Powered CAP/PAP Enrollment</h1>
+            <p>Revolutionize specialty medication access with intelligent automation that recognizes returning patients, checks real-time eligibility, and processes enrollments seamlessly.</p>
+            <div class="cta-buttons">
+                <a href="#demo" class="btn btn-primary">See Live Demo</a>
+                <a href="#contact" class="btn btn-secondary">Schedule Consultation</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">500+</div>
+                    <h3>Specialty Medications</h3>
+                    <p>Comprehensive database with real-time program intelligence</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">$15K</div>
+                    <h3>Average Annual Savings</h3>
+                    <p>Per patient through manufacturer assistance programs</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">85%</div>
+                    <h3>Enrollment Success Rate</h3>
+                    <p>With intelligent callback recognition and guidance</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">24/7</div>
+                    <h3>Automated Processing</h3>
+                    <p>AI handles inquiries and enrollments around the clock</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">Intelligent Automation Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🧠</div>
+                    <h3>Smart Callback Recognition</h3>
+                    <p>AI instantly recognizes returning callers, recalls their medication and program details, and provides personalized service without repetitive data collection.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3>Real-Time Eligibility</h3>
+                    <p>Live database integration checks program availability, maximizer risk levels, and provides current enrollment links and requirements.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <h3>Automated Enrollment</h3>
+                    <p>Captures insurance card details, processes applications, and automatically notifies pharmacies with complete enrollment information.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚠️</div>
+                    <h3>Risk Assessment</h3>
+                    <p>Identifies maximizer/accumulator insurance plans, provides strategic timing guidance, and warns about potential program restrictions.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔗</div>
+                    <h3>Direct Program Access</h3>
+                    <p>Provides manufacturer-specific enrollment URLs, phone numbers, and step-by-step guidance for immediate program access.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Comprehensive Tracking</h3>
+                    <p>Full audit trail of eligibility checks, enrollments, and pharmacy notifications with detailed reporting capabilities.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="demo" class="demo">
+        <div class="container">
+            <div class="demo-content">
+                <div class="demo-text">
+                    <h2>See the Platform in Action</h2>
+                    <p>Our AI system handles complex CAP/PAP scenarios with intelligence that rivals human specialists, but operates at scale 24/7.</p>
+                    
+                    <ul class="demo-features">
+                        <li>Recognizes "Jane Smith" calling back about HUMIRA</li>
+                        <li>Provides direct enrollment URL and savings information</li>
+                        <li>Captures insurance card details for real-time processing</li>
+                        <li>Sends automatic pharmacy notifications with patient data</li>
+                        <li>Tracks enrollment status and follow-up requirements</li>
+                        <li>Handles new eligibility checks for unknown callers</li>
+                    </ul>
+                    
+                    <a href="#contact" class="btn btn-primary">Request Live Demo</a>
+                </div>
+                
+                <div class="demo-video">
+                    <div>
+                        <h3>Live System Demo</h3>
+                        <p>Interactive demonstration of callback recognition, eligibility checking, and automated enrollment processing</p>
+                        <br>
+                        <a href="#contact" class="btn btn-secondary">Schedule Demo Call</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>Transform Your CAP/PAP Operations</h2>
+            <p>Join leading healthcare organizations using AI to streamline specialty medication access and improve patient outcomes.</p>
+            <div class="cta-buttons">
+                <a href="#contact" class="btn btn-primary">Get Started Today</a>
+                <a href="#contact" class="btn btn-secondary">Schedule Consultation</a>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li>Email: info@rxconnectpro.com</li>
+                        <li>Phone: (555) 123-4567</li>
+                        <li>Demo: schedule@rxconnectpro.com</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Solutions</h3>
+                    <ul>
+                        <li><a href="#">CAP/PAP Automation</a></li>
+                        <li><a href="#">Callback Recognition</a></li>
+                        <li><a href="#">Pharmacy Integration</a></li>
+                        <li><a href="#">Reporting Dashboard</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">API Documentation</a></li>
+                        <li><a href="#">Integration Guide</a></li>
+                        <li><a href="#">Best Practices</a></li>
+                        <li><a href="#">Support Center</a></li>
+                    </ul>
+                </div>
+            </div>
+            <p>&copy; 2025 RxConnect Pro. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Login to Your Dashboard</h2>
+                <span class="close" onclick="closeModal('loginModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label for="loginEmail">Email Address</label>
+                        <input type="email" id="loginEmail" required placeholder="your@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" required placeholder="Enter your password">
+                    </div>
+                    <button type="submit" class="submit-btn">Login to Dashboard</button>
+                </form>
+                <div class="form-footer">
+                    <p>Don't have an account? <a href="#" onclick="switchModal('loginModal', 'signupModal')">Sign up here</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Create Your Account</h2>
+                <span class="close" onclick="closeModal('signupModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form onsubmit="handleSignup(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" id="firstName" required placeholder="John">
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" id="lastName" required placeholder="Smith">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupEmail">Email Address</label>
+                        <input type="email" id="signupEmail" required placeholder="your@company.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="company">Company/Organization</label>
+                        <input type="text" id="company" required placeholder="Healthcare System ABC">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="role">Your Role</label>
+                            <select id="role" required>
+                                <option value="">Select Role</option>
+                                <option value="pharmacy_director">Pharmacy Director</option>
+                                <option value="clinical_pharmacist">Clinical Pharmacist</option>
+                                <option value="access_coordinator">Patient Access Coordinator</option>
+                                <option value="administrator">Administrator</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="patients">Monthly Patients</label>
+                            <select id="patients" required>
+                                <option value="">Select Volume</option>
+                                <option value="1-50">1-50 patients</option>
+                                <option value="51-200">51-200 patients</option>
+                                <option value="201-500">201-500 patients</option>
+                                <option value="500+">500+ patients</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupPassword">Password</label>
+                        <input type="password" id="signupPassword" required placeholder="Create a strong password">
+                    </div>
+                    <button type="submit" class="submit-btn">Create Account & Access Dashboard</button>
+                </form>
+                <div class="form-footer">
+                    <p>Already have an account? <a href="#" onclick="switchModal('signupModal', 'loginModal')">Login here</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboard" class="dashboard">
+        <div class="dashboard-header">
+            <div class="container">
+                <div class="dashboard-nav">
+                    <div class="dashboard-title">RxConnect Pro Dashboard</div>
+                    <div class="user-menu">
+                        <span id="userWelcome">Welcome, Healthcare Professional!</span>
+                        <button class="logout-btn" onclick="logout()">Logout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="dashboard-content">
+            <div class="container">
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <h3>This Month's Performance</h3>
+                        <div class="metric">
+                            <span class="metric-label">Total Enrollments</span>
+                            <span class="metric-value metric-positive">147</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Success Rate</span>
+                            <span class="metric-value metric-positive">89%</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Avg. Processing Time</span>
+                            <span class="metric-value">2.3 min</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 89%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <h3>Patient Savings Impact</h3>
+                        <div class="metric">
+                            <span class="metric-label">Total Savings Generated</span>
+                            <span class="metric-value metric-positive">$2.1M</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Avg. per Patient</span>
+                            <span class="metric-value">$14,285</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">ROI vs Manual Process</span>
+                            <span class="metric-value metric-positive">340%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <h3>System Intelligence</h3>
+                        <div class="metric">
+                            <span class="metric-label">Callback Recognition Rate</span>
+                            <span class="metric-value metric-positive">94%</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Maximizer Risk Identified</span>
+                            <span class="metric-value metric-warning">23</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Database Coverage</span>
+                            <span class="metric-value">500+ drugs</span>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <h3>Top Performing Programs</h3>
+                        <div class="metric">
+                            <span class="metric-label">HUMIRA (AbbVie)</span>
+                            <span class="metric-value">34 enrollments</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">SKYRIZI (AbbVie)</span>
+                            <span class="metric-value">28 enrollments</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">COSENTYX (Novartis)</span>
+                            <span class="metric-value">19 enrollments</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chart-container">
+                    <h3>Enrollment Trends (Last 30 Days)</h3>
+                    <div style="height: 300px; display: flex; align-items: center; justify-content: center; background: #f8f9fa; border-radius: 10px;">
+                        <div style="text-align: center; color: #7f8c8d;">
+                            <div style="font-size: 3rem; margin-bottom: 10px;">📊</div>
+                            <p>Interactive Chart: Daily enrollment volume, success rates, and savings trends</p>
+                            <small>Real-time data visualization powered by your CAP/PAP automation</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="recent-activity">
+                    <h3>Recent Activity</h3>
+                    <div class="activity-item">
+                        <div class="activity-icon">✓</div>
+                        <div class="activity-content">
+                            <div class="activity-title">Jane Smith enrolled in HUMIRA CAP program</div>
+                            <div class="activity-subtitle">$15,000 annual savings • Pharmacy notified automatically</div>
+                        </div>
+                        <div class="activity-time">2 hours ago</div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon">⚠</div>
+                        <div class="activity-content">
+                            <div class="activity-title">High maximizer risk detected for SKYRIZI patient</div>
+                            <div class="activity-subtitle">Recommended immediate enrollment • Front-loading strategy suggested</div>
+                        </div>
+                        <div class="activity-time">4 hours ago</div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon">🔄</div>
+                        <div class="activity-content">
+                            <div class="activity-title">John Doe callback recognized automatically</div>
+                            <div class="activity-subtitle">System identified previous SKYRIZI inquiry • Streamlined enrollment</div>
+                        </div>
+                        <div class="activity-time">6 hours ago</div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon">📧</div>
+                        <div class="activity-content">
+                            <div class="activity-title">Pharmacy notification sent for ENBREL enrollment</div>
+                            <div class="activity-subtitle">Complete insurance details transmitted • Ready for fill</div>
+                        </div>
+                        <div class="activity-time">8 hours ago</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Header background change on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(44, 62, 80, 0.95)';
+            } else {
+                header.style.background = 'linear-gradient(135deg, #2c3e50 0%, #3498db 100%)';
+            }
+        });
+
+        // Modal Functions
+        function showLogin() {
+            document.getElementById('loginModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function showSignup() {
+            document.getElementById('signupModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function switchModal(fromModal, toModal) {
+            document.getElementById(fromModal).style.display = 'none';
+            document.getElementById(toModal).style.display = 'block';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modals = ['loginModal', 'signupModal'];
+            modals.forEach(modalId => {
+                const modal = document.getElementById(modalId);
+                if (event.target === modal) {
+                    closeModal(modalId);
+                }
+            });
+        }
+
+        // Handle Login
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            // Simulate authentication (replace with real API call)
+            if (email && password) {
+                // Store session info (replace with real session management)
+                sessionStorage.setItem('userLoggedIn', 'true');
+                sessionStorage.setItem('userEmail', email);
+                sessionStorage.setItem('userName', email.split('@')[0]);
+                
+                // Close modal and show dashboard
+                closeModal('loginModal');
+                showDashboard();
+                
+                // Update welcome message
+                document.getElementById('userWelcome').textContent = `Welcome, ${email.split('@')[0]}!`;
+            }
+        }
+
+        // Handle Signup
+        function handleSignup(event) {
+            event.preventDefault();
+            
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const email = document.getElementById('signupEmail').value;
+            const company = document.getElementById('company').value;
+            const role = document.getElementById('role').value;
+            const patients = document.getElementById('patients').value;
+            const password = document.getElementById('signupPassword').value;
+            
+            if (firstName && lastName && email && company && role && patients && password) {
+                // Simulate account creation (replace with real API call)
+                sessionStorage.setItem('userLoggedIn', 'true');
+                sessionStorage.setItem('userEmail', email);
+                sessionStorage.setItem('userName', firstName + ' ' + lastName);
+                sessionStorage.setItem('userCompany', company);
+                sessionStorage.setItem('userRole', role);
+                
+                // Close modal and show dashboard
+                closeModal('signupModal');
+                showDashboard();
+                
+                // Update welcome message
+                document.getElementById('userWelcome').textContent = `Welcome, ${firstName}!`;
+                
+                // Show success message
+                setTimeout(() => {
+                    alert('Account created successfully! Welcome to RxConnect Pro Dashboard.');
+                }, 500);
+            }
+        }
+
+        // Show Dashboard
+        function showDashboard() {
+            // Hide main website
+            document.querySelector('header').style.display = 'none';
+            document.querySelector('.hero').style.display = 'none';
+            document.querySelector('.stats').style.display = 'none';
+            document.querySelector('.features').style.display = 'none';
+            document.querySelector('.demo').style.display = 'none';
+            document.querySelector('.cta-section').style.display = 'none';
+            document.querySelector('footer').style.display = 'none';
+            
+            // Show dashboard
+            document.getElementById('dashboard').style.display = 'block';
+            
+            // Animate progress bars
+            setTimeout(() => {
+                animateProgressBars();
+            }, 500);
+        }
+
+        // Logout
+        function logout() {
+            // Clear session
+            sessionStorage.clear();
+            
+            // Hide dashboard and show main site
+            document.getElementById('dashboard').style.display = 'none';
+            document.querySelector('header').style.display = 'block';
+            document.querySelector('.hero').style.display = 'block';
+            document.querySelector('.stats').style.display = 'block';
+            document.querySelector('.features').style.display = 'block';
+            document.querySelector('.demo').style.display = 'block';
+            document.querySelector('.cta-section').style.display = 'block';
+            document.querySelector('footer').style.display = 'block';
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Animate progress bars
+        function animateProgressBars() {
+            const progressBars = document.querySelectorAll('.progress-fill');
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 100);
+            });
+        }
+
+        // Check if user is logged in on page load
+        window.addEventListener('load', () => {
+            if (sessionStorage.getItem('userLoggedIn') === 'true') {
+                const userName = sessionStorage.getItem('userName');
+                document.getElementById('userWelcome').textContent = `Welcome, ${userName}!`;
+                showDashboard();
+            }
+        });
+
+        // Demo data animation (simulate real-time updates)
+        function updateDashboardMetrics() {
+            if (document.getElementById('dashboard').style.display === 'block') {
+                // Simulate metric updates
+                const metrics = document.querySelectorAll('.metric-value');
+                metrics.forEach(metric => {
+                    if (metric.classList.contains('metric-positive')) {
+                        // Add subtle pulse animation
+                        metric.style.transform = 'scale(1.02)';
+                        setTimeout(() => {
+                            metric.style.transform = 'scale(1)';
+                        }, 200);
+                    }
+                });
+            }
+        }
+
+        // Update metrics every 30 seconds for demo purposes
+        setInterval(updateDashboardMetrics, 30000);
+    </script>
+</body>
+</html>
