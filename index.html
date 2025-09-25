@@ -948,18 +948,18 @@
                         <h3>This Month's Performance</h3>
                         <div class="metric">
                             <span class="metric-label">Total Enrollments</span>
-                            <span class="metric-value metric-positive">147</span>
+                            <span class="metric-value metric-positive" data-metric="enrollments">147</span>
                         </div>
                         <div class="metric">
                             <span class="metric-label">Success Rate</span>
-                            <span class="metric-value metric-positive">89%</span>
+                            <span class="metric-value metric-positive" data-metric="success-rate">89%</span>
                         </div>
                         <div class="metric">
                             <span class="metric-label">Avg. Processing Time</span>
-                            <span class="metric-value">2.3 min</span>
+                            <span class="metric-value" data-metric="processing-time">2.3 min</span>
                         </div>
                         <div class="progress-bar">
-                            <div class="progress-fill" style="width: 89%"></div>
+                            <div class="progress-fill" data-progress="success-rate" style="width: 89%"></div>
                         </div>
                     </div>
                     
@@ -967,15 +967,15 @@
                         <h3>Patient Savings Impact</h3>
                         <div class="metric">
                             <span class="metric-label">Total Savings Generated</span>
-                            <span class="metric-value metric-positive">$2.1M</span>
+                            <span class="metric-value metric-positive" data-metric="total-savings">$2.1M</span>
                         </div>
                         <div class="metric">
                             <span class="metric-label">Avg. per Patient</span>
-                            <span class="metric-value">$14,285</span>
+                            <span class="metric-value" data-metric="avg-patient">$14,285</span>
                         </div>
                         <div class="metric">
                             <span class="metric-label">ROI vs Manual Process</span>
-                            <span class="metric-value metric-positive">340%</span>
+                            <span class="metric-value metric-positive" data-metric="roi">340%</span>
                         </div>
                     </div>
                     
@@ -983,31 +983,36 @@
                         <h3>System Intelligence</h3>
                         <div class="metric">
                             <span class="metric-label">Callback Recognition Rate</span>
-                            <span class="metric-value metric-positive">94%</span>
+                            <span class="metric-value metric-positive" data-metric="callback-rate">94%</span>
                         </div>
                         <div class="metric">
                             <span class="metric-label">Maximizer Risk Identified</span>
-                            <span class="metric-value metric-warning">23</span>
+                            <span class="metric-value metric-warning" data-metric="maximizer-risk">23</span>
                         </div>
                         <div class="metric">
                             <span class="metric-label">Database Coverage</span>
-                            <span class="metric-value">500+ drugs</span>
+                            <span class="metric-value" data-metric="database">500+ drugs</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" data-progress="callback-rate" style="width: 94%"></div>
                         </div>
                     </div>
                     
                     <div class="dashboard-card">
                         <h3>Top Performing Programs</h3>
-                        <div class="metric">
-                            <span class="metric-label">HUMIRA (AbbVie)</span>
-                            <span class="metric-value">34 enrollments</span>
-                        </div>
-                        <div class="metric">
-                            <span class="metric-label">SKYRIZI (AbbVie)</span>
-                            <span class="metric-value">28 enrollments</span>
-                        </div>
-                        <div class="metric">
-                            <span class="metric-label">COSENTYX (Novartis)</span>
-                            <span class="metric-value">19 enrollments</span>
+                        <div data-section="top-programs">
+                            <div class="metric">
+                                <span class="metric-label">HUMIRA (AbbVie)</span>
+                                <span class="metric-value">34 enrollments</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">SKYRIZI (AbbVie)</span>
+                                <span class="metric-value">28 enrollments</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">COSENTYX (Novartis)</span>
+                                <span class="metric-value">19 enrollments</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1025,37 +1030,39 @@
                 
                 <div class="recent-activity">
                     <h3>Recent Activity</h3>
-                    <div class="activity-item">
-                        <div class="activity-icon">✓</div>
-                        <div class="activity-content">
-                            <div class="activity-title">Jane Smith enrolled in HUMIRA CAP program</div>
-                            <div class="activity-subtitle">$15,000 annual savings • Pharmacy notified automatically</div>
+                    <div data-section="recent-activity">
+                        <div class="activity-item">
+                            <div class="activity-icon">✓</div>
+                            <div class="activity-content">
+                                <div class="activity-title">Jane Smith enrolled in HUMIRA CAP program</div>
+                                <div class="activity-subtitle">$15,000 annual savings • Pharmacy notified automatically</div>
+                            </div>
+                            <div class="activity-time">2 hours ago</div>
                         </div>
-                        <div class="activity-time">2 hours ago</div>
-                    </div>
-                    <div class="activity-item">
-                        <div class="activity-icon">⚠</div>
-                        <div class="activity-content">
-                            <div class="activity-title">High maximizer risk detected for SKYRIZI patient</div>
-                            <div class="activity-subtitle">Recommended immediate enrollment • Front-loading strategy suggested</div>
+                        <div class="activity-item">
+                            <div class="activity-icon">⚠</div>
+                            <div class="activity-content">
+                                <div class="activity-title">High maximizer risk detected for SKYRIZI patient</div>
+                                <div class="activity-subtitle">Recommended immediate enrollment • Front-loading strategy suggested</div>
+                            </div>
+                            <div class="activity-time">4 hours ago</div>
                         </div>
-                        <div class="activity-time">4 hours ago</div>
-                    </div>
-                    <div class="activity-item">
-                        <div class="activity-icon">🔄</div>
-                        <div class="activity-content">
-                            <div class="activity-title">John Doe callback recognized automatically</div>
-                            <div class="activity-subtitle">System identified previous SKYRIZI inquiry • Streamlined enrollment</div>
+                        <div class="activity-item">
+                            <div class="activity-icon">🔄</div>
+                            <div class="activity-content">
+                                <div class="activity-title">John Doe callback recognized automatically</div>
+                                <div class="activity-subtitle">System identified previous SKYRIZI inquiry • Streamlined enrollment</div>
+                            </div>
+                            <div class="activity-time">6 hours ago</div>
                         </div>
-                        <div class="activity-time">6 hours ago</div>
-                    </div>
-                    <div class="activity-item">
-                        <div class="activity-icon">📧</div>
-                        <div class="activity-content">
-                            <div class="activity-title">Pharmacy notification sent for ENBREL enrollment</div>
-                            <div class="activity-subtitle">Complete insurance details transmitted • Ready for fill</div>
+                        <div class="activity-item">
+                            <div class="activity-icon">📧</div>
+                            <div class="activity-content">
+                                <div class="activity-title">Pharmacy notification sent for ENBREL enrollment</div>
+                                <div class="activity-subtitle">Complete insurance details transmitted • Ready for fill</div>
+                            </div>
+                            <div class="activity-time">8 hours ago</div>
                         </div>
-                        <div class="activity-time">8 hours ago</div>
                     </div>
                 </div>
             </div>
@@ -1116,28 +1123,468 @@
             });
         }
 
-        // Handle Login
+        // Demo Accounts Database
+        const demoAccounts = {
+            'demo@rxconnectpro.com': {
+                password: 'demo123',
+                name: 'Healthcare Professional',
+                company: 'Regional Medical Center',
+                role: 'Pharmacy Director'
+            },
+            'admin@demo.com': {
+                password: 'admin123',
+                name: 'Admin User',
+                company: 'RxConnect Pro',
+                role: 'System Administrator'
+            },
+            'test@healthcare.com': {
+                password: 'test123',
+                name: 'Jane Wilson',
+                company: 'Metro Health System',
+                role: 'Clinical Pharmacist'
+            }
+        };
+
+        // Enhanced Dashboard Data
+        const dashboardData = {
+            monthlyMetrics: {
+                totalEnrollments: 147,
+                successRate: 89,
+                avgProcessingTime: 2.3,
+                totalSavings: 2100000,
+                avgPerPatient: 14285,
+                roi: 340
+            },
+            systemIntelligence: {
+                callbackRecognition: 94,
+                maximizerRisk: 23,
+                databaseCoverage: 500
+            },
+            topPrograms: [
+                { name: 'HUMIRA', manufacturer: 'AbbVie', enrollments: 34, savings: 510000 },
+                { name: 'SKYRIZI', manufacturer: 'AbbVie', enrollments: 28, savings: 420000 },
+                { name: 'COSENTYX', manufacturer: 'Novartis', enrollments: 19, savings: 304000 },
+                { name: 'ENBREL', manufacturer: 'Amgen', enrollments: 16, savings: 192000 },
+                { name: 'STELARA', manufacturer: 'J&J', enrollments: 14, savings: 210000 }
+            ],
+            recentActivity: [
+                {
+                    icon: '✓',
+                    title: 'Jane Smith enrolled in HUMIRA CAP program',
+                    subtitle: '$15,000 annual savings • Pharmacy notified automatically',
+                    time: '2 hours ago',
+                    type: 'success'
+                },
+                {
+                    icon: '⚠',
+                    title: 'High maximizer risk detected for SKYRIZI patient',
+                    subtitle: 'Recommended immediate enrollment • Front-loading strategy suggested',
+                    time: '4 hours ago',
+                    type: 'warning'
+                },
+                {
+                    icon: '🔄',
+                    title: 'John Doe callback recognized automatically',
+                    subtitle: 'System identified previous SKYRIZI inquiry • Streamlined enrollment',
+                    time: '6 hours ago',
+                    type: 'info'
+                },
+                {
+                    icon: '📧',
+                    title: 'Pharmacy notification sent for ENBREL enrollment',
+                    subtitle: 'Complete insurance details transmitted • Ready for fill',
+                    time: '8 hours ago',
+                    type: 'success'
+                },
+                {
+                    icon: '📊',
+                    title: 'Weekly analytics report generated',
+                    subtitle: '89% success rate maintained • 12% increase in enrollments',
+                    time: '1 day ago',
+                    type: 'info'
+                },
+                {
+                    icon: '⚡',
+                    title: 'System processed 23 enrollments today',
+                    subtitle: 'Average processing time: 2.1 minutes per patient',
+                    time: '1 day ago',
+                    type: 'success'
+                }
+            ],
+            chartData: {
+                enrollmentTrends: [
+                    { date: '2025-01-01', enrollments: 12, successRate: 85 },
+                    { date: '2025-01-02', enrollments: 18, successRate: 89 },
+                    { date: '2025-01-03', enrollments: 15, successRate: 91 },
+                    { date: '2025-01-04', enrollments: 22, successRate: 87 },
+                    { date: '2025-01-05', enrollments: 19, successRate: 93 },
+                    { date: '2025-01-06', enrollments: 25, successRate: 88 },
+                    { date: '2025-01-07', enrollments: 21, successRate: 90 }
+                ]
+            }
+        };
+
+        // Handle Login with Demo Accounts
         function handleLogin(event) {
             event.preventDefault();
             
             const email = document.getElementById('loginEmail').value;
             const password = document.getElementById('loginPassword').value;
             
-            // Simulate authentication (replace with real API call)
-            if (email && password) {
-                // Store session info (replace with real session management)
+            // Check against demo accounts
+            if (demoAccounts[email] && demoAccounts[email].password === password) {
+                const user = demoAccounts[email];
+                
+                // Store session info
                 sessionStorage.setItem('userLoggedIn', 'true');
                 sessionStorage.setItem('userEmail', email);
-                sessionStorage.setItem('userName', email.split('@')[0]);
+                sessionStorage.setItem('userName', user.name);
+                sessionStorage.setItem('userCompany', user.company);
+                sessionStorage.setItem('userRole', user.role);
                 
                 // Close modal and show dashboard
                 closeModal('loginModal');
+                loadDashboardData();
                 showDashboard();
                 
                 // Update welcome message
-                document.getElementById('userWelcome').textContent = `Welcome, ${email.split('@')[0]}!`;
+                document.getElementById('userWelcome').textContent = `Welcome, ${user.name}!`;
+                
+                // Show success message
+                setTimeout(() => {
+                    showNotification('Login successful! Welcome to your dashboard.', 'success');
+                }, 500);
+            } else {
+                showNotification('Invalid credentials. Try demo@rxconnectpro.com / demo123', 'error');
             }
         }
+
+        // Load Dashboard Data
+        function loadDashboardData() {
+            const data = dashboardData;
+            
+            // Update monthly metrics
+            document.querySelector('[data-metric="enrollments"]').textContent = data.monthlyMetrics.totalEnrollments;
+            document.querySelector('[data-metric="success-rate"]').textContent = data.monthlyMetrics.successRate + '%';
+            document.querySelector('[data-metric="processing-time"]').textContent = data.monthlyMetrics.avgProcessingTime + ' min';
+            document.querySelector('[data-metric="total-savings"]').textContent = '
+
+        // Handle Signup
+        function handleSignup(event) {
+            event.preventDefault();
+            
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const email = document.getElementById('signupEmail').value;
+            const company = document.getElementById('company').value;
+            const role = document.getElementById('role').value;
+            const patients = document.getElementById('patients').value;
+            const password = document.getElementById('signupPassword').value;
+            
+            if (firstName && lastName && email && company && role && patients && password) {
+                // Simulate account creation (replace with real API call)
+                sessionStorage.setItem('userLoggedIn', 'true');
+                sessionStorage.setItem('userEmail', email);
+                sessionStorage.setItem('userName', firstName + ' ' + lastName);
+                sessionStorage.setItem('userCompany', company);
+                sessionStorage.setItem('userRole', role);
+                
+                // Close modal and show dashboard
+                closeModal('signupModal');
+                showDashboard();
+                
+                // Update welcome message
+                document.getElementById('userWelcome').textContent = `Welcome, ${firstName}!`;
+                
+                // Show success message
+                setTimeout(() => {
+                    alert('Account created successfully! Welcome to RxConnect Pro Dashboard.');
+                }, 500);
+            }
+        }
+
+        // Show Dashboard
+        function showDashboard() {
+            // Hide main website
+            document.querySelector('header').style.display = 'none';
+            document.querySelector('.hero').style.display = 'none';
+            document.querySelector('.stats').style.display = 'none';
+            document.querySelector('.features').style.display = 'none';
+            document.querySelector('.demo').style.display = 'none';
+            document.querySelector('.cta-section').style.display = 'none';
+            document.querySelector('footer').style.display = 'none';
+            
+            // Show dashboard
+            document.getElementById('dashboard').style.display = 'block';
+            
+            // Animate progress bars
+            setTimeout(() => {
+                animateProgressBars();
+            }, 500);
+        }
+
+        // Logout
+        function logout() {
+            // Clear session
+            sessionStorage.clear();
+            
+            // Hide dashboard and show main site
+            document.getElementById('dashboard').style.display = 'none';
+            document.querySelector('header').style.display = 'block';
+            document.querySelector('.hero').style.display = 'block';
+            document.querySelector('.stats').style.display = 'block';
+            document.querySelector('.features').style.display = 'block';
+            document.querySelector('.demo').style.display = 'block';
+            document.querySelector('.cta-section').style.display = 'block';
+            document.querySelector('footer').style.display = 'block';
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Animate progress bars
+        function animateProgressBars() {
+            const progressBars = document.querySelectorAll('.progress-fill');
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 100);
+            });
+        }
+
+        // Check if user is logged in on page load
+        window.addEventListener('load', () => {
+            if (sessionStorage.getItem('userLoggedIn') === 'true') {
+                const userName = sessionStorage.getItem('userName');
+                document.getElementById('userWelcome').textContent = `Welcome, ${userName}!`;
+                showDashboard();
+            }
+        });
+
+        // Demo data animation (simulate real-time updates)
+        function updateDashboardMetrics() {
+            if (document.getElementById('dashboard').style.display === 'block') {
+                // Simulate metric updates
+                const metrics = document.querySelectorAll('.metric-value');
+                metrics.forEach(metric => {
+                    if (metric.classList.contains('metric-positive')) {
+                        // Add subtle pulse animation
+                        metric.style.transform = 'scale(1.02)';
+                        setTimeout(() => {
+                            metric.style.transform = 'scale(1)';
+                        }, 200);
+                    }
+                });
+            }
+        }
+
+        // Update metrics every 30 seconds for demo purposes
+        setInterval(updateDashboardMetrics, 30000);
+    </script>
+</body>
+</html> + (data.monthlyMetrics.totalSavings / 1000000).toFixed(1) + 'M';
+            document.querySelector('[data-metric="avg-patient"]').textContent = '
+
+        // Handle Signup
+        function handleSignup(event) {
+            event.preventDefault();
+            
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const email = document.getElementById('signupEmail').value;
+            const company = document.getElementById('company').value;
+            const role = document.getElementById('role').value;
+            const patients = document.getElementById('patients').value;
+            const password = document.getElementById('signupPassword').value;
+            
+            if (firstName && lastName && email && company && role && patients && password) {
+                // Simulate account creation (replace with real API call)
+                sessionStorage.setItem('userLoggedIn', 'true');
+                sessionStorage.setItem('userEmail', email);
+                sessionStorage.setItem('userName', firstName + ' ' + lastName);
+                sessionStorage.setItem('userCompany', company);
+                sessionStorage.setItem('userRole', role);
+                
+                // Close modal and show dashboard
+                closeModal('signupModal');
+                showDashboard();
+                
+                // Update welcome message
+                document.getElementById('userWelcome').textContent = `Welcome, ${firstName}!`;
+                
+                // Show success message
+                setTimeout(() => {
+                    alert('Account created successfully! Welcome to RxConnect Pro Dashboard.');
+                }, 500);
+            }
+        }
+
+        // Show Dashboard
+        function showDashboard() {
+            // Hide main website
+            document.querySelector('header').style.display = 'none';
+            document.querySelector('.hero').style.display = 'none';
+            document.querySelector('.stats').style.display = 'none';
+            document.querySelector('.features').style.display = 'none';
+            document.querySelector('.demo').style.display = 'none';
+            document.querySelector('.cta-section').style.display = 'none';
+            document.querySelector('footer').style.display = 'none';
+            
+            // Show dashboard
+            document.getElementById('dashboard').style.display = 'block';
+            
+            // Animate progress bars
+            setTimeout(() => {
+                animateProgressBars();
+            }, 500);
+        }
+
+        // Logout
+        function logout() {
+            // Clear session
+            sessionStorage.clear();
+            
+            // Hide dashboard and show main site
+            document.getElementById('dashboard').style.display = 'none';
+            document.querySelector('header').style.display = 'block';
+            document.querySelector('.hero').style.display = 'block';
+            document.querySelector('.stats').style.display = 'block';
+            document.querySelector('.features').style.display = 'block';
+            document.querySelector('.demo').style.display = 'block';
+            document.querySelector('.cta-section').style.display = 'block';
+            document.querySelector('footer').style.display = 'block';
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Animate progress bars
+        function animateProgressBars() {
+            const progressBars = document.querySelectorAll('.progress-fill');
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 100);
+            });
+        }
+
+        // Check if user is logged in on page load
+        window.addEventListener('load', () => {
+            if (sessionStorage.getItem('userLoggedIn') === 'true') {
+                const userName = sessionStorage.getItem('userName');
+                document.getElementById('userWelcome').textContent = `Welcome, ${userName}!`;
+                showDashboard();
+            }
+        });
+
+        // Demo data animation (simulate real-time updates)
+        function updateDashboardMetrics() {
+            if (document.getElementById('dashboard').style.display === 'block') {
+                // Simulate metric updates
+                const metrics = document.querySelectorAll('.metric-value');
+                metrics.forEach(metric => {
+                    if (metric.classList.contains('metric-positive')) {
+                        // Add subtle pulse animation
+                        metric.style.transform = 'scale(1.02)';
+                        setTimeout(() => {
+                            metric.style.transform = 'scale(1)';
+                        }, 200);
+                    }
+                });
+            }
+        }
+
+        // Update metrics every 30 seconds for demo purposes
+        setInterval(updateDashboardMetrics, 30000);
+    </script>
+</body>
+</html> + data.monthlyMetrics.avgPerPatient.toLocaleString();
+            document.querySelector('[data-metric="roi"]').textContent = data.monthlyMetrics.roi + '%';
+            document.querySelector('[data-metric="callback-rate"]').textContent = data.systemIntelligence.callbackRecognition + '%';
+            document.querySelector('[data-metric="maximizer-risk"]').textContent = data.systemIntelligence.maximizerRisk;
+            document.querySelector('[data-metric="database"]').textContent = data.systemIntelligence.databaseCoverage + '+ drugs';
+            
+            // Update top programs
+            const programsContainer = document.querySelector('[data-section="top-programs"]');
+            programsContainer.innerHTML = '';
+            data.topPrograms.slice(0, 3).forEach(program => {
+                const programHtml = `
+                    <div class="metric">
+                        <span class="metric-label">${program.name} (${program.manufacturer})</span>
+                        <span class="metric-value">${program.enrollments} enrollments</span>
+                    </div>
+                `;
+                programsContainer.innerHTML += programHtml;
+            });
+            
+            // Update recent activity
+            const activityContainer = document.querySelector('[data-section="recent-activity"]');
+            activityContainer.innerHTML = '';
+            data.recentActivity.forEach(activity => {
+                const activityHtml = `
+                    <div class="activity-item">
+                        <div class="activity-icon">${activity.icon}</div>
+                        <div class="activity-content">
+                            <div class="activity-title">${activity.title}</div>
+                            <div class="activity-subtitle">${activity.subtitle}</div>
+                        </div>
+                        <div class="activity-time">${activity.time}</div>
+                    </div>
+                `;
+                activityContainer.innerHTML += activityHtml;
+            });
+            
+            // Update progress bars
+            document.querySelector('[data-progress="success-rate"]').style.width = data.monthlyMetrics.successRate + '%';
+            document.querySelector('[data-progress="callback-rate"]').style.width = data.systemIntelligence.callbackRecognition + '%';
+        }
+
+        // Show Notification
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#27ae60' : type === 'error' ? '#e74c3c' : '#3498db'};
+                color: white;
+                padding: 15px 20px;
+                border-radius: 5px;
+                z-index: 3000;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+                animation: slideIn 0.3s ease;
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+
+        // Add CSS for notifications
+        const notificationStyles = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+        `;
+        const styleSheet = document.createElement('style');
+        styleSheet.textContent = notificationStyles;
+        document.head.appendChild(styleSheet);
 
         // Handle Signup
         function handleSignup(event) {
