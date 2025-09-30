@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RxConnect Pro - AI-Powered CAP/PAP Automation</title>
+    <title>Premium Dashboard - Savings & Claims Management</title>
     <style>
         * {
             margin: 0;
@@ -11,282 +11,616 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #8b5cf6;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --dark: #1e293b;
+            --gray: #64748b;
+            --light: #f1f5f9;
+            --white: #ffffff;
+            --sidebar-width: 280px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
-            color: #333;
+            color: var(--dark);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,213.3C1248,235,1344,213,1392,202.7L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            animation: wave 20s linear infinite;
+            opacity: 0.3;
         }
 
-        /* Header */
-        header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1rem 0;
+        @keyframes wave {
+            0% { transform: translateX(0) translateY(0) rotate(0deg); }
+            100% { transform: translateX(-50%) translateY(0) rotate(360deg); }
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            transition: var(--transition);
         }
 
-        nav {
+        .nav-container {
+            max-width: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #667eea;
-        }
-
-        .nav-links {
+            font-size: 1.75rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             display: flex;
-            list-style: none;
-            gap: 2rem;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .nav-links a {
-            text-decoration: none;
-            color: #333;
-            transition: color 0.3s;
+        .logo::before {
+            content: '⚡';
+            font-size: 1.5rem;
         }
 
-        .nav-links a:hover {
-            color: #667eea;
+        /* Dashboard Layout */
+        .dashboard-wrapper {
+            display: none;
+            padding-top: 70px;
+            min-height: 100vh;
+            background: var(--light);
         }
 
-        .auth-buttons {
+        .dashboard-wrapper.active {
             display: flex;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: var(--white);
+            box-shadow: 4px 0 20px rgba(0,0,0,0.05);
+            position: fixed;
+            height: calc(100vh - 70px);
+            overflow-y: auto;
+            transition: var(--transition);
+            z-index: 100;
+        }
+
+        .sidebar-header {
+            padding: 2rem 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 1rem;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
             gap: 1rem;
         }
 
-        .btn {
-            padding: 0.5rem 1.5rem;
-            border: none;
-            border-radius: 25px;
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            border: 3px solid rgba(255,255,255,0.5);
+        }
+
+        .user-info h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .user-info p {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        /* Sidebar Menu */
+        .sidebar-menu {
+            padding: 0 1rem;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 12px;
             cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
         }
 
-        .btn-primary {
-            background: #667eea;
+        .menu-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            transform: translateX(-100%);
+            transition: var(--transition);
+        }
+
+        .menu-item:hover {
+            background: var(--light);
+            transform: translateX(5px);
+        }
+
+        .menu-item.active {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
         }
 
-        .btn-primary:hover {
-            background: #5a67d8;
-            transform: translateY(-2px);
+        .menu-item.active::before {
+            transform: translateX(0);
         }
 
-        .btn-secondary {
-            background: transparent;
-            color: #667eea;
-            border: 2px solid #667eea;
-        }
-
-        .btn-secondary:hover {
-            background: #667eea;
-            color: white;
+        .menu-icon {
+            font-size: 1.25rem;
+            width: 30px;
+            text-align: center;
         }
 
         /* Main Content */
-        main {
-            margin-top: 80px;
+        .main-content {
+            margin-left: var(--sidebar-width);
+            flex: 1;
+            padding: 2rem;
+            min-height: calc(100vh - 70px);
+            transition: var(--transition);
         }
 
-        /* Hero Section */
-        .hero {
-            padding: 6rem 0;
-            text-align: center;
-            color: white;
+        .page-header {
+            margin-bottom: 2rem;
+            animation: slideDown 0.5s ease;
         }
 
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(45deg, #fff, #f0f8ff);
+        .page-title {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-        }
-
-        .hero .btn {
-            font-size: 1.1rem;
-            padding: 1rem 2rem;
-        }
-
-        /* Stats Section */
-        .stats {
-            background: white;
-            padding: 4rem 0;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .stat-card {
-            text-align: center;
-            padding: 2rem;
-            background: linear-gradient(135deg, #f8f9ff, #e6f3ff);
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #667eea;
             margin-bottom: 0.5rem;
         }
 
-        .stat-label {
-            color: #666;
+        .page-subtitle {
+            color: var(--gray);
             font-size: 1.1rem;
         }
 
-        /* Features Section */
-        .features {
-            padding: 6rem 0;
-            background: #f8f9ff;
-        }
-
-        .features h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: #333;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
-        }
-
-        .feature-card {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .feature-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .feature-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: #333;
-        }
-
-        /* Demo Section */
-        .demo {
-            padding: 6rem 0;
-            background: white;
-        }
-
-        .demo h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: #333;
-        }
-
-        .demo-grid {
+        /* Stats Cards */
+        .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
         }
 
-        .demo-card {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
             color: white;
-            padding: 2rem;
-            border-radius: 15px;
-            text-align: center;
-        }
-
-        /* CTA Section */
-        .cta {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 4rem 0;
-            text-align: center;
-            color: white;
-        }
-
-        .cta h2 {
-            font-size: 2.5rem;
             margin-bottom: 1rem;
         }
 
-        .cta p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 0.25rem;
         }
 
-        /* Footer */
-        footer {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            color: #333;
-            padding: 3rem 0;
-            text-align: center;
-            box-shadow: 0 -2px 20px rgba(0,0,0,0.1);
+        .stat-label {
+            color: var(--gray);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stat-change {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .stat-change.positive {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+        }
+
+        .stat-change.negative {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger);
+        }
+
+        /* Charts Section */
+        .chart-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .chart-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .chart-options {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .chart-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--light);
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.85rem;
+        }
+
+        .chart-btn:hover,
+        .chart-btn.active {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-color: transparent;
+        }
+
+        canvas {
+            width: 100% !important;
+            height: 400px !important;
+            border-radius: 12px;
+        }
+
+        /* Tables */
+        .table-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            overflow-x: auto;
+            animation: fadeInUp 0.7s ease;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: var(--light);
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: var(--gray);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--light);
+        }
+
+        tr:hover {
+            background: rgba(99, 102, 241, 0.05);
+        }
+
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .status-active {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+        }
+
+        .status-pending {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--warning);
+        }
+
+        .status-inactive {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger);
         }
 
         /* Modal Styles */
         .modal {
             display: none;
             position: fixed;
-            z-index: 2000;
-            left: 0;
             top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+            animation: fadeIn 0.3s;
+        }
+
+        .modal.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .modal-content {
-            background-color: white;
-            margin: 5% auto;
-            padding: 2rem;
-            border-radius: 15px;
+            background: white;
+            padding: 3rem;
+            border-radius: 24px;
             width: 90%;
-            max-width: 400px;
+            max-width: 450px;
+            animation: slideUp 0.3s;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             position: relative;
-            animation: modalSlideIn 0.3s ease-out;
         }
 
-        @keyframes modalSlideIn {
+        .modal-header {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .modal-header h2 {
+            font-size: 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--gray);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--light);
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: var(--transition);
+            background: var(--light);
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--light);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            text-align: center;
+            padding: 6rem 2rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+            animation: slideDown 0.8s ease;
+        }
+
+        .hero-section p {
+            font-size: 1.5rem;
+            opacity: 0.95;
+            margin-bottom: 2rem;
+            animation: slideUp 0.8s ease;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            animation: fadeIn 1s ease;
+        }
+
+        /* Mobile Toggle */
+        .mobile-toggle {
+            display: none;
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+            cursor: pointer;
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(-50px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
@@ -294,869 +628,926 @@
             }
         }
 
-        .close {
-            position: absolute;
-            right: 1rem;
-            top: 1rem;
-            font-size: 2rem;
-            cursor: pointer;
-            color: #aaa;
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .close:hover {
-            color: #000;
-        }
-
-        .modal h2 {
-            margin-bottom: 1.5rem;
-            color: #333;
-            text-align: center;
-        }
-
-        .form-group {
-            margin-bottom: 1rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #555;
-        }
-
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 0.75rem;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            font-size: 1rem;
-        }
-
-        .form-group input:focus, .form-group select:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-
-        .modal .btn {
-            width: 100%;
-            padding: 0.75rem;
-            margin-top: 1rem;
-            font-size: 1rem;
-        }
-
-        /* Dashboard Styles */
-        .dashboard {
-            display: none;
-            background: #f5f7fa;
-            min-height: 100vh;
-            padding-top: 80px;
-        }
-
-        .dashboard-header {
-            background: white;
-            padding: 2rem 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin-bottom: 2rem;
-        }
-
-        .dashboard-title {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .dashboard-title h1 {
-            color: #333;
-            font-size: 2rem;
-        }
-
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .logout-btn {
-            background: #dc3545;
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .logout-btn:hover {
-            background: #c82333;
-        }
-
-        /* Dashboard Charts */
-        .charts-section {
-            margin-bottom: 2rem;
-        }
-
-        .charts-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-        }
-
-        .chart-card {
-            background: white;
-            border-radius: 10px;
-            padding: 1.5rem;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .chart-card h3 {
-            margin-bottom: 1rem;
-            color: #333;
-            font-size: 1.2rem;
-        }
-
-        .chart-container {
-            width: 100%;
-            height: 300px;
-            position: relative;
-        }
-
-        .chart-canvas {
-            width: 100%;
-            height: 100%;
-            border: 1px solid #e1e5e9;
-            border-radius: 5px;
-        }
-
-        /* Dashboard Metrics */
-        .metrics-section {
-            margin-bottom: 2rem;
-        }
-
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-        }
-
-        .metric-card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-
-        .metric-value {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #667eea;
-            margin-bottom: 0.5rem;
-        }
-
-        .metric-label {
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        /* Activity Feed */
-        .activity-section {
-            background: white;
-            border-radius: 10px;
-            padding: 1.5rem;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .activity-section h3 {
-            margin-bottom: 1rem;
-            color: #333;
-        }
-
-        .activity-item {
-            padding: 1rem;
-            border-left: 4px solid #667eea;
-            margin-bottom: 1rem;
-            background: #f8f9ff;
-            border-radius: 0 5px 5px 0;
-        }
-
-        .activity-time {
-            font-size: 0.8rem;
-            color: #666;
-            margin-bottom: 0.5rem;
-        }
-
-        .activity-text {
-            color: #333;
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
+        @media (max-width: 1024px) {
+            .sidebar {
+                transform: translateX(-100%);
             }
-
-            .nav-links {
-                display: none;
+            
+            .sidebar.active {
+                transform: translateX(0);
             }
-
-            .charts-grid {
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .mobile-toggle {
+                display: flex;
+            }
+            
+            .stats-grid {
                 grid-template-columns: 1fr;
             }
+        }
 
-            .metrics-grid {
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-section p {
+                font-size: 1.1rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .modal-content {
+                padding: 2rem;
+                margin: 1rem;
+            }
+        }
+
+        /* Loading Spinner */
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 4px solid var(--light);
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 2rem auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Success Animation */
+        .success-animation {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            z-index: 3000;
+            text-align: center;
+        }
+
+        .success-animation.active {
+            display: block;
+            animation: bounceIn 0.6s ease;
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.3);
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.1);
+            }
+            100% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <nav class="container">
-            <div class="logo">RxConnect Pro</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#features">Features</a></li>
-                <li><a href="#demo">Demo</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <div class="auth-buttons" id="authButtons">
-                <button class="btn btn-secondary" onclick="openModal('loginModal')">Login</button>
-                <button class="btn btn-primary" onclick="openModal('signupModal')">Sign Up</button>
-            </div>
-        </nav>
-    </header>
+    <!-- Animated Background -->
+    <div class="bg-animation"></div>
 
-    <!-- Main Content -->
-    <main id="mainContent">
-        <!-- Hero Section -->
-        <section class="hero" id="home">
-            <div class="container">
-                <h1>AI-Powered CAP/PAP Automation</h1>
-                <p>Streamline patient assistance programs with intelligent callback recognition and real-time enrollment processing</p>
-                <button class="btn btn-primary" onclick="openModal('signupModal')">Start Free Trial</button>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">SavingsHub Pro</div>
+            <div class="nav-buttons" id="navButtons">
+                <button class="btn btn-secondary" onclick="openModal('login')">Login</button>
+                <button class="btn btn-primary" onclick="openModal('signup')">Get Started</button>
             </div>
-        </section>
-
-        <!-- Stats Section -->
-        <section class="stats">
-            <div class="container">
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-number">500+</div>
-                        <div class="stat-label">Medications Supported</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">$15K</div>
-                        <div class="stat-label">Average Patient Savings</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">89%</div>
-                        <div class="stat-label">Enrollment Success Rate</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">94%</div>
-                        <div class="stat-label">Callback Recognition</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Features Section -->
-        <section class="features" id="features">
-            <div class="container">
-                <h2>Powerful Features</h2>
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">🤖</div>
-                        <h3>AI Callback Recognition</h3>
-                        <p>Automatically recognize returning callers and their specific medications, eliminating redundant questions and improving patient experience.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">⚡</div>
-                        <h3>Real-Time Eligibility</h3>
-                        <p>Instant eligibility checking with comprehensive database of 500+ medications and their assistance programs.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">🎯</div>
-                        <h3>Maximizer Risk Detection</h3>
-                        <p>Identify and alert about insurance maximizer plans that could impact patient benefits, with strategic recommendations.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">📊</div>
-                        <h3>Analytics Dashboard</h3>
-                        <p>Comprehensive reporting on enrollment success rates, patient savings, and program performance metrics.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">🔗</div>
-                        <h3>Pharmacy Integration</h3>
-                        <p>Direct integration with pharmacy systems for seamless enrollment processing and benefit activation.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">🛡️</div>
-                        <h3>HIPAA Compliant</h3>
-                        <p>Enterprise-grade security and compliance ensuring patient data protection and regulatory adherence.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Demo Section -->
-        <section class="demo" id="demo">
-            <div class="container">
-                <h2>See It In Action</h2>
-                <div class="demo-grid">
-                    <div class="demo-card">
-                        <h3>Callback Recognition</h3>
-                        <p>"Hi Jane! You're calling about HUMIRA. Let's continue with your enrollment."</p>
-                    </div>
-                    <div class="demo-card">
-                        <h3>Eligibility Check</h3>
-                        <p>Instant verification across 500+ medications with maximizer risk assessment.</p>
-                    </div>
-                    <div class="demo-card">
-                        <h3>Real-Time Enrollment</h3>
-                        <p>Capture insurance details and process enrollment with automatic pharmacy notification.</p>
-                    </div>
-                    <div class="demo-card">
-                        <h3>Analytics & Insights</h3>
-                        <p>Track enrollment success, patient savings, and program performance in real-time.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- CTA Section -->
-        <section class="cta">
-            <div class="container">
-                <h2>Ready to Transform Patient Assistance?</h2>
-                <p>Join healthcare organizations already saving time and improving patient outcomes</p>
-                <button class="btn btn-primary" onclick="openModal('signupModal')">Get Started Today</button>
-            </div>
-        </section>
-    </main>
-
-    <!-- Dashboard -->
-    <div class="dashboard" id="dashboard">
-        <div class="dashboard-header">
-            <div class="container">
-                <div class="dashboard-title">
-                    <h1>RxConnect Pro Dashboard</h1>
-                    <div class="user-info">
-                        <span id="userEmail">demo@rxconnectpro.com</span>
-                        <button class="logout-btn" onclick="logout()">Logout</button>
-                    </div>
-                </div>
+            <div class="nav-buttons" id="userNav" style="display: none;">
+                <button class="btn btn-secondary" onclick="logout()">Logout</button>
             </div>
         </div>
+    </nav>
 
-        <div class="container">
-            <!-- Charts Section -->
-            <div class="charts-section">
-                <div class="charts-grid">
-                    <div class="chart-card">
-                        <h3>Weekly Enrollment Trends</h3>
-                        <div class="chart-container">
-                            <canvas id="enrollmentChart" class="chart-canvas"></canvas>
-                        </div>
-                    </div>
-                    <div class="chart-card">
-                        <h3>Patient Savings Over Time</h3>
-                        <div class="chart-container">
-                            <canvas id="savingsChart" class="chart-canvas"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Metrics Section -->
-            <div class="metrics-section">
-                <div class="metrics-grid">
-                    <div class="metric-card">
-                        <div class="metric-value">147</div>
-                        <div class="metric-label">Monthly Enrollments</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value">89%</div>
-                        <div class="metric-label">Success Rate</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value">$2.1M</div>
-                        <div class="metric-label">Total Patient Savings</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value">$14,285</div>
-                        <div class="metric-label">Avg Savings per Patient</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value">94%</div>
-                        <div class="metric-label">Callback Recognition</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value">23</div>
-                        <div class="metric-label">Maximizer Risks Identified</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Activity Feed -->
-            <div class="activity-section">
-                <h3>Recent Activity</h3>
-                <div class="activity-feed">
-                    <div class="activity-item">
-                        <div class="activity-time">2 minutes ago</div>
-                        <div class="activity-text">✅ Sarah Johnson enrolled in HUMIRA CAP program - $15,000 annual savings</div>
-                    </div>
-                    <div class="activity-item">
-                        <div class="activity-time">5 minutes ago</div>
-                        <div class="activity-text">⚠️ Maximizer risk detected for Michael Chen - SKYRIZI enrollment</div>
-                    </div>
-                    <div class="activity-item">
-                        <div class="activity-time">8 minutes ago</div>
-                        <div class="activity-text">🔄 Callback recognition: Jane Smith called about HUMIRA follow-up</div>
-                    </div>
-                    <div class="activity-item">
-                        <div class="activity-time">12 minutes ago</div>
-                        <div class="activity-text">📧 Pharmacy notification sent for Robert Wilson - ENBREL enrollment</div>
-                    </div>
-                </div>
-            </div>
+    <!-- Hero Section (Landing Page) -->
+    <div class="hero-section" id="heroSection">
+        <h1>Smart Savings Management</h1>
+        <p>Track, Analyze, and Maximize Your Financial Growth</p>
+        <div class="hero-buttons">
+            <button class="btn btn-primary" onclick="openModal('login')" style="padding: 1.2rem 3rem;">
+                Start Your Journey
+            </button>
+            <button class="btn btn-secondary" onclick="openModal('signup')" style="padding: 1.2rem 3rem;">
+                Learn More
+            </button>
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer id="mainFooter" style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); color: #333; padding: 3rem 0; text-align: center; box-shadow: 0 -2px 20px rgba(0,0,0,0.1);">
-        <div class="container">
-            <div style="margin-bottom: 2rem;">
-                <div class="logo" style="color: #667eea; font-size: 1.5rem; margin-bottom: 1rem;">RxConnect Pro</div>
-                <p style="color: #333;">AI-powered CAP/PAP automation platform</p>
+    <!-- Dashboard -->
+    <div class="dashboard-wrapper" id="dashboardWrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="user-profile">
+                    <div class="user-avatar" id="userAvatar">U</div>
+                    <div class="user-info">
+                        <h3 id="sidebarUserName">User Name</h3>
+                        <p>Premium Member</p>
+                    </div>
+                </div>
             </div>
-            <div>
-                <h4 style="margin-bottom: 1rem; color: #333;">Contact Information</h4>
-                <p style="color: #333;">Email: contact@rxconnectpro.com</p>
-                <p style="color: #333;">Phone: 1-800-RXCONNECT</p>
-                <p style="color: #333;">Address: Healthcare Innovation Center, Denver, CO</p>
+            
+            <div class="sidebar-menu">
+                <div class="menu-item active" onclick="switchPage('home')">
+                    <span class="menu-icon">🏠</span>
+                    <span>Home Dashboard</span>
+                </div>
+                <div class="menu-item" onclick="switchPage('member')">
+                    <span class="menu-icon">👥</span>
+                    <span>Member Savings</span>
+                </div>
+                <div class="menu-item" onclick="switchPage('client')">
+                    <span class="menu-icon">💼</span>
+                    <span>Client Savings</span>
+                </div>
+                <div class="menu-item" onclick="switchPage('claims')">
+                    <span class="menu-icon">📋</span>
+                    <span>Claim Details</span>
+                </div>
+                <div class="menu-item" onclick="switchPage('analytics')">
+                    <span class="menu-icon">📊</span>
+                    <span>Analytics</span>
+                </div>
+                <div class="menu-item" onclick="switchPage('settings')">
+                    <span class="menu-icon">⚙️</span>
+                    <span>Settings</span>
+                </div>
             </div>
-            <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #ddd;">
-                <p style="color: #333;">&copy; 2025 RxConnect Pro. All rights reserved.</p>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Home Page -->
+            <div class="page-content" id="homePage">
+                <div class="page-header">
+                    <h1 class="page-title">Welcome Back!</h1>
+                    <p class="page-subtitle">Here's your financial overview for today</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">💰</div>
+                        <div class="stat-value">$124,563</div>
+                        <div class="stat-label">Total Savings</div>
+                        <div class="stat-change positive">+12.5%</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-value">1,284</div>
+                        <div class="stat-label">Active Members</div>
+                        <div class="stat-change positive">+8.2%</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📈</div>
+                        <div class="stat-value">$45,231</div>
+                        <div class="stat-label">Monthly Growth</div>
+                        <div class="stat-change positive">+23.1%</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">✅</div>
+                        <div class="stat-value">98.5%</div>
+                        <div class="stat-label">Claim Success Rate</div>
+                        <div class="stat-change positive">+2.3%</div>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3 class="chart-title">Savings Trend Analysis</h3>
+                        <div class="chart-options">
+                            <button class="chart-btn active">Monthly</button>
+                            <button class="chart-btn">Quarterly</button>
+                            <button class="chart-btn">Yearly</button>
+                        </div>
+                    </div>
+                    <canvas id="savingsChart"></canvas>
+                </div>
+
+                <div class="table-container">
+                    <h3 class="chart-title" style="margin-bottom: 1.5rem;">Recent Activities</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Member</th>
+                                <th>Type</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Sep 30, 2025</td>
+                                <td>John Smith</td>
+                                <td>Deposit</td>
+                                <td>$2,500</td>
+                                <td><span class="status-badge status-active">Completed</span></td>
+                            </tr>
+                            <tr>
+                                <td>Sep 29, 2025</td>
+                                <td>Sarah Johnson</td>
+                                <td>Claim</td>
+                                <td>$1,200</td>
+                                <td><span class="status-badge status-pending">Processing</span></td>
+                            </tr>
+                            <tr>
+                                <td>Sep 28, 2025</td>
+                                <td>Mike Wilson</td>
+                                <td>Deposit</td>
+                                <td>$3,800</td>
+                                <td><span class="status-badge status-active">Completed</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
-    </footer>
+
+            <!-- Member Savings Page -->
+            <div class="page-content" id="memberPage" style="display: none;">
+                <div class="page-header">
+                    <h1 class="page-title">Member Savings</h1>
+                    <p class="page-subtitle">Manage and track member savings accounts</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">👤</div>
+                        <div class="stat-value">$89,456</div>
+                        <div class="stat-label">Total Member Savings</div>
+                        <div class="stat-change positive">+15.3%</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📊</div>
+                        <div class="stat-value">$2,456</div>
+                        <div class="stat-label">Average Balance</div>
+                        <div class="stat-change positive">+5.7%</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🎯</div>
+                        <div class="stat-value">342</div>
+                        <div class="stat-label">Active Accounts</div>
+                        <div class="stat-change positive">+12</div>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3 class="chart-title">Member Growth Trend</h3>
+                    </div>
+                    <canvas id="memberChart"></canvas>
+                </div>
+
+                <div class="table-container">
+                    <h3 class="chart-title" style="margin-bottom: 1.5rem;">Top Members by Savings</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Member Name</th>
+                                <th>Account Type</th>
+                                <th>Balance</th>
+                                <th>Growth</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#1</td>
+                                <td>Robert Anderson</td>
+                                <td>Premium</td>
+                                <td>$12,450</td>
+                                <td style="color: var(--success);">+18.5%</td>
+                                <td><span class="status-badge status-active">Active</span></td>
+                            </tr>
+                            <tr>
+                                <td>#2</td>
+                                <td>Emily Davis</td>
+                                <td>Gold</td>
+                                <td>$10,230</td>
+                                <td style="color: var(--success);">+14.2%</td>
+                                <td><span class="status-badge status-active">Active</span></td>
+                            </tr>
+                            <tr>
+                                <td>#3</td>
+                                <td>Michael Brown</td>
+                                <td>Premium</td>
+                                <td>$9,876</td>
+                                <td style="color: var(--success);">+22.1%</td>
+                                <td><span class="status-badge status-active">Active</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Client Savings Page -->
+            <div class="page-content" id="clientPage" style="display: none;">
+                <div class="page-header">
+                    <h1 class="page-title">Client Savings</h1>
+                    <p class="page-subtitle">Corporate and institutional client accounts</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">🏢</div>
+                        <div class="stat-value">$456,789</div>
+                        <div class="stat-label">Corporate Savings</div>
+                        <div class="stat-change positive">+28.4%</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">💎</div>
+                        <div class="stat-value">85</div>
+                        <div class="stat-label">Enterprise Clients</div>
+                        <div class="stat-change positive">+7</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📈</div>
+                        <div class="stat-value">$5,374</div>
+                        <div class="stat-label">Avg. Transaction</div>
+                        <div class="stat-change positive">+9.8%</div>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3 class="chart-title">Client Portfolio Distribution</h3>
+                    </div>
+                    <canvas id="clientChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Claims Page -->
+            <div class="page-content" id="claimsPage" style="display: none;">
+                <div class="page-header">
+                    <h1 class="page-title">Claim Details</h1>
+                    <p class="page-subtitle">Process and track all claim requests</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">📝</div>
+                        <div class="stat-value">234</div>
+                        <div class="stat-label">Total Claims</div>
+                        <div class="stat-change positive">+12</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">✅</div>
+                        <div class="stat-value">198</div>
+                        <div class="stat-label">Approved</div>
+                        <div class="stat-change positive">+8</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⏱️</div>
+                        <div class="stat-value">24</div>
+                        <div class="stat-label">Pending</div>
+                        <div class="stat-change negative">+3</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">❌</div>
+                        <div class="stat-value">12</div>
+                        <div class="stat-label">Rejected</div>
+                        <div class="stat-change positive">-2</div>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <h3 class="chart-title" style="margin-bottom: 1.5rem;">Recent Claims</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Claim ID</th>
+                                <th>Member</th>
+                                <th>Type</th>
+                                <th>Amount</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#CLM-2025-234</td>
+                                <td>Lisa Martinez</td>
+                                <td>Withdrawal</td>
+                                <td>$3,500</td>
+                                <td>Sep 30, 2025</td>
+                                <td><span class="status-badge status-pending">Pending</span></td>
+                            </tr>
+                            <tr>
+                                <td>#CLM-2025-233</td>
+                                <td>David Lee</td>
+                                <td>Emergency</td>
+                                <td>$1,200</td>
+                                <td>Sep 29, 2025</td>
+                                <td><span class="status-badge status-active">Approved</span></td>
+                            </tr>
+                            <tr>
+                                <td>#CLM-2025-232</td>
+                                <td>Jennifer White</td>
+                                <td>Partial</td>
+                                <td>$800</td>
+                                <td>Sep 28, 2025</td>
+                                <td><span class="status-badge status-active">Approved</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Mobile Menu Toggle -->
+    <div class="mobile-toggle" onclick="toggleSidebar()">☰</div>
 
     <!-- Login Modal -->
-    <div id="loginModal" class="modal">
+    <div class="modal" id="loginModal">
         <div class="modal-content">
-            <span class="close" onclick="closeModal('loginModal')">&times;</span>
-            <h2>Login to Your Account</h2>
-            <form onsubmit="return handleLogin(event)">
+            <button class="close-modal" onclick="closeModal('login')" style="position: absolute; right: 1.5rem; top: 1.5rem; background: none; border: none; font-size: 2rem; cursor: pointer; color: var(--gray);">&times;</button>
+            <div class="modal-header">
+                <h2>Welcome Back</h2>
+                <p style="color: var(--gray);">Login to access your dashboard</p>
+            </div>
+            <form id="loginForm" onsubmit="handleLogin(event)">
                 <div class="form-group">
-                    <label for="loginEmail">Email</label>
-                    <input type="email" id="loginEmail" required>
+                    <label for="loginEmail">Email Address</label>
+                    <input type="email" id="loginEmail" required placeholder="you@example.com">
                 </div>
                 <div class="form-group">
                     <label for="loginPassword">Password</label>
-                    <input type="password" id="loginPassword" required>
+                    <input type="password" id="loginPassword" required placeholder="••••••••">
                 </div>
-                <button type="submit" class="btn btn-primary">Login</button>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Login to Dashboard</button>
             </form>
+            <div style="text-align: center; margin-top: 2rem; color: var(--gray);">
+                Don't have an account? <a href="#" onclick="switchModal('signup'); return false;" style="color: var(--primary); text-decoration: none; font-weight: 600;">Sign up</a>
+            </div>
         </div>
     </div>
 
     <!-- Signup Modal -->
-    <div id="signupModal" class="modal">
+    <div class="modal" id="signupModal">
         <div class="modal-content">
-            <span class="close" onclick="closeModal('signupModal')">&times;</span>
-            <h2>Create Your Account</h2>
-            <form onsubmit="return handleSignup(event)">
+            <button class="close-modal" onclick="closeModal('signup')" style="position: absolute; right: 1.5rem; top: 1.5rem; background: none; border: none; font-size: 2rem; cursor: pointer; color: var(--gray);">&times;</button>
+            <div class="modal-header">
+                <h2>Get Started</h2>
+                <p style="color: var(--gray);">Create your account in seconds</p>
+            </div>
+            <form id="signupForm" onsubmit="handleSignup(event)">
                 <div class="form-group">
-                    <label for="signupEmail">Email</label>
-                    <input type="email" id="signupEmail" required>
+                    <label for="signupName">Full Name</label>
+                    <input type="text" id="signupName" required placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email Address</label>
+                    <input type="email" id="signupEmail" required placeholder="you@example.com">
                 </div>
                 <div class="form-group">
                     <label for="signupPassword">Password</label>
-                    <input type="password" id="signupPassword" required>
+                    <input type="password" id="signupPassword" required placeholder="Create a strong password" minlength="6">
                 </div>
-                <div class="form-group">
-                    <label for="signupRole">Role</label>
-                    <select id="signupRole" required>
-                        <option value="">Select your role</option>
-                        <option value="pharmacy_director">Pharmacy Director</option>
-                        <option value="clinical_pharmacist">Clinical Pharmacist</option>
-                        <option value="healthcare_admin">Healthcare Administrator</option>
-                        <option value="other">Other</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="signupCompany">Company/Organization</label>
-                    <input type="text" id="signupCompany" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Create Account</button>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Create Account</button>
             </form>
+            <div style="text-align: center; margin-top: 2rem; color: var(--gray);">
+                Already have an account? <a href="#" onclick="switchModal('login'); return false;" style="color: var(--primary); text-decoration: none; font-weight: 600;">Login</a>
+            </div>
         </div>
     </div>
 
+    <!-- Success Animation -->
+    <div class="success-animation" id="successAnimation">
+        <div style="font-size: 4rem; margin-bottom: 1rem;">✨</div>
+        <h2 style="color: var(--primary); margin-bottom: 0.5rem;">Success!</h2>
+        <p style="color: var(--gray);">Redirecting to your dashboard...</p>
+    </div>
+
     <script>
-        // Modal Functions
-        function openModal(modalId) {
-            try {
-                document.getElementById(modalId).style.display = 'block';
-            } catch (error) {
-                console.error('Error opening modal:', error);
-            }
-        }
+        // User Management
+        let users = JSON.parse(localStorage.getItem('users')) || [
+            { email: 'demo@example.com', password: 'password123', name: 'Demo User' }
+        ];
+        
+        let currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
 
-        function closeModal(modalId) {
-            try {
-                document.getElementById(modalId).style.display = 'none';
-            } catch (error) {
-                console.error('Error closing modal:', error);
+        // Check login status on load
+        window.onload = function() {
+            if (currentUser) {
+                showDashboard();
             }
-        }
-
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            var modals = document.getElementsByClassName('modal');
-            for (var i = 0; i < modals.length; i++) {
-                if (event.target == modals[i]) {
-                    modals[i].style.display = 'none';
-                }
-            }
-        }
-
-        // Demo accounts
-        var demoAccounts = {
-            'demo@rxconnectpro.com': { password: 'demo123', role: 'admin' },
-            'admin@demo.com': { password: 'admin123', role: 'admin' },
-            'test@healthcare.com': { password: 'test123', role: 'user' }
+            initCharts();
         };
 
-        // Login Function
+        // Modal Functions
+        function openModal(type) {
+            document.getElementById(type + 'Modal').classList.add('active');
+        }
+
+        function closeModal(type) {
+            document.getElementById(type + 'Modal').classList.remove('active');
+            document.getElementById(type + 'Form').reset();
+        }
+
+        function switchModal(to) {
+            closeModal('login');
+            closeModal('signup');
+            setTimeout(() => openModal(to), 300);
+        }
+
+        // Authentication
         function handleLogin(event) {
             event.preventDefault();
             
-            try {
-                var email = document.getElementById('loginEmail').value;
-                var password = document.getElementById('loginPassword').value;
-                
-                if (demoAccounts[email] && demoAccounts[email].password === password) {
-                    // Store session
-                    sessionStorage.setItem('loggedIn', 'true');
-                    sessionStorage.setItem('userEmail', email);
-                    sessionStorage.setItem('userRole', demoAccounts[email].role);
-                    
-                    // Close modal
-                    closeModal('loginModal');
-                    
-                    // Show dashboard
-                    showDashboard();
-                    
-                    // Show success message
-                    alert('Login successful! Welcome to RxConnect Pro.');
-                } else {
-                    alert('Invalid credentials. Try demo@rxconnectpro.com / demo123');
-                }
-            } catch (error) {
-                console.error('Login error:', error);
-                alert('Login error occurred. Please try again.');
-            }
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
             
-            return false;
+            const user = users.find(u => u.email === email && u.password === password);
+            
+            if (user) {
+                currentUser = user;
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                
+                document.getElementById('successAnimation').classList.add('active');
+                
+                setTimeout(() => {
+                    document.getElementById('successAnimation').classList.remove('active');
+                    closeModal('login');
+                    showDashboard();
+                }, 2000);
+            } else {
+                alert('Invalid credentials. Try demo@example.com / password123');
+            }
         }
 
-        // Signup Function
         function handleSignup(event) {
             event.preventDefault();
             
-            try {
-                var email = document.getElementById('signupEmail').value;
-                var password = document.getElementById('signupPassword').value;
-                var role = document.getElementById('signupRole').value;
-                var company = document.getElementById('signupCompany').value;
-                
-                // Store new account (in real app, this would go to backend)
-                sessionStorage.setItem('loggedIn', 'true');
-                sessionStorage.setItem('userEmail', email);
-                sessionStorage.setItem('userRole', role);
-                sessionStorage.setItem('userCompany', company);
-                
-                // Close modal
-                closeModal('signupModal');
-                
-                // Show dashboard
-                showDashboard();
-                
-                // Show success message
-                alert('Account created successfully! Welcome to RxConnect Pro.');
-            } catch (error) {
-                console.error('Signup error:', error);
-                alert('Signup error occurred. Please try again.');
+            const name = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            
+            if (users.find(u => u.email === email)) {
+                alert('Email already exists');
+                return;
             }
             
-            return false;
+            const newUser = { email, password, name };
+            users.push(newUser);
+            localStorage.setItem('users', JSON.stringify(users));
+            
+            currentUser = newUser;
+            localStorage.setItem('currentUser', JSON.stringify(newUser));
+            
+            document.getElementById('successAnimation').classList.add('active');
+            
+            setTimeout(() => {
+                document.getElementById('successAnimation').classList.remove('active');
+                closeModal('signup');
+                showDashboard();
+            }, 2000);
         }
 
-        // Show Dashboard Function
         function showDashboard() {
-            try {
-                // Hide main content and footer
-                document.getElementById('mainContent').style.display = 'none';
-                document.getElementById('mainFooter').style.display = 'none';
-                
-                // Show dashboard
-                document.getElementById('dashboard').style.display = 'block';
-                
-                // Update user email
-                var userEmail = sessionStorage.getItem('userEmail');
-                if (userEmail) {
-                    document.getElementById('userEmail').textContent = userEmail;
-                }
-                
-                // Create charts after a brief delay to ensure DOM is ready
-                setTimeout(function() {
-                    createCharts();
-                }, 100);
-                
-            } catch (error) {
-                console.error('Error showing dashboard:', error);
-            }
+            document.getElementById('heroSection').style.display = 'none';
+            document.getElementById('dashboardWrapper').classList.add('active');
+            document.getElementById('navButtons').style.display = 'none';
+            document.getElementById('userNav').style.display = 'flex';
+            
+            // Update user info
+            document.getElementById('sidebarUserName').textContent = currentUser.name;
+            document.getElementById('userAvatar').textContent = currentUser.name.charAt(0).toUpperCase();
         }
 
-        // Logout Function
         function logout() {
-            try {
-                // Clear session
-                sessionStorage.removeItem('loggedIn');
-                sessionStorage.removeItem('userEmail');
-                sessionStorage.removeItem('userRole');
-                sessionStorage.removeItem('userCompany');
-                
-                // Hide dashboard
-                document.getElementById('dashboard').style.display = 'none';
-                
-                // Show main content and footer
-                document.getElementById('mainContent').style.display = 'block';
-                document.getElementById('mainFooter').style.display = 'block';
-                
-                alert('Logged out successfully!');
-            } catch (error) {
-                console.error('Logout error:', error);
+            currentUser = null;
+            localStorage.removeItem('currentUser');
+            document.getElementById('heroSection').style.display = 'block';
+            document.getElementById('dashboardWrapper').classList.remove('active');
+            document.getElementById('navButtons').style.display = 'flex';
+            document.getElementById('userNav').style.display = 'none';
+        }
+
+        // Page Navigation
+        function switchPage(page) {
+            // Hide all pages
+            document.querySelectorAll('.page-content').forEach(p => {
+                p.style.display = 'none';
+            });
+            
+            // Remove active from all menu items
+            document.querySelectorAll('.menu-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Show selected page
+            switch(page) {
+                case 'home':
+                    document.getElementById('homePage').style.display = 'block';
+                    break;
+                case 'member':
+                    document.getElementById('memberPage').style.display = 'block';
+                    drawMemberChart();
+                    break;
+                case 'client':
+                    document.getElementById('clientPage').style.display = 'block';
+                    drawClientChart();
+                    break;
+                case 'claims':
+                    document.getElementById('claimsPage').style.display = 'block';
+                    break;
+                default:
+                    document.getElementById('homePage').style.display = 'block';
+            }
+            
+            // Add active to clicked menu item
+            event.target.closest('.menu-item').classList.add('active');
+            
+            // Close mobile sidebar
+            if (window.innerWidth <= 1024) {
+                document.getElementById('sidebar').classList.remove('active');
             }
         }
 
-        // Create Charts Function
-        function createCharts() {
-            try {
-                createEnrollmentChart();
-                createSavingsChart();
-            } catch (error) {
-                console.error('Error creating charts:', error);
+        // Mobile sidebar toggle
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('active');
+        }
+
+        // Chart Functions
+        function initCharts() {
+            if (document.getElementById('savingsChart')) {
+                drawSavingsChart();
             }
         }
 
-        // Create Enrollment Chart
-        function createEnrollmentChart() {
-            try {
-                var canvas = document.getElementById('enrollmentChart');
-                if (!canvas) return;
-                
-                var ctx = canvas.getContext('2d');
-                var width = canvas.width = canvas.offsetWidth;
-                var height = canvas.height = canvas.offsetHeight;
-                
-                // Clear canvas
-                ctx.clearRect(0, 0, width, height);
-                
-                // Chart data
-                var data = [12, 19, 23, 31, 28, 35, 29, 41, 38, 45];
-                var labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'Mon', 'Tue', 'Wed'];
-                
-                // Chart dimensions
-                var chartWidth = width - 80;
-                var chartHeight = height - 60;
-                var chartX = 60;
-                var chartY = 20;
-                
-                // Draw background
-                ctx.fillStyle = '#f8f9fa';
-                ctx.fillRect(0, 0, width, height);
-                
-                // Draw grid lines
-                ctx.strokeStyle = '#e1e5e9';
-                ctx.lineWidth = 1;
-                
-                // Horizontal grid lines
-                for (var i = 0; i <= 5; i++) {
-                    var y = chartY + (chartHeight / 5) * i;
-                    ctx.beginPath();
-                    ctx.moveTo(chartX, y);
-                    ctx.lineTo(chartX + chartWidth, y);
-                    ctx.stroke();
-                }
-                
-                // Draw bars
-                var barWidth = chartWidth / data.length;
-                var maxValue = Math.max.apply(Math, data);
-                
-                for (var i = 0; i < data.length; i++) {
-                    var barHeight = (data[i] / maxValue) * chartHeight;
-                    var x = chartX + (i * barWidth) + (barWidth * 0.1);
-                    var y = chartY + chartHeight - barHeight;
-                    var w = barWidth * 0.8;
-                    
-                    // Create gradient
-                    var gradient = ctx.createLinearGradient(0, y, 0, y + barHeight);
-                    gradient.addColorStop(0, '#667eea');
-                    gradient.addColorStop(1, '#764ba2');
-                    
-                    ctx.fillStyle = gradient;
-                    ctx.fillRect(x, y, w, barHeight);
-                    
-                    // Add labels
-                    ctx.fillStyle = '#666';
-                    ctx.font = '12px Arial';
-                    ctx.textAlign = 'center';
-                    ctx.fillText(labels[i], x + w/2, chartY + chartHeight + 20);
-                    
-                    // Add values on bars
-                    ctx.fillStyle = '#333';
-                    ctx.font = 'bold 11px Arial';
-                    ctx.fillText(data[i], x + w/2, y - 5);
-                }
-                
-                // Y-axis labels
-                ctx.fillStyle = '#666';
-                ctx.font = '12px Arial';
-                ctx.textAlign = 'right';
-                for (var i = 0; i <= 5; i++) {
-                    var value = Math.round((maxValue / 5) * (5 - i));
-                    var y = chartY + (chartHeight / 5) * i + 5;
-                    ctx.fillText(value, chartX - 10, y);
-                }
-                
-            } catch (error) {
-                console.error('Error creating enrollment chart:', error);
-            }
-        }
-
-        // Create Savings Chart
-        function createSavingsChart() {
-            try {
-                var canvas = document.getElementById('savingsChart');
-                if (!canvas) return;
-                
-                var ctx = canvas.getContext('2d');
-                var width = canvas.width = canvas.offsetWidth;
-                var height = canvas.height = canvas.offsetHeight;
-                
-                // Clear canvas
-                ctx.clearRect(0, 0, width, height);
-                
-                // Chart data (in thousands)
-                var data = [180, 320, 450, 680, 850, 1200, 1450, 1780, 2100, 2700];
-                var labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'];
-                
-                // Chart dimensions
-                var chartWidth = width - 80;
-                var chartHeight = height - 60;
-                var chartX = 60;
-                var chartY = 20;
-                
-                // Draw background
-                ctx.fillStyle = '#f8f9fa';
-                ctx.fillRect(0, 0, width, height);
-                
-                // Draw grid lines
-                ctx.strokeStyle = '#e1e5e9';
-                ctx.lineWidth = 1;
-                
-                // Horizontal grid lines
-                for (var i = 0; i <= 5; i++) {
-                    var y = chartY + (chartHeight / 5) * i;
-                    ctx.beginPath();
-                    ctx.moveTo(chartX, y);
-                    ctx.lineTo(chartX + chartWidth, y);
-                    ctx.stroke();
-                }
-                
-                // Create area gradient
-                var gradient = ctx.createLinearGradient(0, chartY, 0, chartY + chartHeight);
-                gradient.addColorStop(0, 'rgba(102, 126, 234, 0.3)');
-                gradient.addColorStop(1, 'rgba(102, 126, 234, 0.1)');
-                
-                // Draw area
-                var maxValue = Math.max.apply(Math, data);
-                var points = [];
-                
+        function drawSavingsChart() {
+            const canvas = document.getElementById('savingsChart');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            const width = canvas.width = canvas.offsetWidth;
+            const height = canvas.height = 400;
+            
+            // Clear canvas
+            ctx.clearRect(0, 0, width, height);
+            
+            // Sample data
+            const data = [45, 52, 48, 65, 72, 78, 85, 92, 88, 95, 105, 115];
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            
+            const padding = 60;
+            const graphWidth = width - 2 * padding;
+            const graphHeight = height - 2 * padding;
+            const pointSpacing = graphWidth / (data.length - 1);
+            
+            // Find max value
+            const maxValue = Math.max(...data);
+            
+            // Draw grid lines
+            ctx.strokeStyle = '#e5e7eb';
+            ctx.lineWidth = 1;
+            for (let i = 0; i <= 5; i++) {
+                const y = padding + (graphHeight / 5) * i;
                 ctx.beginPath();
-                ctx.moveTo(chartX, chartY + chartHeight);
-                
-                for (var i = 0; i < data.length; i++) {
-                    var x = chartX + (i / (data.length - 1)) * chartWidth;
-                    var y = chartY + chartHeight - (data[i] / maxValue) * chartHeight;
-                    points.push({x: x, y: y});
-                    
-                    if (i === 0) {
-                        ctx.lineTo(x, y);
-                    } else {
-                        ctx.lineTo(x, y);
-                    }
+                ctx.moveTo(padding, y);
+                ctx.lineTo(width - padding, y);
+                ctx.stroke();
+            }
+            
+            // Draw gradient fill
+            const gradient = ctx.createLinearGradient(0, padding, 0, height - padding);
+            gradient.addColorStop(0, 'rgba(99, 102, 241, 0.3)');
+            gradient.addColorStop(1, 'rgba(99, 102, 241, 0)');
+            
+            // Draw filled area
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.moveTo(padding, height - padding);
+            data.forEach((value, i) => {
+                const x = padding + i * pointSpacing;
+                const y = height - padding - (value / maxValue) * graphHeight;
+                if (i === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
                 }
+            });
+            ctx.lineTo(width - padding, height - padding);
+            ctx.closePath();
+            ctx.fill();
+            
+            // Draw line
+            ctx.strokeStyle = '#6366f1';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            data.forEach((value, i) => {
+                const x = padding + i * pointSpacing;
+                const y = height - padding - (value / maxValue) * graphHeight;
+                if (i === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            });
+            ctx.stroke();
+            
+            // Draw points
+            data.forEach((value, i) => {
+                const x = padding + i * pointSpacing;
+                const y = height - padding - (value / maxValue) * graphHeight;
                 
-                ctx.lineTo(chartX + chartWidth, chartY + chartHeight);
-                ctx.closePath();
+                ctx.fillStyle = '#ffffff';
+                ctx.strokeStyle = '#6366f1';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.arc(x, y, 6, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.stroke();
+            });
+            
+            // Draw labels
+            ctx.fillStyle = '#64748b';
+            ctx.font = '12px Inter, sans-serif';
+            ctx.textAlign = 'center';
+            months.forEach((month, i) => {
+                const x = padding + i * pointSpacing;
+                ctx.fillText(month, x, height - padding + 25);
+            });
+            
+            // Draw values on y-axis
+            ctx.textAlign = 'right';
+            for (let i = 0; i <= 5; i++) {
+                const value = Math.round((maxValue / 5) * (5 - i));
+                const y = padding + (graphHeight / 5) * i;
+                ctx.fillText('$' + value + 'K', padding - 10, y + 4);
+            }
+        }
+
+        function drawMemberChart() {
+            const canvas = document.getElementById('memberChart');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            const width = canvas.width = canvas.offsetWidth;
+            const height = canvas.height = 400;
+            
+            ctx.clearRect(0, 0, width, height);
+            
+            // Bar chart for member growth
+            const data = [120, 145, 168, 195, 220, 245, 268, 285, 310, 328, 342];
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov'];
+            
+            const padding = 60;
+            const barWidth = (width - 2 * padding) / data.length * 0.7;
+            const spacing = (width - 2 * padding) / data.length;
+            const maxValue = Math.max(...data);
+            
+            // Draw bars with gradient
+            data.forEach((value, i) => {
+                const barHeight = (value / maxValue) * (height - 2 * padding);
+                const x = padding + i * spacing + spacing * 0.15;
+                const y = height - padding - barHeight;
+                
+                const gradient = ctx.createLinearGradient(0, y, 0, height - padding);
+                gradient.addColorStop(0, '#6366f1');
+                gradient.addColorStop(1, '#8b5cf6');
+                
                 ctx.fillStyle = gradient;
+                ctx.fillRect(x, y, barWidth, barHeight);
+                
+                // Value labels
+                ctx.fillStyle = '#1e293b';
+                ctx.font = 'bold 12px Inter, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText(value, x + barWidth / 2, y - 10);
+                
+                // Month labels
+                ctx.fillStyle = '#64748b';
+                ctx.font = '11px Inter, sans-serif';
+                ctx.fillText(months[i], x + barWidth / 2, height - padding + 20);
+            });
+        }
+
+        function drawClientChart() {
+            const canvas = document.getElementById('clientChart');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            const width = canvas.width = canvas.offsetWidth;
+            const height = canvas.height = 400;
+            
+            ctx.clearRect(0, 0, width, height);
+            
+            // Pie chart for client distribution
+            const data = [
+                { label: 'Enterprise', value: 45, color: '#6366f1' },
+                { label: 'Corporate', value: 30, color: '#8b5cf6' },
+                { label: 'Small Business', value: 15, color: '#10b981' },
+                { label: 'Startup', value: 10, color: '#f59e0b' }
+            ];
+            
+            const centerX = width / 2;
+            const centerY = height / 2;
+            const radius = Math.min(width, height) / 3;
+            
+            let currentAngle = -Math.PI / 2;
+            const total = data.reduce((sum, item) => sum + item.value, 0);
+            
+            // Draw pie slices
+            data.forEach((segment, i) => {
+                const sliceAngle = (segment.value / total) * Math.PI * 2;
+                
+                // Draw slice
+                ctx.beginPath();
+                ctx.moveTo(centerX, centerY);
+                ctx.arc(centerX, centerY, radius, currentAngle, currentAngle + sliceAngle);
+                ctx.closePath();
+                ctx.fillStyle = segment.color;
                 ctx.fill();
                 
-                // Draw line
-                ctx.beginPath();
-                ctx.moveTo(points[0].x, points[0].y);
-                for (var i = 1; i < points.length; i++) {
-                    ctx.lineTo(points[i].x, points[i].y);
-                }
-                ctx.strokeStyle = '#667eea';
-                ctx.lineWidth = 3;
-                ctx.stroke();
+                // Draw label
+                const labelAngle = currentAngle + sliceAngle / 2;
+                const labelX = centerX + Math.cos(labelAngle) * (radius + 30);
+                const labelY = centerY + Math.sin(labelAngle) * (radius + 30);
                 
-                // Draw points
-                for (var i = 0; i < points.length; i++) {
-                    ctx.beginPath();
-                    ctx.arc(points[i].x, points[i].y, 4, 0, 2 * Math.PI);
-                    ctx.fillStyle = '#667eea';
-                    ctx.fill();
-                    ctx.strokeStyle = '#fff';
-                    ctx.lineWidth = 2;
-                    ctx.stroke();
-                }
-                
-                // Add labels
-                ctx.fillStyle = '#666';
-                ctx.font = '12px Arial';
+                ctx.fillStyle = '#1e293b';
+                ctx.font = 'bold 12px Inter, sans-serif';
                 ctx.textAlign = 'center';
-                for (var i = 0; i < labels.length; i++) {
-                    var x = chartX + (i / (data.length - 1)) * chartWidth;
-                    ctx.fillText(labels[i], x, chartY + chartHeight + 20);
-                }
+                ctx.fillText(segment.label, labelX, labelY);
+                ctx.font = '11px Inter, sans-serif';
+                ctx.fillStyle = '#64748b';
+                ctx.fillText(segment.value + '%', labelX, labelY + 15);
                 
-                // Y-axis labels (in K format)
-                ctx.textAlign = 'right';
-                for (var i = 0; i <= 5; i++) {
-                    var value = Math.round((maxValue / 5) * (5 - i));
-                    var y = chartY + (chartHeight / 5) * i + 5;
-                    ctx.fillText('$' + value + 'K', chartX - 10, y);
-                }
-                
-            } catch (error) {
-                console.error('Error creating savings chart:', error);
+                currentAngle += sliceAngle;
+            });
+            
+            // Draw center circle for donut effect
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, radius * 0.6, 0, Math.PI * 2);
+            ctx.fillStyle = '#ffffff';
+            ctx.fill();
+            
+            // Center text
+            ctx.fillStyle = '#1e293b';
+            ctx.font = 'bold 24px Inter, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('85', centerX, centerY);
+            ctx.font = '12px Inter, sans-serif';
+            ctx.fillStyle = '#64748b';
+            ctx.fillText('Total Clients', centerX, centerY + 20);
+        }
+
+        // Close modal on outside click
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.classList.remove('active');
             }
         }
 
-        // Check if user is already logged in
-        document.addEventListener('DOMContentLoaded', function() {
-            try {
-                var loggedIn = sessionStorage.getItem('loggedIn');
-                if (loggedIn === 'true') {
-                    showDashboard();
-                }
-            } catch (error) {
-                console.error('Error checking login status:', error);
+        // Resize charts on window resize
+        window.addEventListener('resize', () => {
+            if (currentUser) {
+                initCharts();
             }
         });
     </script>
