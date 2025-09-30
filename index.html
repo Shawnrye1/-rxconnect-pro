@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Dashboard - Savings & Claims Management</title>
+    <title>MedSave Pro | Enterprise Healthcare Savings Platform</title>
     <style>
         * {
             margin: 0;
@@ -12,62 +12,52 @@
         }
 
         :root {
-            --primary: #6366f1;
-            --primary-dark: #4f46e5;
-            --secondary: #8b5cf6;
+            --primary: #0066ff;
+            --primary-dark: #0052cc;
+            --secondary: #00d4ff;
+            --accent: #7c3aed;
             --success: #10b981;
             --warning: #f59e0b;
             --danger: #ef4444;
-            --dark: #1e293b;
+            --dark: #0f172a;
             --gray: #64748b;
-            --light: #f1f5f9;
+            --light: #f8fafc;
             --white: #ffffff;
+            --gradient-primary: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%);
+            --gradient-secondary: linear-gradient(135deg, #7c3aed 0%, #0066ff 100%);
+            --gradient-dark: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
             --sidebar-width: 280px;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
             color: var(--dark);
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            background: var(--white);
             overflow-x: hidden;
         }
 
-        /* Animated Background */
-        .bg-animation {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: -1;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 10px;
         }
 
-        .bg-animation::before {
-            content: '';
-            position: absolute;
-            width: 200%;
-            height: 200%;
-            top: -50%;
-            left: -50%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,213.3C1248,235,1344,213,1392,202.7L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
-            animation: wave 20s linear infinite;
-            opacity: 0.3;
+        ::-webkit-scrollbar-track {
+            background: var(--light);
         }
 
-        @keyframes wave {
-            0% { transform: translateX(0) translateY(0) rotate(0deg); }
-            100% { transform: translateX(-50%) translateY(0) rotate(360deg); }
+        ::-webkit-scrollbar-thumb {
+            background: var(--gradient-primary);
+            border-radius: 5px;
         }
 
         /* Navigation */
         nav {
             background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(20px);
-            padding: 1rem 2rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            padding: 1rem 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             position: fixed;
             width: 100%;
             top: 0;
@@ -75,30 +65,710 @@
             transition: var(--transition);
         }
 
+        nav.scrolled {
+            padding: 0.75rem 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
         .nav-container {
-            max-width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .logo {
-            font-size: 1.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
             font-weight: 800;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--dark);
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-primary);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 102, 255, 0.3);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--gray);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: width 0.3s;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 0 80px;
+            background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(0, 102, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: var(--gradient-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--gray);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .hero-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero-feature {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: white;
+            border-radius: 50px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .hero-feature-icon {
+            color: var(--success);
+        }
+
+        .hero-metrics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .hero-metric {
+            text-align: center;
+        }
+
+        .hero-metric-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-metric-label {
+            color: var(--gray);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero-visual {
+            position: relative;
+        }
+
+        .hero-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hero-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-card-badge {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* Solutions Section */
+        .solutions {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 4rem;
+        }
+
+        .section-badge {
+            display: inline-block;
+            background: rgba(0, 102, 255, 0.1);
+            color: var(--primary);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: var(--gradient-dark);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-subtitle {
+            font-size: 1.25rem;
+            color: var(--gray);
+            line-height: 1.8;
+        }
+
+        .solutions-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .solution-card {
+            background: var(--light);
+            padding: 2.5rem;
+            border-radius: 20px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .solution-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .solution-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            background: white;
+        }
+
+        .solution-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .solution-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--gradient-primary);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 102, 255, 0.3);
+        }
+
+        .solution-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .solution-description {
+            color: var(--gray);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .solution-features {
+            list-style: none;
+        }
+
+        .solution-features li {
+            padding: 0.5rem 0;
+            color: var(--gray);
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
 
-        .logo::before {
-            content: '⚡';
-            font-size: 1.5rem;
+        .solution-features li::before {
+            content: '✓';
+            color: var(--success);
+            font-weight: bold;
         }
 
-        /* Dashboard Layout */
+        /* Target Audience Section */
+        .target-audience {
+            padding: 80px 0;
+            background: var(--gradient-dark);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .target-audience::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.05" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,213.3C1248,235,1344,213,1392,202.7L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            opacity: 0.3;
+        }
+
+        .audience-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .audience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .audience-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .audience-card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .audience-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: 0 auto 1.5rem;
+        }
+
+        .audience-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .audience-description {
+            opacity: 0.9;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .audience-stats {
+            display: flex;
+            justify-content: space-around;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .audience-stat {
+            text-align: center;
+        }
+
+        .audience-stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+
+        .audience-stat-label {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+        }
+
+        /* ROI Calculator Section */
+        .roi-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
+        }
+
+        .roi-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .roi-calculator {
+            background: white;
+            padding: 3rem;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            margin-top: 3rem;
+        }
+
+        .roi-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .roi-inputs {
+            padding-right: 2rem;
+            border-right: 1px solid var(--light);
+        }
+
+        .roi-input-group {
+            margin-bottom: 2rem;
+        }
+
+        .roi-input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--gray);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        .roi-input-wrapper {
+            position: relative;
+        }
+
+        .roi-input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            border: 2px solid var(--light);
+            border-radius: 12px;
+            font-size: 1.25rem;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .roi-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(0, 102, 255, 0.1);
+        }
+
+        .roi-input-prefix {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .roi-slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: var(--light);
+            outline: none;
+            -webkit-appearance: none;
+            margin-top: 1rem;
+        }
+
+        .roi-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 102, 255, 0.3);
+        }
+
+        .roi-results {
+            padding-left: 2rem;
+        }
+
+        .roi-result-card {
+            background: var(--gradient-primary);
+            padding: 2rem;
+            border-radius: 20px;
+            color: white;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 102, 255, 0.3);
+        }
+
+        .roi-result-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .roi-result-value {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .roi-breakdown {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .roi-breakdown-item {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .roi-breakdown-label {
+            font-size: 0.85rem;
+            color: var(--gray);
+            margin-bottom: 0.5rem;
+        }
+
+        .roi-breakdown-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        /* Features Grid */
+        .features-section {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .features-grid {
+            max-width: 1400px;
+            margin: 4rem auto 0;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 20px;
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            background: var(--light);
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1rem;
+            background: var(--gradient-primary);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            box-shadow: 0 8px 20px rgba(0, 102, 255, 0.2);
+        }
+
+        .feature-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .feature-description {
+            color: var(--gray);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 0;
+            background: var(--gradient-dark);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .cta-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .cta-subtitle {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 5rem;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .cta-stat {
+            text-align: center;
+            color: white;
+        }
+
+        .cta-stat-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--secondary);
+        }
+
+        .cta-stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Dashboard */
         .dashboard-wrapper {
             display: none;
             padding-top: 70px;
@@ -113,8 +783,8 @@
         /* Sidebar */
         .sidebar {
             width: var(--sidebar-width);
-            background: var(--white);
-            box-shadow: 4px 0 20px rgba(0,0,0,0.05);
+            background: white;
+            box-shadow: 1px 0 3px rgba(0,0,0,0.05);
             position: fixed;
             height: calc(100vh - 70px);
             overflow-y: auto;
@@ -124,10 +794,8 @@
 
         .sidebar-header {
             padding: 2rem 1.5rem;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: var(--gradient-primary);
             color: white;
-            border-radius: 0 0 20px 20px;
-            margin-bottom: 1rem;
         }
 
         .user-profile {
@@ -149,19 +817,22 @@
             border: 3px solid rgba(255,255,255,0.5);
         }
 
-        .user-info h3 {
-            font-size: 1.1rem;
-            margin-bottom: 0.25rem;
-        }
-
-        .user-info p {
-            font-size: 0.85rem;
-            opacity: 0.9;
-        }
-
-        /* Sidebar Menu */
         .sidebar-menu {
+            padding: 1rem;
+        }
+
+        .menu-section {
+            margin-bottom: 2rem;
+        }
+
+        .menu-section-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--gray);
+            margin-bottom: 0.5rem;
             padding: 0 1rem;
+            font-weight: 600;
         }
 
         .menu-item {
@@ -169,44 +840,25 @@
             align-items: center;
             gap: 1rem;
             padding: 1rem;
-            margin: 0.5rem 0;
+            margin: 0.25rem 0;
             border-radius: 12px;
             cursor: pointer;
             transition: var(--transition);
             position: relative;
-            overflow: hidden;
-        }
-
-        .menu-item::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: 4px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            transform: translateX(-100%);
-            transition: var(--transition);
         }
 
         .menu-item:hover {
             background: var(--light);
-            transform: translateX(5px);
         }
 
         .menu-item.active {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: var(--gradient-primary);
             color: white;
-            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
-        }
-
-        .menu-item.active::before {
-            transform: translateX(0);
+            box-shadow: 0 4px 12px rgba(0, 102, 255, 0.3);
         }
 
         .menu-icon {
-            font-size: 1.25rem;
-            width: 30px;
+            width: 24px;
             text-align: center;
         }
 
@@ -219,27 +871,8 @@
             transition: var(--transition);
         }
 
-        .page-header {
-            margin-bottom: 2rem;
-            animation: slideDown 0.5s ease;
-        }
-
-        .page-title {
-            font-size: 2rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 0.5rem;
-        }
-
-        .page-subtitle {
-            color: var(--gray);
-            font-size: 1.1rem;
-        }
-
         /* Stats Cards */
-        .stats-grid {
+        .stats-row {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 1.5rem;
@@ -249,12 +882,11 @@
         .stat-card {
             background: white;
             padding: 1.5rem;
-            border-radius: 20px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
             transition: var(--transition);
             position: relative;
             overflow: hidden;
-            animation: fadeInUp 0.5s ease;
         }
 
         .stat-card::before {
@@ -262,49 +894,38 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            width: 4px;
+            height: 100%;
+            background: var(--gradient-primary);
         }
 
         .stat-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
         }
 
         .stat-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 16px;
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 102, 255, 0.1);
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.5rem;
-            color: white;
-            margin-bottom: 1rem;
-        }
-
-        .stat-value {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--dark);
-            margin-bottom: 0.25rem;
-        }
-
-        .stat-label {
-            color: var(--gray);
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            color: var(--primary);
         }
 
         .stat-change {
-            position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
             padding: 0.25rem 0.75rem;
-            border-radius: 20px;
+            border-radius: 50px;
             font-size: 0.85rem;
             font-weight: 600;
         }
@@ -319,235 +940,51 @@
             color: var(--danger);
         }
 
-        /* Charts Section */
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Charts */
         .chart-container {
             background: white;
             padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
             margin-bottom: 2rem;
-            animation: fadeInUp 0.6s ease;
-        }
-
-        .chart-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-        }
-
-        .chart-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--dark);
-        }
-
-        .chart-options {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .chart-btn {
-            padding: 0.5rem 1rem;
-            border: 1px solid var(--light);
-            background: white;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: var(--transition);
-            font-size: 0.85rem;
-        }
-
-        .chart-btn:hover,
-        .chart-btn.active {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            border-color: transparent;
-        }
-
-        canvas {
-            width: 100% !important;
-            height: 400px !important;
-            border-radius: 12px;
-        }
-
-        /* Tables */
-        .table-container {
-            background: white;
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            overflow-x: auto;
-            animation: fadeInUp 0.7s ease;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th {
-            background: var(--light);
-            padding: 1rem;
-            text-align: left;
-            font-weight: 600;
-            color: var(--gray);
-            text-transform: uppercase;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
-        }
-
-        td {
-            padding: 1rem;
-            border-bottom: 1px solid var(--light);
-        }
-
-        tr:hover {
-            background: rgba(99, 102, 241, 0.05);
-        }
-
-        .status-badge {
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            display: inline-block;
-        }
-
-        .status-active {
-            background: rgba(16, 185, 129, 0.1);
-            color: var(--success);
-        }
-
-        .status-pending {
-            background: rgba(245, 158, 11, 0.1);
-            color: var(--warning);
-        }
-
-        .status-inactive {
-            background: rgba(239, 68, 68, 0.1);
-            color: var(--danger);
-        }
-
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.6);
-            backdrop-filter: blur(10px);
-            z-index: 2000;
-            animation: fadeIn 0.3s;
-        }
-
-        .modal.active {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            background: white;
-            padding: 3rem;
-            border-radius: 24px;
-            width: 90%;
-            max-width: 450px;
-            animation: slideUp 0.3s;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            position: relative;
-        }
-
-        .modal-header {
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-
-        .modal-header h2 {
-            font-size: 2rem;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 0.5rem;
-        }
-
-        /* Form Styles */
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--gray);
-            font-weight: 600;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        input[type="text"],
-        input[type="email"],
-        input[type="password"] {
-            width: 100%;
-            padding: 1rem;
-            border: 2px solid var(--light);
-            border-radius: 12px;
-            font-size: 1rem;
-            transition: var(--transition);
-            background: var(--light);
-        }
-
-        input:focus {
-            outline: none;
-            border-color: var(--primary);
-            background: white;
-            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
         }
 
         /* Buttons */
         .btn {
-            padding: 1rem 2rem;
+            padding: 0.75rem 2rem;
             border: none;
-            border-radius: 12px;
+            border-radius: 10px;
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             transition: var(--transition);
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            text-decoration: none;
+            display: inline-block;
             position: relative;
             overflow: hidden;
         }
 
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-
-        .btn:hover::before {
-            width: 300px;
-            height: 300px;
-        }
-
         .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: var(--gradient-primary);
             color: white;
-            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
+            box-shadow: 0 4px 14px rgba(0, 102, 255, 0.3);
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.4);
+            box-shadow: 0 6px 20px rgba(0, 102, 255, 0.4);
         }
 
         .btn-secondary {
@@ -561,82 +998,78 @@
             transform: translateY(-2px);
         }
 
-        /* Hero Section */
-        .hero-section {
-            text-align: center;
-            padding: 6rem 2rem;
-            color: white;
-            position: relative;
-            overflow: hidden;
+        .btn-large {
+            padding: 1.25rem 3rem;
+            font-size: 1.1rem;
         }
 
-        .hero-section h1 {
-            font-size: 4rem;
-            font-weight: 900;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.2);
-            animation: slideDown 0.8s ease;
-        }
-
-        .hero-section p {
-            font-size: 1.5rem;
-            opacity: 0.95;
-            margin-bottom: 2rem;
-            animation: slideUp 0.8s ease;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            animation: fadeIn 1s ease;
-        }
-
-        /* Mobile Toggle */
-        .mobile-toggle {
+        /* Modal */
+        .modal {
             display: none;
             position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 50%;
-            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
-            cursor: pointer;
-            z-index: 1000;
-            align-items: center;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+        }
+
+        .modal.active {
+            display: flex;
             justify-content: center;
-            color: white;
-            font-size: 1.5rem;
+            align-items: center;
+            animation: fadeIn 0.3s;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 24px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            position: relative;
+            animation: slideUp 0.3s;
+        }
+
+        /* Forms */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--gray);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--light);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: var(--transition);
+            background: var(--light);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(0, 102, 255, 0.1);
         }
 
         /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         @keyframes slideUp {
@@ -652,6 +1085,10 @@
 
         /* Responsive */
         @media (max-width: 1024px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+            }
+            
             .sidebar {
                 transform: translateX(-100%);
             }
@@ -664,119 +1101,447 @@
                 margin-left: 0;
             }
             
-            .mobile-toggle {
-                display: flex;
+            .roi-grid {
+                grid-template-columns: 1fr;
             }
             
-            .stats-grid {
-                grid-template-columns: 1fr;
+            .roi-inputs {
+                border-right: none;
+                padding-right: 0;
+                padding-bottom: 2rem;
+                border-bottom: 1px solid var(--light);
+            }
+            
+            .roi-results {
+                padding-left: 0;
+                padding-top: 2rem;
+            }
+            
+            .cta-stats {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
         @media (max-width: 768px) {
-            .hero-section h1 {
+            .nav-menu {
+                display: none;
+            }
+            
+            .hero-content h1 {
                 font-size: 2.5rem;
             }
             
-            .hero-section p {
-                font-size: 1.1rem;
+            .section-title {
+                font-size: 2rem;
             }
             
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
+            .cta-title {
+                font-size: 2.5rem;
             }
             
-            .modal-content {
-                padding: 2rem;
-                margin: 1rem;
+            .audience-grid {
+                grid-template-columns: 1fr;
             }
         }
 
-        /* Loading Spinner */
-        .loader {
-            width: 50px;
-            height: 50px;
-            border: 4px solid var(--light);
-            border-top: 4px solid var(--primary);
+        /* Loading State */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid var(--light);
+            border-top: 3px solid var(--primary);
             border-radius: 50%;
             animation: spin 1s linear infinite;
-            margin: 2rem auto;
         }
 
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-
-        /* Success Animation */
-        .success-animation {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: white;
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-            z-index: 3000;
-            text-align: center;
-        }
-
-        .success-animation.active {
-            display: block;
-            animation: bounceIn 0.6s ease;
-        }
-
-        @keyframes bounceIn {
-            0% {
-                opacity: 0;
-                transform: translate(-50%, -50%) scale(0.3);
-            }
-            50% {
-                transform: translate(-50%, -50%) scale(1.1);
-            }
-            100% {
-                opacity: 1;
-                transform: translate(-50%, -50%) scale(1);
-            }
-        }
     </style>
 </head>
 <body>
-    <!-- Animated Background -->
-    <div class="bg-animation"></div>
-
     <!-- Navigation -->
-    <nav>
+    <nav id="navbar">
         <div class="nav-container">
-            <div class="logo">SavingsHub Pro</div>
+            <div class="logo">
+                <div class="logo-icon">💊</div>
+                <span>MedSave Pro</span>
+            </div>
+            <div class="nav-menu">
+                <a href="#solutions" class="nav-link">Solutions</a>
+                <a href="#audience" class="nav-link">For Industry</a>
+                <a href="#roi" class="nav-link">ROI Calculator</a>
+                <a href="#features" class="nav-link">Features</a>
+            </div>
             <div class="nav-buttons" id="navButtons">
                 <button class="btn btn-secondary" onclick="openModal('login')">Login</button>
-                <button class="btn btn-primary" onclick="openModal('signup')">Get Started</button>
+                <button class="btn btn-primary" onclick="openModal('signup')">Start Free Trial</button>
             </div>
             <div class="nav-buttons" id="userNav" style="display: none;">
+                <button class="btn btn-primary" onclick="showDashboard()">Dashboard</button>
                 <button class="btn btn-secondary" onclick="logout()">Logout</button>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section (Landing Page) -->
-    <div class="hero-section" id="heroSection">
-        <h1>Smart Savings Management</h1>
-        <p>Track, Analyze, and Maximize Your Financial Growth</p>
-        <div class="hero-buttons">
-            <button class="btn btn-primary" onclick="openModal('login')" style="padding: 1.2rem 3rem;">
-                Start Your Journey
-            </button>
-            <button class="btn btn-secondary" onclick="openModal('signup')" style="padding: 1.2rem 3rem;">
-                Learn More
-            </button>
-        </div>
+    <!-- Landing Page Content -->
+    <div id="landingPage">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <h1>Revolutionize Healthcare Savings Across the Industry</h1>
+                    <p class="hero-subtitle">The enterprise platform trusted by Employers, PBMs, Specialty Pharmacies, and Pharmaceutical Hubs to maximize savings and streamline operations.</p>
+                    
+                    <div class="hero-features">
+                        <div class="hero-feature">
+                            <span class="hero-feature-icon">✓</span>
+                            <span>HIPAA Compliant</span>
+                        </div>
+                        <div class="hero-feature">
+                            <span class="hero-feature-icon">✓</span>
+                            <span>Real-time Analytics</span>
+                        </div>
+                        <div class="hero-feature">
+                            <span class="hero-feature-icon">✓</span>
+                            <span>API Integration</span>
+                        </div>
+                        <div class="hero-feature">
+                            <span class="hero-feature-icon">✓</span>
+                            <span>SOC 2 Certified</span>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                        <button class="btn btn-primary btn-large" onclick="openModal('demo')">Schedule Demo</button>
+                        <button class="btn btn-secondary btn-large" onclick="scrollToROI()">Calculate Your Savings</button>
+                    </div>
+
+                    <div class="hero-metrics">
+                        <div class="hero-metric">
+                            <div class="hero-metric-value">$2.4B+</div>
+                            <div class="hero-metric-label">Total Savings Generated</div>
+                        </div>
+                        <div class="hero-metric">
+                            <div class="hero-metric-value">500+</div>
+                            <div class="hero-metric-label">Enterprise Clients</div>
+                        </div>
+                        <div class="hero-metric">
+                            <div class="hero-metric-value">45%</div>
+                            <div class="hero-metric-label">Average Cost Reduction</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-visual">
+                    <div class="hero-card">
+                        <div class="hero-card-header">
+                            <h3 style="margin: 0;">Live Savings Tracker</h3>
+                            <span class="hero-card-badge">REAL-TIME</span>
+                        </div>
+                        <canvas id="heroChart" width="400" height="200"></canvas>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem;">
+                            <div style="background: var(--light); padding: 1rem; border-radius: 10px;">
+                                <div style="color: var(--gray); font-size: 0.85rem;">Today's Savings</div>
+                                <div style="font-size: 1.5rem; font-weight: 700; color: var(--success);">+$124,563</div>
+                            </div>
+                            <div style="background: var(--light); padding: 1rem; border-radius: 10px;">
+                                <div style="color: var(--gray); font-size: 0.85rem;">Active Plans</div>
+                                <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary);">8,432</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Solutions Section -->
+        <section class="solutions" id="solutions">
+            <div class="section-header">
+                <div class="section-badge">Comprehensive Solutions</div>
+                <h2 class="section-title">Enterprise-Grade Healthcare Savings Platform</h2>
+                <p class="section-subtitle">Designed specifically for the unique needs of healthcare industry leaders</p>
+            </div>
+
+            <div class="solutions-grid">
+                <div class="solution-card">
+                    <div class="solution-icon">📊</div>
+                    <h3 class="solution-title">Advanced Analytics</h3>
+                    <p class="solution-description">Real-time dashboards with predictive analytics and customizable reporting for data-driven decisions.</p>
+                    <ul class="solution-features">
+                        <li>Predictive cost modeling</li>
+                        <li>Utilization analytics</li>
+                        <li>Compliance tracking</li>
+                    </ul>
+                </div>
+
+                <div class="solution-card">
+                    <div class="solution-icon">🔗</div>
+                    <h3 class="solution-title">Seamless Integration</h3>
+                    <p class="solution-description">Connect with existing PBM systems, EMRs, and pharmacy networks through our robust API.</p>
+                    <ul class="solution-features">
+                        <li>REST API & Webhooks</li>
+                        <li>HL7 FHIR support</li>
+                        <li>Batch processing</li>
+                    </ul>
+                </div>
+
+                <div class="solution-card">
+                    <div class="solution-icon">🛡️</div>
+                    <h3 class="solution-title">Compliance & Security</h3>
+                    <p class="solution-description">Built from the ground up with HIPAA compliance and enterprise security standards.</p>
+                    <ul class="solution-features">
+                        <li>HIPAA & SOC 2 compliant</li>
+                        <li>End-to-end encryption</li>
+                        <li>Audit logging</li>
+                    </ul>
+                </div>
+
+                <div class="solution-card">
+                    <div class="solution-icon">🤖</div>
+                    <h3 class="solution-title">AI-Powered Optimization</h3>
+                    <p class="solution-description">Machine learning algorithms identify savings opportunities and optimize benefit designs.</p>
+                    <ul class="solution-features">
+                        <li>Formulary optimization</li>
+                        <li>Prior auth automation</li>
+                        <li>Fraud detection</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Target Audience Section -->
+        <section class="target-audience" id="audience">
+            <div class="audience-container">
+                <div class="section-header">
+                    <div class="section-badge" style="background: rgba(255, 255, 255, 0.2); color: white;">Built For Industry Leaders</div>
+                    <h2 class="section-title" style="color: white;">Tailored Solutions for Every Healthcare Stakeholder</h2>
+                    <p class="section-subtitle" style="color: rgba(255, 255, 255, 0.9);">Maximize value across the entire healthcare ecosystem</p>
+                </div>
+
+                <div class="audience-grid">
+                    <div class="audience-card">
+                        <div class="audience-icon">🏢</div>
+                        <h3 class="audience-title">Employers</h3>
+                        <p class="audience-description">Reduce healthcare costs while improving employee satisfaction and health outcomes.</p>
+                        <div class="audience-stats">
+                            <div class="audience-stat">
+                                <div class="audience-stat-value">32%</div>
+                                <div class="audience-stat-label">Cost Reduction</div>
+                            </div>
+                            <div class="audience-stat">
+                                <div class="audience-stat-value">89%</div>
+                                <div class="audience-stat-label">Satisfaction</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="audience-card">
+                        <div class="audience-icon">💊</div>
+                        <h3 class="audience-title">PBMs</h3>
+                        <p class="audience-description">Streamline operations, improve formulary management, and enhance client relationships.</p>
+                        <div class="audience-stats">
+                            <div class="audience-stat">
+                                <div class="audience-stat-value">5x</div>
+                                <div class="audience-stat-label">Efficiency</div>
+                            </div>
+                            <div class="audience-stat">
+                                <div class="audience-stat-value">$450M</div>
+                                <div class="audience-stat-label">Processed</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="audience-card">
+                        <div class="audience-icon">🏥</div>
+                        <h3 class="audience-title">Specialty Pharmacies</h3>
+                        <p class="audience-description">Optimize specialty drug management and improve patient adherence programs.</p>
+                        <div class="audience-stats">
+                            <div class="audience-stat">
+                                <div class="audience-stat-value">94%</div>
+                                <div class="audience-stat-label">Adherence</div>
+                            </div>
+                            <div class="audience-stat">
+                                <div class="audience-stat-value">2.8x</div>
+                                <div class="audience-stat-label">ROI</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="audience-card">
+                        <div class="audience-icon">🔬</div>
+                        <h3 class="audience-title">Pharmaceutical Hubs</h3>
+                        <p class="audience-description">Connect manufacturers with patients while ensuring access and affordability.</p>
+                        <div class="audience-stats">
+                            <div class="audience-stat">
+                                <div class="audience-stat-value">15K+</div>
+                                <div class="audience-stat-label">Patients</div>
+                            </div>
+                            <div class="audience-stat">
+                                <div class="audience-stat-value">98%</div>
+                                <div class="audience-stat-label">Coverage</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ROI Calculator Section -->
+        <section class="roi-section" id="roi">
+            <div class="roi-container">
+                <div class="section-header">
+                    <div class="section-badge">ROI Calculator</div>
+                    <h2 class="section-title">Calculate Your Potential Savings</h2>
+                    <p class="section-subtitle">See how much your organization could save with MedSave Pro</p>
+                </div>
+
+                <div class="roi-calculator">
+                    <div class="roi-grid">
+                        <div class="roi-inputs">
+                            <div class="roi-input-group">
+                                <label>Number of Covered Lives</label>
+                                <div class="roi-input-wrapper">
+                                    <span class="roi-input-prefix">👥</span>
+                                    <input type="number" class="roi-input" id="coveredLives" value="5000" min="100" max="100000" oninput="calculateROI()">
+                                </div>
+                                <input type="range" class="roi-slider" min="100" max="100000" value="5000" oninput="document.getElementById('coveredLives').value = this.value; calculateROI()">
+                            </div>
+
+                            <div class="roi-input-group">
+                                <label>Annual Pharmacy Spend</label>
+                                <div class="roi-input-wrapper">
+                                    <span class="roi-input-prefix">$</span>
+                                    <input type="number" class="roi-input" id="pharmacySpend" value="5000000" min="100000" max="100000000" oninput="calculateROI()">
+                                </div>
+                                <input type="range" class="roi-slider" min="100000" max="100000000" value="5000000" oninput="document.getElementById('pharmacySpend').value = this.value; calculateROI()">
+                            </div>
+
+                            <div class="roi-input-group">
+                                <label>Industry Segment</label>
+                                <select class="roi-input" style="padding-left: 1rem;" onchange="calculateROI()">
+                                    <option value="employer">Employer</option>
+                                    <option value="pbm">PBM</option>
+                                    <option value="specialty">Specialty Pharmacy</option>
+                                    <option value="hub">Pharmaceutical Hub</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="roi-results">
+                            <div class="roi-result-card">
+                                <div class="roi-result-label">Estimated Annual Savings</div>
+                                <div class="roi-result-value" id="annualSavings">$1,250,000</div>
+                            </div>
+
+                            <div class="roi-breakdown">
+                                <div class="roi-breakdown-item">
+                                    <div class="roi-breakdown-label">Monthly Savings</div>
+                                    <div class="roi-breakdown-value" id="monthlySavings">$104,167</div>
+                                </div>
+                                <div class="roi-breakdown-item">
+                                    <div class="roi-breakdown-label">Per Member</div>
+                                    <div class="roi-breakdown-value" id="perMemberSavings">$250</div>
+                                </div>
+                                <div class="roi-breakdown-item">
+                                    <div class="roi-breakdown-label">ROI</div>
+                                    <div class="roi-breakdown-value" id="roiPercent">450%</div>
+                                </div>
+                                <div class="roi-breakdown-item">
+                                    <div class="roi-breakdown-label">Payback Period</div>
+                                    <div class="roi-breakdown-value" id="payback">3 months</div>
+                                </div>
+                            </div>
+
+                            <button class="btn btn-primary btn-large" style="width: 100%; margin-top: 2rem;" onclick="openModal('demo')">Get Detailed Analysis</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Grid -->
+        <section class="features-section" id="features">
+            <div class="section-header">
+                <div class="section-badge">Platform Features</div>
+                <h2 class="section-title">Everything You Need to Transform Healthcare Savings</h2>
+                <p class="section-subtitle">Comprehensive tools designed for healthcare industry professionals</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h4 class="feature-title">Real-time Analytics</h4>
+                    <p class="feature-description">Monitor performance metrics and identify trends as they happen</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h4 class="feature-title">Enterprise Security</h4>
+                    <p class="feature-description">Bank-level encryption and comprehensive audit trails</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h4 class="feature-title">Instant Implementation</h4>
+                    <p class="feature-description">Go live in days, not months, with our streamlined onboarding</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤝</div>
+                    <h4 class="feature-title">White Glove Support</h4>
+                    <p class="feature-description">Dedicated success team and 24/7 technical support</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h4 class="feature-title">Custom Workflows</h4>
+                    <p class="feature-description">Tailor the platform to match your unique processes</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h4 class="feature-title">Benchmarking Tools</h4>
+                    <p class="feature-description">Compare performance against industry standards</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="cta-container">
+                <h2 class="cta-title">Ready to Transform Your Healthcare Savings?</h2>
+                <p class="cta-subtitle">Join 500+ leading organizations already maximizing their healthcare value</p>
+                
+                <div class="cta-buttons">
+                    <button class="btn btn-primary btn-large" style="background: white; color: var(--primary);" onclick="openModal('demo')">
+                        Schedule a Demo
+                    </button>
+                    <button class="btn btn-secondary btn-large" style="background: transparent; border-color: white; color: white;" onclick="openModal('contact')">
+                        Contact Sales
+                    </button>
+                </div>
+
+                <div class="cta-stats">
+                    <div class="cta-stat">
+                        <div class="cta-stat-value">99.9%</div>
+                        <div class="cta-stat-label">Uptime SLA</div>
+                    </div>
+                    <div class="cta-stat">
+                        <div class="cta-stat-value">24/7</div>
+                        <div class="cta-stat-label">Support</div>
+                    </div>
+                    <div class="cta-stat">
+                        <div class="cta-stat-value">HIPAA</div>
+                        <div class="cta-stat-label">Compliant</div>
+                    </div>
+                    <div class="cta-stat">
+                        <div class="cta-stat-value">SOC 2</div>
+                        <div class="cta-stat-label">Certified</div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
 
-    <!-- Dashboard -->
+    <!-- Dashboard (Hidden by default) -->
     <div class="dashboard-wrapper" id="dashboardWrapper">
         <!-- Sidebar -->
         <aside class="sidebar" id="sidebar">
@@ -784,344 +1549,172 @@
                 <div class="user-profile">
                     <div class="user-avatar" id="userAvatar">U</div>
                     <div class="user-info">
-                        <h3 id="sidebarUserName">User Name</h3>
-                        <p>Premium Member</p>
+                        <h3 id="sidebarUserName" style="font-size: 1.1rem; margin-bottom: 0.25rem;">User Name</h3>
+                        <p style="font-size: 0.85rem; opacity: 0.9;">Enterprise Admin</p>
                     </div>
                 </div>
             </div>
             
             <div class="sidebar-menu">
-                <div class="menu-item active" onclick="switchPage('home')">
-                    <span class="menu-icon">🏠</span>
-                    <span>Home Dashboard</span>
+                <div class="menu-section">
+                    <div class="menu-section-title">Main</div>
+                    <div class="menu-item active" onclick="switchPage('home')">
+                        <span class="menu-icon">📊</span>
+                        <span>Dashboard Overview</span>
+                    </div>
+                    <div class="menu-item" onclick="switchPage('analytics')">
+                        <span class="menu-icon">📈</span>
+                        <span>Analytics & Reports</span>
+                    </div>
                 </div>
-                <div class="menu-item" onclick="switchPage('member')">
-                    <span class="menu-icon">👥</span>
-                    <span>Member Savings</span>
+
+                <div class="menu-section">
+                    <div class="menu-section-title">Savings Management</div>
+                    <div class="menu-item" onclick="switchPage('employer')">
+                        <span class="menu-icon">🏢</span>
+                        <span>Employer Savings</span>
+                    </div>
+                    <div class="menu-item" onclick="switchPage('member')">
+                        <span class="menu-icon">👥</span>
+                        <span>Member Savings</span>
+                    </div>
+                    <div class="menu-item" onclick="switchPage('client')">
+                        <span class="menu-icon">💼</span>
+                        <span>Client Accounts</span>
+                    </div>
                 </div>
-                <div class="menu-item" onclick="switchPage('client')">
-                    <span class="menu-icon">💼</span>
-                    <span>Client Savings</span>
+
+                <div class="menu-section">
+                    <div class="menu-section-title">Pharmacy Network</div>
+                    <div class="menu-item" onclick="switchPage('pbm')">
+                        <span class="menu-icon">💊</span>
+                        <span>PBM Integration</span>
+                    </div>
+                    <div class="menu-item" onclick="switchPage('specialty')">
+                        <span class="menu-icon">🏥</span>
+                        <span>Specialty Pharmacy</span>
+                    </div>
+                    <div class="menu-item" onclick="switchPage('hub')">
+                        <span class="menu-icon">🔬</span>
+                        <span>Pharma Hub</span>
+                    </div>
                 </div>
-                <div class="menu-item" onclick="switchPage('claims')">
-                    <span class="menu-icon">📋</span>
-                    <span>Claim Details</span>
-                </div>
-                <div class="menu-item" onclick="switchPage('analytics')">
-                    <span class="menu-icon">📊</span>
-                    <span>Analytics</span>
-                </div>
-                <div class="menu-item" onclick="switchPage('settings')">
-                    <span class="menu-icon">⚙️</span>
-                    <span>Settings</span>
+
+                <div class="menu-section">
+                    <div class="menu-section-title">Operations</div>
+                    <div class="menu-item" onclick="switchPage('claims')">
+                        <span class="menu-icon">📋</span>
+                        <span>Claims Processing</span>
+                    </div>
+                    <div class="menu-item" onclick="switchPage('compliance')">
+                        <span class="menu-icon">🛡️</span>
+                        <span>Compliance</span>
+                    </div>
+                    <div class="menu-item" onclick="switchPage('settings')">
+                        <span class="menu-icon">⚙️</span>
+                        <span>Settings</span>
+                    </div>
                 </div>
             </div>
         </aside>
 
         <!-- Main Content -->
         <main class="main-content">
-            <!-- Home Page -->
+            <!-- Dashboard Overview Page -->
             <div class="page-content" id="homePage">
-                <div class="page-header">
-                    <h1 class="page-title">Welcome Back!</h1>
-                    <p class="page-subtitle">Here's your financial overview for today</p>
+                <div class="page-header" style="margin-bottom: 2rem;">
+                    <h1 style="font-size: 2rem; font-weight: 800; color: var(--dark); margin-bottom: 0.5rem;">Enterprise Dashboard</h1>
+                    <p style="color: var(--gray);">Real-time overview of your healthcare savings ecosystem</p>
                 </div>
 
-                <div class="stats-grid">
+                <div class="stats-row">
                     <div class="stat-card">
-                        <div class="stat-icon">💰</div>
-                        <div class="stat-value">$124,563</div>
-                        <div class="stat-label">Total Savings</div>
-                        <div class="stat-change positive">+12.5%</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">👥</div>
-                        <div class="stat-value">1,284</div>
-                        <div class="stat-label">Active Members</div>
-                        <div class="stat-change positive">+8.2%</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">📈</div>
-                        <div class="stat-value">$45,231</div>
-                        <div class="stat-label">Monthly Growth</div>
-                        <div class="stat-change positive">+23.1%</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">✅</div>
-                        <div class="stat-value">98.5%</div>
-                        <div class="stat-label">Claim Success Rate</div>
-                        <div class="stat-change positive">+2.3%</div>
-                    </div>
-                </div>
-
-                <div class="chart-container">
-                    <div class="chart-header">
-                        <h3 class="chart-title">Savings Trend Analysis</h3>
-                        <div class="chart-options">
-                            <button class="chart-btn active">Monthly</button>
-                            <button class="chart-btn">Quarterly</button>
-                            <button class="chart-btn">Yearly</button>
+                        <div class="stat-header">
+                            <div class="stat-icon">💰</div>
+                            <div class="stat-change positive">+12.5%</div>
                         </div>
-                    </div>
-                    <canvas id="savingsChart"></canvas>
-                </div>
-
-                <div class="table-container">
-                    <h3 class="chart-title" style="margin-bottom: 1.5rem;">Recent Activities</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Date</th>
-                                <th>Member</th>
-                                <th>Type</th>
-                                <th>Amount</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Sep 30, 2025</td>
-                                <td>John Smith</td>
-                                <td>Deposit</td>
-                                <td>$2,500</td>
-                                <td><span class="status-badge status-active">Completed</span></td>
-                            </tr>
-                            <tr>
-                                <td>Sep 29, 2025</td>
-                                <td>Sarah Johnson</td>
-                                <td>Claim</td>
-                                <td>$1,200</td>
-                                <td><span class="status-badge status-pending">Processing</span></td>
-                            </tr>
-                            <tr>
-                                <td>Sep 28, 2025</td>
-                                <td>Mike Wilson</td>
-                                <td>Deposit</td>
-                                <td>$3,800</td>
-                                <td><span class="status-badge status-active">Completed</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Member Savings Page -->
-            <div class="page-content" id="memberPage" style="display: none;">
-                <div class="page-header">
-                    <h1 class="page-title">Member Savings</h1>
-                    <p class="page-subtitle">Manage and track member savings accounts</p>
-                </div>
-
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-icon">👤</div>
-                        <div class="stat-value">$89,456</div>
-                        <div class="stat-label">Total Member Savings</div>
-                        <div class="stat-change positive">+15.3%</div>
+                        <div class="stat-value">$2,456,789</div>
+                        <div class="stat-label">Total Savings YTD</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-icon">📊</div>
-                        <div class="stat-value">$2,456</div>
-                        <div class="stat-label">Average Balance</div>
-                        <div class="stat-change positive">+5.7%</div>
+                        <div class="stat-header">
+                            <div class="stat-icon">👥</div>
+                            <div class="stat-change positive">+324</div>
+                        </div>
+                        <div class="stat-value">45,678</div>
+                        <div class="stat-label">Active Members</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-icon">🎯</div>
-                        <div class="stat-value">342</div>
-                        <div class="stat-label">Active Accounts</div>
-                        <div class="stat-change positive">+12</div>
+                        <div class="stat-header">
+                            <div class="stat-icon">💊</div>
+                            <div class="stat-change positive">+8.2%</div>
+                        </div>
+                        <div class="stat-value">98.5%</div>
+                        <div class="stat-label">Formulary Compliance</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-icon">📈</div>
+                            <div class="stat-change positive">+23.1%</div>
+                        </div>
+                        <div class="stat-value">$345</div>
+                        <div class="stat-label">Avg Savings/Member</div>
                     </div>
                 </div>
 
                 <div class="chart-container">
-                    <div class="chart-header">
-                        <h3 class="chart-title">Member Growth Trend</h3>
-                    </div>
-                    <canvas id="memberChart"></canvas>
-                </div>
-
-                <div class="table-container">
-                    <h3 class="chart-title" style="margin-bottom: 1.5rem;">Top Members by Savings</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Rank</th>
-                                <th>Member Name</th>
-                                <th>Account Type</th>
-                                <th>Balance</th>
-                                <th>Growth</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>#1</td>
-                                <td>Robert Anderson</td>
-                                <td>Premium</td>
-                                <td>$12,450</td>
-                                <td style="color: var(--success);">+18.5%</td>
-                                <td><span class="status-badge status-active">Active</span></td>
-                            </tr>
-                            <tr>
-                                <td>#2</td>
-                                <td>Emily Davis</td>
-                                <td>Gold</td>
-                                <td>$10,230</td>
-                                <td style="color: var(--success);">+14.2%</td>
-                                <td><span class="status-badge status-active">Active</span></td>
-                            </tr>
-                            <tr>
-                                <td>#3</td>
-                                <td>Michael Brown</td>
-                                <td>Premium</td>
-                                <td>$9,876</td>
-                                <td style="color: var(--success);">+22.1%</td>
-                                <td><span class="status-badge status-active">Active</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <h3 style="margin-bottom: 1.5rem; color: var(--dark);">Savings Performance Trend</h3>
+                    <canvas id="dashboardChart"></canvas>
                 </div>
             </div>
 
-            <!-- Client Savings Page -->
-            <div class="page-content" id="clientPage" style="display: none;">
-                <div class="page-header">
-                    <h1 class="page-title">Client Savings</h1>
-                    <p class="page-subtitle">Corporate and institutional client accounts</p>
-                </div>
-
-                <div class="stats-grid">
+            <!-- Other Pages (Hidden by default) -->
+            <div class="page-content" id="employerPage" style="display: none;">
+                <h1 style="font-size: 2rem; font-weight: 800; color: var(--dark); margin-bottom: 2rem;">Employer Savings Management</h1>
+                <div class="stats-row">
                     <div class="stat-card">
-                        <div class="stat-icon">🏢</div>
-                        <div class="stat-value">$456,789</div>
-                        <div class="stat-label">Corporate Savings</div>
-                        <div class="stat-change positive">+28.4%</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">💎</div>
-                        <div class="stat-value">85</div>
-                        <div class="stat-label">Enterprise Clients</div>
-                        <div class="stat-change positive">+7</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">📈</div>
-                        <div class="stat-value">$5,374</div>
-                        <div class="stat-label">Avg. Transaction</div>
-                        <div class="stat-change positive">+9.8%</div>
-                    </div>
-                </div>
-
-                <div class="chart-container">
-                    <div class="chart-header">
-                        <h3 class="chart-title">Client Portfolio Distribution</h3>
-                    </div>
-                    <canvas id="clientChart"></canvas>
-                </div>
-            </div>
-
-            <!-- Claims Page -->
-            <div class="page-content" id="claimsPage" style="display: none;">
-                <div class="page-header">
-                    <h1 class="page-title">Claim Details</h1>
-                    <p class="page-subtitle">Process and track all claim requests</p>
-                </div>
-
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-icon">📝</div>
+                        <div class="stat-header">
+                            <div class="stat-icon">🏢</div>
+                            <div class="stat-change positive">+15%</div>
+                        </div>
                         <div class="stat-value">234</div>
-                        <div class="stat-label">Total Claims</div>
-                        <div class="stat-change positive">+12</div>
+                        <div class="stat-label">Active Employers</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-icon">✅</div>
-                        <div class="stat-value">198</div>
-                        <div class="stat-label">Approved</div>
-                        <div class="stat-change positive">+8</div>
+                        <div class="stat-header">
+                            <div class="stat-icon">💵</div>
+                            <div class="stat-change positive">+$2.3M</div>
+                        </div>
+                        <div class="stat-value">$45.6M</div>
+                        <div class="stat-label">Total Employer Savings</div>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">⏱️</div>
-                        <div class="stat-value">24</div>
-                        <div class="stat-label">Pending</div>
-                        <div class="stat-change negative">+3</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">❌</div>
-                        <div class="stat-value">12</div>
-                        <div class="stat-label">Rejected</div>
-                        <div class="stat-change positive">-2</div>
-                    </div>
-                </div>
-
-                <div class="table-container">
-                    <h3 class="chart-title" style="margin-bottom: 1.5rem;">Recent Claims</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Claim ID</th>
-                                <th>Member</th>
-                                <th>Type</th>
-                                <th>Amount</th>
-                                <th>Date</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>#CLM-2025-234</td>
-                                <td>Lisa Martinez</td>
-                                <td>Withdrawal</td>
-                                <td>$3,500</td>
-                                <td>Sep 30, 2025</td>
-                                <td><span class="status-badge status-pending">Pending</span></td>
-                            </tr>
-                            <tr>
-                                <td>#CLM-2025-233</td>
-                                <td>David Lee</td>
-                                <td>Emergency</td>
-                                <td>$1,200</td>
-                                <td>Sep 29, 2025</td>
-                                <td><span class="status-badge status-active">Approved</span></td>
-                            </tr>
-                            <tr>
-                                <td>#CLM-2025-232</td>
-                                <td>Jennifer White</td>
-                                <td>Partial</td>
-                                <td>$800</td>
-                                <td>Sep 28, 2025</td>
-                                <td><span class="status-badge status-active">Approved</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
                 </div>
             </div>
         </main>
     </div>
 
-    <!-- Mobile Menu Toggle -->
-    <div class="mobile-toggle" onclick="toggleSidebar()">☰</div>
-
     <!-- Login Modal -->
     <div class="modal" id="loginModal">
         <div class="modal-content">
-            <button class="close-modal" onclick="closeModal('login')" style="position: absolute; right: 1.5rem; top: 1.5rem; background: none; border: none; font-size: 2rem; cursor: pointer; color: var(--gray);">&times;</button>
-            <div class="modal-header">
-                <h2>Welcome Back</h2>
-                <p style="color: var(--gray);">Login to access your dashboard</p>
+            <button onclick="closeModal('login')" style="position: absolute; right: 1.5rem; top: 1.5rem; background: none; border: none; font-size: 2rem; cursor: pointer; color: var(--gray);">&times;</button>
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <div class="logo-icon" style="margin: 0 auto 1rem; width: 60px; height: 60px; font-size: 2rem;">💊</div>
+                <h2 style="font-size: 2rem; margin-bottom: 0.5rem;">Welcome Back</h2>
+                <p style="color: var(--gray);">Login to access your enterprise dashboard</p>
             </div>
             <form id="loginForm" onsubmit="handleLogin(event)">
                 <div class="form-group">
-                    <label for="loginEmail">Email Address</label>
-                    <input type="email" id="loginEmail" required placeholder="you@example.com">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" class="form-input" id="loginEmail" required placeholder="you@company.com">
                 </div>
                 <div class="form-group">
-                    <label for="loginPassword">Password</label>
-                    <input type="password" id="loginPassword" required placeholder="••••••••">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-input" id="loginPassword" required placeholder="••••••••">
                 </div>
                 <button type="submit" class="btn btn-primary" style="width: 100%;">Login to Dashboard</button>
             </form>
             <div style="text-align: center; margin-top: 2rem; color: var(--gray);">
-                Don't have an account? <a href="#" onclick="switchModal('signup'); return false;" style="color: var(--primary); text-decoration: none; font-weight: 600;">Sign up</a>
+                Don't have an account? <a href="#" onclick="switchModal('signup'); return false;" style="color: var(--primary); text-decoration: none; font-weight: 600;">Start Free Trial</a>
             </div>
         </div>
     </div>
@@ -1129,54 +1722,139 @@
     <!-- Signup Modal -->
     <div class="modal" id="signupModal">
         <div class="modal-content">
-            <button class="close-modal" onclick="closeModal('signup')" style="position: absolute; right: 1.5rem; top: 1.5rem; background: none; border: none; font-size: 2rem; cursor: pointer; color: var(--gray);">&times;</button>
-            <div class="modal-header">
-                <h2>Get Started</h2>
-                <p style="color: var(--gray);">Create your account in seconds</p>
+            <button onclick="closeModal('signup')" style="position: absolute; right: 1.5rem; top: 1.5rem; background: none; border: none; font-size: 2rem; cursor: pointer; color: var(--gray);">&times;</button>
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <div class="logo-icon" style="margin: 0 auto 1rem; width: 60px; height: 60px; font-size: 2rem;">💊</div>
+                <h2 style="font-size: 2rem; margin-bottom: 0.5rem;">Start Your Free Trial</h2>
+                <p style="color: var(--gray);">14-day trial with full access to all features</p>
             </div>
             <form id="signupForm" onsubmit="handleSignup(event)">
                 <div class="form-group">
-                    <label for="signupName">Full Name</label>
-                    <input type="text" id="signupName" required placeholder="John Doe">
+                    <label class="form-label">Organization Name</label>
+                    <input type="text" class="form-input" id="signupOrg" required placeholder="Your Company">
                 </div>
                 <div class="form-group">
-                    <label for="signupEmail">Email Address</label>
-                    <input type="email" id="signupEmail" required placeholder="you@example.com">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" class="form-input" id="signupName" required placeholder="John Doe">
                 </div>
                 <div class="form-group">
-                    <label for="signupPassword">Password</label>
-                    <input type="password" id="signupPassword" required placeholder="Create a strong password" minlength="6">
+                    <label class="form-label">Work Email</label>
+                    <input type="email" class="form-input" id="signupEmail" required placeholder="you@company.com">
                 </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;">Create Account</button>
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-input" id="signupPassword" required placeholder="Create a strong password" minlength="8">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Organization Type</label>
+                    <select class="form-input">
+                        <option>Employer</option>
+                        <option>PBM</option>
+                        <option>Specialty Pharmacy</option>
+                        <option>Pharmaceutical Hub</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Start Free Trial</button>
             </form>
-            <div style="text-align: center; margin-top: 2rem; color: var(--gray);">
-                Already have an account? <a href="#" onclick="switchModal('login'); return false;" style="color: var(--primary); text-decoration: none; font-weight: 600;">Login</a>
+            <div style="text-align: center; margin-top: 1.5rem; color: var(--gray); font-size: 0.85rem;">
+                By signing up, you agree to our Terms of Service and Privacy Policy
             </div>
         </div>
     </div>
 
-    <!-- Success Animation -->
-    <div class="success-animation" id="successAnimation">
-        <div style="font-size: 4rem; margin-bottom: 1rem;">✨</div>
-        <h2 style="color: var(--primary); margin-bottom: 0.5rem;">Success!</h2>
-        <p style="color: var(--gray);">Redirecting to your dashboard...</p>
+    <!-- Demo Modal -->
+    <div class="modal" id="demoModal">
+        <div class="modal-content">
+            <button onclick="closeModal('demo')" style="position: absolute; right: 1.5rem; top: 1.5rem; background: none; border: none; font-size: 2rem; cursor: pointer; color: var(--gray);">&times;</button>
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <div class="logo-icon" style="margin: 0 auto 1rem; width: 60px; height: 60px; font-size: 2rem;">📅</div>
+                <h2 style="font-size: 2rem; margin-bottom: 0.5rem;">Schedule a Demo</h2>
+                <p style="color: var(--gray);">See MedSave Pro in action with a personalized demo</p>
+            </div>
+            <form onsubmit="handleDemo(event)">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label class="form-label">First Name</label>
+                        <input type="text" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Last Name</label>
+                        <input type="text" class="form-input" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Work Email</label>
+                    <input type="email" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Company</label>
+                    <input type="text" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Phone Number</label>
+                    <input type="tel" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Number of Covered Lives</label>
+                    <select class="form-input">
+                        <option>Under 1,000</option>
+                        <option>1,000 - 5,000</option>
+                        <option>5,000 - 10,000</option>
+                        <option>10,000 - 50,000</option>
+                        <option>Over 50,000</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Schedule Demo</button>
+            </form>
+        </div>
     </div>
 
     <script>
         // User Management
-        let users = JSON.parse(localStorage.getItem('users')) || [
-            { email: 'demo@example.com', password: 'password123', name: 'Demo User' }
+        let users = JSON.parse(localStorage.getItem('medsave_users')) || [
+            { email: 'demo@company.com', password: 'password123', name: 'Demo User', org: 'Demo Corp' }
         ];
         
-        let currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
+        let currentUser = JSON.parse(localStorage.getItem('medsave_currentUser')) || null;
 
         // Check login status on load
         window.onload = function() {
             if (currentUser) {
-                showDashboard();
+                document.getElementById('navButtons').style.display = 'none';
+                document.getElementById('userNav').style.display = 'flex';
             }
             initCharts();
+            animateMetrics();
         };
+
+        // Scroll Effects
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        function scrollToROI() {
+            document.getElementById('roi').scrollIntoView({ behavior: 'smooth' });
+        }
 
         // Modal Functions
         function openModal(type) {
@@ -1185,7 +1863,8 @@
 
         function closeModal(type) {
             document.getElementById(type + 'Modal').classList.remove('active');
-            document.getElementById(type + 'Form').reset();
+            const form = document.getElementById(type + 'Form');
+            if (form) form.reset();
         }
 
         function switchModal(to) {
@@ -1205,23 +1884,19 @@
             
             if (user) {
                 currentUser = user;
-                localStorage.setItem('currentUser', JSON.stringify(user));
+                localStorage.setItem('medsave_currentUser', JSON.stringify(user));
                 
-                document.getElementById('successAnimation').classList.add('active');
-                
-                setTimeout(() => {
-                    document.getElementById('successAnimation').classList.remove('active');
-                    closeModal('login');
-                    showDashboard();
-                }, 2000);
+                closeModal('login');
+                showDashboard();
             } else {
-                alert('Invalid credentials. Try demo@example.com / password123');
+                alert('Invalid credentials. Try demo@company.com / password123');
             }
         }
 
         function handleSignup(event) {
             event.preventDefault();
             
+            const org = document.getElementById('signupOrg').value;
             const name = document.getElementById('signupName').value;
             const email = document.getElementById('signupEmail').value;
             const password = document.getElementById('signupPassword').value;
@@ -1231,37 +1906,45 @@
                 return;
             }
             
-            const newUser = { email, password, name };
+            const newUser = { email, password, name, org };
             users.push(newUser);
-            localStorage.setItem('users', JSON.stringify(users));
+            localStorage.setItem('medsave_users', JSON.stringify(users));
             
             currentUser = newUser;
-            localStorage.setItem('currentUser', JSON.stringify(newUser));
+            localStorage.setItem('medsave_currentUser', JSON.stringify(newUser));
             
-            document.getElementById('successAnimation').classList.add('active');
-            
-            setTimeout(() => {
-                document.getElementById('successAnimation').classList.remove('active');
-                closeModal('signup');
-                showDashboard();
-            }, 2000);
+            closeModal('signup');
+            showDashboard();
+        }
+
+        function handleDemo(event) {
+            event.preventDefault();
+            alert('Thank you! Our sales team will contact you within 24 hours to schedule your personalized demo.');
+            closeModal('demo');
         }
 
         function showDashboard() {
-            document.getElementById('heroSection').style.display = 'none';
+            document.getElementById('landingPage').style.display = 'none';
             document.getElementById('dashboardWrapper').classList.add('active');
             document.getElementById('navButtons').style.display = 'none';
             document.getElementById('userNav').style.display = 'flex';
             
             // Update user info
-            document.getElementById('sidebarUserName').textContent = currentUser.name;
-            document.getElementById('userAvatar').textContent = currentUser.name.charAt(0).toUpperCase();
+            if (currentUser) {
+                document.getElementById('sidebarUserName').textContent = currentUser.name;
+                document.getElementById('userAvatar').textContent = currentUser.name.charAt(0).toUpperCase();
+            }
+            
+            // Initialize dashboard charts
+            setTimeout(() => {
+                drawDashboardChart();
+            }, 100);
         }
 
         function logout() {
             currentUser = null;
-            localStorage.removeItem('currentUser');
-            document.getElementById('heroSection').style.display = 'block';
+            localStorage.removeItem('medsave_currentUser');
+            document.getElementById('landingPage').style.display = 'block';
             document.getElementById('dashboardWrapper').classList.remove('active');
             document.getElementById('navButtons').style.display = 'flex';
             document.getElementById('userNav').style.display = 'none';
@@ -1280,109 +1963,191 @@
             });
             
             // Show selected page
-            switch(page) {
-                case 'home':
-                    document.getElementById('homePage').style.display = 'block';
-                    break;
-                case 'member':
-                    document.getElementById('memberPage').style.display = 'block';
-                    drawMemberChart();
-                    break;
-                case 'client':
-                    document.getElementById('clientPage').style.display = 'block';
-                    drawClientChart();
-                    break;
-                case 'claims':
-                    document.getElementById('claimsPage').style.display = 'block';
-                    break;
-                default:
-                    document.getElementById('homePage').style.display = 'block';
+            const pageElement = document.getElementById(page + 'Page');
+            if (pageElement) {
+                pageElement.style.display = 'block';
+            } else {
+                // Show home page as default
+                document.getElementById('homePage').style.display = 'block';
             }
             
             // Add active to clicked menu item
-            event.target.closest('.menu-item').classList.add('active');
-            
-            // Close mobile sidebar
-            if (window.innerWidth <= 1024) {
-                document.getElementById('sidebar').classList.remove('active');
+            if (event && event.target) {
+                event.target.closest('.menu-item').classList.add('active');
             }
         }
 
-        // Mobile sidebar toggle
-        function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('active');
+        // ROI Calculator
+        function calculateROI() {
+            const lives = parseInt(document.getElementById('coveredLives').value) || 5000;
+            const spend = parseInt(document.getElementById('pharmacySpend').value) || 5000000;
+            
+            // Calculate savings based on industry averages
+            const savingsRate = 0.25; // 25% average savings
+            const annualSavings = Math.round(spend * savingsRate);
+            const monthlySavings = Math.round(annualSavings / 12);
+            const perMemberSavings = Math.round(annualSavings / lives);
+            const roi = Math.round((annualSavings / (lives * 50)) * 100); // Assuming $50/member/year cost
+            
+            // Update display
+            document.getElementById('annualSavings').textContent = ' + annualSavings.toLocaleString();
+            document.getElementById('monthlySavings').textContent = ' + monthlySavings.toLocaleString();
+            document.getElementById('perMemberSavings').textContent = ' + perMemberSavings.toLocaleString();
+            document.getElementById('roiPercent').textContent = roi + '%';
+            document.getElementById('payback').textContent = roi > 400 ? '3 months' : '6 months';
         }
 
         // Chart Functions
         function initCharts() {
-            if (document.getElementById('savingsChart')) {
-                drawSavingsChart();
-            }
+            drawHeroChart();
         }
 
-        function drawSavingsChart() {
-            const canvas = document.getElementById('savingsChart');
+        function drawHeroChart() {
+            const canvas = document.getElementById('heroChart');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            const width = canvas.width = 400;
+            const height = canvas.height = 200;
+            
+            // Animated line chart
+            let frame = 0;
+            const data = [20, 35, 30, 45, 40, 55, 50, 65, 60, 75, 70, 85];
+            
+            function animate() {
+                ctx.clearRect(0, 0, width, height);
+                
+                // Draw grid
+                ctx.strokeStyle = '#e5e7eb';
+                ctx.lineWidth = 1;
+                for (let i = 0; i <= 4; i++) {
+                    const y = (height / 4) * i;
+                    ctx.beginPath();
+                    ctx.moveTo(0, y);
+                    ctx.lineTo(width, y);
+                    ctx.stroke();
+                }
+                
+                // Draw gradient
+                const gradient = ctx.createLinearGradient(0, 0, 0, height);
+                gradient.addColorStop(0, 'rgba(0, 102, 255, 0.3)');
+                gradient.addColorStop(1, 'rgba(0, 102, 255, 0)');
+                
+                // Draw filled area
+                ctx.fillStyle = gradient;
+                ctx.beginPath();
+                const pointsToShow = Math.min(Math.floor(frame / 5), data.length);
+                for (let i = 0; i < pointsToShow; i++) {
+                    const x = (width / (data.length - 1)) * i;
+                    const y = height - (data[i] / 100) * height;
+                    if (i === 0) {
+                        ctx.moveTo(x, y);
+                    } else {
+                        ctx.lineTo(x, y);
+                    }
+                }
+                if (pointsToShow > 0) {
+                    ctx.lineTo((width / (data.length - 1)) * (pointsToShow - 1), height);
+                    ctx.lineTo(0, height);
+                    ctx.closePath();
+                    ctx.fill();
+                }
+                
+                // Draw line
+                ctx.strokeStyle = '#0066ff';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                for (let i = 0; i < pointsToShow; i++) {
+                    const x = (width / (data.length - 1)) * i;
+                    const y = height - (data[i] / 100) * height;
+                    if (i === 0) {
+                        ctx.moveTo(x, y);
+                    } else {
+                        ctx.lineTo(x, y);
+                    }
+                }
+                ctx.stroke();
+                
+                // Draw points
+                for (let i = 0; i < pointsToShow; i++) {
+                    const x = (width / (data.length - 1)) * i;
+                    const y = height - (data[i] / 100) * height;
+                    
+                    ctx.fillStyle = '#ffffff';
+                    ctx.strokeStyle = '#0066ff';
+                    ctx.lineWidth = 2;
+                    ctx.beginPath();
+                    ctx.arc(x, y, 4, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.stroke();
+                }
+                
+                frame++;
+                if (frame < data.length * 5 + 30) {
+                    requestAnimationFrame(animate);
+                }
+            }
+            
+            animate();
+        }
+
+        function drawDashboardChart() {
+            const canvas = document.getElementById('dashboardChart');
             if (!canvas) return;
             
             const ctx = canvas.getContext('2d');
             const width = canvas.width = canvas.offsetWidth;
-            const height = canvas.height = 400;
+            const height = canvas.height = 300;
+            
+            // Sample data
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'];
+            const savings = [180, 220, 195, 280, 310, 295, 340, 380, 410];
+            const members = [120, 145, 168, 195, 220, 245, 268, 285, 310];
+            
+            const padding = 50;
+            const graphWidth = width - 2 * padding;
+            const graphHeight = height - 2 * padding;
+            const barWidth = graphWidth / months.length * 0.3;
+            const spacing = graphWidth / months.length;
             
             // Clear canvas
             ctx.clearRect(0, 0, width, height);
             
-            // Sample data
-            const data = [45, 52, 48, 65, 72, 78, 85, 92, 88, 95, 105, 115];
-            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            // Find max values
+            const maxSavings = Math.max(...savings);
+            const maxMembers = Math.max(...members);
             
-            const padding = 60;
-            const graphWidth = width - 2 * padding;
-            const graphHeight = height - 2 * padding;
-            const pointSpacing = graphWidth / (data.length - 1);
-            
-            // Find max value
-            const maxValue = Math.max(...data);
-            
-            // Draw grid lines
+            // Draw axes
             ctx.strokeStyle = '#e5e7eb';
             ctx.lineWidth = 1;
-            for (let i = 0; i <= 5; i++) {
-                const y = padding + (graphHeight / 5) * i;
-                ctx.beginPath();
-                ctx.moveTo(padding, y);
-                ctx.lineTo(width - padding, y);
-                ctx.stroke();
-            }
-            
-            // Draw gradient fill
-            const gradient = ctx.createLinearGradient(0, padding, 0, height - padding);
-            gradient.addColorStop(0, 'rgba(99, 102, 241, 0.3)');
-            gradient.addColorStop(1, 'rgba(99, 102, 241, 0)');
-            
-            // Draw filled area
-            ctx.fillStyle = gradient;
             ctx.beginPath();
-            ctx.moveTo(padding, height - padding);
-            data.forEach((value, i) => {
-                const x = padding + i * pointSpacing;
-                const y = height - padding - (value / maxValue) * graphHeight;
-                if (i === 0) {
-                    ctx.moveTo(x, y);
-                } else {
-                    ctx.lineTo(x, y);
-                }
-            });
+            ctx.moveTo(padding, padding);
+            ctx.lineTo(padding, height - padding);
             ctx.lineTo(width - padding, height - padding);
-            ctx.closePath();
-            ctx.fill();
+            ctx.stroke();
             
-            // Draw line
-            ctx.strokeStyle = '#6366f1';
+            // Draw bars for savings
+            savings.forEach((value, i) => {
+                const barHeight = (value / maxSavings) * graphHeight;
+                const x = padding + i * spacing + spacing * 0.2;
+                const y = height - padding - barHeight;
+                
+                // Gradient for bars
+                const gradient = ctx.createLinearGradient(0, y, 0, height - padding);
+                gradient.addColorStop(0, '#0066ff');
+                gradient.addColorStop(1, '#00d4ff');
+                
+                ctx.fillStyle = gradient;
+                ctx.fillRect(x, y, barWidth, barHeight);
+            });
+            
+            // Draw line for members
+            ctx.strokeStyle = '#7c3aed';
             ctx.lineWidth = 3;
             ctx.beginPath();
-            data.forEach((value, i) => {
-                const x = padding + i * pointSpacing;
-                const y = height - padding - (value / maxValue) * graphHeight;
+            members.forEach((value, i) => {
+                const x = padding + i * spacing + spacing * 0.5;
+                const y = height - padding - (value / maxMembers) * graphHeight;
                 if (i === 0) {
                     ctx.moveTo(x, y);
                 } else {
@@ -1391,16 +2156,16 @@
             });
             ctx.stroke();
             
-            // Draw points
-            data.forEach((value, i) => {
-                const x = padding + i * pointSpacing;
-                const y = height - padding - (value / maxValue) * graphHeight;
+            // Draw points for members
+            members.forEach((value, i) => {
+                const x = padding + i * spacing + spacing * 0.5;
+                const y = height - padding - (value / maxMembers) * graphHeight;
                 
                 ctx.fillStyle = '#ffffff';
-                ctx.strokeStyle = '#6366f1';
-                ctx.lineWidth = 3;
+                ctx.strokeStyle = '#7c3aed';
+                ctx.lineWidth = 2;
                 ctx.beginPath();
-                ctx.arc(x, y, 6, 0, Math.PI * 2);
+                ctx.arc(x, y, 5, 0, Math.PI * 2);
                 ctx.fill();
                 ctx.stroke();
             });
@@ -1410,131 +2175,47 @@
             ctx.font = '12px Inter, sans-serif';
             ctx.textAlign = 'center';
             months.forEach((month, i) => {
-                const x = padding + i * pointSpacing;
-                ctx.fillText(month, x, height - padding + 25);
+                const x = padding + i * spacing + spacing * 0.5;
+                ctx.fillText(month, x, height - padding + 20);
             });
             
-            // Draw values on y-axis
-            ctx.textAlign = 'right';
-            for (let i = 0; i <= 5; i++) {
-                const value = Math.round((maxValue / 5) * (5 - i));
-                const y = padding + (graphHeight / 5) * i;
-                ctx.fillText('$' + value + 'K', padding - 10, y + 4);
-            }
-        }
-
-        function drawMemberChart() {
-            const canvas = document.getElementById('memberChart');
-            if (!canvas) return;
-            
-            const ctx = canvas.getContext('2d');
-            const width = canvas.width = canvas.offsetWidth;
-            const height = canvas.height = 400;
-            
-            ctx.clearRect(0, 0, width, height);
-            
-            // Bar chart for member growth
-            const data = [120, 145, 168, 195, 220, 245, 268, 285, 310, 328, 342];
-            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov'];
-            
-            const padding = 60;
-            const barWidth = (width - 2 * padding) / data.length * 0.7;
-            const spacing = (width - 2 * padding) / data.length;
-            const maxValue = Math.max(...data);
-            
-            // Draw bars with gradient
-            data.forEach((value, i) => {
-                const barHeight = (value / maxValue) * (height - 2 * padding);
-                const x = padding + i * spacing + spacing * 0.15;
-                const y = height - padding - barHeight;
-                
-                const gradient = ctx.createLinearGradient(0, y, 0, height - padding);
-                gradient.addColorStop(0, '#6366f1');
-                gradient.addColorStop(1, '#8b5cf6');
-                
-                ctx.fillStyle = gradient;
-                ctx.fillRect(x, y, barWidth, barHeight);
-                
-                // Value labels
-                ctx.fillStyle = '#1e293b';
-                ctx.font = 'bold 12px Inter, sans-serif';
-                ctx.textAlign = 'center';
-                ctx.fillText(value, x + barWidth / 2, y - 10);
-                
-                // Month labels
-                ctx.fillStyle = '#64748b';
-                ctx.font = '11px Inter, sans-serif';
-                ctx.fillText(months[i], x + barWidth / 2, height - padding + 20);
-            });
-        }
-
-        function drawClientChart() {
-            const canvas = document.getElementById('clientChart');
-            if (!canvas) return;
-            
-            const ctx = canvas.getContext('2d');
-            const width = canvas.width = canvas.offsetWidth;
-            const height = canvas.height = 400;
-            
-            ctx.clearRect(0, 0, width, height);
-            
-            // Pie chart for client distribution
-            const data = [
-                { label: 'Enterprise', value: 45, color: '#6366f1' },
-                { label: 'Corporate', value: 30, color: '#8b5cf6' },
-                { label: 'Small Business', value: 15, color: '#10b981' },
-                { label: 'Startup', value: 10, color: '#f59e0b' }
-            ];
-            
-            const centerX = width / 2;
-            const centerY = height / 2;
-            const radius = Math.min(width, height) / 3;
-            
-            let currentAngle = -Math.PI / 2;
-            const total = data.reduce((sum, item) => sum + item.value, 0);
-            
-            // Draw pie slices
-            data.forEach((segment, i) => {
-                const sliceAngle = (segment.value / total) * Math.PI * 2;
-                
-                // Draw slice
-                ctx.beginPath();
-                ctx.moveTo(centerX, centerY);
-                ctx.arc(centerX, centerY, radius, currentAngle, currentAngle + sliceAngle);
-                ctx.closePath();
-                ctx.fillStyle = segment.color;
-                ctx.fill();
-                
-                // Draw label
-                const labelAngle = currentAngle + sliceAngle / 2;
-                const labelX = centerX + Math.cos(labelAngle) * (radius + 30);
-                const labelY = centerY + Math.sin(labelAngle) * (radius + 30);
-                
-                ctx.fillStyle = '#1e293b';
-                ctx.font = 'bold 12px Inter, sans-serif';
-                ctx.textAlign = 'center';
-                ctx.fillText(segment.label, labelX, labelY);
-                ctx.font = '11px Inter, sans-serif';
-                ctx.fillStyle = '#64748b';
-                ctx.fillText(segment.value + '%', labelX, labelY + 15);
-                
-                currentAngle += sliceAngle;
-            });
-            
-            // Draw center circle for donut effect
-            ctx.beginPath();
-            ctx.arc(centerX, centerY, radius * 0.6, 0, Math.PI * 2);
-            ctx.fillStyle = '#ffffff';
-            ctx.fill();
-            
-            // Center text
-            ctx.fillStyle = '#1e293b';
-            ctx.font = 'bold 24px Inter, sans-serif';
-            ctx.textAlign = 'center';
-            ctx.fillText('85', centerX, centerY);
-            ctx.font = '12px Inter, sans-serif';
+            // Draw legend
+            ctx.fillStyle = '#0066ff';
+            ctx.fillRect(width - 150, 20, 15, 15);
             ctx.fillStyle = '#64748b';
-            ctx.fillText('Total Clients', centerX, centerY + 20);
+            ctx.font = '12px Inter, sans-serif';
+            ctx.textAlign = 'left';
+            ctx.fillText('Savings ($K)', width - 130, 32);
+            
+            ctx.strokeStyle = '#7c3aed';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(width - 150, 47);
+            ctx.lineTo(width - 135, 47);
+            ctx.stroke();
+            ctx.fillStyle = '#64748b';
+            ctx.fillText('Members', width - 130, 52);
+        }
+
+        // Animate metrics on scroll
+        function animateMetrics() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const metrics = entry.target.querySelectorAll('.hero-metric-value, .cta-stat-value');
+                        metrics.forEach(metric => {
+                            const finalValue = metric.textContent;
+                            metric.textContent = '0';
+                            setTimeout(() => {
+                                metric.textContent = finalValue;
+                            }, 300);
+                        });
+                    }
+                });
+            });
+            
+            const sections = document.querySelectorAll('.hero-metrics, .cta-stats');
+            sections.forEach(section => observer.observe(section));
         }
 
         // Close modal on outside click
@@ -1544,12 +2225,5 @@
             }
         }
 
-        // Resize charts on window resize
-        window.addEventListener('resize', () => {
-            if (currentUser) {
-                initCharts();
-            }
-        });
-    </script>
-</body>
-</html>
+        // Initialize ROI calculator
+        calculateROI();
