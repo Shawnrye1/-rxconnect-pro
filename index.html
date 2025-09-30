@@ -1774,17 +1774,19 @@
                 <h2 style="font-size: 2rem; margin-bottom: 0.5rem;">Welcome Back</h2>
                 <p style="color: var(--gray);">Login to access your enterprise dashboard</p>
             </div>
-            <form id="loginForm">
-                <div class="form-group">
-                    <label class="form-label">Email Address</label>
-                    <input type="email" class="form-input" id="loginEmail" required placeholder="you@company.com">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Password</label>
-                    <input type="password" class="form-input" id="loginPassword" required placeholder="••••••••">
-                </div>
-                <button type="button" class="btn btn-primary" style="width: 100%;" onclick="handleLogin(event)">Login to Dashboard</button>
-            </form>
+            <div class="form-group">
+                <label class="form-label">Email Address</label>
+                <input type="email" class="form-input" id="loginEmail" placeholder="demo@company.com" value="demo@company.com">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-input" id="loginPassword" placeholder="password123" value="password123">
+            </div>
+            <button class="btn btn-primary" style="width: 100%; cursor: pointer;" onclick="performLogin()">Login to Dashboard</button>
+            <div style="text-align: center; margin-top: 1rem; padding: 1rem; background: var(--light); border-radius: 10px;">
+                <p style="color: var(--gray); font-size: 0.9rem; margin: 0;">Demo Credentials Already Filled</p>
+                <p style="color: var(--primary); font-weight: 600; margin: 0.5rem 0 0 0;">Just click "Login to Dashboard"</p>
+            </div>
             <div style="text-align: center; margin-top: 2rem; color: var(--gray);">
                 Don't have an account? <a href="#" onclick="switchModal('signup'); return false;" style="color: var(--primary); text-decoration: none; font-weight: 600;">Start Free Trial</a>
             </div>
@@ -1800,35 +1802,33 @@
                 <h2 style="font-size: 2rem; margin-bottom: 0.5rem;">Start Your Free Trial</h2>
                 <p style="color: var(--gray);">14-day trial with full access to all features</p>
             </div>
-            <form id="signupForm">
-                <div class="form-group">
-                    <label class="form-label">Organization Name</label>
-                    <input type="text" class="form-input" id="signupOrg" required placeholder="Your Company">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Full Name</label>
-                    <input type="text" class="form-input" id="signupName" required placeholder="John Doe">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Work Email</label>
-                    <input type="email" class="form-input" id="signupEmail" required placeholder="you@company.com">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Password</label>
-                    <input type="password" class="form-input" id="signupPassword" required placeholder="Create a strong password" minlength="8">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Organization Type</label>
-                    <select class="form-input">
-                        <option>Employer</option>
-                        <option>PBM</option>
-                        <option>Specialty Pharmacy</option>
-                        <option>Pharmaceutical Hub</option>
-                        <option>Other</option>
-                    </select>
-                </div>
-                <button type="button" class="btn btn-primary" style="width: 100%;" onclick="handleSignup(event)">Start Free Trial</button>
-            </form>
+            <div class="form-group">
+                <label class="form-label">Organization Name</label>
+                <input type="text" class="form-input" id="signupOrg" placeholder="Your Company">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Full Name</label>
+                <input type="text" class="form-input" id="signupName" placeholder="John Doe">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Work Email</label>
+                <input type="email" class="form-input" id="signupEmail" placeholder="you@company.com">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-input" id="signupPassword" placeholder="Create a strong password" minlength="8">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Organization Type</label>
+                <select class="form-input" id="signupOrgType">
+                    <option>Employer</option>
+                    <option>PBM</option>
+                    <option>Specialty Pharmacy</option>
+                    <option>Pharmaceutical Hub</option>
+                    <option>Other</option>
+                </select>
+            </div>
+            <button class="btn btn-primary" style="width: 100%; cursor: pointer;" onclick="performSignup()">Start Free Trial</button>
             <div style="text-align: center; margin-top: 1.5rem; color: var(--gray); font-size: 0.85rem;">
                 By signing up, you agree to our Terms of Service and Privacy Policy
             </div>
@@ -1945,42 +1945,40 @@
             setTimeout(() => openModal(to), 300);
         }
 
-        // Authentication
-        function handleLogin(event) {
-            if (event) event.preventDefault();
-            
+        // Authentication Functions
+        function performLogin() {
             const email = document.getElementById('loginEmail').value;
             const password = document.getElementById('loginPassword').value;
             
-            // Check if fields are filled
-            if (!email || !password) {
-                alert('Please fill in all fields');
+            // For demo purposes, always allow the demo account
+            if (email === 'demo@company.com' && password === 'password123') {
+                currentUser = { email: email, password: password, name: 'Demo User', org: 'Demo Corp' };
+                localStorage.setItem('medsave_currentUser', JSON.stringify(currentUser));
+                
+                closeModal('login');
+                showDashboard();
                 return;
             }
             
+            // Check against stored users
             const user = users.find(u => u.email === email && u.password === password);
             
             if (user) {
                 currentUser = user;
                 localStorage.setItem('medsave_currentUser', JSON.stringify(user));
-                
                 closeModal('login');
                 showDashboard();
-                alert('Login successful! Welcome to your dashboard.');
             } else {
-                alert('Invalid credentials. Please try:\nEmail: demo@company.com\nPassword: password123');
+                alert('Invalid credentials. Please use:\nEmail: demo@company.com\nPassword: password123');
             }
         }
 
-        function handleSignup(event) {
-            if (event) event.preventDefault();
-            
+        function performSignup() {
             const org = document.getElementById('signupOrg').value;
             const name = document.getElementById('signupName').value;
             const email = document.getElementById('signupEmail').value;
             const password = document.getElementById('signupPassword').value;
             
-            // Check if fields are filled
             if (!org || !name || !email || !password) {
                 alert('Please fill in all fields');
                 return;
@@ -2000,7 +1998,6 @@
             
             closeModal('signup');
             showDashboard();
-            alert('Account created successfully! Welcome to MedSave Pro.');
         }
 
         function handleDemo(event) {
