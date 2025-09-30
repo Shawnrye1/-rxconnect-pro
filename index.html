@@ -1774,7 +1774,7 @@
                 <h2 style="font-size: 2rem; margin-bottom: 0.5rem;">Welcome Back</h2>
                 <p style="color: var(--gray);">Login to access your enterprise dashboard</p>
             </div>
-            <form id="loginForm" onsubmit="handleLogin(event)">
+            <form id="loginForm">
                 <div class="form-group">
                     <label class="form-label">Email Address</label>
                     <input type="email" class="form-input" id="loginEmail" required placeholder="you@company.com">
@@ -1783,7 +1783,7 @@
                     <label class="form-label">Password</label>
                     <input type="password" class="form-input" id="loginPassword" required placeholder="••••••••">
                 </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;">Login to Dashboard</button>
+                <button type="button" class="btn btn-primary" style="width: 100%;" onclick="handleLogin(event)">Login to Dashboard</button>
             </form>
             <div style="text-align: center; margin-top: 2rem; color: var(--gray);">
                 Don't have an account? <a href="#" onclick="switchModal('signup'); return false;" style="color: var(--primary); text-decoration: none; font-weight: 600;">Start Free Trial</a>
@@ -1800,7 +1800,7 @@
                 <h2 style="font-size: 2rem; margin-bottom: 0.5rem;">Start Your Free Trial</h2>
                 <p style="color: var(--gray);">14-day trial with full access to all features</p>
             </div>
-            <form id="signupForm" onsubmit="handleSignup(event)">
+            <form id="signupForm">
                 <div class="form-group">
                     <label class="form-label">Organization Name</label>
                     <input type="text" class="form-input" id="signupOrg" required placeholder="Your Company">
@@ -1827,7 +1827,7 @@
                         <option>Other</option>
                     </select>
                 </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;">Start Free Trial</button>
+                <button type="button" class="btn btn-primary" style="width: 100%;" onclick="handleSignup(event)">Start Free Trial</button>
             </form>
             <div style="text-align: center; margin-top: 1.5rem; color: var(--gray); font-size: 0.85rem;">
                 By signing up, you agree to our Terms of Service and Privacy Policy
@@ -1947,10 +1947,16 @@
 
         // Authentication
         function handleLogin(event) {
-            event.preventDefault();
+            if (event) event.preventDefault();
             
             const email = document.getElementById('loginEmail').value;
             const password = document.getElementById('loginPassword').value;
+            
+            // Check if fields are filled
+            if (!email || !password) {
+                alert('Please fill in all fields');
+                return;
+            }
             
             const user = users.find(u => u.email === email && u.password === password);
             
@@ -1960,8 +1966,9 @@
                 
                 closeModal('login');
                 showDashboard();
+                alert('Login successful! Welcome to your dashboard.');
             } else {
-                alert('Invalid credentials. Try demo@company.com / password123');
+                alert('Invalid credentials. Please try:\nEmail: demo@company.com\nPassword: password123');
             }
         }
 
