@@ -1973,15 +1973,21 @@
         }
 
         function handleSignup(event) {
-            event.preventDefault();
+            if (event) event.preventDefault();
             
             const org = document.getElementById('signupOrg').value;
             const name = document.getElementById('signupName').value;
             const email = document.getElementById('signupEmail').value;
             const password = document.getElementById('signupPassword').value;
             
+            // Check if fields are filled
+            if (!org || !name || !email || !password) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
             if (users.find(u => u.email === email)) {
-                alert('Email already exists');
+                alert('Email already exists. Please use a different email.');
                 return;
             }
             
@@ -1994,6 +2000,7 @@
             
             closeModal('signup');
             showDashboard();
+            alert('Account created successfully! Welcome to MedSave Pro.');
         }
 
         function handleDemo(event) {
