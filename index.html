@@ -30,11 +30,11 @@
             background: var(--white);
         }
 
-        /* Navigation */
         nav {
-            background: white;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
             padding: 1rem 0;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
             position: fixed;
             width: 100%;
             top: 0;
@@ -67,8 +67,10 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             color: white;
+            font-weight: 700;
+            box-shadow: 0 4px 12px rgba(0, 102, 255, 0.25);
         }
 
         .nav-menu {
@@ -81,18 +83,17 @@
             color: var(--gray);
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s;
+            transition: color 0.2s ease;
         }
 
         .nav-link:hover {
             color: var(--primary);
         }
 
-        /* Hero Section */
         .hero {
-            padding: 120px 0 80px;
+            padding: 140px 0 100px;
             background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
-            min-height: 600px;
+            min-height: 650px;
         }
 
         .container {
@@ -104,24 +105,25 @@
         .hero-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            gap: 5rem;
             align-items: center;
         }
 
         h1 {
-            font-size: 3.5rem;
+            font-size: 4rem;
             font-weight: 900;
             line-height: 1.1;
             margin-bottom: 1.5rem;
             background: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            letter-spacing: -0.02em;
         }
 
         .hero-subtitle {
             font-size: 1.5rem;
             color: var(--gray);
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
             font-weight: 300;
         }
 
@@ -129,26 +131,32 @@
             display: flex;
             flex-wrap: wrap;
             gap: 1rem;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
         }
 
         .hero-feature {
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            padding: 0.5rem 1rem;
+            padding: 0.6rem 1.2rem;
             background: white;
             border-radius: 50px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+        }
+
+        .hero-feature:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
         }
 
         .metrics-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-            padding-top: 3rem;
-            border-top: 1px solid rgba(0,0,0,0.1);
+            gap: 2.5rem;
+            margin-top: 4rem;
+            padding-top: 4rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.08);
         }
 
         .metric {
@@ -156,8 +164,8 @@
         }
 
         .metric-value {
-            font-size: 2.5rem;
-            font-weight: 800;
+            font-size: 3rem;
+            font-weight: 900;
             color: var(--primary);
         }
 
@@ -166,87 +174,79 @@
             font-size: 0.9rem;
             text-transform: uppercase;
             letter-spacing: 1px;
+            font-weight: 600;
         }
 
         .hero-visual {
             background: white;
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            padding: 2.5rem;
+            border-radius: 24px;
+            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.12);
         }
 
-        /* Sections */
         section {
-            padding: 80px 0;
+            padding: 100px 0;
         }
 
         .section-header {
             text-align: center;
             max-width: 800px;
-            margin: 0 auto 4rem;
+            margin: 0 auto 5rem;
         }
 
         .section-badge {
             display: inline-block;
             background: rgba(0, 102, 255, 0.1);
             color: var(--primary);
-            padding: 0.5rem 1.5rem;
+            padding: 0.6rem 1.5rem;
             border-radius: 50px;
             font-weight: 600;
             font-size: 0.9rem;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
         .section-title {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
             color: var(--dark);
+            letter-spacing: -0.02em;
         }
 
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            gap: 2.5rem;
         }
 
         .card {
             background: var(--light);
-            padding: 2.5rem;
-            border-radius: 20px;
-            transition: transform 0.3s, box-shadow 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%);
+            padding: 3rem;
+            border-radius: 24px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 48px rgba(0, 0, 0, 0.15);
+            background: white;
         }
 
         .card-icon {
             width: 70px;
             height: 70px;
             background: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%);
-            border-radius: 20px;
+            border-radius: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 2rem;
             color: white;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 24px rgba(0, 102, 255, 0.25);
         }
 
         .card-title {
@@ -259,19 +259,17 @@
         .card-description {
             color: var(--gray);
             line-height: 1.8;
-            margin-bottom: 1.5rem;
         }
 
-        /* ROI Calculator */
         .roi-section {
             background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
         }
 
         .roi-calculator {
             background: white;
-            padding: 3rem;
-            border-radius: 30px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            padding: 4rem;
+            border-radius: 32px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
             max-width: 1200px;
             margin: 0 auto;
         }
@@ -279,7 +277,7 @@
         .roi-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 3rem;
+            gap: 4rem;
         }
 
         .form-group {
@@ -288,7 +286,7 @@
 
         .form-label {
             display: block;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.75rem;
             color: var(--gray);
             font-weight: 600;
             text-transform: uppercase;
@@ -298,11 +296,12 @@
 
         .form-input {
             width: 100%;
-            padding: 1rem;
+            padding: 1.2rem;
             border: 2px solid var(--light);
-            border-radius: 10px;
+            border-radius: 12px;
             font-size: 1rem;
             background: var(--light);
+            transition: all 0.3s ease;
         }
 
         .form-input:focus {
@@ -313,25 +312,24 @@
 
         .roi-result {
             background: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%);
-            padding: 2rem;
-            border-radius: 20px;
+            padding: 3rem;
+            border-radius: 24px;
             color: white;
             margin-bottom: 2rem;
+            box-shadow: 0 12px 32px rgba(0, 102, 255, 0.3);
         }
 
         .roi-value {
-            font-size: 3rem;
-            font-weight: 800;
+            font-size: 3.5rem;
+            font-weight: 900;
         }
 
-        /* CTA Section */
         .cta-section {
             background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
             color: white;
             text-align: center;
         }
 
-        /* Dashboard */
         .dashboard-wrapper {
             display: none;
             padding-top: 70px;
@@ -382,7 +380,7 @@
             gap: 1rem;
             padding: 1rem 1.5rem;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: all 0.2s ease;
         }
 
         .menu-item:hover {
@@ -390,53 +388,55 @@
         }
 
         .menu-item.active {
-            background: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%);
-            color: white;
+            background: linear-gradient(90deg, rgba(0, 102, 255, 0.1) 0%, transparent 100%);
+            color: var(--primary);
+            font-weight: 600;
         }
 
         .main-content {
             margin-left: 280px;
-            padding: 2rem;
+            padding: 3rem;
             flex: 1;
         }
 
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
+            gap: 2rem;
+            margin-bottom: 3rem;
         }
 
         .stat-card {
             background: white;
-            padding: 1.5rem;
-            border-radius: 16px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
             border-left: 4px solid var(--primary);
         }
 
         .stat-value {
-            font-size: 2rem;
-            font-weight: 800;
+            font-size: 2.5rem;
+            font-weight: 900;
             color: var(--dark);
         }
 
         .stat-label {
             color: var(--gray);
             font-size: 0.9rem;
+            font-weight: 600;
         }
 
         .stat-change {
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             color: var(--success);
             margin-top: 0.5rem;
         }
 
         .data-table {
             background: white;
-            padding: 2rem;
-            border-radius: 16px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
             overflow-x: auto;
             margin-top: 2rem;
         }
@@ -448,7 +448,7 @@
 
         th {
             background: var(--light);
-            padding: 1rem;
+            padding: 1.2rem;
             text-align: left;
             font-weight: 600;
             color: var(--gray);
@@ -457,16 +457,16 @@
         }
 
         td {
-            padding: 1rem;
+            padding: 1.2rem;
             border-bottom: 1px solid var(--light);
         }
 
         tr:hover {
-            background: rgba(0, 102, 255, 0.05);
+            background: rgba(0, 102, 255, 0.03);
         }
 
         .status-badge {
-            padding: 0.25rem 0.75rem;
+            padding: 0.4rem 1rem;
             border-radius: 20px;
             font-size: 0.85rem;
             font-weight: 600;
@@ -483,7 +483,6 @@
             color: var(--warning);
         }
 
-        /* Modal */
         .modal {
             display: none;
             position: fixed;
@@ -491,7 +490,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.7);
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
             z-index: 2000;
             justify-content: center;
             align-items: center;
@@ -508,34 +508,40 @@
             width: 90%;
             max-width: 500px;
             position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
         }
 
-        /* Buttons */
         .btn {
-            padding: 0.75rem 2rem;
+            padding: 1rem 2.5rem;
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.2s ease;
             display: inline-block;
         }
 
         .btn-primary {
             background: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%);
             color: white;
+            box-shadow: 0 4px 12px rgba(0, 102, 255, 0.3);
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 102, 255, 0.4);
+            box-shadow: 0 8px 24px rgba(0, 102, 255, 0.4);
         }
 
         .btn-secondary {
             background: white;
             color: var(--primary);
             border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
         }
 
         .btn-large {
@@ -567,18 +573,16 @@
     </style>
 </head>
 <body>
-    <!-- Navigation -->
     <nav>
         <div class="nav-container">
             <div class="logo">
-                <div class="logo-icon">💊</div>
+                <div class="logo-icon">◈</div>
                 <span>MedSave Pro</span>
             </div>
             <div class="nav-menu">
                 <a href="#solutions" class="nav-link">Solutions</a>
                 <a href="#audience" class="nav-link">For Industry</a>
                 <a href="#roi" class="nav-link">ROI Calculator</a>
-                <a href="#features" class="nav-link">Features</a>
             </div>
             <div id="navButtons">
                 <button class="btn btn-secondary" onclick="showLogin()">Login</button>
@@ -591,9 +595,7 @@
         </div>
     </nav>
 
-    <!-- Landing Page -->
     <div id="landingPage">
-        <!-- Hero Section -->
         <section class="hero">
             <div class="container">
                 <div class="hero-content">
@@ -642,14 +644,14 @@
                     </div>
 
                     <div class="hero-visual">
-                        <h3>Live Savings Tracker</h3>
+                        <h3 style="margin-bottom: 1.5rem;">Live Savings Tracker</h3>
                         <canvas id="heroChart" width="400" height="200" style="width: 100%; height: 200px;"></canvas>
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem;">
-                            <div style="background: var(--light); padding: 1rem; border-radius: 10px;">
+                            <div style="background: var(--light); padding: 1.2rem; border-radius: 12px;">
                                 <div style="color: var(--gray); font-size: 0.85rem;">Today's Savings</div>
                                 <div style="font-size: 1.5rem; font-weight: 700; color: var(--success);">+$124,563</div>
                             </div>
-                            <div style="background: var(--light); padding: 1rem; border-radius: 10px;">
+                            <div style="background: var(--light); padding: 1.2rem; border-radius: 12px;">
                                 <div style="color: var(--gray); font-size: 0.85rem;">Active Plans</div>
                                 <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary);">8,432</div>
                             </div>
@@ -659,7 +661,6 @@
             </div>
         </section>
 
-        <!-- Solutions Section -->
         <section id="solutions">
             <div class="container">
                 <div class="section-header">
@@ -669,22 +670,22 @@
 
                 <div class="cards-grid">
                     <div class="card">
-                        <div class="card-icon">📊</div>
+                        <div class="card-icon">▣</div>
                         <h3 class="card-title">Advanced Analytics</h3>
                         <p class="card-description">Real-time dashboards with predictive analytics and customizable reporting.</p>
                     </div>
                     <div class="card">
-                        <div class="card-icon">🔗</div>
+                        <div class="card-icon">◉</div>
                         <h3 class="card-title">Seamless Integration</h3>
                         <p class="card-description">Connect with existing PBM systems, EMRs, and pharmacy networks.</p>
                     </div>
                     <div class="card">
-                        <div class="card-icon">🛡️</div>
+                        <div class="card-icon">◈</div>
                         <h3 class="card-title">Compliance & Security</h3>
                         <p class="card-description">Built with HIPAA compliance and enterprise security standards.</p>
                     </div>
                     <div class="card">
-                        <div class="card-icon">🤖</div>
+                        <div class="card-icon">◆</div>
                         <h3 class="card-title">AI Optimization</h3>
                         <p class="card-description">Machine learning identifies savings opportunities automatically.</p>
                     </div>
@@ -692,7 +693,6 @@
             </div>
         </section>
 
-        <!-- Target Audience -->
         <section id="audience" style="background: var(--light);">
             <div class="container">
                 <div class="section-header">
@@ -702,7 +702,7 @@
 
                 <div class="cards-grid">
                     <div class="card" style="background: white;">
-                        <div class="card-icon">🏢</div>
+                        <div class="card-icon">◫</div>
                         <h3 class="card-title">Employers</h3>
                         <p class="card-description">Reduce healthcare costs while improving employee satisfaction.</p>
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding-top: 1rem;">
@@ -717,7 +717,7 @@
                         </div>
                     </div>
                     <div class="card" style="background: white;">
-                        <div class="card-icon" style="background: linear-gradient(135deg, #10b981 0%, #34d399 100%);">💊</div>
+                        <div class="card-icon" style="background: linear-gradient(135deg, #10b981 0%, #34d399 100%);">◉</div>
                         <h3 class="card-title">PBMs</h3>
                         <p class="card-description">Streamline operations and improve formulary management.</p>
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding-top: 1rem;">
@@ -732,7 +732,7 @@
                         </div>
                     </div>
                     <div class="card" style="background: white;">
-                        <div class="card-icon" style="background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%);">🏥</div>
+                        <div class="card-icon" style="background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%);">⬢</div>
                         <h3 class="card-title">Specialty Pharmacies</h3>
                         <p class="card-description">Optimize specialty drug management and patient programs.</p>
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding-top: 1rem;">
@@ -747,7 +747,7 @@
                         </div>
                     </div>
                     <div class="card" style="background: white;">
-                        <div class="card-icon" style="background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);">🔬</div>
+                        <div class="card-icon" style="background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);">◈</div>
                         <h3 class="card-title">Pharmaceutical Hubs</h3>
                         <p class="card-description">Connect manufacturers with patients effectively.</p>
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding-top: 1rem;">
@@ -765,7 +765,6 @@
             </div>
         </section>
 
-        <!-- ROI Calculator -->
         <section id="roi" class="roi-section">
             <div class="container">
                 <div class="section-header">
@@ -797,10 +796,9 @@
             </div>
         </section>
 
-        <!-- CTA Section -->
         <section class="cta-section">
             <div class="container">
-                <h2 style="font-size: 3rem; margin-bottom: 1.5rem;">Ready to Transform Healthcare Savings?</h2>
+                <h2 style="font-size: 3.5rem; margin-bottom: 1.5rem;">Ready to Transform Healthcare Savings?</h2>
                 <p style="font-size: 1.25rem; opacity: 0.9; margin-bottom: 2rem;">Join 500+ leading organizations</p>
                 <div>
                     <button class="btn btn-large" style="background: white; color: var(--primary); margin: 0.5rem;" onclick="showDemo()">Schedule Demo</button>
@@ -810,7 +808,6 @@
         </section>
     </div>
 
-    <!-- Dashboard -->
     <div class="dashboard-wrapper" id="dashboardWrapper">
         <aside class="sidebar">
             <div class="sidebar-header">
@@ -825,26 +822,25 @@
             
             <div style="padding: 1rem 0;">
                 <div class="menu-item active" onclick="showPage('overview')">
-                    <span>📊</span>
+                    <span>▣</span>
                     <span>Dashboard Overview</span>
                 </div>
                 <div class="menu-item" onclick="showPage('employers')">
-                    <span>🏢</span>
+                    <span>◫</span>
                     <span>Employer Savings</span>
                 </div>
                 <div class="menu-item" onclick="showPage('members')">
-                    <span>👥</span>
+                    <span>◉</span>
                     <span>Member Savings</span>
                 </div>
                 <div class="menu-item" onclick="showPage('claims')">
-                    <span>📋</span>
+                    <span>◈</span>
                     <span>Claims Processing</span>
                 </div>
             </div>
         </aside>
 
         <main class="main-content">
-            <!-- Overview Page -->
             <div id="overviewPage">
                 <h1 style="margin-bottom: 2rem;">Dashboard Overview</h1>
                 
@@ -929,7 +925,6 @@
                 </div>
             </div>
 
-            <!-- Employer Savings Page -->
             <div id="employersPage" style="display: none;">
                 <h1 style="margin-bottom: 2rem;">Employer Savings</h1>
                 
@@ -1020,7 +1015,6 @@
                 </div>
             </div>
 
-            <!-- Member Savings Page -->
             <div id="membersPage" style="display: none;">
                 <h1 style="margin-bottom: 2rem;">Member Savings</h1>
                 
@@ -1111,7 +1105,6 @@
                 </div>
             </div>
 
-            <!-- Claims Page -->
             <div id="claimsPage" style="display: none;">
                 <h1 style="margin-bottom: 2rem;">Claims Processing</h1>
                 
@@ -1204,13 +1197,13 @@
         </main>
     </div>
 
-    <!-- Login Modal -->
     <div class="modal" id="loginModal">
         <div class="modal-content">
-            <button style="position: absolute; right: 1rem; top: 1rem; background: none; border: none; font-size: 2rem; cursor: pointer;" onclick="closeLogin()">&times;</button>
+            <button style="position: absolute; right: 1rem; top: 1rem; background: none; border: none; font-size: 2rem; cursor: pointer; color: var(--gray);" onclick="closeLogin()">&times;</button>
             <div style="text-align: center; margin-bottom: 2rem;">
-                <div style="width: 60px; height: 60px; margin: 0 auto 1rem; background: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%); border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: white;">💊</div>
-                <h2>Welcome Back</h2>
+                <div style="width: 60px; height: 60px; margin: 0 auto 1rem; background: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%); border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: white; font-weight: 700; box-shadow: 0 8px 24px rgba(0, 102, 255, 0.3);">◈</div>
+                <h2 style="font-size: 2rem; margin-bottom: 0.5rem;">Welcome Back</h2>
+                <p style="color: var(--gray);">Login to access your dashboard</p>
             </div>
             <div class="form-group">
                 <label class="form-label">Email</label>
@@ -1221,12 +1214,11 @@
                 <input type="password" class="form-input" value="password123" id="loginPassword">
             </div>
             <button class="btn btn-primary" style="width: 100%;" onclick="doLogin()">Login to Dashboard</button>
-            <p style="text-align: center; margin-top: 1rem; color: var(--gray);">Demo credentials pre-filled</p>
+            <p style="text-align: center; margin-top: 1rem; color: var(--gray); font-size: 0.9rem;">Demo credentials pre-filled</p>
         </div>
     </div>
 
     <script>
-        // Chart drawing function
         function drawChart(canvasId, labels, data, color) {
             const canvas = document.getElementById(canvasId);
             if (!canvas) return;
@@ -1244,11 +1236,9 @@
             const minValue = Math.min(...data);
             const range = maxValue - minValue;
             
-            // Background
             ctx.fillStyle = '#f9fafb';
             ctx.fillRect(0, 0, width, height);
             
-            // Grid
             ctx.strokeStyle = '#e5e7eb';
             ctx.lineWidth = 1;
             for (let i = 0; i <= 5; i++) {
@@ -1259,7 +1249,6 @@
                 ctx.stroke();
             }
             
-            // Axes
             ctx.strokeStyle = '#9ca3af';
             ctx.lineWidth = 2;
             ctx.beginPath();
@@ -1268,7 +1257,6 @@
             ctx.lineTo(width - padding, height - padding);
             ctx.stroke();
             
-            // Line
             ctx.strokeStyle = color;
             ctx.lineWidth = 3;
             ctx.beginPath();
@@ -1288,7 +1276,6 @@
             
             ctx.stroke();
             
-            // Points
             ctx.fillStyle = color;
             data.forEach((value, index) => {
                 const x = padding + stepX * index;
@@ -1299,7 +1286,6 @@
                 ctx.fill();
             });
             
-            // Labels
             ctx.fillStyle = '#374151';
             ctx.font = '12px sans-serif';
             ctx.textAlign = 'center';
@@ -1309,7 +1295,6 @@
                 ctx.fillText(label, x, height - padding + 20);
             });
             
-            // Y-axis values
             ctx.textAlign = 'right';
             for (let i = 0; i <= 5; i++) {
                 const value = maxValue - (range / 5) * i;
@@ -1319,60 +1304,37 @@
             }
         }
 
-        // Initialize all charts
         function initCharts() {
             const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'];
             
-            // Overview chart
             const savingsData = [1800000, 1950000, 2100000, 2250000, 2400000, 2550000, 2700000, 2850000, 3000000, 3150000];
             drawChart('overviewChart', months, savingsData, '#0066ff');
             
-            // Employer chart
             const employerData = [850000, 920000, 980000, 1050000, 1120000, 1180000, 1250000, 1320000, 1390000, 1460000];
             drawChart('employerChart', months, employerData, '#10b981');
             
-            // Member chart
             const memberData = [450000, 480000, 510000, 540000, 570000, 600000, 630000, 660000, 690000, 720000];
             drawChart('memberChart', months, memberData, '#7c3aed');
             
-            // Claims chart
             const claimsData = [5200, 5400, 5600, 5900, 6200, 6500, 6800, 7100, 7400, 7700];
             drawChart('claimsChart', months, claimsData, '#f59e0b');
         }
 
-        // Modal functions
         function showLogin() {
-            const modal = document.getElementById('loginModal');
-            if (modal) {
-                modal.classList.add('active');
-            }
+            document.getElementById('loginModal').classList.add('active');
         }
 
         function closeLogin() {
-            const modal = document.getElementById('loginModal');
-            if (modal) {
-                modal.classList.remove('active');
-            }
+            document.getElementById('loginModal').classList.remove('active');
         }
 
         function doLogin() {
-            const email = document.getElementById('loginEmail').value;
-            const password = document.getElementById('loginPassword').value;
-            
-            if (email && password) {
-                closeLogin();
-                document.getElementById('landingPage').style.display = 'none';
-                document.getElementById('dashboardWrapper').classList.add('active');
-                document.getElementById('navButtons').style.display = 'none';
-                document.getElementById('userNav').style.display = 'flex';
-                
-                // Update user name
-                document.getElementById('userName').textContent = 'Demo User';
-                document.getElementById('userAvatar').textContent = 'D';
-                
-                // Initialize charts after a brief delay
-                setTimeout(initCharts, 100);
-            }
+            closeLogin();
+            document.getElementById('landingPage').style.display = 'none';
+            document.getElementById('dashboardWrapper').classList.add('active');
+            document.getElementById('navButtons').style.display = 'none';
+            document.getElementById('userNav').style.display = 'flex';
+            setTimeout(initCharts, 100);
         }
 
         function doLogout() {
@@ -1400,16 +1362,13 @@
         }
 
         function showPage(page) {
-            // Hide all pages
             document.getElementById('overviewPage').style.display = 'none';
             document.getElementById('employersPage').style.display = 'none';
             document.getElementById('membersPage').style.display = 'none';
             document.getElementById('claimsPage').style.display = 'none';
             
-            // Show selected page
             document.getElementById(page + 'Page').style.display = 'block';
             
-            // Update active menu
             const items = document.querySelectorAll('.menu-item');
             items.forEach(item => item.classList.remove('active'));
             event.target.closest('.menu-item').classList.add('active');
@@ -1422,7 +1381,6 @@
             document.getElementById('roiValue').textContent = '$' + savings.toLocaleString();
         }
 
-        // Simple hero chart
         window.onload = function() {
             const canvas = document.getElementById('heroChart');
             if (canvas && canvas.getContext) {
