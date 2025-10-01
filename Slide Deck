@@ -1,0 +1,1022 @@
+import React, { useState } from 'react';
+import { ChevronLeft, ChevronRight, DollarSign, Users, Clock, Shield, TrendingUp, CheckCircle, Phone, Mail, Building, Activity } from 'lucide-react';
+
+const ClientDeck = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [audience, setAudience] = useState('employer'); // 'employer' or 'pharmacy'
+
+  const slides = [
+    // Slide 1: Title with Audience Selector
+    {
+      type: 'title',
+      content: (
+        <div className="flex flex-col items-center justify-center h-full bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-900 text-white px-8">
+          <div className="text-center space-y-8">
+            <h1 className="text-7xl font-bold mb-4">RxConnect Pro</h1>
+            <p className="text-3xl font-light mb-8">AI-Powered Prescription Assistance That Actually Works</p>
+            
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 max-w-2xl mx-auto">
+              <p className="text-lg mb-4">Select your organization type:</p>
+              <div className="flex gap-4 justify-center">
+                <button
+                  onClick={() => setAudience('employer')}
+                  className={`px-8 py-4 rounded-lg font-bold text-lg transition ${
+                    audience === 'employer' 
+                      ? 'bg-white text-blue-900' 
+                      : 'bg-white/20 hover:bg-white/30'
+                  }`}
+                >
+                  <Building className="w-6 h-6 inline-block mr-2" />
+                  Employers
+                </button>
+                <button
+                  onClick={() => setAudience('pharmacy')}
+                  className={`px-8 py-4 rounded-lg font-bold text-lg transition ${
+                    audience === 'pharmacy' 
+                      ? 'bg-white text-blue-900' 
+                      : 'bg-white/20 hover:bg-white/30'
+                  }`}
+                >
+                  <Activity className="w-6 h-6 inline-block mr-2" />
+                  Pharmacies
+                </button>
+              </div>
+            </div>
+            
+            <div className="flex gap-8 justify-center text-lg mt-12">
+              <div className="flex items-center gap-2">
+                <Shield className="w-6 h-6" />
+                <span>HIPAA Compliant</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle className="w-6 h-6" />
+                <span>100% Automated</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <TrendingUp className="w-6 h-6" />
+                <span>85%+ Savings</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+    },
+
+    // Slide 2: The Problem (Audience-Specific)
+    {
+      type: 'content',
+      title: audience === 'employer' ? 'Your Prescription Cost Challenge' : 'Your Patient Abandonment Problem',
+      content: (
+        <div className="space-y-8">
+          {audience === 'employer' ? (
+            <>
+              <p className="text-2xl text-gray-700 leading-relaxed">
+                <strong>Specialty medications are crushing your benefits budget</strong> — and your employees are struggling to afford their prescriptions.
+              </p>
+              
+              <div className="grid grid-cols-2 gap-6">
+                <div className="bg-red-50 border-l-4 border-red-500 p-6 rounded-r-lg">
+                  <h3 className="text-xl font-bold text-red-900 mb-4">The Financial Impact</h3>
+                  <ul className="space-y-3 text-gray-700">
+                    <li className="flex items-start gap-3">
+                      <span className="text-red-600 font-bold text-2xl">•</span>
+                      <span>Specialty drugs: <strong>$6,000-$12,000+ per employee annually</strong></span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-red-600 font-bold text-2xl">•</span>
+                      <span>Benefits costs rising <strong>8-12% year over year</strong></span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-red-600 font-bold text-2xl">•</span>
+                      <span>Average employer wastes <strong>$XXX,XXX annually</strong> on avoidable Rx costs</span>
+                    </li>
+                  </ul>
+                </div>
+                
+                <div className="bg-red-50 border-l-4 border-red-500 p-6 rounded-r-lg">
+                  <h3 className="text-xl font-bold text-red-900 mb-4">The Employee Impact</h3>
+                  <ul className="space-y-3 text-gray-700">
+                    <li className="flex items-start gap-3">
+                      <span className="text-red-600 font-bold text-2xl">•</span>
+                      <span><strong>30% abandon prescriptions</strong> due to cost</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-red-600 font-bold text-2xl">•</span>
+                      <span>Leads to <strong>worse health outcomes & higher claims</strong></span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-red-600 font-bold text-2xl">•</span>
+                      <span><strong>Decreased productivity</strong> and increased absenteeism</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              
+              <div className="bg-gradient-to-r from-orange-100 to-red-100 border-2 border-orange-400 rounded-lg p-6">
+                <h3 className="text-xl font-bold text-gray-800 mb-3">Why Copay Assistance Programs Fail</h3>
+                <div className="grid grid-cols-2 gap-6">
+                  <ul className="space-y-2 text-gray-700">
+                    <li>❌ Employees don't know programs exist</li>
+                    <li>❌ Complex enrollment (45+ minutes)</li>
+                    <li>❌ Limited call center hours & long waits</li>
+                  </ul>
+                  <ul className="space-y-2 text-gray-700">
+                    <li>❌ No proactive outreach to eligible members</li>
+                    <li>❌ Programs change constantly, hard to track</li>
+                    <li>❌ <strong>Result: Only 20-35% enrollment rate</strong></li>
+                  </ul>
+                </div>
+              </div>
+            </>
+          ) : (
+            <>
+              <p className="text-2xl text-gray-700 leading-relaxed">
+                <strong>Patient abandonment is costing you revenue</strong> — and you don't have the resources to help every patient navigate copay programs.
+              </p>
+              
+              <div className="grid grid-cols-2 gap-6">
+                <div className="bg-red-50 border-l-4 border-red-500 p-6 rounded-r-lg">
+                  <h3 className="text-xl font-bold text-red-900 mb-4">The Business Impact</h3>
+                  <ul className="space-y-3 text-gray-700">
+                    <li className="flex items-start gap-3">
+                      <span className="text-red-600 font-bold text-2xl">•</span>
+                      <span><strong>25-35% of specialty Rx abandoned</strong> at counter</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-red-600 font-bold text-2xl">•</span>
+                      <span>Average loss: <strong>$[XXX]K+ annually</strong> per location</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-red-600 font-bold text-2xl">•</span>
+                      <span>Staff spends <strong>hours on phone</strong> with manufacturers</span>
+                    </li>
+                  </ul>
+                </div>
+                
+                <div className="bg-red-50 border-l-4 border-red-500 p-6 rounded-r-lg">
+                  <h3 className="text-xl font-bold text-red-900 mb-4">The Staffing Challenge</h3>
+                  <ul className="space-y-3 text-gray-700">
+                    <li className="flex items-start gap-3">
+                      <span className="text-red-600 font-bold text-2xl">•</span>
+                      <span>Pharmacists' time wasted on <strong>program navigation</strong></span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-red-600 font-bold text-2xl">•</span>
+                      <span>Can't afford dedicated <strong>copay assistance staff</strong></span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-red-600 font-bold text-2xl">•</span>
+                      <span><strong>500+ programs</strong> to track manually</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              
+              <div className="bg-gradient-to-r from-orange-100 to-red-100 border-2 border-orange-400 rounded-lg p-6">
+                <h3 className="text-xl font-bold text-gray-800 mb-3">The Patient Experience Problem</h3>
+                <div className="grid grid-cols-2 gap-6">
+                  <ul className="space-y-2 text-gray-700">
+                    <li>❌ Patients frustrated by high costs</li>
+                    <li>❌ They don't know assistance exists</li>
+                    <li>❌ Too complicated to navigate alone</li>
+                  </ul>
+                  <ul className="space-y-2 text-gray-700">
+                    <li>❌ Go to competitors who offer help</li>
+                    <li>❌ Poor reviews hurt your reputation</li>
+                    <li>❌ <strong>Lost revenue & lost loyalty</strong></li>
+                  </ul>
+                </div>
+              </div>
+            </>
+          )}
+        </div>
+      )
+    },
+
+    // Slide 3: The Solution
+    {
+      type: 'content',
+      title: 'Introducing RxConnect Pro: AI That Solves It All',
+      content: (
+        <div className="space-y-8">
+          <p className="text-2xl text-gray-700 leading-relaxed">
+            <strong>100% automated prescription assistance</strong> that finds and enrolls {audience === 'employer' ? 'your employees' : 'your patients'} in savings programs — with zero effort from you.
+          </p>
+          
+          <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-8 rounded-xl">
+            <h3 className="text-2xl font-bold mb-6">How It Works: Complete Automation</h3>
+            <div className="grid grid-cols-3 gap-6">
+              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6">
+                <div className="bg-white text-blue-900 w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mb-4 mx-auto">1</div>
+                <h4 className="font-bold text-lg mb-3 text-center">AI Identifies & Contacts</h4>
+                <p className="text-sm text-center opacity-90">
+                  {audience === 'employer' 
+                    ? 'Proactively reaches out to employees on high-cost medications'
+                    : 'AI agent calls patients when prescriptions are ready, offers assistance'}
+                </p>
+              </div>
+              
+              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6">
+                <div className="bg-white text-blue-900 w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mb-4 mx-auto">2</div>
+                <h4 className="font-bold text-lg mb-3 text-center">Real-Time Program Matching</h4>
+                <p className="text-sm text-center opacity-90">
+                  Searches 500+ manufacturer programs instantly, finds best savings (copay cards, PAPs, foundations)
+                </p>
+              </div>
+              
+              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6">
+                <div className="bg-white text-blue-900 w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mb-4 mx-auto">3</div>
+                <h4 className="font-bold text-lg mb-3 text-center">Complete Enrollment</h4>
+                <p className="text-sm text-center opacity-90">
+                  Guides through application, submits forms, follows up automatically until approved
+                </p>
+              </div>
+            </div>
+          </div>
+          
+          <div className="grid grid-cols-4 gap-6">
+            <div className="bg-gradient-to-br from-green-50 to-green-100 border-2 border-green-400 rounded-lg p-6 text-center">
+              <Clock className="w-12 h-12 text-green-600 mx-auto mb-3" />
+              <p className="text-3xl font-bold text-green-700 mb-2">24/7</p>
+              <p className="text-sm text-gray-700">Always Available</p>
+            </div>
+            
+            <div className="bg-gradient-to-br from-blue-50 to-blue-100 border-2 border-blue-400 rounded-lg p-6 text-center">
+              <DollarSign className="w-12 h-12 text-blue-600 mx-auto mb-3" />
+              <p className="text-3xl font-bold text-blue-700 mb-2">85%+</p>
+              <p className="text-sm text-gray-700">Cost Reduction</p>
+            </div>
+            
+            <div className="bg-gradient-to-br from-purple-50 to-purple-100 border-2 border-purple-400 rounded-lg p-6 text-center">
+              <TrendingUp className="w-12 h-12 text-purple-600 mx-auto mb-3" />
+              <p className="text-3xl font-bold text-purple-700 mb-2">&lt;3min</p>
+              <p className="text-sm text-gray-700">Average Call</p>
+            </div>
+            
+            <div className="bg-gradient-to-br from-orange-50 to-orange-100 border-2 border-orange-400 rounded-lg p-6 text-center">
+              <Users className="w-12 h-12 text-orange-600 mx-auto mb-3" />
+              <p className="text-3xl font-bold text-orange-700 mb-2">90%+</p>
+              <p className="text-sm text-gray-700">Success Rate</p>
+            </div>
+          </div>
+          
+          {audience === 'employer' ? (
+            <div className="bg-blue-50 border-2 border-blue-400 rounded-lg p-6">
+              <p className="text-xl text-blue-900 text-center">
+                <strong>Your employees get help automatically.</strong> Your benefits budget gets relief immediately. Zero work required from HR.
+              </p>
+            </div>
+          ) : (
+            <div className="bg-blue-50 border-2 border-blue-400 rounded-lg p-6">
+              <p className="text-xl text-blue-900 text-center">
+                <strong>Your patients get enrolled automatically.</strong> Your revenue increases immediately. Zero additional staff required.
+              </p>
+            </div>
+          )}
+        </div>
+      )
+    },
+
+    // Slide 4: ROI Calculator (Audience-Specific)
+    {
+      type: 'content',
+      title: audience === 'employer' ? 'Your Potential Savings' : 'Your Revenue Opportunity',
+      content: (
+        <div className="space-y-8">
+          {audience === 'employer' ? (
+            <>
+              <p className="text-2xl text-gray-700">
+                Calculate your annual savings with RxConnect Pro based on your employee count.
+              </p>
+              
+              <div className="bg-gradient-to-br from-green-50 to-green-100 border-2 border-green-400 rounded-xl p-8">
+                <h3 className="text-2xl font-bold text-green-900 mb-6 text-center">Conservative Savings Estimate</h3>
+                
+                <div className="grid grid-cols-3 gap-6 mb-8">
+                  <div className="bg-white rounded-lg p-6 shadow-md">
+                    <p className="text-sm text-gray-600 mb-2">Your Company Size</p>
+                    <p className="text-4xl font-bold text-gray-800">[XXX]</p>
+                    <p className="text-sm text-gray-500 mt-1">Employees</p>
+                  </div>
+                  
+                  <div className="bg-white rounded-lg p-6 shadow-md">
+                    <p className="text-sm text-gray-600 mb-2">On Specialty Medications</p>
+                    <p className="text-4xl font-bold text-gray-800">[XX]</p>
+                    <p className="text-sm text-gray-500 mt-1">~[X]% of workforce</p>
+                  </div>
+                  
+                  <div className="bg-white rounded-lg p-6 shadow-md">
+                    <p className="text-sm text-gray-600 mb-2">Avg Cost per Employee</p>
+                    <p className="text-4xl font-bold text-gray-800">$[X]K</p>
+                    <p className="text-sm text-gray-500 mt-1">Specialty Rx annually</p>
+                  </div>
+                </div>
+                
+                <div className="bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-xl p-8 text-center">
+                  <p className="text-lg mb-2 opacity-90">Your Annual Savings with RxConnect Pro</p>
+                  <p className="text-6xl font-bold mb-4">$[XXX,XXX]</p>
+                  <p className="text-lg opacity-90">Plus improved employee satisfaction and retention</p>
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-3 gap-6">
+                <div className="bg-white border-2 border-gray-300 rounded-lg p-6">
+                  <h4 className="font-bold text-gray-800 mb-3">Traditional Approach</h4>
+                  <ul className="space-y-2 text-sm text-gray-700">
+                    <li>• Call center: $[XX]K+/year</li>
+                    <li>• Limited hours, long waits</li>
+                    <li>• 20-35% enrollment rate</li>
+                    <li>• High employee frustration</li>
+                  </ul>
+                  <p className="mt-4 text-2xl font-bold text-red-600">$[XX]K/year</p>
+                </div>
+                
+                <div className="bg-gradient-to-br from-blue-50 to-blue-100 border-2 border-blue-500 rounded-lg p-6">
+                  <h4 className="font-bold text-blue-900 mb-3">RxConnect Pro</h4>
+                  <ul className="space-y-2 text-sm text-gray-700">
+                    <li>• AI automation: $[X]K/year</li>
+                    <li>• 24/7 availability</li>
+                    <li>• 85%+ enrollment rate</li>
+                    <li>• Happy employees</li>
+                  </ul>
+                  <p className="mt-4 text-2xl font-bold text-green-600">$[X]K/year</p>
+                </div>
+                
+                <div className="bg-gradient-to-br from-green-50 to-emerald-100 border-2 border-green-500 rounded-lg p-6">
+                  <h4 className="font-bold text-green-900 mb-3">Your Net Benefit</h4>
+                  <ul className="space-y-2 text-sm text-gray-700">
+                    <li>• Rx savings: +$[XXX]K</li>
+                    <li>• Cost reduction: +$[XX]K</li>
+                    <li>• Better outcomes</li>
+                    <li>• ROI: [X]X in Year 1</li>
+                  </ul>
+                  <p className="mt-4 text-2xl font-bold text-green-700">+$[XXX]K</p>
+                </div>
+              </div>
+            </>
+          ) : (
+            <>
+              <p className="text-2xl text-gray-700">
+                Calculate your revenue recovery with RxConnect Pro based on your prescription volume.
+              </p>
+              
+              <div className="bg-gradient-to-br from-blue-50 to-blue-100 border-2 border-blue-400 rounded-xl p-8">
+                <h3 className="text-2xl font-bold text-blue-900 mb-6 text-center">Conservative Revenue Impact</h3>
+                
+                <div className="grid grid-cols-3 gap-6 mb-8">
+                  <div className="bg-white rounded-lg p-6 shadow-md">
+                    <p className="text-sm text-gray-600 mb-2">Monthly Specialty Rx</p>
+                    <p className="text-4xl font-bold text-gray-800">[XXX]</p>
+                    <p className="text-sm text-gray-500 mt-1">Prescriptions filled</p>
+                  </div>
+                  
+                  <div className="bg-white rounded-lg p-6 shadow-md">
+                    <p className="text-sm text-gray-600 mb-2">Current Abandonment</p>
+                    <p className="text-4xl font-bold text-gray-800">30%</p>
+                    <p className="text-sm text-gray-500 mt-1">Industry average</p>
+                  </div>
+                  
+                  <div className="bg-white rounded-lg p-6 shadow-md">
+                    <p className="text-sm text-gray-600 mb-2">Avg Margin per Rx</p>
+                    <p className="text-4xl font-bold text-gray-800">$[XXX]</p>
+                    <p className="text-sm text-gray-500 mt-1">Specialty medication</p>
+                  </div>
+                </div>
+                
+                <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl p-8 text-center">
+                  <p className="text-lg mb-2 opacity-90">Your Additional Annual Revenue</p>
+                  <p className="text-6xl font-bold mb-4">$[XXX,XXX]</p>
+                  <p className="text-lg opacity-90">From reduced abandonment + improved patient loyalty</p>
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-3 gap-6">
+                <div className="bg-white border-2 border-gray-300 rounded-lg p-6">
+                  <h4 className="font-bold text-gray-800 mb-3">Without RxConnect</h4>
+                  <ul className="space-y-2 text-sm text-gray-700">
+                    <li>• 30% abandonment rate</li>
+                    <li>• Lost revenue: $[XXX]K/year</li>
+                    <li>• Staff time wasted on calls</li>
+                    <li>• Frustrated patients leave</li>
+                  </ul>
+                  <p className="mt-4 text-2xl font-bold text-red-600">-$[XXX]K</p>
+                </div>
+                
+                <div className="bg-gradient-to-br from-green-50 to-green-100 border-2 border-green-500 rounded-lg p-6">
+                  <h4 className="font-bold text-green-900 mb-3">With RxConnect Pro</h4>
+                  <ul className="space-y-2 text-sm text-gray-700">
+                    <li>• 5-10% abandonment rate</li>
+                    <li>• Revenue recovered: $[XXX]K</li>
+                    <li>• Zero staff time required</li>
+                    <li>• Patients stay loyal</li>
+                  </ul>
+                  <p className="mt-4 text-2xl font-bold text-green-600">+$[XXX]K</p>
+                </div>
+                
+                <div className="bg-gradient-to-br from-blue-50 to-blue-100 border-2 border-blue-500 rounded-lg p-6">
+                  <h4 className="font-bold text-blue-900 mb-3">Your Net Gain</h4>
+                  <ul className="space-y-2 text-sm text-gray-700">
+                    <li>• Revenue increase: +$[XXX]K</li>
+                    <li>• Platform cost: -$[X]K</li>
+                    <li>• Staff time saved</li>
+                    <li>• ROI: [XX]X in Year 1</li>
+                  </ul>
+                  <p className="mt-4 text-2xl font-bold text-blue-700">+$[XXX]K</p>
+                </div>
+              </div>
+            </>
+          )}
+        </div>
+      )
+    },
+
+    // Slide 5: Case Study / Success Metrics
+    {
+      type: 'content',
+      title: 'Real Results from Beta Testing',
+      content: (
+        <div className="space-y-8">
+          <p className="text-2xl text-gray-700">
+            Early pilots show dramatic improvements in enrollment rates and {audience === 'employer' ? 'cost savings' : 'revenue recovery'}.
+          </p>
+          
+          {audience === 'employer' ? (
+            <div className="bg-gradient-to-br from-blue-50 to-indigo-100 border-2 border-blue-400 rounded-xl p-8">
+              <div className="flex items-center gap-4 mb-6">
+                <Building className="w-16 h-16 text-blue-600" />
+                <div>
+                  <h3 className="text-2xl font-bold text-gray-800">[Company Name] - Mid-Size Employer</h3>
+                  <p className="text-lg text-gray-600">[X,XXX] employees, self-insured plan</p>
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-4 gap-6 mb-8">
+                <div className="bg-white rounded-lg p-6 text-center shadow-md">
+                  <p className="text-sm text-gray-600 mb-2">Employees Contacted</p>
+                  <p className="text-4xl font-bold text-blue-600">[XXX]</p>
+                  <p className="text-sm text-gray-500 mt-2">In 30 days</p>
+                </div>
+                
+                <div className="bg-white rounded-lg p-6 text-center shadow-md">
+                  <p className="text-sm text-gray-600 mb-2">Successfully Enrolled</p>
+                  <p className="text-4xl font-bold text-green-600">[XX]%</p>
+                  <p className="text-sm text-gray-500 mt-2">vs 25% traditional</p>
+                </div>
+                
+                <div className="bg-white rounded-lg p-6 text-center shadow-md">
+                  <p className="text-sm text-gray-600 mb-2">Annual Savings</p>
+                  <p className="text-4xl font-bold text-green-600">$[XXX]K</p>
+                  <p className="text-sm text-gray-500 mt-2">Year 1 projection</p>
+                </div>
+                
+                <div className="bg-white rounded-lg p-6 text-center shadow-md">
+                  <p className="text-sm text-gray-600 mb-2">Employee NPS</p>
+                  <p className="text-4xl font-bold text-purple-600">[XX]</p>
+                  <p className="text-sm text-gray-500 mt-2">Excellent score</p>
+                </div>
+              </div>
+              
+              <div className="bg-white rounded-lg p-6">
+                <h4 className="font-bold text-gray-800 mb-4 text-lg">Key Insights:</h4>
+                <div className="grid grid-cols-2 gap-6">
+                  <ul className="space-y-3 text-gray-700">
+                    <li className="flex items-start gap-3">
+                      <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-1" />
+                      <span><strong>Zero HR involvement required</strong> after initial setup</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-1" />
+                      <span>Employees loved the <strong>proactive outreach</strong></span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-1" />
+                      <span><strong>24/7 availability</strong> = higher engagement</span>
+                    </li>
+                  </ul>
+                  <ul className="space-y-3 text-gray-700">
+                    <li className="flex items-start gap-3">
+                      <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-1" />
+                      <span>Average enrollment time: <strong>under 8 minutes</strong></span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-1" />
+                      <span><strong>Immediate ROI</strong> from first month</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-1" />
+                      <span>Better benefits = <strong>recruitment advantage</strong></span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="bg-gradient-to-br from-green-50 to-emerald-100 border-2 border-green-400 rounded-xl p-8">
+              <div className="flex items-center gap-4 mb-6">
+                <Activity className="w-16 h-16 text-green-600" />
+                <div>
+                  <h3 className="text-2xl font-bold text-gray-800">[Pharmacy Name] - Independent Specialty</h3>
+                  <p className="text-lg text-gray-600">[XXX] specialty prescriptions/month</p>
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-4 gap-6 mb-8">
+                <div className="bg-white rounded-lg p-6 text-center shadow-md">
+                  <p className="text-sm text-gray-600 mb-2">Patients Contacted</p>
+                  <p className="text-4xl font-bold text-green-600">[XXX]</p>
+                  <p className="text-sm text-gray-500 mt-2">In 60 days</p>
+                </div>
+                
+                <div className="bg-white rounded-lg p-6 text-center shadow-md">
+                  <p className="text-sm text-gray-600 mb-2">Abandonment Rate</p>
+                  <p className="text-4xl font-bold text-green-600">[X]%</p>
+                  <p className="text-sm text-gray-500 mt-2">Down from 28%</p>
+                </div>
+                
+                <div className="bg-white rounded-lg p-6 text-center shadow-md">
+                  <p className="text-sm text-gray-600 mb-2">Revenue Recovered</p>
+                  <p className="text-4xl font-bold text-blue-600">$[XX]K</p>
+                  <p className="text-sm text-gray-500 mt-2">In 60 days</p>
+                </div>
+                
+                <div className="bg-white rounded-lg p-6 text-center shadow-md">
+                  <p className="text-sm text-gray-600 mb-2">Staff Time Saved</p>
+                  <p className="text-4xl font-bold text-purple-600">[XX]</p>
+                  <p className="text-sm text-gray-500 mt-2">Hours per week</p>
+                </div>
+              </div>
+              
+              <div className="bg-white rounded-lg p-6">
+                <h4 className="font-bold text-gray-800 mb-4 text-lg">Key Insights:</h4>
+                <div className="grid grid-cols-2 gap-6">
+                  <ul className="space-y-3 text-gray-700">
+                    <li className="flex items-start gap-3">
+                      <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-1" />
+                      <span><strong>Pharmacists freed up</strong> for patient care</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-1" />
+                      <span>Patients thrilled with <strong>proactive support</strong></span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-1" />
+                      <span><strong>Google reviews improved</strong> by [X] points</span>
+                    </li>
+                  </ul>
+                  <ul className="space-y-3 text-gray-700">
+                    <li className="flex items-start gap-3">
+                      <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-1" />
+                      <span>Fills increased <strong>[XX]% month-over-month</strong></span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-1" />
+                      <span><strong>Patient retention</strong> significantly improved</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-1" />
+                      <span>ROI achieved in <strong>first month</strong></span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          )}
+          
+          <div className="grid grid-cols-3 gap-6">
+            <div className="bg-blue-50 border-2 border-blue-300 rounded-lg p-6 text-center">
+              <p className="text-5xl font-bold text-blue-600 mb-3">[XX]%</p>
+              <p className="text-gray-700 font-semibold">Enrollment Success Rate</p>
+              <p className="text-sm text-gray-500 mt-2">vs 20-35% industry avg</p>
+            </div>
+            
+            <div className="bg-green-50 border-2 border-green-300 rounded-lg p-6 text-center">
+              <p className="text-5xl font-bold text-green-600 mb-3">&lt;[X]min</p>
+              <p className="text-gray-700 font-semibold">Average Call Duration</p>
+              <p className="text-sm text-gray-500 mt-2">vs 45+ min manual process</p>
+            </div>
+            
+            <div className="bg-purple-50 border-2 border-purple-300 rounded-lg p-6 text-center">
+              <p className="text-5xl font-bold text-purple-600 mb-3">[XX]</p>
+              <p className="text-gray-700 font-semibold">Net Promoter Score</p>
+              <p className="text-sm text-gray-500 mt-2">Exceptional satisfaction</p>
+            </div>
+          </div>
+        </div>
+      )
+    },
+
+    // Slide 6: Implementation & Security
+    {
+      type: 'content',
+      title: 'Enterprise-Grade Security & Simple Setup',
+      content: (
+        <div className="space-y-8">
+          <div className="grid grid-cols-2 gap-8">
+            <div>
+              <h3 className="text-2xl font-bold text-gray-800 mb-6">Implementation Timeline</h3>
+              
+              <div className="space-y-4">
+                <div className="flex gap-4">
+                  <div className="bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold flex-shrink-0">1</div>
+                  <div className="flex-1">
+                    <p className="font-bold text-gray-800">Week 1: Setup & Integration</p>
+                    <p className="text-sm text-gray-600">Connect to your systems via secure API, configure member data feeds</p>
+                  </div>
+                </div>
+                
+                <div className="flex gap-4">
+                  <div className="bg-green-600 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold flex-shrink-0">2</div>
+                  <div className="flex-1">
+                    <p className="font-bold text-gray-800">Week 2: Testing & Training</p>
+                    <p className="text-sm text-gray-600">Run pilot with small group, train your team on dashboard and reporting</p>
+                  </div>
+                </div>
+                
+                <div className="flex gap-4">
+                  <div className="bg-purple-600 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold flex-shrink-0">3</div>
+                  <div className="flex-1">
+                    <p className="font-bold text-gray-800">Week 3-4: Full Launch</p>
+                    <p className="text-sm text-gray-600">Go live with all {audience === 'employer' ? 'employees' : 'patients'}, AI begins proactive outreach</p>
+                  </div>
+                </div>
+                
+                <div className="flex gap-4">
+                  <div className="bg-orange-600 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold flex-shrink-0">4</div>
+                  <div className="flex-1">
+                    <p className="font-bold text-gray-800">Ongoing: Optimization</p>
+                    <p className="text-sm text-gray-600">Continuous AI improvements, quarterly business reviews, dedicated support</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-green-50 border-2 border-green-400 rounded-lg p-6 mt-6">
+                <p className="text-center text-lg text-gray-800">
+                  <strong>Average time to value: 2-3 weeks</strong>
+                </p>
+                <p className="text-center text-sm text-gray-600 mt-2">Most customers see ROI in first 30 days</p>
+              </div>
+            </div>
+            
+            <div>
+              <h3 className="text-2xl font-bold text-gray-800 mb-6">Security & Compliance</h3>
+              
+              <div className="space-y-4">
+                <div className="bg-blue-50 border-l-4 border-blue-600 p-5 rounded-r-lg">
+                  <div className="flex items-center gap-3 mb-2">
+                    <Shield className="w-8 h-8 text-blue-600" />
+                    <h4 className="font-bold text-gray-800 text-lg">HIPAA Compliant</h4>
+                  </div>
+                  <p className="text-sm text-gray-600">
+                    Full Business Associate Agreement (BAA), encrypted data at rest and in transit, regular audits
+                  </p>
+                </div>
+                
+                <div className="bg-green-50 border-l-4 border-green-600 p-5 rounded-r-lg">
+                  <div className="flex items-center gap-3 mb-2">
+                    <CheckCircle className="w-8 h-8 text-green-600" />
+                    <h4 className="font-bold text-gray-800 text-lg">SOC 2 Type II Certified</h4>
+                  </div>
+                  <p className="text-sm text-gray-600">
+                    Independent verification of security controls, annual penetration testing
+                  </p>
+                </div>
+                
+                <div className="bg-purple-50 border-l-4 border-purple-600 p-5 rounded-r-lg">
+                  <div className="flex items-center gap-3 mb-2">
+                    <Shield className="w-8 h-8 text-purple-600" />
+                    <h4 className="font-bold text-gray-800 text-lg">Enterprise Infrastructure</h4>
+                  </div>
+                  <p className="text-sm text-gray-600">
+                    99.9% uptime SLA, redundant systems, 24/7 monitoring, disaster recovery
+                  </p>
+                </div>
+                
+                <div className="bg-orange-50 border-l-4 border-orange-600 p-5 rounded-r-lg">
+                  <div className="flex items-center gap-3 mb-2">
+                    <Users className="w-8 h-8 text-orange-600" />
+                    <h4 className="font-bold text-gray-800 text-lg">Privacy First</h4>
+                  </div>
+                  <p className="text-sm text-gray-600">
+                    Minimal data collection, automatic PII redaction, complete audit logging
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white p-8 rounded-xl">
+            <h3 className="text-2xl font-bold mb-4 text-center">What You Get</h3>
+            <div className="grid grid-cols-3 gap-6">
+              <ul className="space-y-2 text-sm">
+                <li>✓ Dedicated account manager</li>
+                <li>✓ Real-time analytics dashboard</li>
+                <li>✓ Custom reporting</li>
+              </ul>
+              <ul className="space-y-2 text-sm">
+                <li>✓ API integration support</li>
+                <li>✓ Quarterly business reviews</li>
+                <li>✓ Priority support (24/7)</li>
+              </ul>
+              <ul className="space-y-2 text-sm">
+                <li>✓ Regular platform updates</li>
+                <li>✓ Training & onboarding</li>
+                <li>✓ Success guarantee</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      )
+    },
+
+    // Slide 7: Pricing
+    {
+      type: 'content',
+      title: 'Simple, Transparent Pricing',
+      content: (
+        <div className="space-y-8">
+          <p className="text-2xl text-gray-700 text-center">
+            <strong>Pay for results, not overhead.</strong> {audience === 'employer' ? 'Our pricing scales with your employee count.' : 'Our pricing is based on your prescription volume.'}
+          </p>
+          
+          {audience === 'employer' ? (
+            <div className="grid grid-cols-3 gap-6">
+              <div className="bg-white border-2 border-gray-300 rounded-xl p-8 text-center hover:shadow-xl transition">
+                <h3 className="text-2xl font-bold text-gray-800 mb-4">Starter</h3>
+                <p className="text-gray-600 mb-6">500-2,000 employees</p>
+                <p className="text-5xl font-bold text-blue-600 mb-2">$[X]</p>
+                <p className="text-gray-500 mb-8">per employee/month</p>
+                <ul className="text-left space-y-3 text-sm text-gray-700 mb-8">
+                  <li>✓ Full AI automation</li>
+                  <li>✓ 500+ program database</li>
+                  <li>✓ Real-time analytics</li>
+                  <li>✓ Email support</li>
+                  <li>✓ Standard integrations</li>
+                </ul>
+                <button className="w-full bg-blue-600 text-white py-3 rounded-lg font-bold hover:bg-blue-700 transition">
+                  Get Started
+                </button>
+              </div>
+              
+              <div className="bg-gradient-to-br from-blue-50 to-indigo-100 border-4 border-blue-600 rounded-xl p-8 text-center transform scale-105 shadow-xl">
+                <div className="bg-blue-600 text-white px-4 py-1 rounded-full text-sm font-bold inline-block mb-4">
+                  MOST POPULAR
+                </div>
+                <h3 className="text-2xl font-bold text-gray-800 mb-4">Professional</h3>
+                <p className="text-gray-600 mb-6">2,000-10,000 employees</p>
+                <p className="text-5xl font-bold text-blue-600 mb-2">$[X]</p>
+                <p className="text-gray-500 mb-8">per employee/month</p>
+                <ul className="text-left space-y-3 text-sm text-gray-700 mb-8">
+                  <li>✓ Everything in Starter</li>
+                  <li>✓ Dedicated account manager</li>
+                  <li>✓ Custom reporting</li>
+                  <li>✓ Priority support (24/7)</li>
+                  <li>✓ Quarterly business reviews</li>
+                  <li>✓ Advanced integrations</li>
+                </ul>
+                <button className="w-full bg-blue-600 text-white py-3 rounded-lg font-bold hover:bg-blue-700 transition">
+                  Get Started
+                </button>
+              </div>
+              
+              <div className="bg-white border-2 border-gray-300 rounded-xl p-8 text-center hover:shadow-xl transition">
+                <h3 className="text-2xl font-bold text-gray-800 mb-4">Enterprise</h3>
+                <p className="text-gray-600 mb-6">10,000+ employees</p>
+                <p className="text-5xl font-bold text-blue-600 mb-2">Custom</p>
+                <p className="text-gray-500 mb-8">Volume pricing</p>
+                <ul className="text-left space-y-3 text-sm text-gray-700 mb-8">
+                  <li>✓ Everything in Professional</li>
+                  <li>✓ Custom AI workflows</li>
+                  <li>✓ White-label options</li>
+                  <li>✓ Dedicated success team</li>
+                  <li>✓ SLA guarantees</li>
+                  <li>✓ Strategic consulting</li>
+                </ul>
+                <button className="w-full bg-gray-800 text-white py-3 rounded-lg font-bold hover:bg-gray-900 transition">
+                  Contact Sales
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div className="grid grid-cols-3 gap-6">
+              <div className="bg-white border-2 border-gray-300 rounded-xl p-8 text-center hover:shadow-xl transition">
+                <h3 className="text-2xl font-bold text-gray-800 mb-4">Basic</h3>
+                <p className="text-gray-600 mb-6">&lt;200 Rx/month</p>
+                <p className="text-5xl font-bold text-green-600 mb-2">$[XXX]</p>
+                <p className="text-gray-500 mb-8">per location/month</p>
+                <ul className="text-left space-y-3 text-sm text-gray-700 mb-8">
+                  <li>✓ Full AI automation</li>
+                  <li>✓ 500+ program database</li>
+                  <li>✓ Basic analytics</li>
+                  <li>✓ Email support</li>
+                  <li>✓ Simple integration</li>
+                </ul>
+                <button className="w-full bg-green-600 text-white py-3 rounded-lg font-bold hover:bg-green-700 transition">
+                  Get Started
+                </button>
+              </div>
+              
+              <div className="bg-gradient-to-br from-green-50 to-emerald-100 border-4 border-green-600 rounded-xl p-8 text-center transform scale-105 shadow-xl">
+                <div className="bg-green-600 text-white px-4 py-1 rounded-full text-sm font-bold inline-block mb-4">
+                  MOST POPULAR
+                </div>
+                <h3 className="text-2xl font-bold text-gray-800 mb-4">Growth</h3>
+                <p className="text-gray-600 mb-6">200-500 Rx/month</p>
+                <p className="text-5xl font-bold text-green-600 mb-2">$[XXX]</p>
+                <p className="text-gray-500 mb-8">per location/month</p>
+                <ul className="text-left space-y-3 text-sm text-gray-700 mb-8">
+                  <li>✓ Everything in Basic</li>
+                  <li>✓ Dedicated support</li>
+                  <li>✓ Advanced analytics</li>
+                  <li>✓ Priority phone support</li>
+                  <li>✓ Custom workflows</li>
+                  <li>✓ Monthly check-ins</li>
+                </ul>
+                <button className="w-full bg-green-600 text-white py-3 rounded-lg font-bold hover:bg-green-700 transition">
+                  Get Started
+                </button>
+              </div>
+              
+              <div className="bg-white border-2 border-gray-300 rounded-xl p-8 text-center hover:shadow-xl transition">
+                <h3 className="text-2xl font-bold text-gray-800 mb-4">Enterprise</h3>
+                <p className="text-gray-600 mb-6">500+ Rx/month or multi-location</p>
+                <p className="text-5xl font-bold text-green-600 mb-2">Custom</p>
+                <p className="text-gray-500 mb-8">Volume pricing</p>
+                <ul className="text-left space-y-3 text-sm text-gray-700 mb-8">
+                  <li>✓ Everything in Growth</li>
+                  <li>✓ Multi-location support</li>
+                  <li>✓ White-label options</li>
+                  <li>✓ Account manager</li>
+                  <li>✓ 99.9% uptime SLA</li>
+                  <li>✓ Strategic partnership</li>
+                </ul>
+                <button className="w-full bg-gray-800 text-white py-3 rounded-lg font-bold hover:bg-gray-900 transition">
+                  Contact Sales
+                </button>
+              </div>
+            </div>
+          )}
+          
+          <div className="bg-gradient-to-r from-yellow-100 to-orange-100 border-2 border-orange-400 rounded-lg p-8">
+            <div className="grid grid-cols-2 gap-8">
+              <div>
+                <h3 className="text-xl font-bold text-gray-800 mb-4">What's Included in All Plans</h3>
+                <ul className="space-y-2 text-gray-700">
+                  <li>✓ No setup fees</li>
+                  <li>✓ No hidden costs</li>
+                  <li>✓ Cancel anytime (no long-term contracts)</li>
+                  <li>✓ 30-day money-back guarantee</li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-gray-800 mb-4">ROI Guarantee</h3>
+                <p className="text-gray-700 mb-3">
+                  <strong>If you don't see measurable ROI within 90 days, we'll refund your subscription.</strong>
+                </p>
+                <p className="text-sm text-gray-600">
+                  That's how confident we are in our platform's ability to deliver results.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+    },
+
+    // Slide 8: Next Steps / CTA
+    {
+      type: 'content',
+      title: 'Ready to Transform Your Prescription Assistance?',
+      content: (
+        <div className="flex flex-col items-center justify-center h-full space-y-8 px-8">
+          <div className="text-center max-w-3xl">
+            <h2 className="text-4xl font-bold text-gray-800 mb-6">
+              {audience === 'employer' 
+                ? 'Start Saving on Prescription Costs Today'
+                : 'Start Recovering Lost Revenue Today'}
+            </h2>
+            <p className="text-2xl text-gray-600 mb-8">
+              Join innovative {audience === 'employer' ? 'employers' : 'pharmacies'} who are already seeing dramatic results with AI-powered prescription assistance.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-3 gap-8 max-w-5xl">
+            <div className="bg-gradient-to-br from-blue-50 to-blue-100 border-2 border-blue-400 rounded-xl p-8 text-center">
+              <div className="bg-blue-600 text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">1</div>
+              <h3 className="text-xl font-bold text-gray-800 mb-3">Schedule Demo</h3>
+              <p className="text-gray-600 mb-6">See RxConnect Pro in action with your data</p>
+              <button className="bg-blue-600 text-white px-8 py-3 rounded-lg font-bold hover:bg-blue-700 transition w-full">
+                Book Demo
+              </button>
+            </div>
+            
+            <div className="bg-gradient-to-br from-green-50 to-green-100 border-2 border-green-400 rounded-xl p-8 text-center">
+              <div className="bg-green-600 text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">2</div>
+              <h3 className="text-xl font-bold text-gray-800 mb-3">Get Custom ROI</h3>
+              <p className="text-gray-600 mb-6">We'll calculate your specific savings potential</p>
+              <button className="bg-green-600 text-white px-8 py-3 rounded-lg font-bold hover:bg-green-700 transition w-full">
+                Get Quote
+              </button>
+            </div>
+            
+            <div className="bg-gradient-to-br from-purple-50 to-purple-100 border-2 border-purple-400 rounded-xl p-8 text-center">
+              <div className="bg-purple-600 text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">3</div>
+              <h3 className="text-xl font-bold text-gray-800 mb-3">Start Free Trial</h3>
+              <p className="text-gray-600 mb-6">Try it risk-free with our 30-day guarantee</p>
+              <button className="bg-purple-600 text-white px-8 py-3 rounded-lg font-bold hover:bg-purple-700 transition w-full">
+                Start Trial
+              </button>
+            </div>
+          </div>
+          
+          <div className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white p-8 rounded-xl max-w-4xl text-center">
+            <p className="text-xl mb-4">
+              <strong>Limited Time Offer:</strong> First {audience === 'employer' ? '50 employers' : '100 pharmacies'} get 20% off their first year
+            </p>
+            <p className="text-lg opacity-90">Plus free premium onboarding and dedicated support</p>
+          </div>
+          
+          <div className="text-center space-y-4 pt-8">
+            <p className="text-xl text-gray-700">Questions? Let's talk:</p>
+            <div className="flex gap-8 justify-center text-gray-800">
+              <div className="flex items-center gap-3">
+                <Phone className="w-6 h-6 text-blue-600" />
+                <span className="text-xl font-semibold">[Your Phone]</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <Mail className="w-6 h-6 text-blue-600" />
+                <span className="text-xl font-semibold">[Your Email]</span>
+              </div>
+            </div>
+            <p className="text-gray-600">www.rxconnectpro.com</p>
+          </div>
+        </div>
+      )
+    }
+  ];
+
+  const nextSlide = () => {
+    if (currentSlide < slides.length - 1) {
+      setCurrentSlide(currentSlide + 1);
+    }
+  };
+
+  const prevSlide = () => {
+    if (currentSlide > 0) {
+      setCurrentSlide(currentSlide - 1);
+    }
+  };
+
+  return (
+    <div className="w-full h-screen bg-gray-100 flex flex-col">
+      <div className="flex-1 bg-white shadow-lg mx-4 my-4 rounded-lg overflow-hidden relative">
+        {slides[currentSlide].content}
+        
+        {slides[currentSlide].title && (
+          <div className="absolute top-8 left-8 right-8">
+            <h2 className="text-4xl font-bold text-gray-800">{slides[currentSlide].title}</h2>
+            <div className="h-1 bg-gradient-to-r from-blue-600 to-purple-600 w-32 mt-4"></div>
+          </div>
+        )}
+      </div>
+      
+      <div className="flex items-center justify-between px-8 py-4 bg-white border-t">
+        <button
+          onClick={prevSlide}
+          disabled={currentSlide === 0}
+          className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition"
+        >
+          <ChevronLeft className="w-5 h-5" />
+          Previous
+        </button>
+        
+        <div className="flex items-center gap-4">
+          <span className="text-lg font-semibold text-gray-700">
+            Slide {currentSlide + 1} of {slides.length} | {audience === 'employer' ? 'Employer' : 'Pharmacy'} View
+          </span>
+          <div className="flex gap-1">
+            {slides.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setCurrentSlide(idx)}
+                className={`w-2 h-2 rounded-full transition ${
+                  idx === currentSlide ? 'bg-blue-600 w-8' : 'bg-gray-300'
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+        
+        <button
+          onClick={nextSlide}
+          disabled={currentSlide === slides.length - 1}
+          className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition"
+        >
+          Next
+          <ChevronRight className="w-5 h-5" />
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default ClientDeck;
