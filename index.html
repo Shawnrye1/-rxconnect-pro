@@ -11,67 +11,22 @@
             box-sizing: border-box;
         }
 
-        :root {
-            --primary: #0066ff;
-            --primary-dark: #0052cc;
-            --secondary: #00d4ff;
-            --accent: #7c3aed;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --danger: #ef4444;
-            --dark: #0f172a;
-            --gray: #64748b;
-            --light: #f8fafc;
-            --white: #ffffff;
-            --gradient-primary: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%);
-            --gradient-secondary: linear-gradient(135deg, #7c3aed 0%, #0066ff 100%);
-            --gradient-dark: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
-            --sidebar-width: 280px;
-            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
-            color: var(--dark);
-            background: var(--white);
-            overflow-x: hidden;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Scrollbar Styling */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--light);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--gradient-primary);
-            border-radius: 5px;
+            color: #0f172a;
+            background: #ffffff;
         }
 
         /* Navigation */
         nav {
             background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(20px);
             padding: 1rem 0;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            transition: var(--transition);
-        }
-
-        nav.scrolled {
-            padding: 0.75rem 0;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
 
         .nav-container {
@@ -89,536 +44,46 @@
             gap: 0.75rem;
             font-size: 1.5rem;
             font-weight: 800;
-            color: var(--dark);
-            cursor: pointer;
         }
 
         .logo-icon {
             width: 40px;
             height: 40px;
-            background: var(--gradient-primary);
+            background: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%);
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.5rem;
             color: white;
-            box-shadow: 0 4px 12px rgba(0, 102, 255, 0.3);
-        }
-
-        .nav-menu {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        .nav-link {
-            color: var(--gray);
-            text-decoration: none;
-            font-weight: 500;
-            transition: var(--transition);
-            position: relative;
-        }
-
-        .nav-link:hover {
-            color: var(--primary);
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--gradient-primary);
-            transition: width 0.3s;
-        }
-
-        .nav-link:hover::after {
-            width: 100%;
         }
 
         /* Hero Section */
         .hero {
             padding: 120px 0 80px;
             background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -10%;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(0, 102, 255, 0.1) 0%, transparent 70%);
-            border-radius: 50%;
         }
 
         .hero-container {
             max-width: 1400px;
             margin: 0 auto;
             padding: 0 2rem;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-            position: relative;
-            z-index: 1;
+            text-align: center;
         }
 
-        .hero-content h1 {
+        .hero h1 {
             font-size: 3.5rem;
             font-weight: 900;
-            line-height: 1.1;
             margin-bottom: 1.5rem;
-            background: var(--gradient-primary);
+            background: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .hero-subtitle {
+        .hero p {
             font-size: 1.5rem;
-            color: var(--gray);
+            color: #64748b;
             margin-bottom: 2rem;
-            font-weight: 300;
-        }
-
-        .hero-features {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .hero-feature {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            background: white;
-            border-radius: 50px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-
-        .hero-feature-icon {
-            color: var(--success);
-        }
-
-        .hero-metrics {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-            padding-top: 3rem;
-            border-top: 1px solid rgba(0,0,0,0.1);
-        }
-
-        .hero-metric {
-            text-align: center;
-        }
-
-        .hero-metric-value {
-            font-size: 2.5rem;
-            font-weight: 800;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero-metric-label {
-            color: var(--gray);
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .hero-visual {
-            position: relative;
-        }
-
-        .hero-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-            position: relative;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-
-        /* Solutions Section */
-        .solutions {
-            padding: 80px 0;
-            background: white;
-        }
-
-        .section-header {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto 4rem;
-        }
-
-        .section-badge {
-            display: inline-block;
-            background: rgba(0, 102, 255, 0.1);
-            color: var(--primary);
-            padding: 0.5rem 1.5rem;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .section-title {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            background: var(--gradient-dark);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .section-subtitle {
-            font-size: 1.25rem;
-            color: var(--gray);
-            line-height: 1.8;
-        }
-
-        .solutions-grid {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .solution-card {
-            background: var(--light);
-            padding: 2.5rem;
-            border-radius: 20px;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .solution-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: var(--gradient-primary);
-            transform: scaleX(0);
-            transition: transform 0.3s;
-        }
-
-        .solution-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            background: white;
-        }
-
-        .solution-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .solution-icon {
-            width: 70px;
-            height: 70px;
-            background: var(--gradient-primary);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            color: white;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 10px 30px rgba(0, 102, 255, 0.3);
-        }
-
-        .solution-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-
-        .solution-description {
-            color: var(--gray);
-            line-height: 1.8;
-            margin-bottom: 1.5rem;
-        }
-
-        .solution-features {
-            list-style: none;
-        }
-
-        .solution-features li {
-            padding: 0.5rem 0;
-            color: var(--gray);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .solution-features li::before {
-            content: '✓';
-            color: var(--success);
-            font-weight: bold;
-        }
-
-        /* Target Audience Section */
-        .target-audience {
-            padding: 80px 0;
-            background: white;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .target-audience::before {
-            content: '';
-            position: absolute;
-            top: -100px;
-            right: -100px;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(0, 102, 255, 0.03) 0%, transparent 70%);
-            border-radius: 50%;
-        }
-
-        .audience-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .audience-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 4rem;
-        }
-
-        .audience-card {
-            background: var(--light);
-            padding: 2.5rem;
-            border-radius: 20px;
-            transition: var(--transition);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .audience-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: var(--gradient-primary);
-        }
-
-        .audience-card:nth-child(2)::before {
-            background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
-        }
-
-        .audience-card:nth-child(3)::before {
-            background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%);
-        }
-
-        .audience-card:nth-child(4)::before {
-            background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
-        }
-
-        .audience-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            background: white;
-        }
-
-        .audience-icon {
-            width: 70px;
-            height: 70px;
-            background: var(--gradient-primary);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            margin: 0 auto 1.5rem;
-            color: white;
-            box-shadow: 0 10px 30px rgba(0, 102, 255, 0.3);
-        }
-
-        .audience-card:nth-child(2) .audience-icon {
-            background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
-            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
-        }
-
-        .audience-card:nth-child(3) .audience-icon {
-            background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%);
-            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
-        }
-
-        .audience-card:nth-child(4) .audience-icon {
-            background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
-            box-shadow: 0 10px 30px rgba(245, 158, 11, 0.3);
-        }
-
-        .audience-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-
-        .audience-description {
-            color: var(--gray);
-            line-height: 1.8;
-            margin-bottom: 1.5rem;
-        }
-
-        .audience-stats {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(0, 0, 0, 0.05);
-        }
-
-        .audience-stat {
-            text-align: center;
-        }
-
-        .audience-stat-value {
-            font-size: 1.75rem;
-            font-weight: 800;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .audience-card:nth-child(2) .audience-stat-value {
-            background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .audience-card:nth-child(3) .audience-stat-value {
-            background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .audience-card:nth-child(4) .audience-stat-value {
-            background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .audience-stat-label {
-            font-size: 0.85rem;
-            color: var(--gray);
-            text-transform: uppercase;
-            margin-top: 0.25rem;
-            letter-spacing: 1px;
-        }
-
-        /* ROI Section */
-        .roi-section {
-            padding: 80px 0;
-            background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
-        }
-
-        .roi-calculator {
-            background: white;
-            padding: 3rem;
-            border-radius: 30px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-            margin-top: 3rem;
-            max-width: 1200px;
-            margin: 3rem auto 0;
-        }
-
-        /* Features Section */
-        .features-section {
-            padding: 80px 0;
-            background: white;
-        }
-
-        .features-grid {
-            max-width: 1400px;
-            margin: 4rem auto 0;
-            padding: 0 2rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .feature-card {
-            text-align: center;
-            padding: 2rem;
-            border-radius: 20px;
-            transition: var(--transition);
-        }
-
-        .feature-card:hover {
-            background: var(--light);
-            transform: translateY(-5px);
-        }
-
-        .feature-icon {
-            width: 60px;
-            height: 60px;
-            margin: 0 auto 1rem;
-            background: var(--gradient-primary);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: white;
-            box-shadow: 0 8px 20px rgba(0, 102, 255, 0.2);
-        }
-
-        /* CTA Section */
-        .cta-section {
-            padding: 100px 0;
-            background: var(--gradient-dark);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .cta-title {
-            font-size: 3.5rem;
-            font-weight: 800;
-            color: white;
-            margin-bottom: 1.5rem;
-            line-height: 1.1;
         }
 
         /* Dashboard */
@@ -626,7 +91,7 @@
             display: none;
             padding-top: 70px;
             min-height: 100vh;
-            background: var(--light);
+            background: #f8fafc;
         }
 
         .dashboard-wrapper.active {
@@ -635,26 +100,18 @@
 
         /* Sidebar */
         .sidebar {
-            width: var(--sidebar-width);
+            width: 280px;
             background: white;
             box-shadow: 1px 0 3px rgba(0,0,0,0.05);
             position: fixed;
             height: calc(100vh - 70px);
             overflow-y: auto;
-            transition: var(--transition);
-            z-index: 100;
         }
 
         .sidebar-header {
             padding: 2rem 1.5rem;
-            background: var(--gradient-primary);
+            background: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%);
             color: white;
-        }
-
-        .user-profile {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
         }
 
         .user-avatar {
@@ -667,105 +124,35 @@
             justify-content: center;
             font-size: 1.5rem;
             font-weight: bold;
-            border: 3px solid rgba(255,255,255,0.5);
-        }
-
-        .sidebar-menu {
-            padding: 1rem;
-        }
-
-        .menu-section {
-            margin-bottom: 2rem;
-        }
-
-        .menu-section-title {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--gray);
-            margin-bottom: 0.5rem;
-            padding: 0 1rem;
-            font-weight: 600;
+            margin-bottom: 1rem;
         }
 
         .menu-item {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
             display: flex;
             align-items: center;
             gap: 1rem;
-            padding: 1rem;
-            margin: 0.25rem 0;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: var(--transition);
-            position: relative;
         }
 
         .menu-item:hover {
-            background: var(--light);
+            background: #f8fafc;
         }
 
         .menu-item.active {
-            background: var(--gradient-primary);
+            background: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%);
             color: white;
-            box-shadow: 0 4px 12px rgba(0, 102, 255, 0.3);
-        }
-
-        .menu-icon {
-            width: 24px;
-            text-align: center;
         }
 
         /* Main Content */
         .main-content {
-            margin-left: var(--sidebar-width);
-            flex: 1;
+            margin-left: 280px;
             padding: 2rem;
-            min-height: calc(100vh - 70px);
-            transition: var(--transition);
+            flex: 1;
         }
 
-        .page-content {
-            display: none;
-        }
-
-        .page-content.active {
-            display: block;
-        }
-
-        /* Stats Cards */
-        .stats-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .stat-card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 16px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: var(--gradient-primary);
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-        }
-
-        /* Modal */
+        /* Modal - SIMPLIFIED */
         .modal {
             display: none;
             position: fixed;
@@ -774,14 +161,9 @@
             width: 100%;
             height: 100%;
             background: rgba(0,0,0,0.7);
-            backdrop-filter: blur(10px);
             z-index: 2000;
             justify-content: center;
             align-items: center;
-        }
-
-        .modal.active {
-            display: flex !important;
         }
 
         .modal-content {
@@ -790,20 +172,18 @@
             border-radius: 24px;
             width: 90%;
             max-width: 500px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             position: relative;
-            animation: slideUp 0.3s;
         }
 
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .close-btn {
+            position: absolute;
+            right: 1.5rem;
+            top: 1.5rem;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #64748b;
         }
 
         /* Buttons */
@@ -814,17 +194,12 @@
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: var(--transition);
-            text-decoration: none;
-            display: inline-block;
-            position: relative;
-            overflow: hidden;
+            transition: all 0.3s;
         }
 
         .btn-primary {
-            background: var(--gradient-primary);
+            background: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%);
             color: white;
-            box-shadow: 0 4px 14px rgba(0, 102, 255, 0.3);
         }
 
         .btn-primary:hover {
@@ -834,18 +209,12 @@
 
         .btn-secondary {
             background: white;
-            color: var(--primary);
-            border: 2px solid var(--primary);
+            color: #0066ff;
+            border: 2px solid #0066ff;
         }
 
         .btn-secondary:hover {
-            background: var(--light);
-            transform: translateY(-2px);
-        }
-
-        .btn-large {
-            padding: 1.25rem 3rem;
-            font-size: 1.1rem;
+            background: #f8fafc;
         }
 
         /* Forms */
@@ -856,7 +225,7 @@
         .form-label {
             display: block;
             margin-bottom: 0.5rem;
-            color: var(--gray);
+            color: #64748b;
             font-weight: 600;
             font-size: 0.9rem;
             text-transform: uppercase;
@@ -866,371 +235,46 @@
         .form-input {
             width: 100%;
             padding: 1rem;
-            border: 2px solid var(--light);
+            border: 2px solid #e5e7eb;
             border-radius: 10px;
             font-size: 1rem;
-            transition: var(--transition);
-            background: var(--light);
+            background: #f8fafc;
         }
 
         .form-input:focus {
             outline: none;
-            border-color: var(--primary);
+            border-color: #0066ff;
             background: white;
-            box-shadow: 0 0 0 4px rgba(0, 102, 255, 0.1);
-        }
-
-        /* Charts */
-        .chart-container {
-            background: white;
-            padding: 2rem;
-            border-radius: 16px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            margin-bottom: 2rem;
-        }
-
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .sidebar {
-                transform: translateX(-100%);
-            }
-            
-            .sidebar.active {
-                transform: translateX(0);
-            }
-            
-            .main-content {
-                margin-left: 0;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav-menu {
-                display: none;
-            }
-            
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .section-title {
-                font-size: 2rem;
-            }
-            
-            .cta-title {
-                font-size: 2.5rem;
-            }
-            
-            .audience-grid {
-                grid-template-columns: 1fr;
-            }
         }
     </style>
 </head>
 <body>
     <!-- Navigation -->
-    <nav id="navbar">
+    <nav>
         <div class="nav-container">
-            <div class="logo" onclick="goHome()">
+            <div class="logo">
                 <div class="logo-icon">💊</div>
                 <span>MedSave Pro</span>
             </div>
-            <div class="nav-menu">
-                <a href="#solutions" class="nav-link">Solutions</a>
-                <a href="#audience" class="nav-link">For Industry</a>
-                <a href="#roi" class="nav-link">ROI Calculator</a>
-                <a href="#features" class="nav-link">Features</a>
-            </div>
-            <div class="nav-buttons" id="navButtons">
+            <div id="navButtons">
                 <button class="btn btn-secondary" id="loginBtn">Login</button>
                 <button class="btn btn-primary" id="signupBtn">Start Free Trial</button>
             </div>
-            <div class="nav-buttons" id="userNav" style="display: none;">
-                <button class="btn btn-primary" onclick="showDashboard()">Dashboard</button>
-                <button class="btn btn-secondary" onclick="logout()">Logout</button>
+            <div id="userNav" style="display: none;">
+                <button class="btn btn-primary" id="dashboardBtn">Dashboard</button>
+                <button class="btn btn-secondary" id="logoutBtn">Logout</button>
             </div>
         </div>
     </nav>
 
-    <!-- Landing Page Content -->
+    <!-- Landing Page -->
     <div id="landingPage">
-        <!-- Hero Section -->
         <section class="hero">
             <div class="hero-container">
-                <div class="hero-content">
-                    <h1>Revolutionize Healthcare Savings Across the Industry</h1>
-                    <p class="hero-subtitle">The enterprise platform trusted by Employers, PBMs, Specialty Pharmacies, and Pharmaceutical Hubs to maximize savings and streamline operations.</p>
-                    
-                    <div class="hero-features">
-                        <div class="hero-feature">
-                            <span class="hero-feature-icon">✓</span>
-                            <span>HIPAA Compliant</span>
-                        </div>
-                        <div class="hero-feature">
-                            <span class="hero-feature-icon">✓</span>
-                            <span>Real-time Analytics</span>
-                        </div>
-                        <div class="hero-feature">
-                            <span class="hero-feature-icon">✓</span>
-                            <span>API Integration</span>
-                        </div>
-                        <div class="hero-feature">
-                            <span class="hero-feature-icon">✓</span>
-                            <span>SOC 2 Certified</span>
-                        </div>
-                    </div>
-
-                    <div style="display: flex; gap: 1rem; margin-top: 2rem;">
-                        <button class="btn btn-primary btn-large" onclick="openModal('demo')">Schedule Demo</button>
-                        <button class="btn btn-secondary btn-large" onclick="document.getElementById('roi').scrollIntoView({behavior: 'smooth'})">Calculate Your Savings</button>
-                    </div>
-
-                    <div class="hero-metrics">
-                        <div class="hero-metric">
-                            <div class="hero-metric-value">$2.4B+</div>
-                            <div class="hero-metric-label">Total Savings Generated</div>
-                        </div>
-                        <div class="hero-metric">
-                            <div class="hero-metric-value">500+</div>
-                            <div class="hero-metric-label">Enterprise Clients</div>
-                        </div>
-                        <div class="hero-metric">
-                            <div class="hero-metric-value">45%</div>
-                            <div class="hero-metric-label">Average Cost Reduction</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="hero-visual">
-                    <div class="hero-card">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
-                            <h3 style="margin: 0;">Live Savings Tracker</h3>
-                            <span style="background: var(--gradient-primary); color: white; padding: 0.5rem 1rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600;">REAL-TIME</span>
-                        </div>
-                        <canvas id="heroChart" width="400" height="200"></canvas>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem;">
-                            <div style="background: var(--light); padding: 1rem; border-radius: 10px;">
-                                <div style="color: var(--gray); font-size: 0.85rem;">Today's Savings</div>
-                                <div style="font-size: 1.5rem; font-weight: 700; color: var(--success);">+$124,563</div>
-                            </div>
-                            <div style="background: var(--light); padding: 1rem; border-radius: 10px;">
-                                <div style="color: var(--gray); font-size: 0.85rem;">Active Plans</div>
-                                <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary);">8,432</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Solutions Section -->
-        <section class="solutions" id="solutions">
-            <div class="section-header">
-                <div class="section-badge">Comprehensive Solutions</div>
-                <h2 class="section-title">Enterprise-Grade Healthcare Savings Platform</h2>
-                <p class="section-subtitle">Designed specifically for the unique needs of healthcare industry leaders</p>
-            </div>
-
-            <div class="solutions-grid">
-                <div class="solution-card">
-                    <div class="solution-icon">📊</div>
-                    <h3 class="solution-title">Advanced Analytics</h3>
-                    <p class="solution-description">Real-time dashboards with predictive analytics and customizable reporting for data-driven decisions.</p>
-                    <ul class="solution-features">
-                        <li>Predictive cost modeling</li>
-                        <li>Utilization analytics</li>
-                        <li>Compliance tracking</li>
-                    </ul>
-                </div>
-
-                <div class="solution-card">
-                    <div class="solution-icon">🔗</div>
-                    <h3 class="solution-title">Seamless Integration</h3>
-                    <p class="solution-description">Connect with existing PBM systems, EMRs, and pharmacy networks through our robust API.</p>
-                    <ul class="solution-features">
-                        <li>REST API & Webhooks</li>
-                        <li>HL7 FHIR support</li>
-                        <li>Batch processing</li>
-                    </ul>
-                </div>
-
-                <div class="solution-card">
-                    <div class="solution-icon">🛡️</div>
-                    <h3 class="solution-title">Compliance & Security</h3>
-                    <p class="solution-description">Built from the ground up with HIPAA compliance and enterprise security standards.</p>
-                    <ul class="solution-features">
-                        <li>HIPAA & SOC 2 compliant</li>
-                        <li>End-to-end encryption</li>
-                        <li>Audit logging</li>
-                    </ul>
-                </div>
-
-                <div class="solution-card">
-                    <div class="solution-icon">🤖</div>
-                    <h3 class="solution-title">AI-Powered Optimization</h3>
-                    <p class="solution-description">Machine learning algorithms identify savings opportunities and optimize benefit designs.</p>
-                    <ul class="solution-features">
-                        <li>Formulary optimization</li>
-                        <li>Prior auth automation</li>
-                        <li>Fraud detection</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- Target Audience Section -->
-        <section class="target-audience" id="audience">
-            <div class="audience-container">
-                <div class="section-header">
-                    <div class="section-badge">Built For Industry Leaders</div>
-                    <h2 class="section-title">Tailored Solutions for Every Healthcare Stakeholder</h2>
-                    <p class="section-subtitle">Maximize value across the entire healthcare ecosystem</p>
-                </div>
-
-                <div class="audience-grid">
-                    <div class="audience-card">
-                        <div class="audience-icon">🏢</div>
-                        <h3 class="audience-title">Employers</h3>
-                        <p class="audience-description">Reduce healthcare costs while improving employee satisfaction and health outcomes.</p>
-                        <div class="audience-stats">
-                            <div class="audience-stat">
-                                <div class="audience-stat-value">32%</div>
-                                <div class="audience-stat-label">Cost Reduction</div>
-                            </div>
-                            <div class="audience-stat">
-                                <div class="audience-stat-value">89%</div>
-                                <div class="audience-stat-label">Satisfaction</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="audience-card">
-                        <div class="audience-icon">💊</div>
-                        <h3 class="audience-title">PBMs</h3>
-                        <p class="audience-description">Streamline operations, improve formulary management, and enhance client relationships.</p>
-                        <div class="audience-stats">
-                            <div class="audience-stat">
-                                <div class="audience-stat-value">5x</div>
-                                <div class="audience-stat-label">Efficiency</div>
-                            </div>
-                            <div class="audience-stat">
-                                <div class="audience-stat-value">$450M</div>
-                                <div class="audience-stat-label">Processed</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="audience-card">
-                        <div class="audience-icon">🏥</div>
-                        <h3 class="audience-title">Specialty Pharmacies</h3>
-                        <p class="audience-description">Optimize specialty drug management and improve patient adherence programs.</p>
-                        <div class="audience-stats">
-                            <div class="audience-stat">
-                                <div class="audience-stat-value">94%</div>
-                                <div class="audience-stat-label">Adherence</div>
-                            </div>
-                            <div class="audience-stat">
-                                <div class="audience-stat-value">2.8x</div>
-                                <div class="audience-stat-label">ROI</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="audience-card">
-                        <div class="audience-icon">🔬</div>
-                        <h3 class="audience-title">Pharmaceutical Hubs</h3>
-                        <p class="audience-description">Connect manufacturers with patients while ensuring access and affordability.</p>
-                        <div class="audience-stats">
-                            <div class="audience-stat">
-                                <div class="audience-stat-value">15K+</div>
-                                <div class="audience-stat-label">Patients</div>
-                            </div>
-                            <div class="audience-stat">
-                                <div class="audience-stat-value">98%</div>
-                                <div class="audience-stat-label">Coverage</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ROI Calculator Section -->
-        <section class="roi-section" id="roi">
-            <div class="section-header">
-                <div class="section-badge">ROI Calculator</div>
-                <h2 class="section-title">Calculate Your Potential Savings</h2>
-                <p class="section-subtitle">See how much your organization could save with MedSave Pro</p>
-            </div>
-
-            <div class="roi-calculator">
-                <div style="text-align: center; padding: 2rem;">
-                    <h3 style="font-size: 2rem; margin-bottom: 1rem;">Interactive ROI Calculator Coming Soon</h3>
-                    <p style="color: var(--gray); margin-bottom: 2rem;">Our team will provide a personalized savings analysis</p>
-                    <button class="btn btn-primary btn-large" onclick="openModal('demo')">Get Personalized Analysis</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Features Section -->
-        <section class="features-section" id="features">
-            <div class="section-header">
-                <div class="section-badge">Platform Features</div>
-                <h2 class="section-title">Everything You Need to Transform Healthcare Savings</h2>
-                <p class="section-subtitle">Comprehensive tools designed for healthcare industry professionals</p>
-            </div>
-
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">📈</div>
-                    <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--dark);">Real-time Analytics</h4>
-                    <p style="color: var(--gray); font-size: 0.95rem;">Monitor performance metrics and identify trends as they happen</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🔒</div>
-                    <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--dark);">Enterprise Security</h4>
-                    <p style="color: var(--gray); font-size: 0.95rem;">Bank-level encryption and comprehensive audit trails</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">⚡</div>
-                    <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--dark);">Instant Implementation</h4>
-                    <p style="color: var(--gray); font-size: 0.95rem;">Go live in days, not months, with our streamlined onboarding</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🤝</div>
-                    <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--dark);">White Glove Support</h4>
-                    <p style="color: var(--gray); font-size: 0.95rem;">Dedicated success team and 24/7 technical support</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🎯</div>
-                    <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--dark);">Custom Workflows</h4>
-                    <p style="color: var(--gray); font-size: 0.95rem;">Tailor the platform to match your unique processes</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📊</div>
-                    <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--dark);">Benchmarking Tools</h4>
-                    <p style="color: var(--gray); font-size: 0.95rem;">Compare performance against industry standards</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- CTA Section -->
-        <section class="cta-section">
-            <div class="cta-container">
-                <h2 class="cta-title">Ready to Transform Your Healthcare Savings?</h2>
-                <p style="font-size: 1.5rem; color: rgba(255, 255, 255, 0.9); margin-bottom: 3rem; font-weight: 300;">Join 500+ leading organizations already maximizing their healthcare value</p>
-                
-                <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
-                    <button class="btn btn-large" style="background: white; color: var(--primary);" onclick="openModal('demo')">
-                        Schedule a Demo
-                    </button>
-                    <button class="btn btn-large" style="background: transparent; border: 2px solid white; color: white;" onclick="openModal('contact')">
-                        Contact Sales
-                    </button>
+                <h1>Revolutionize Healthcare Savings</h1>
+                <p>The enterprise platform trusted by Employers, PBMs, Specialty Pharmacies, and Pharmaceutical Hubs</p>
+                <div style="margin-top: 3rem;">
+                    <button class="btn btn-primary" style="padding: 1.2rem 3rem; font-size: 1.2rem;" id="heroLoginBtn">Get Started</button>
                 </div>
             </div>
         </section>
@@ -1238,177 +282,74 @@
 
     <!-- Dashboard -->
     <div class="dashboard-wrapper" id="dashboardWrapper">
-        <!-- Sidebar -->
-        <aside class="sidebar" id="sidebar">
+        <aside class="sidebar">
             <div class="sidebar-header">
-                <div class="user-profile">
-                    <div class="user-avatar" id="userAvatar">U</div>
-                    <div class="user-info">
-                        <h3 id="sidebarUserName" style="font-size: 1.1rem; margin-bottom: 0.25rem;">User Name</h3>
-                        <p style="font-size: 0.85rem; opacity: 0.9;">Enterprise Admin</p>
-                    </div>
-                </div>
+                <div class="user-avatar" id="userAvatar">D</div>
+                <h3 id="userName">Demo User</h3>
             </div>
-            
-            <div class="sidebar-menu">
-                <div class="menu-section">
-                    <div class="menu-section-title">Main</div>
-                    <div class="menu-item active" onclick="switchPage('home')">
-                        <span class="menu-icon">📊</span>
-                        <span>Dashboard Overview</span>
-                    </div>
-                    <div class="menu-item" onclick="switchPage('analytics')">
-                        <span class="menu-icon">📈</span>
-                        <span>Analytics & Reports</span>
-                    </div>
+            <div style="padding: 1rem 0;">
+                <div class="menu-item active" onclick="switchPage('home')">
+                    <span>📊</span>
+                    <span>Dashboard Overview</span>
                 </div>
-
-                <div class="menu-section">
-                    <div class="menu-section-title">Savings Management</div>
-                    <div class="menu-item" onclick="switchPage('employer')">
-                        <span class="menu-icon">🏢</span>
-                        <span>Employer Savings</span>
-                    </div>
-                    <div class="menu-item" onclick="switchPage('member')">
-                        <span class="menu-icon">👥</span>
-                        <span>Member Savings</span>
-                    </div>
-                    <div class="menu-item" onclick="switchPage('client')">
-                        <span class="menu-icon">💼</span>
-                        <span>Client Accounts</span>
-                    </div>
+                <div class="menu-item" onclick="switchPage('employer')">
+                    <span>🏢</span>
+                    <span>Employer Savings</span>
                 </div>
-
-                <div class="menu-section">
-                    <div class="menu-section-title">Pharmacy Network</div>
-                    <div class="menu-item" onclick="switchPage('pbm')">
-                        <span class="menu-icon">💊</span>
-                        <span>PBM Integration</span>
-                    </div>
-                    <div class="menu-item" onclick="switchPage('specialty')">
-                        <span class="menu-icon">🏥</span>
-                        <span>Specialty Pharmacy</span>
-                    </div>
-                    <div class="menu-item" onclick="switchPage('hub')">
-                        <span class="menu-icon">🔬</span>
-                        <span>Pharma Hub</span>
-                    </div>
+                <div class="menu-item" onclick="switchPage('member')">
+                    <span>👥</span>
+                    <span>Member Savings</span>
                 </div>
-
-                <div class="menu-section">
-                    <div class="menu-section-title">Operations</div>
-                    <div class="menu-item" onclick="switchPage('claims')">
-                        <span class="menu-icon">📋</span>
-                        <span>Claims Processing</span>
-                    </div>
-                    <div class="menu-item" onclick="switchPage('compliance')">
-                        <span class="menu-icon">🛡️</span>
-                        <span>Compliance</span>
-                    </div>
-                    <div class="menu-item" onclick="switchPage('settings')">
-                        <span class="menu-icon">⚙️</span>
-                        <span>Settings</span>
-                    </div>
+                <div class="menu-item" onclick="switchPage('pbm')">
+                    <span>💊</span>
+                    <span>PBM Integration</span>
+                </div>
+                <div class="menu-item" onclick="switchPage('claims')">
+                    <span>📋</span>
+                    <span>Claims Processing</span>
                 </div>
             </div>
         </aside>
 
-        <!-- Main Content -->
         <main class="main-content">
-            <!-- Dashboard Overview Page -->
-            <div class="page-content active" id="homePage">
-                <div class="page-header" style="margin-bottom: 2rem;">
-                    <h1 style="font-size: 2rem; font-weight: 800; color: var(--dark); margin-bottom: 0.5rem;">Enterprise Dashboard</h1>
-                    <p style="color: var(--gray);">Real-time overview of your healthcare savings ecosystem</p>
-                </div>
-
-                <div class="stats-row">
-                    <div class="stat-card">
-                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
-                            <div style="width: 50px; height: 50px; background: rgba(0, 102, 255, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">💰</div>
-                            <div style="background: rgba(16, 185, 129, 0.1); color: var(--success); padding: 0.25rem 0.75rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600;">+12.5%</div>
-                        </div>
-                        <div style="font-size: 2rem; font-weight: 800; color: var(--dark); margin-bottom: 0.25rem;">$2,456,789</div>
-                        <div style="color: var(--gray); font-size: 0.9rem;">Total Savings YTD</div>
+            <div id="homePage">
+                <h1>Enterprise Dashboard</h1>
+                <p>Welcome to your healthcare savings management platform</p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+                    <div style="background: white; padding: 1.5rem; border-radius: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                        <h3>Total Savings YTD</h3>
+                        <p style="font-size: 2rem; font-weight: 800; color: #0066ff;">$2,456,789</p>
                     </div>
-                    <div class="stat-card">
-                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
-                            <div style="width: 50px; height: 50px; background: rgba(0, 102, 255, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">👥</div>
-                            <div style="background: rgba(16, 185, 129, 0.1); color: var(--success); padding: 0.25rem 0.75rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600;">+324</div>
-                        </div>
-                        <div style="font-size: 2rem; font-weight: 800; color: var(--dark); margin-bottom: 0.25rem;">45,678</div>
-                        <div style="color: var(--gray); font-size: 0.9rem;">Active Members</div>
+                    <div style="background: white; padding: 1.5rem; border-radius: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                        <h3>Active Members</h3>
+                        <p style="font-size: 2rem; font-weight: 800; color: #10b981;">45,678</p>
                     </div>
-                    <div class="stat-card">
-                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
-                            <div style="width: 50px; height: 50px; background: rgba(0, 102, 255, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">💊</div>
-                            <div style="background: rgba(16, 185, 129, 0.1); color: var(--success); padding: 0.25rem 0.75rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600;">+8.2%</div>
-                        </div>
-                        <div style="font-size: 2rem; font-weight: 800; color: var(--dark); margin-bottom: 0.25rem;">98.5%</div>
-                        <div style="color: var(--gray); font-size: 0.9rem;">Formulary Compliance</div>
-                    </div>
-                    <div class="stat-card">
-                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
-                            <div style="width: 50px; height: 50px; background: rgba(0, 102, 255, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">📈</div>
-                            <div style="background: rgba(16, 185, 129, 0.1); color: var(--success); padding: 0.25rem 0.75rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600;">+23.1%</div>
-                        </div>
-                        <div style="font-size: 2rem; font-weight: 800; color: var(--dark); margin-bottom: 0.25rem;">$345</div>
-                        <div style="color: var(--gray); font-size: 0.9rem;">Avg Savings/Member</div>
-                    </div>
-                </div>
-
-                <div class="chart-container">
-                    <h3 style="margin-bottom: 1.5rem; color: var(--dark);">Savings Performance Trend</h3>
-                    <canvas id="dashboardChart" width="800" height="300"></canvas>
-                </div>
-            </div>
-
-            <!-- Other Pages (Hidden by default) -->
-            <div class="page-content" id="employerPage">
-                <h1 style="font-size: 2rem; font-weight: 800; color: var(--dark); margin-bottom: 2rem;">Employer Savings Management</h1>
-                <div class="stats-row">
-                    <div class="stat-card">
-                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
-                            <div style="width: 50px; height: 50px; background: rgba(0, 102, 255, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">🏢</div>
-                            <div style="background: rgba(16, 185, 129, 0.1); color: var(--success); padding: 0.25rem 0.75rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600;">+15%</div>
-                        </div>
-                        <div style="font-size: 2rem; font-weight: 800; color: var(--dark); margin-bottom: 0.25rem;">234</div>
-                        <div style="color: var(--gray); font-size: 0.9rem;">Active Employers</div>
-                    </div>
-                    <div class="stat-card">
-                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
-                            <div style="width: 50px; height: 50px; background: rgba(0, 102, 255, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">💵</div>
-                            <div style="background: rgba(16, 185, 129, 0.1); color: var(--success); padding: 0.25rem 0.75rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600;">+$2.3M</div>
-                        </div>
-                        <div style="font-size: 2rem; font-weight: 800; color: var(--dark); margin-bottom: 0.25rem;">$45.6M</div>
-                        <div style="color: var(--gray); font-size: 0.9rem;">Total Employer Savings</div>
+                    <div style="background: white; padding: 1.5rem; border-radius: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                        <h3>Claims Processed</h3>
+                        <p style="font-size: 2rem; font-weight: 800; color: #8b5cf6;">12,345</p>
                     </div>
                 </div>
             </div>
 
-            <div class="page-content" id="memberPage">
-                <h1 style="font-size: 2rem; font-weight: 800; color: var(--dark); margin-bottom: 2rem;">Member Savings</h1>
-                <p>Member savings content goes here...</p>
+            <div id="employerPage" style="display: none;">
+                <h1>Employer Savings</h1>
+                <p>Manage employer accounts and savings programs</p>
             </div>
 
-            <div class="page-content" id="clientPage">
-                <h1 style="font-size: 2rem; font-weight: 800; color: var(--dark); margin-bottom: 2rem;">Client Accounts</h1>
-                <p>Client accounts content goes here...</p>
+            <div id="memberPage" style="display: none;">
+                <h1>Member Savings</h1>
+                <p>Track individual member savings and benefits</p>
             </div>
 
-            <div class="page-content" id="pbmPage">
-                <h1 style="font-size: 2rem; font-weight: 800; color: var(--dark); margin-bottom: 2rem;">PBM Integration</h1>
-                <p>PBM integration content goes here...</p>
+            <div id="pbmPage" style="display: none;">
+                <h1>PBM Integration</h1>
+                <p>Pharmacy benefit management integration dashboard</p>
             </div>
 
-            <div class="page-content" id="specialtyPage">
-                <h1 style="font-size: 2rem; font-weight: 800; color: var(--dark); margin-bottom: 2rem;">Specialty Pharmacy</h1>
-                <p>Specialty pharmacy content goes here...</p>
-            </div>
-
-            <div class="page-content" id="claimsPage">
-                <h1 style="font-size: 2rem; font-weight: 800; color: var(--dark); margin-bottom: 2rem;">Claims Processing</h1>
-                <p>Claims processing content goes here...</p>
+            <div id="claimsPage" style="display: none;">
+                <h1>Claims Processing</h1>
+                <p>Process and track healthcare claims</p>
             </div>
         </main>
     </div>
@@ -1416,27 +357,24 @@
     <!-- Login Modal -->
     <div class="modal" id="loginModal">
         <div class="modal-content">
-            <button onclick="closeModal('login')" style="position: absolute; right: 1.5rem; top: 1.5rem; background: none; border: none; font-size: 2rem; cursor: pointer; color: var(--gray);">&times;</button>
+            <button class="close-btn" id="closeLogin">&times;</button>
             <div style="text-align: center; margin-bottom: 2rem;">
                 <div class="logo-icon" style="margin: 0 auto 1rem; width: 60px; height: 60px; font-size: 2rem;">💊</div>
-                <h2 style="font-size: 2rem; margin-bottom: 0.5rem;">Welcome Back</h2>
-                <p style="color: var(--gray);">Login to access your enterprise dashboard</p>
+                <h2>Welcome Back</h2>
+                <p style="color: #64748b;">Login to access your dashboard</p>
             </div>
             <div class="form-group">
                 <label class="form-label">Email Address</label>
-                <input type="email" class="form-input" id="loginEmail" placeholder="demo@company.com" value="demo@company.com">
+                <input type="email" class="form-input" id="loginEmail" value="demo@company.com">
             </div>
             <div class="form-group">
                 <label class="form-label">Password</label>
-                <input type="password" class="form-input" id="loginPassword" placeholder="password123" value="password123">
+                <input type="password" class="form-input" id="loginPassword" value="password123">
             </div>
-            <button class="btn btn-primary" style="width: 100%; cursor: pointer;" onclick="performLogin()">Login to Dashboard</button>
-            <div style="text-align: center; margin-top: 1rem; padding: 1rem; background: var(--light); border-radius: 10px;">
-                <p style="color: var(--gray); font-size: 0.9rem; margin: 0;">Demo Credentials Already Filled</p>
-                <p style="color: var(--primary); font-weight: 600; margin: 0.5rem 0 0 0;">Just click "Login to Dashboard"</p>
-            </div>
-            <div style="text-align: center; margin-top: 2rem; color: var(--gray);">
-                Don't have an account? <a href="#" onclick="switchModal('signup'); return false;" style="color: var(--primary); text-decoration: none; font-weight: 600;">Start Free Trial</a>
+            <button class="btn btn-primary" style="width: 100%;" id="loginSubmit">Login to Dashboard</button>
+            <div style="text-align: center; margin-top: 1rem; padding: 1rem; background: #f8fafc; border-radius: 10px;">
+                <p style="color: #64748b; margin: 0;">Demo credentials are pre-filled</p>
+                <p style="color: #0066ff; font-weight: 600; margin: 0;">Just click Login to Dashboard</p>
             </div>
         </div>
     </div>
@@ -1444,378 +382,160 @@
     <!-- Signup Modal -->
     <div class="modal" id="signupModal">
         <div class="modal-content">
-            <button onclick="closeModal('signup')" style="position: absolute; right: 1.5rem; top: 1.5rem; background: none; border: none; font-size: 2rem; cursor: pointer; color: var(--gray);">&times;</button>
+            <button class="close-btn" id="closeSignup">&times;</button>
             <div style="text-align: center; margin-bottom: 2rem;">
                 <div class="logo-icon" style="margin: 0 auto 1rem; width: 60px; height: 60px; font-size: 2rem;">💊</div>
-                <h2 style="font-size: 2rem; margin-bottom: 0.5rem;">Start Your Free Trial</h2>
-                <p style="color: var(--gray);">14-day trial with full access to all features</p>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Organization Name</label>
-                <input type="text" class="form-input" id="signupOrg" placeholder="Your Company">
+                <h2>Start Free Trial</h2>
+                <p style="color: #64748b;">14-day trial with full access</p>
             </div>
             <div class="form-group">
                 <label class="form-label">Full Name</label>
-                <input type="text" class="form-input" id="signupName" placeholder="John Doe">
+                <input type="text" class="form-input" id="signupName">
             </div>
             <div class="form-group">
-                <label class="form-label">Work Email</label>
-                <input type="email" class="form-input" id="signupEmail" placeholder="you@company.com">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-input" id="signupEmail">
             </div>
             <div class="form-group">
                 <label class="form-label">Password</label>
-                <input type="password" class="form-input" id="signupPassword" placeholder="Create a strong password" minlength="8">
+                <input type="password" class="form-input" id="signupPassword">
             </div>
-            <button class="btn btn-primary" style="width: 100%; cursor: pointer;" onclick="performSignup()">Start Free Trial</button>
-        </div>
-    </div>
-
-    <!-- Demo Modal -->
-    <div class="modal" id="demoModal">
-        <div class="modal-content">
-            <button onclick="closeModal('demo')" style="position: absolute; right: 1.5rem; top: 1.5rem; background: none; border: none; font-size: 2rem; cursor: pointer; color: var(--gray);">&times;</button>
-            <div style="text-align: center; margin-bottom: 2rem;">
-                <div class="logo-icon" style="margin: 0 auto 1rem; width: 60px; height: 60px; font-size: 2rem;">📅</div>
-                <h2 style="font-size: 2rem; margin-bottom: 0.5rem;">Schedule a Demo</h2>
-                <p style="color: var(--gray);">See MedSave Pro in action with a personalized demo</p>
-            </div>
-            <button class="btn btn-primary" style="width: 100%;" onclick="alert('Demo scheduled! Our sales team will contact you within 24 hours.'); closeModal('demo')">Confirm Demo Request</button>
-        </div>
-    </div>
-
-    <!-- Contact Modal -->
-    <div class="modal" id="contactModal">
-        <div class="modal-content">
-            <button onclick="closeModal('contact')" style="position: absolute; right: 1.5rem; top: 1.5rem; background: none; border: none; font-size: 2rem; cursor: pointer; color: var(--gray);">&times;</button>
-            <div style="text-align: center; margin-bottom: 2rem;">
-                <div class="logo-icon" style="margin: 0 auto 1rem; width: 60px; height: 60px; font-size: 2rem;">📞</div>
-                <h2 style="font-size: 2rem; margin-bottom: 0.5rem;">Contact Sales</h2>
-                <p style="color: var(--gray);">Our enterprise sales team is ready to help</p>
-            </div>
-            <button class="btn btn-primary" style="width: 100%;" onclick="alert('Thank you! Our sales team will contact you soon.'); closeModal('contact')">Submit Contact Request</button>
+            <button class="btn btn-primary" style="width: 100%;" id="signupSubmit">Create Account</button>
         </div>
     </div>
 
     <script>
-        // User Management
-        let currentUser = null;
-
-        // Check login status on load
-        window.onload = function() {
-            initCharts();
+        // Wait for DOM to load
+        document.addEventListener('DOMContentLoaded', function() {
             
-            // Add event listeners for buttons
-            document.getElementById('loginBtn').addEventListener('click', function() {
-                const modal = document.getElementById('loginModal');
-                modal.style.display = 'flex';
-                modal.classList.add('active');
+            // Get all elements
+            const loginBtn = document.getElementById('loginBtn');
+            const signupBtn = document.getElementById('signupBtn');
+            const heroLoginBtn = document.getElementById('heroLoginBtn');
+            const loginModal = document.getElementById('loginModal');
+            const signupModal = document.getElementById('signupModal');
+            const closeLogin = document.getElementById('closeLogin');
+            const closeSignup = document.getElementById('closeSignup');
+            const loginSubmit = document.getElementById('loginSubmit');
+            const signupSubmit = document.getElementById('signupSubmit');
+            const dashboardBtn = document.getElementById('dashboardBtn');
+            const logoutBtn = document.getElementById('logoutBtn');
+            
+            // Open Login Modal
+            loginBtn.addEventListener('click', function() {
+                loginModal.style.display = 'flex';
             });
             
-            document.getElementById('signupBtn').addEventListener('click', function() {
-                const modal = document.getElementById('signupModal');
-                modal.style.display = 'flex';
-                modal.classList.add('active');
+            // Open Login Modal from Hero
+            heroLoginBtn.addEventListener('click', function() {
+                loginModal.style.display = 'flex';
             });
             
-            // Add scroll effect to navbar
-            window.addEventListener('scroll', function() {
-                const navbar = document.getElementById('navbar');
-                if (window.scrollY > 50) {
-                    navbar.classList.add('scrolled');
+            // Open Signup Modal
+            signupBtn.addEventListener('click', function() {
+                signupModal.style.display = 'flex';
+            });
+            
+            // Close Login Modal
+            closeLogin.addEventListener('click', function() {
+                loginModal.style.display = 'none';
+            });
+            
+            // Close Signup Modal
+            closeSignup.addEventListener('click', function() {
+                signupModal.style.display = 'none';
+            });
+            
+            // Login Submit
+            loginSubmit.addEventListener('click', function() {
+                const email = document.getElementById('loginEmail').value;
+                const password = document.getElementById('loginPassword').value;
+                
+                if (email === 'demo@company.com' && password === 'password123') {
+                    // Hide modal and landing page
+                    loginModal.style.display = 'none';
+                    document.getElementById('landingPage').style.display = 'none';
+                    
+                    // Show dashboard
+                    document.getElementById('dashboardWrapper').classList.add('active');
+                    
+                    // Update nav
+                    document.getElementById('navButtons').style.display = 'none';
+                    document.getElementById('userNav').style.display = 'flex';
                 } else {
-                    navbar.classList.remove('scrolled');
+                    alert('Please use demo@company.com / password123');
                 }
             });
-        };
-
-        // Modal Functions
-        function openModal(type) {
-            console.log('Opening modal:', type);
-            const modal = document.getElementById(type + 'Modal');
-            if (modal) {
-                modal.classList.add('active');
-                modal.style.display = 'flex';
-            } else {
-                console.error('Modal not found:', type + 'Modal');
-            }
-        }
-
-        function closeModal(type) {
-            console.log('Closing modal:', type);
-            const modal = document.getElementById(type + 'Modal');
-            if (modal) {
-                modal.classList.remove('active');
-                modal.style.display = 'none';
-            }
-        }
-
-        function switchModal(to) {
-            closeModal('login');
-            closeModal('signup');
-            setTimeout(() => openModal(to), 300);
-        }
-
-        // Authentication Functions
-        function performLogin() {
-            const email = document.getElementById('loginEmail').value;
-            const password = document.getElementById('loginPassword').value;
             
-            // For demo purposes, always allow the demo account
-            if (email === 'demo@company.com' && password === 'password123') {
-                currentUser = { email: email, password: password, name: 'Demo User' };
-                
-                closeModal('login');
-                showDashboard();
-                return;
-            }
-            
-            alert('Invalid credentials. Please use:\nEmail: demo@company.com\nPassword: password123');
-        }
-
-        function performSignup() {
-            const org = document.getElementById('signupOrg').value;
-            const name = document.getElementById('signupName').value;
-            const email = document.getElementById('signupEmail').value;
-            const password = document.getElementById('signupPassword').value;
-            
-            if (!org || !name || !email || !password) {
-                alert('Please fill in all fields');
-                return;
-            }
-            
-            currentUser = { email, password, name, org };
-            closeModal('signup');
-            showDashboard();
-        }
-
-        function showDashboard() {
-            document.getElementById('landingPage').style.display = 'none';
-            document.getElementById('dashboardWrapper').classList.add('active');
-            document.getElementById('navButtons').style.display = 'none';
-            document.getElementById('userNav').style.display = 'flex';
-            
-            // Update user info
-            if (currentUser) {
-                document.getElementById('sidebarUserName').textContent = currentUser.name;
-                document.getElementById('userAvatar').textContent = currentUser.name.charAt(0).toUpperCase();
-            }
-            
-            // Initialize dashboard charts
-            setTimeout(() => {
-                drawDashboardChart();
-            }, 100);
-        }
-
-        function goHome() {
-            if (currentUser) {
-                // If logged in, go to dashboard home
-                showDashboard();
-                switchPage('home');
-            } else {
-                // If not logged in, go to landing page
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-        }
-
-        function logout() {
-            currentUser = null;
-            document.getElementById('landingPage').style.display = 'block';
-            document.getElementById('dashboardWrapper').classList.remove('active');
-            document.getElementById('navButtons').style.display = 'flex';
-            document.getElementById('userNav').style.display = 'none';
-        }
-
-        // Page Navigation
-        function switchPage(page) {
-            // Hide all pages
-            document.querySelectorAll('.page-content').forEach(p => {
-                p.classList.remove('active');
+            // Signup Submit
+            signupSubmit.addEventListener('click', function() {
+                const name = document.getElementById('signupName').value;
+                if (name) {
+                    // Update user info
+                    document.getElementById('userName').textContent = name;
+                    document.getElementById('userAvatar').textContent = name.charAt(0).toUpperCase();
+                    
+                    // Hide modal and landing page
+                    signupModal.style.display = 'none';
+                    document.getElementById('landingPage').style.display = 'none';
+                    
+                    // Show dashboard
+                    document.getElementById('dashboardWrapper').classList.add('active');
+                    
+                    // Update nav
+                    document.getElementById('navButtons').style.display = 'none';
+                    document.getElementById('userNav').style.display = 'flex';
+                } else {
+                    alert('Please fill in all fields');
+                }
             });
             
-            // Remove active from all menu items
+            // Dashboard button
+            if (dashboardBtn) {
+                dashboardBtn.addEventListener('click', function() {
+                    document.getElementById('landingPage').style.display = 'none';
+                    document.getElementById('dashboardWrapper').classList.add('active');
+                });
+            }
+            
+            // Logout
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', function() {
+                    document.getElementById('landingPage').style.display = 'block';
+                    document.getElementById('dashboardWrapper').classList.remove('active');
+                    document.getElementById('navButtons').style.display = 'flex';
+                    document.getElementById('userNav').style.display = 'none';
+                });
+            }
+            
+            // Close modals when clicking outside
+            window.addEventListener('click', function(e) {
+                if (e.target === loginModal) {
+                    loginModal.style.display = 'none';
+                }
+                if (e.target === signupModal) {
+                    signupModal.style.display = 'none';
+                }
+            });
+        });
+        
+        // Page switching function
+        function switchPage(page) {
+            // Hide all pages
+            document.getElementById('homePage').style.display = 'none';
+            document.getElementById('employerPage').style.display = 'none';
+            document.getElementById('memberPage').style.display = 'none';
+            document.getElementById('pbmPage').style.display = 'none';
+            document.getElementById('claimsPage').style.display = 'none';
+            
+            // Show selected page
+            document.getElementById(page + 'Page').style.display = 'block';
+            
+            // Update active menu item
             document.querySelectorAll('.menu-item').forEach(item => {
                 item.classList.remove('active');
             });
-            
-            // Show selected page
-            const pageElement = document.getElementById(page + 'Page');
-            if (pageElement) {
-                pageElement.classList.add('active');
-            } else {
-                // Show home page as default
-                document.getElementById('homePage').classList.add('active');
-            }
-            
-            // Add active to clicked menu item
-            if (event && event.target) {
-                event.target.closest('.menu-item').classList.add('active');
-            }
-        }
-
-        // Chart Functions
-        function initCharts() {
-            drawHeroChart();
-        }
-
-        function drawHeroChart() {
-            const canvas = document.getElementById('heroChart');
-            if (!canvas) return;
-            
-            const ctx = canvas.getContext('2d');
-            const width = canvas.width = 400;
-            const height = canvas.height = 200;
-            
-            // Animated line chart
-            let frame = 0;
-            const data = [20, 35, 30, 45, 40, 55, 50, 65, 60, 75, 70, 85];
-            
-            function animate() {
-                ctx.clearRect(0, 0, width, height);
-                
-                // Draw grid
-                ctx.strokeStyle = '#e5e7eb';
-                ctx.lineWidth = 1;
-                for (let i = 0; i <= 4; i++) {
-                    const y = (height / 4) * i;
-                    ctx.beginPath();
-                    ctx.moveTo(0, y);
-                    ctx.lineTo(width, y);
-                    ctx.stroke();
-                }
-                
-                // Draw gradient
-                const gradient = ctx.createLinearGradient(0, 0, 0, height);
-                gradient.addColorStop(0, 'rgba(0, 102, 255, 0.3)');
-                gradient.addColorStop(1, 'rgba(0, 102, 255, 0)');
-                
-                // Draw filled area
-                ctx.fillStyle = gradient;
-                ctx.beginPath();
-                const pointsToShow = Math.min(Math.floor(frame / 5), data.length);
-                for (let i = 0; i < pointsToShow; i++) {
-                    const x = (width / (data.length - 1)) * i;
-                    const y = height - (data[i] / 100) * height;
-                    if (i === 0) {
-                        ctx.moveTo(x, y);
-                    } else {
-                        ctx.lineTo(x, y);
-                    }
-                }
-                if (pointsToShow > 0) {
-                    ctx.lineTo((width / (data.length - 1)) * (pointsToShow - 1), height);
-                    ctx.lineTo(0, height);
-                    ctx.closePath();
-                    ctx.fill();
-                }
-                
-                // Draw line
-                ctx.strokeStyle = '#0066ff';
-                ctx.lineWidth = 3;
-                ctx.beginPath();
-                for (let i = 0; i < pointsToShow; i++) {
-                    const x = (width / (data.length - 1)) * i;
-                    const y = height - (data[i] / 100) * height;
-                    if (i === 0) {
-                        ctx.moveTo(x, y);
-                    } else {
-                        ctx.lineTo(x, y);
-                    }
-                }
-                ctx.stroke();
-                
-                // Draw points
-                for (let i = 0; i < pointsToShow; i++) {
-                    const x = (width / (data.length - 1)) * i;
-                    const y = height - (data[i] / 100) * height;
-                    
-                    ctx.fillStyle = '#ffffff';
-                    ctx.strokeStyle = '#0066ff';
-                    ctx.lineWidth = 2;
-                    ctx.beginPath();
-                    ctx.arc(x, y, 4, 0, Math.PI * 2);
-                    ctx.fill();
-                    ctx.stroke();
-                }
-                
-                frame++;
-                if (frame < data.length * 5 + 30) {
-                    requestAnimationFrame(animate);
-                }
-            }
-            
-            animate();
-        }
-
-        function drawDashboardChart() {
-            const canvas = document.getElementById('dashboardChart');
-            if (!canvas) return;
-            
-            const ctx = canvas.getContext('2d');
-            const width = canvas.width = canvas.offsetWidth || 800;
-            const height = canvas.height = 300;
-            
-            // Sample data
-            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'];
-            const savings = [180, 220, 195, 280, 310, 295, 340, 380, 410];
-            
-            const padding = 50;
-            const graphWidth = width - 2 * padding;
-            const graphHeight = height - 2 * padding;
-            const barWidth = graphWidth / months.length * 0.6;
-            const spacing = graphWidth / months.length;
-            
-            // Clear canvas
-            ctx.clearRect(0, 0, width, height);
-            
-            // Find max value
-            const maxSavings = Math.max(...savings);
-            
-            // Draw axes
-            ctx.strokeStyle = '#e5e7eb';
-            ctx.lineWidth = 1;
-            ctx.beginPath();
-            ctx.moveTo(padding, padding);
-            ctx.lineTo(padding, height - padding);
-            ctx.lineTo(width - padding, height - padding);
-            ctx.stroke();
-            
-            // Draw bars for savings
-            savings.forEach((value, i) => {
-                const barHeight = (value / maxSavings) * graphHeight;
-                const x = padding + i * spacing + spacing * 0.2;
-                const y = height - padding - barHeight;
-                
-                // Gradient for bars
-                const gradient = ctx.createLinearGradient(0, y, 0, height - padding);
-                gradient.addColorStop(0, '#0066ff');
-                gradient.addColorStop(1, '#00d4ff');
-                
-                ctx.fillStyle = gradient;
-                ctx.fillRect(x, y, barWidth, barHeight);
-                
-                // Value labels
-                ctx.fillStyle = '#0f172a';
-                ctx.font = 'bold 12px Inter, sans-serif';
-                ctx.textAlign = 'center';
-                ctx.fillText(' + value + 'K', x + barWidth / 2, y - 10);
-            });
-            
-            // Draw labels
-            ctx.fillStyle = '#64748b';
-            ctx.font = '12px Inter, sans-serif';
-            ctx.textAlign = 'center';
-            months.forEach((month, i) => {
-                const x = padding + i * spacing + spacing * 0.5;
-                ctx.fillText(month, x, height - padding + 20);
-            });
-        }
-
-        // Close modal on outside click
-        window.onclick = function(event) {
-            if (event.target.classList.contains('modal')) {
-                event.target.classList.remove('active');
-                event.target.style.display = 'none';
-            }
+            event.target.closest('.menu-item').classList.add('active');
         }
     </script>
 </body>
