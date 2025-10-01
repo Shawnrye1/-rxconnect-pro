@@ -946,8 +946,8 @@
                 <a href="#features" class="nav-link">Features</a>
             </div>
             <div class="nav-buttons" id="navButtons">
-                <button class="btn btn-secondary" onclick="openModal('login')">Login</button>
-                <button class="btn btn-primary" onclick="openModal('signup')">Start Free Trial</button>
+                <button class="btn btn-secondary" id="loginBtn">Login</button>
+                <button class="btn btn-primary" id="signupBtn">Start Free Trial</button>
             </div>
             <div class="nav-buttons" id="userNav" style="display: none;">
                 <button class="btn btn-primary" onclick="showDashboard()">Dashboard</button>
@@ -1503,6 +1503,19 @@
         // Check login status on load
         window.onload = function() {
             initCharts();
+            
+            // Add event listeners for buttons
+            document.getElementById('loginBtn').addEventListener('click', function() {
+                const modal = document.getElementById('loginModal');
+                modal.style.display = 'flex';
+                modal.classList.add('active');
+            });
+            
+            document.getElementById('signupBtn').addEventListener('click', function() {
+                const modal = document.getElementById('signupModal');
+                modal.style.display = 'flex';
+                modal.classList.add('active');
+            });
             
             // Add scroll effect to navbar
             window.addEventListener('scroll', function() {
