@@ -11,16 +11,30 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --primary: #0066ff;
+            --primary-dark: #0052cc;
+            --secondary: #00d4ff;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --dark: #0f172a;
+            --gray: #64748b;
+            --light: #f8fafc;
+            --white: #ffffff;
+        }
+
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
-            color: #0f172a;
-            background: #ffffff;
+            color: var(--dark);
+            background: var(--white);
         }
 
         /* Navigation */
         nav {
             background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
             padding: 1rem 0;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             position: fixed;
@@ -44,6 +58,7 @@
             gap: 0.75rem;
             font-size: 1.5rem;
             font-weight: 800;
+            cursor: pointer;
         }
 
         .logo-icon {
@@ -58,32 +73,312 @@
             color: white;
         }
 
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--gray);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
         /* Hero Section */
         .hero {
             padding: 120px 0 80px;
             background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(0, 102, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
         }
 
         .hero-container {
             max-width: 1400px;
             margin: 0 auto;
             padding: 0 2rem;
-            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
         }
 
         .hero h1 {
             font-size: 3.5rem;
             font-weight: 900;
+            line-height: 1.1;
             margin-bottom: 1.5rem;
             background: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .hero p {
+        .hero-subtitle {
             font-size: 1.5rem;
-            color: #64748b;
+            color: var(--gray);
             margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .hero-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero-feature {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: white;
+            border-radius: 50px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .hero-metrics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .hero-metric-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+
+        /* Solutions Section */
+        .solutions-section {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 4rem;
+        }
+
+        .section-badge {
+            display: inline-block;
+            background: rgba(0, 102, 255, 0.1);
+            color: var(--primary);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .solutions-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .solution-card {
+            background: var(--light);
+            padding: 2.5rem;
+            border-radius: 20px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .solution-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%);
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .solution-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            background: white;
+        }
+
+        .solution-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .solution-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Target Audience Section */
+        .audience-section {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .audience-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .audience-card {
+            background: var(--light);
+            padding: 2.5rem;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .audience-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%);
+        }
+
+        .audience-card:nth-child(2)::before {
+            background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+        }
+
+        .audience-card:nth-child(3)::before {
+            background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%);
+        }
+
+        .audience-card:nth-child(4)::before {
+            background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+        }
+
+        .audience-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            background: white;
+        }
+
+        .audience-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 1.5rem;
+            color: white;
+        }
+
+        .audience-card:nth-child(2) .audience-icon {
+            background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+        }
+
+        .audience-card:nth-child(3) .audience-icon {
+            background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%);
+        }
+
+        .audience-card:nth-child(4) .audience-icon {
+            background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
+        }
+
+        .features-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 20px;
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 0;
+            background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            text-align: center;
         }
 
         /* Dashboard */
@@ -91,7 +386,7 @@
             display: none;
             padding-top: 70px;
             min-height: 100vh;
-            background: #f8fafc;
+            background: var(--light);
         }
 
         .dashboard-wrapper.active {
@@ -114,6 +409,12 @@
             color: white;
         }
 
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
         .user-avatar {
             width: 50px;
             height: 50px;
@@ -124,20 +425,34 @@
             justify-content: center;
             font-size: 1.5rem;
             font-weight: bold;
-            margin-bottom: 1rem;
+        }
+
+        .menu-section {
+            margin-bottom: 2rem;
+        }
+
+        .menu-section-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--gray);
+            margin-bottom: 0.5rem;
+            padding: 1rem 1.5rem 0.5rem;
+            font-weight: 600;
         }
 
         .menu-item {
-            padding: 1rem 1.5rem;
+            padding: 0.875rem 1.5rem;
             cursor: pointer;
             transition: all 0.3s;
             display: flex;
             align-items: center;
             gap: 1rem;
+            color: var(--dark);
         }
 
         .menu-item:hover {
-            background: #f8fafc;
+            background: var(--light);
         }
 
         .menu-item.active {
@@ -152,7 +467,101 @@
             flex: 1;
         }
 
-        /* Modal - SIMPLIFIED */
+        .page-header {
+            margin-bottom: 2rem;
+        }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .chart-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+        }
+
+        .data-table {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: var(--light);
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: var(--gray);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--light);
+        }
+
+        tr:hover {
+            background: rgba(0, 102, 255, 0.05);
+        }
+
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .status-active {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+        }
+
+        .status-pending {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--warning);
+        }
+
+        /* Modal */
         .modal {
             display: none;
             position: fixed;
@@ -161,6 +570,7 @@
             width: 100%;
             height: 100%;
             background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(10px);
             z-index: 2000;
             justify-content: center;
             align-items: center;
@@ -173,6 +583,18 @@
             width: 90%;
             max-width: 500px;
             position: relative;
+            animation: slideUp 0.3s;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .close-btn {
@@ -183,7 +605,7 @@
             border: none;
             font-size: 2rem;
             cursor: pointer;
-            color: #64748b;
+            color: var(--gray);
         }
 
         /* Buttons */
@@ -195,6 +617,7 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
+            display: inline-block;
         }
 
         .btn-primary {
@@ -209,12 +632,18 @@
 
         .btn-secondary {
             background: white;
-            color: #0066ff;
-            border: 2px solid #0066ff;
+            color: var(--primary);
+            border: 2px solid var(--primary);
         }
 
         .btn-secondary:hover {
-            background: #f8fafc;
+            background: var(--light);
+            transform: translateY(-2px);
+        }
+
+        .btn-large {
+            padding: 1.25rem 3rem;
+            font-size: 1.1rem;
         }
 
         /* Forms */
@@ -225,7 +654,7 @@
         .form-label {
             display: block;
             margin-bottom: 0.5rem;
-            color: #64748b;
+            color: var(--gray);
             font-weight: 600;
             font-size: 0.9rem;
             text-transform: uppercase;
@@ -238,13 +667,36 @@
             border: 2px solid #e5e7eb;
             border-radius: 10px;
             font-size: 1rem;
-            background: #f8fafc;
+            background: var(--light);
         }
 
         .form-input:focus {
             outline: none;
-            border-color: #0066ff;
+            border-color: var(--primary);
             background: white;
+            box-shadow: 0 0 0 4px rgba(0, 102, 255, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-menu {
+                display: none;
+            }
+            
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
         }
     </style>
 </head>
@@ -255,6 +707,11 @@
             <div class="logo">
                 <div class="logo-icon">💊</div>
                 <span>MedSave Pro</span>
+            </div>
+            <div class="nav-menu">
+                <a href="#solutions" class="nav-link">Solutions</a>
+                <a href="#audience" class="nav-link">For Industry</a>
+                <a href="#features" class="nav-link">Features</a>
             </div>
             <div id="navButtons">
                 <button class="btn btn-secondary" id="loginBtn">Login</button>
@@ -269,12 +726,255 @@
 
     <!-- Landing Page -->
     <div id="landingPage">
+        <!-- Hero Section -->
         <section class="hero">
             <div class="hero-container">
-                <h1>Revolutionize Healthcare Savings</h1>
-                <p>The enterprise platform trusted by Employers, PBMs, Specialty Pharmacies, and Pharmaceutical Hubs</p>
-                <div style="margin-top: 3rem;">
-                    <button class="btn btn-primary" style="padding: 1.2rem 3rem; font-size: 1.2rem;" id="heroLoginBtn">Get Started</button>
+                <div class="hero-content">
+                    <div>
+                        <h1>Revolutionize Healthcare Savings Across the Industry</h1>
+                        <p class="hero-subtitle">The enterprise platform trusted by Employers, PBMs, Specialty Pharmacies, and Pharmaceutical Hubs to maximize savings and streamline operations.</p>
+                        
+                        <div class="hero-features">
+                            <div class="hero-feature">
+                                <span style="color: var(--success);">✓</span>
+                                <span>HIPAA Compliant</span>
+                            </div>
+                            <div class="hero-feature">
+                                <span style="color: var(--success);">✓</span>
+                                <span>Real-time Analytics</span>
+                            </div>
+                            <div class="hero-feature">
+                                <span style="color: var(--success);">✓</span>
+                                <span>API Integration</span>
+                            </div>
+                            <div class="hero-feature">
+                                <span style="color: var(--success);">✓</span>
+                                <span>SOC 2 Certified</span>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                            <button class="btn btn-primary btn-large" id="heroLoginBtn">Schedule Demo</button>
+                            <button class="btn btn-secondary btn-large">Learn More</button>
+                        </div>
+
+                        <div class="hero-metrics">
+                            <div style="text-align: center;">
+                                <div class="hero-metric-value">$2.4B+</div>
+                                <div style="color: var(--gray); font-size: 0.9rem;">Total Savings Generated</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div class="hero-metric-value">500+</div>
+                                <div style="color: var(--gray); font-size: 0.9rem;">Enterprise Clients</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div class="hero-metric-value">45%</div>
+                                <div style="color: var(--gray); font-size: 0.9rem;">Average Cost Reduction</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="hero-card">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                            <h3 style="margin: 0;">Live Savings Tracker</h3>
+                            <span style="background: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%); color: white; padding: 0.5rem 1rem; border-radius: 50px; font-size: 0.85rem;">REAL-TIME</span>
+                        </div>
+                        <canvas id="heroChart" width="400" height="200"></canvas>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem;">
+                            <div style="background: var(--light); padding: 1rem; border-radius: 10px;">
+                                <div style="color: var(--gray); font-size: 0.85rem;">Today's Savings</div>
+                                <div style="font-size: 1.5rem; font-weight: 700; color: var(--success);">+$124,563</div>
+                            </div>
+                            <div style="background: var(--light); padding: 1rem; border-radius: 10px;">
+                                <div style="color: var(--gray); font-size: 0.85rem;">Active Plans</div>
+                                <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary);">8,432</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Solutions Section -->
+        <section class="solutions-section" id="solutions">
+            <div class="section-header">
+                <div class="section-badge">Comprehensive Solutions</div>
+                <h2 class="section-title">Enterprise-Grade Healthcare Savings Platform</h2>
+                <p style="color: var(--gray); font-size: 1.25rem;">Designed specifically for the unique needs of healthcare industry leaders</p>
+            </div>
+
+            <div class="solutions-grid">
+                <div class="solution-card">
+                    <div class="solution-icon">📊</div>
+                    <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">Advanced Analytics</h3>
+                    <p style="color: var(--gray); line-height: 1.8; margin-bottom: 1.5rem;">Real-time dashboards with predictive analytics and customizable reporting for data-driven decisions.</p>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="padding: 0.5rem 0; color: var(--gray);"><span style="color: var(--success); font-weight: bold;">✓</span> Predictive cost modeling</li>
+                        <li style="padding: 0.5rem 0; color: var(--gray);"><span style="color: var(--success); font-weight: bold;">✓</span> Utilization analytics</li>
+                        <li style="padding: 0.5rem 0; color: var(--gray);"><span style="color: var(--success); font-weight: bold;">✓</span> Compliance tracking</li>
+                    </ul>
+                </div>
+
+                <div class="solution-card">
+                    <div class="solution-icon">🔗</div>
+                    <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">Seamless Integration</h3>
+                    <p style="color: var(--gray); line-height: 1.8; margin-bottom: 1.5rem;">Connect with existing PBM systems, EMRs, and pharmacy networks through our robust API.</p>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="padding: 0.5rem 0; color: var(--gray);"><span style="color: var(--success); font-weight: bold;">✓</span> REST API & Webhooks</li>
+                        <li style="padding: 0.5rem 0; color: var(--gray);"><span style="color: var(--success); font-weight: bold;">✓</span> HL7 FHIR support</li>
+                        <li style="padding: 0.5rem 0; color: var(--gray);"><span style="color: var(--success); font-weight: bold;">✓</span> Batch processing</li>
+                    </ul>
+                </div>
+
+                <div class="solution-card">
+                    <div class="solution-icon">🛡️</div>
+                    <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">Compliance & Security</h3>
+                    <p style="color: var(--gray); line-height: 1.8; margin-bottom: 1.5rem;">Built from the ground up with HIPAA compliance and enterprise security standards.</p>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="padding: 0.5rem 0; color: var(--gray);"><span style="color: var(--success); font-weight: bold;">✓</span> HIPAA & SOC 2 compliant</li>
+                        <li style="padding: 0.5rem 0; color: var(--gray);"><span style="color: var(--success); font-weight: bold;">✓</span> End-to-end encryption</li>
+                        <li style="padding: 0.5rem 0; color: var(--gray);"><span style="color: var(--success); font-weight: bold;">✓</span> Audit logging</li>
+                    </ul>
+                </div>
+
+                <div class="solution-card">
+                    <div class="solution-icon">🤖</div>
+                    <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">AI-Powered Optimization</h3>
+                    <p style="color: var(--gray); line-height: 1.8; margin-bottom: 1.5rem;">Machine learning algorithms identify savings opportunities and optimize benefit designs.</p>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="padding: 0.5rem 0; color: var(--gray);"><span style="color: var(--success); font-weight: bold;">✓</span> Formulary optimization</li>
+                        <li style="padding: 0.5rem 0; color: var(--gray);"><span style="color: var(--success); font-weight: bold;">✓</span> Prior auth automation</li>
+                        <li style="padding: 0.5rem 0; color: var(--gray);"><span style="color: var(--success); font-weight: bold;">✓</span> Fraud detection</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Target Audience Section -->
+        <section class="audience-section" id="audience">
+            <div class="section-header">
+                <div class="section-badge">Built For Industry Leaders</div>
+                <h2 class="section-title">Tailored Solutions for Every Healthcare Stakeholder</h2>
+                <p style="color: var(--gray); font-size: 1.25rem;">Maximize value across the entire healthcare ecosystem</p>
+            </div>
+
+            <div class="audience-grid">
+                <div class="audience-card">
+                    <div class="audience-icon">🏢</div>
+                    <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">Employers</h3>
+                    <p style="color: var(--gray); line-height: 1.8; margin-bottom: 1.5rem;">Reduce healthcare costs while improving employee satisfaction and health outcomes.</p>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding-top: 1.5rem; border-top: 1px solid rgba(0,0,0,0.05);">
+                        <div style="text-align: center;">
+                            <div style="font-size: 1.75rem; font-weight: 800; color: var(--primary);">32%</div>
+                            <div style="font-size: 0.85rem; color: var(--gray);">Cost Reduction</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 1.75rem; font-weight: 800; color: var(--primary);">89%</div>
+                            <div style="font-size: 0.85rem; color: var(--gray);">Satisfaction</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="audience-card">
+                    <div class="audience-icon">💊</div>
+                    <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">PBMs</h3>
+                    <p style="color: var(--gray); line-height: 1.8; margin-bottom: 1.5rem;">Streamline operations, improve formulary management, and enhance client relationships.</p>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding-top: 1.5rem; border-top: 1px solid rgba(0,0,0,0.05);">
+                        <div style="text-align: center;">
+                            <div style="font-size: 1.75rem; font-weight: 800; color: #10b981;">5x</div>
+                            <div style="font-size: 0.85rem; color: var(--gray);">Efficiency</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 1.75rem; font-weight: 800; color: #10b981;">$450M</div>
+                            <div style="font-size: 0.85rem; color: var(--gray);">Processed</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="audience-card">
+                    <div class="audience-icon">🏥</div>
+                    <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">Specialty Pharmacies</h3>
+                    <p style="color: var(--gray); line-height: 1.8; margin-bottom: 1.5rem;">Optimize specialty drug management and improve patient adherence programs.</p>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding-top: 1.5rem; border-top: 1px solid rgba(0,0,0,0.05);">
+                        <div style="text-align: center;">
+                            <div style="font-size: 1.75rem; font-weight: 800; color: #8b5cf6;">94%</div>
+                            <div style="font-size: 0.85rem; color: var(--gray);">Adherence</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 1.75rem; font-weight: 800; color: #8b5cf6;">2.8x</div>
+                            <div style="font-size: 0.85rem; color: var(--gray);">ROI</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="audience-card">
+                    <div class="audience-icon">🔬</div>
+                    <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">Pharmaceutical Hubs</h3>
+                    <p style="color: var(--gray); line-height: 1.8; margin-bottom: 1.5rem;">Connect manufacturers with patients while ensuring access and affordability.</p>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding-top: 1.5rem; border-top: 1px solid rgba(0,0,0,0.05);">
+                        <div style="text-align: center;">
+                            <div style="font-size: 1.75rem; font-weight: 800; color: #f59e0b;">15K+</div>
+                            <div style="font-size: 0.85rem; color: var(--gray);">Patients</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 1.75rem; font-weight: 800; color: #f59e0b;">98%</div>
+                            <div style="font-size: 0.85rem; color: var(--gray);">Coverage</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features-section" id="features">
+            <div class="section-header">
+                <div class="section-badge">Platform Features</div>
+                <h2 class="section-title">Everything You Need to Transform Healthcare Savings</h2>
+                <p style="color: var(--gray); font-size: 1.25rem;">Comprehensive tools designed for healthcare industry professionals</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div style="width: 60px; height: 60px; margin: 0 auto 1rem; background: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%); border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: white;">📈</div>
+                    <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">Real-time Analytics</h4>
+                    <p style="color: var(--gray);">Monitor performance metrics and identify trends as they happen</p>
+                </div>
+                <div class="feature-card">
+                    <div style="width: 60px; height: 60px; margin: 0 auto 1rem; background: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%); border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: white;">🔒</div>
+                    <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">Enterprise Security</h4>
+                    <p style="color: var(--gray);">Bank-level encryption and comprehensive audit trails</p>
+                </div>
+                <div class="feature-card">
+                    <div style="width: 60px; height: 60px; margin: 0 auto 1rem; background: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%); border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: white;">⚡</div>
+                    <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">Instant Implementation</h4>
+                    <p style="color: var(--gray);">Go live in days, not months, with streamlined onboarding</p>
+                </div>
+                <div class="feature-card">
+                    <div style="width: 60px; height: 60px; margin: 0 auto 1rem; background: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%); border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: white;">🤝</div>
+                    <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">White Glove Support</h4>
+                    <p style="color: var(--gray);">Dedicated success team and 24/7 technical support</p>
+                </div>
+                <div class="feature-card">
+                    <div style="width: 60px; height: 60px; margin: 0 auto 1rem; background: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%); border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: white;">🎯</div>
+                    <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">Custom Workflows</h4>
+                    <p style="color: var(--gray);">Tailor the platform to match your unique processes</p>
+                </div>
+                <div class="feature-card">
+                    <div style="width: 60px; height: 60px; margin: 0 auto 1rem; background: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%); border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: white;">📊</div>
+                    <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">Benchmarking Tools</h4>
+                    <p style="color: var(--gray);">Compare performance against industry standards</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div style="max-width: 900px; margin: 0 auto; padding: 0 2rem;">
+                <h2 style="font-size: 3.5rem; font-weight: 800; margin-bottom: 1.5rem;">Ready to Transform Your Healthcare Savings?</h2>
+                <p style="font-size: 1.5rem; opacity: 0.9; margin-bottom: 3rem;">Join 500+ leading organizations already maximizing their healthcare value</p>
+                <div style="display: flex; gap: 1.5rem; justify-content: center;">
+                    <button class="btn btn-large" style="background: white; color: var(--primary);">Schedule a Demo</button>
+                    <button class="btn btn-large" style="background: transparent; border: 2px solid white; color: white;">Contact Sales</button>
                 </div>
             </div>
         </section>
@@ -284,14 +984,29 @@
     <div class="dashboard-wrapper" id="dashboardWrapper">
         <aside class="sidebar">
             <div class="sidebar-header">
-                <div class="user-avatar" id="userAvatar">D</div>
-                <h3 id="userName">Demo User</h3>
+                <div class="user-profile">
+                    <div class="user-avatar" id="userAvatar">D</div>
+                    <div>
+                        <h3 id="userName" style="font-size: 1.1rem; margin-bottom: 0.25rem;">Demo User</h3>
+                        <p style="font-size: 0.85rem; opacity: 0.9;">Enterprise Admin</p>
+                    </div>
+                </div>
             </div>
-            <div style="padding: 1rem 0;">
+            
+            <div class="menu-section">
+                <div class="menu-section-title">Main</div>
                 <div class="menu-item active" onclick="switchPage('home')">
                     <span>📊</span>
                     <span>Dashboard Overview</span>
                 </div>
+                <div class="menu-item" onclick="switchPage('analytics')">
+                    <span>📈</span>
+                    <span>Analytics & Reports</span>
+                </div>
+            </div>
+
+            <div class="menu-section">
+                <div class="menu-section-title">Savings Management</div>
                 <div class="menu-item" onclick="switchPage('employer')">
                     <span>🏢</span>
                     <span>Employer Savings</span>
@@ -300,56 +1015,236 @@
                     <span>👥</span>
                     <span>Member Savings</span>
                 </div>
+                <div class="menu-item" onclick="switchPage('client')">
+                    <span>💼</span>
+                    <span>Client Accounts</span>
+                </div>
+            </div>
+
+            <div class="menu-section">
+                <div class="menu-section-title">Pharmacy Network</div>
                 <div class="menu-item" onclick="switchPage('pbm')">
                     <span>💊</span>
                     <span>PBM Integration</span>
                 </div>
+                <div class="menu-item" onclick="switchPage('specialty')">
+                    <span>🏥</span>
+                    <span>Specialty Pharmacy</span>
+                </div>
+                <div class="menu-item" onclick="switchPage('pharma')">
+                    <span>🔬</span>
+                    <span>Pharma Hub</span>
+                </div>
+            </div>
+
+            <div class="menu-section">
+                <div class="menu-section-title">Operations</div>
                 <div class="menu-item" onclick="switchPage('claims')">
                     <span>📋</span>
                     <span>Claims Processing</span>
+                </div>
+                <div class="menu-item" onclick="switchPage('compliance')">
+                    <span>🛡️</span>
+                    <span>Compliance</span>
+                </div>
+                <div class="menu-item" onclick="switchPage('settings')">
+                    <span>⚙️</span>
+                    <span>Settings</span>
                 </div>
             </div>
         </aside>
 
         <main class="main-content">
-            <div id="homePage">
-                <h1>Enterprise Dashboard</h1>
-                <p>Welcome to your healthcare savings management platform</p>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
-                    <div style="background: white; padding: 1.5rem; border-radius: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
-                        <h3>Total Savings YTD</h3>
-                        <p style="font-size: 2rem; font-weight: 800; color: #0066ff;">$2,456,789</p>
+            <!-- Dashboard Overview -->
+            <div id="homePage" style="display: block;">
+                <div class="page-header">
+                    <h1 style="font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem;">Enterprise Dashboard</h1>
+                    <p style="color: var(--gray);">Real-time overview of your healthcare savings ecosystem</p>
+                </div>
+
+                <div class="stats-row">
+                    <div class="stat-card">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+                            <div style="width: 50px; height: 50px; background: rgba(0, 102, 255, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">💰</div>
+                            <div style="background: rgba(16, 185, 129, 0.1); color: var(--success); padding: 0.25rem 0.75rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600;">+12.5%</div>
+                        </div>
+                        <div style="font-size: 2rem; font-weight: 800; margin-bottom: 0.25rem;">$2,456,789</div>
+                        <div style="color: var(--gray); font-size: 0.9rem;">Total Savings YTD</div>
                     </div>
-                    <div style="background: white; padding: 1.5rem; border-radius: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
-                        <h3>Active Members</h3>
-                        <p style="font-size: 2rem; font-weight: 800; color: #10b981;">45,678</p>
+                    <div class="stat-card">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+                            <div style="width: 50px; height: 50px; background: rgba(0, 102, 255, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">👥</div>
+                            <div style="background: rgba(16, 185, 129, 0.1); color: var(--success); padding: 0.25rem 0.75rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600;">+324</div>
+                        </div>
+                        <div style="font-size: 2rem; font-weight: 800; margin-bottom: 0.25rem;">45,678</div>
+                        <div style="color: var(--gray); font-size: 0.9rem;">Active Members</div>
                     </div>
-                    <div style="background: white; padding: 1.5rem; border-radius: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
-                        <h3>Claims Processed</h3>
-                        <p style="font-size: 2rem; font-weight: 800; color: #8b5cf6;">12,345</p>
+                    <div class="stat-card">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+                            <div style="width: 50px; height: 50px; background: rgba(0, 102, 255, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">💊</div>
+                            <div style="background: rgba(16, 185, 129, 0.1); color: var(--success); padding: 0.25rem 0.75rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600;">+8.2%</div>
+                        </div>
+                        <div style="font-size: 2rem; font-weight: 800; margin-bottom: 0.25rem;">98.5%</div>
+                        <div style="color: var(--gray); font-size: 0.9rem;">Formulary Compliance</div>
+                    </div>
+                    <div class="stat-card">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+                            <div style="width: 50px; height: 50px; background: rgba(0, 102, 255, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">📈</div>
+                            <div style="background: rgba(16, 185, 129, 0.1); color: var(--success); padding: 0.25rem 0.75rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600;">+23.1%</div>
+                        </div>
+                        <div style="font-size: 2rem; font-weight: 800; margin-bottom: 0.25rem;">$345</div>
+                        <div style="color: var(--gray); font-size: 0.9rem;">Avg Savings/Member</div>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <h3 style="margin-bottom: 1.5rem;">Savings Performance Trend</h3>
+                    <canvas id="dashboardChart" width="800" height="300"></canvas>
+                </div>
+
+                <div class="data-table">
+                    <h3 style="margin-bottom: 1.5rem;">Recent Activities</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Member</th>
+                                <th>Type</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Oct 1, 2025</td>
+                                <td>John Smith</td>
+                                <td>Prescription Savings</td>
+                                <td style="font-weight: 600; color: var(--success);">$2,340</td>
+                                <td><span class="status-badge status-active">Completed</span></td>
+                            </tr>
+                            <tr>
+                                <td>Sep 30, 2025</td>
+                                <td>Sarah Johnson</td>
+                                <td>Generic Substitution</td>
+                                <td style="font-weight: 600; color: var(--success);">$1,567</td>
+                                <td><span class="status-badge status-active">Completed</span></td>
+                            </tr>
+                            <tr>
+                                <td>Sep 29, 2025</td>
+                                <td>Michael Chen</td>
+                                <td>Prior Authorization</td>
+                                <td style="font-weight: 600; color: var(--warning);">$890</td>
+                                <td><span class="status-badge status-pending">Processing</span></td>
+                            </tr>
+                            <tr>
+                                <td>Sep 28, 2025</td>
+                                <td>Emily Davis</td>
+                                <td>Formulary Optimization</td>
+                                <td style="font-weight: 600; color: var(--success);">$3,450</td>
+                                <td><span class="status-badge status-active">Completed</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Other Pages -->
+            <div id="employerPage" style="display: none;">
+                <div class="page-header">
+                    <h1 style="font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem;">Employer Savings Management</h1>
+                    <p style="color: var(--gray);">Manage and optimize employer healthcare benefit programs</p>
+                </div>
+                <div class="stats-row">
+                    <div class="stat-card">
+                        <div style="font-size: 2rem; font-weight: 800; margin-bottom: 0.25rem;">234</div>
+                        <div style="color: var(--gray);">Active Employers</div>
+                    </div>
+                    <div class="stat-card">
+                        <div style="font-size: 2rem; font-weight: 800; margin-bottom: 0.25rem;">$45.6M</div>
+                        <div style="color: var(--gray);">Total Employer Savings</div>
+                    </div>
+                    <div class="stat-card">
+                        <div style="font-size: 2rem; font-weight: 800; margin-bottom: 0.25rem;">32%</div>
+                        <div style="color: var(--gray);">Average Cost Reduction</div>
                     </div>
                 </div>
             </div>
 
-            <div id="employerPage" style="display: none;">
-                <h1>Employer Savings</h1>
-                <p>Manage employer accounts and savings programs</p>
+            <div id="memberPage" style="display: none;">
+                <div class="page-header">
+                    <h1 style="font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem;">Member Savings</h1>
+                    <p style="color: var(--gray);">Track and manage individual member savings programs</p>
+                </div>
+                <div class="stats-row">
+                    <div class="stat-card">
+                        <div style="font-size: 2rem; font-weight: 800; margin-bottom: 0.25rem;">45,678</div>
+                        <div style="color: var(--gray);">Total Members</div>
+                    </div>
+                    <div class="stat-card">
+                        <div style="font-size: 2rem; font-weight: 800; margin-bottom: 0.25rem;">$345</div>
+                        <div style="color: var(--gray);">Avg Savings per Member</div>
+                    </div>
+                    <div class="stat-card">
+                        <div style="font-size: 2rem; font-weight: 800; margin-bottom: 0.25rem;">89%</div>
+                        <div style="color: var(--gray);">Member Satisfaction</div>
+                    </div>
+                </div>
             </div>
 
-            <div id="memberPage" style="display: none;">
-                <h1>Member Savings</h1>
-                <p>Track individual member savings and benefits</p>
+            <div id="claimsPage" style="display: none;">
+                <div class="page-header">
+                    <h1 style="font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem;">Claims Processing</h1>
+                    <p style="color: var(--gray);">Process and track healthcare claims efficiently</p>
+                </div>
+                <div class="stats-row">
+                    <div class="stat-card">
+                        <div style="font-size: 2rem; font-weight: 800; margin-bottom: 0.25rem;">12,345</div>
+                        <div style="color: var(--gray);">Claims Processed</div>
+                    </div>
+                    <div class="stat-card">
+                        <div style="font-size: 2rem; font-weight: 800; margin-bottom: 0.25rem;">1.2 days</div>
+                        <div style="color: var(--gray);">Avg Processing Time</div>
+                    </div>
+                    <div class="stat-card">
+                        <div style="font-size: 2rem; font-weight: 800; margin-bottom: 0.25rem;">99.8%</div>
+                        <div style="color: var(--gray);">Accuracy Rate</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="analyticsPage" style="display: none;">
+                <h1>Analytics & Reports</h1>
+                <p>Comprehensive analytics and reporting dashboard</p>
+            </div>
+
+            <div id="clientPage" style="display: none;">
+                <h1>Client Accounts</h1>
+                <p>Manage client accounts and relationships</p>
             </div>
 
             <div id="pbmPage" style="display: none;">
                 <h1>PBM Integration</h1>
-                <p>Pharmacy benefit management integration dashboard</p>
+                <p>Pharmacy Benefit Manager integration and management</p>
             </div>
 
-            <div id="claimsPage" style="display: none;">
-                <h1>Claims Processing</h1>
-                <p>Process and track healthcare claims</p>
+            <div id="specialtyPage" style="display: none;">
+                <h1>Specialty Pharmacy</h1>
+                <p>Specialty pharmacy programs and management</p>
+            </div>
+
+            <div id="pharmaPage" style="display: none;">
+                <h1>Pharmaceutical Hub</h1>
+                <p>Pharmaceutical hub connections and management</p>
+            </div>
+
+            <div id="compliancePage" style="display: none;">
+                <h1>Compliance</h1>
+                <p>Compliance tracking and reporting</p>
+            </div>
+
+            <div id="settingsPage" style="display: none;">
+                <h1>Settings</h1>
+                <p>System settings and configuration</p>
             </div>
         </main>
     </div>
@@ -361,7 +1256,7 @@
             <div style="text-align: center; margin-bottom: 2rem;">
                 <div class="logo-icon" style="margin: 0 auto 1rem; width: 60px; height: 60px; font-size: 2rem;">💊</div>
                 <h2>Welcome Back</h2>
-                <p style="color: #64748b;">Login to access your dashboard</p>
+                <p style="color: var(--gray);">Login to access your enterprise dashboard</p>
             </div>
             <div class="form-group">
                 <label class="form-label">Email Address</label>
@@ -372,9 +1267,9 @@
                 <input type="password" class="form-input" id="loginPassword" value="password123">
             </div>
             <button class="btn btn-primary" style="width: 100%;" id="loginSubmit">Login to Dashboard</button>
-            <div style="text-align: center; margin-top: 1rem; padding: 1rem; background: #f8fafc; border-radius: 10px;">
-                <p style="color: #64748b; margin: 0;">Demo credentials are pre-filled</p>
-                <p style="color: #0066ff; font-weight: 600; margin: 0;">Just click Login to Dashboard</p>
+            <div style="text-align: center; margin-top: 1rem; padding: 1rem; background: var(--light); border-radius: 10px;">
+                <p style="color: var(--gray); margin: 0;">Demo credentials are pre-filled</p>
+                <p style="color: var(--primary); font-weight: 600; margin: 0;">Just click Login to Dashboard</p>
             </div>
         </div>
     </div>
@@ -385,20 +1280,24 @@
             <button class="close-btn" id="closeSignup">&times;</button>
             <div style="text-align: center; margin-bottom: 2rem;">
                 <div class="logo-icon" style="margin: 0 auto 1rem; width: 60px; height: 60px; font-size: 2rem;">💊</div>
-                <h2>Start Free Trial</h2>
-                <p style="color: #64748b;">14-day trial with full access</p>
+                <h2>Start Your Free Trial</h2>
+                <p style="color: var(--gray);">14-day trial with full access to all features</p>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Organization Name</label>
+                <input type="text" class="form-input" id="signupOrg" placeholder="Your Company">
             </div>
             <div class="form-group">
                 <label class="form-label">Full Name</label>
-                <input type="text" class="form-input" id="signupName">
+                <input type="text" class="form-input" id="signupName" placeholder="John Doe">
             </div>
             <div class="form-group">
                 <label class="form-label">Email</label>
-                <input type="email" class="form-input" id="signupEmail">
+                <input type="email" class="form-input" id="signupEmail" placeholder="you@company.com">
             </div>
             <div class="form-group">
                 <label class="form-label">Password</label>
-                <input type="password" class="form-input" id="signupPassword">
+                <input type="password" class="form-input" id="signupPassword" placeholder="Minimum 8 characters">
             </div>
             <button class="btn btn-primary" style="width: 100%;" id="signupSubmit">Create Account</button>
         </div>
@@ -462,6 +1361,9 @@
                     // Update nav
                     document.getElementById('navButtons').style.display = 'none';
                     document.getElementById('userNav').style.display = 'flex';
+                    
+                    // Draw chart
+                    setTimeout(drawDashboardChart, 100);
                 } else {
                     alert('Please use demo@company.com / password123');
                 }
@@ -470,7 +1372,9 @@
             // Signup Submit
             signupSubmit.addEventListener('click', function() {
                 const name = document.getElementById('signupName').value;
-                if (name) {
+                const org = document.getElementById('signupOrg').value;
+                
+                if (name && org) {
                     // Update user info
                     document.getElementById('userName').textContent = name;
                     document.getElementById('userAvatar').textContent = name.charAt(0).toUpperCase();
@@ -485,6 +1389,9 @@
                     // Update nav
                     document.getElementById('navButtons').style.display = 'none';
                     document.getElementById('userNav').style.display = 'flex';
+                    
+                    // Draw chart
+                    setTimeout(drawDashboardChart, 100);
                 } else {
                     alert('Please fill in all fields');
                 }
@@ -517,26 +1424,220 @@
                     signupModal.style.display = 'none';
                 }
             });
+            
+            // Initialize hero chart
+            drawHeroChart();
         });
         
         // Page switching function
         function switchPage(page) {
             // Hide all pages
-            document.getElementById('homePage').style.display = 'none';
-            document.getElementById('employerPage').style.display = 'none';
-            document.getElementById('memberPage').style.display = 'none';
-            document.getElementById('pbmPage').style.display = 'none';
-            document.getElementById('claimsPage').style.display = 'none';
+            const pages = ['home', 'employer', 'member', 'client', 'pbm', 'specialty', 'pharma', 'claims', 'analytics', 'compliance', 'settings'];
+            pages.forEach(p => {
+                const element = document.getElementById(p + 'Page');
+                if (element) {
+                    element.style.display = 'none';
+                }
+            });
             
             // Show selected page
-            document.getElementById(page + 'Page').style.display = 'block';
+            const selectedPage = document.getElementById(page + 'Page');
+            if (selectedPage) {
+                selectedPage.style.display = 'block';
+            }
             
             // Update active menu item
             document.querySelectorAll('.menu-item').forEach(item => {
                 item.classList.remove('active');
             });
-            event.target.closest('.menu-item').classList.add('active');
+            if (event && event.target) {
+                event.target.closest('.menu-item').classList.add('active');
+            }
         }
+        
+        // Draw Hero Chart
+        function drawHeroChart() {
+            const canvas = document.getElementById('heroChart');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            const width = canvas.width = 400;
+            const height = canvas.height = 200;
+            
+            // Animated line chart
+            let frame = 0;
+            const data = [20, 35, 30, 45, 40, 55, 50, 65, 60, 75, 70, 85];
+            
+            function animate() {
+                ctx.clearRect(0, 0, width, height);
+                
+                // Draw grid
+                ctx.strokeStyle = '#e5e7eb';
+                ctx.lineWidth = 1;
+                for (let i = 0; i <= 4; i++) {
+                    const y = (height / 4) * i;
+                    ctx.beginPath();
+                    ctx.moveTo(0, y);
+                    ctx.lineTo(width, y);
+                    ctx.stroke();
+                }
+                
+                // Draw gradient
+                const gradient = ctx.createLinearGradient(0, 0, 0, height);
+                gradient.addColorStop(0, 'rgba(0, 102, 255, 0.3)');
+                gradient.addColorStop(1, 'rgba(0, 102, 255, 0)');
+                
+                // Draw filled area
+                ctx.fillStyle = gradient;
+                ctx.beginPath();
+                const pointsToShow = Math.min(Math.floor(frame / 5), data.length);
+                for (let i = 0; i < pointsToShow; i++) {
+                    const x = (width / (data.length - 1)) * i;
+                    const y = height - (data[i] / 100) * height;
+                    if (i === 0) {
+                        ctx.moveTo(x, y);
+                    } else {
+                        ctx.lineTo(x, y);
+                    }
+                }
+                if (pointsToShow > 0) {
+                    ctx.lineTo((width / (data.length - 1)) * (pointsToShow - 1), height);
+                    ctx.lineTo(0, height);
+                    ctx.closePath();
+                    ctx.fill();
+                }
+                
+                // Draw line
+                ctx.strokeStyle = '#0066ff';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                for (let i = 0; i < pointsToShow; i++) {
+                    const x = (width / (data.length - 1)) * i;
+                    const y = height - (data[i] / 100) * height;
+                    if (i === 0) {
+                        ctx.moveTo(x, y);
+                    } else {
+                        ctx.lineTo(x, y);
+                    }
+                }
+                ctx.stroke();
+                
+                // Draw points
+                for (let i = 0; i < pointsToShow; i++) {
+                    const x = (width / (data.length - 1)) * i;
+                    const y = height - (data[i] / 100) * height;
+                    
+                    ctx.fillStyle = '#ffffff';
+                    ctx.strokeStyle = '#0066ff';
+                    ctx.lineWidth = 2;
+                    ctx.beginPath();
+                    ctx.arc(x, y, 4, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.stroke();
+                }
+                
+                frame++;
+                if (frame < data.length * 5 + 30) {
+                    requestAnimationFrame(animate);
+                }
+            }
+            
+            animate();
+        }
+        
+        // Draw Dashboard Chart
+        function drawDashboardChart() {
+            const canvas = document.getElementById('dashboardChart');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            const width = canvas.width = canvas.offsetWidth || 800;
+            const height = canvas.height = 300;
+            
+            // Sample data
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'];
+            const savings = [180, 220, 195, 280, 310, 295, 340, 380, 410];
+            
+            const padding = 50;
+            const graphWidth = width - 2 * padding;
+            const graphHeight = height - 2 * padding;
+            const barWidth = graphWidth / months.length * 0.6;
+            const spacing = graphWidth / months.length;
+            
+            // Clear canvas
+            ctx.clearRect(0, 0, width, height);
+            
+            // Find max value
+            const maxSavings = Math.max(...savings);
+            
+            // Draw axes
+            ctx.strokeStyle = '#e5e7eb';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(padding, padding);
+            ctx.lineTo(padding, height - padding);
+            ctx.lineTo(width - padding, height - padding);
+            ctx.stroke();
+            
+            // Draw grid lines
+            for (let i = 0; i <= 5; i++) {
+                const y = padding + (graphHeight / 5) * i;
+                ctx.beginPath();
+                ctx.moveTo(padding, y);
+                ctx.lineTo(width - padding, y);
+                ctx.strokeStyle = '#f1f5f9';
+                ctx.stroke();
+            }
+            
+            // Draw bars for savings
+            savings.forEach((value, i) => {
+                const barHeight = (value / maxSavings) * graphHeight;
+                const x = padding + i * spacing + spacing * 0.2;
+                const y = height - padding - barHeight;
+                
+                // Gradient for bars
+                const gradient = ctx.createLinearGradient(0, y, 0, height - padding);
+                gradient.addColorStop(0, '#0066ff');
+                gradient.addColorStop(1, '#00d4ff');
+                
+                ctx.fillStyle = gradient;
+                ctx.fillRect(x, y, barWidth, barHeight);
+                
+                // Value labels
+                ctx.fillStyle = '#0f172a';
+                ctx.font = 'bold 12px Inter, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText(' + value + 'K', x + barWidth / 2, y - 10);
+            });
+            
+            // Draw labels
+            ctx.fillStyle = '#64748b';
+            ctx.font = '12px Inter, sans-serif';
+            ctx.textAlign = 'center';
+            months.forEach((month, i) => {
+                const x = padding + i * spacing + spacing * 0.5;
+                ctx.fillText(month, x, height - padding + 20);
+            });
+            
+            // Draw y-axis labels
+            ctx.textAlign = 'right';
+            for (let i = 0; i <= 5; i++) {
+                const value = Math.round((maxSavings / 5) * (5 - i));
+                const y = padding + (graphHeight / 5) * i;
+                ctx.fillText(' + value + 'K', padding - 10, y + 4);
+            }
+        }
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
     </script>
-</body>
-</html>
