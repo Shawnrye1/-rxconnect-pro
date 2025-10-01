@@ -340,12 +340,12 @@
             background: rgba(0,0,0,0.7);
             backdrop-filter: blur(10px);
             z-index: 2000;
+            justify-content: center;
+            align-items: center;
         }
 
         .modal.active {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            display: flex !important;
         }
 
         .modal-content {
@@ -759,11 +759,23 @@
 
         // Modal Functions
         function openModal(type) {
-            document.getElementById(type + 'Modal').classList.add('active');
+            console.log('Opening modal:', type);
+            const modal = document.getElementById(type + 'Modal');
+            if (modal) {
+                modal.classList.add('active');
+                modal.style.display = 'flex';
+            } else {
+                console.error('Modal not found:', type + 'Modal');
+            }
         }
 
         function closeModal(type) {
-            document.getElementById(type + 'Modal').classList.remove('active');
+            console.log('Closing modal:', type);
+            const modal = document.getElementById(type + 'Modal');
+            if (modal) {
+                modal.classList.remove('active');
+                modal.style.display = 'none';
+            }
         }
 
         // Authentication - FIXED LOGIN FUNCTION
