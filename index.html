@@ -1474,4 +1474,336 @@
     <div class="modal" id="demoModal">
         <div class="modal-content">
             <button onclick="closeModal('demo')" style="position: absolute; right: 1.5rem; top: 1.5rem; background: none; border: none; font-size: 2rem; cursor: pointer; color: var(--gray);">&times;</button>
-            <div style="text
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <div class="logo-icon" style="margin: 0 auto 1rem; width: 60px; height: 60px; font-size: 2rem;">📅</div>
+                <h2 style="font-size: 2rem; margin-bottom: 0.5rem;">Schedule a Demo</h2>
+                <p style="color: var(--gray);">See MedSave Pro in action with a personalized demo</p>
+            </div>
+            <button class="btn btn-primary" style="width: 100%;" onclick="alert('Demo scheduled! Our sales team will contact you within 24 hours.'); closeModal('demo')">Confirm Demo Request</button>
+        </div>
+    </div>
+
+    <!-- Contact Modal -->
+    <div class="modal" id="contactModal">
+        <div class="modal-content">
+            <button onclick="closeModal('contact')" style="position: absolute; right: 1.5rem; top: 1.5rem; background: none; border: none; font-size: 2rem; cursor: pointer; color: var(--gray);">&times;</button>
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <div class="logo-icon" style="margin: 0 auto 1rem; width: 60px; height: 60px; font-size: 2rem;">📞</div>
+                <h2 style="font-size: 2rem; margin-bottom: 0.5rem;">Contact Sales</h2>
+                <p style="color: var(--gray);">Our enterprise sales team is ready to help</p>
+            </div>
+            <button class="btn btn-primary" style="width: 100%;" onclick="alert('Thank you! Our sales team will contact you soon.'); closeModal('contact')">Submit Contact Request</button>
+        </div>
+    </div>
+
+    <script>
+        // User Management
+        let currentUser = null;
+
+        // Check login status on load
+        window.onload = function() {
+            initCharts();
+            
+            // Add scroll effect to navbar
+            window.addEventListener('scroll', function() {
+                const navbar = document.getElementById('navbar');
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+        };
+
+        // Modal Functions
+        function openModal(type) {
+            console.log('Opening modal:', type);
+            const modal = document.getElementById(type + 'Modal');
+            if (modal) {
+                modal.classList.add('active');
+                modal.style.display = 'flex';
+            } else {
+                console.error('Modal not found:', type + 'Modal');
+            }
+        }
+
+        function closeModal(type) {
+            console.log('Closing modal:', type);
+            const modal = document.getElementById(type + 'Modal');
+            if (modal) {
+                modal.classList.remove('active');
+                modal.style.display = 'none';
+            }
+        }
+
+        function switchModal(to) {
+            closeModal('login');
+            closeModal('signup');
+            setTimeout(() => openModal(to), 300);
+        }
+
+        // Authentication Functions
+        function performLogin() {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            // For demo purposes, always allow the demo account
+            if (email === 'demo@company.com' && password === 'password123') {
+                currentUser = { email: email, password: password, name: 'Demo User' };
+                
+                closeModal('login');
+                showDashboard();
+                return;
+            }
+            
+            alert('Invalid credentials. Please use:\nEmail: demo@company.com\nPassword: password123');
+        }
+
+        function performSignup() {
+            const org = document.getElementById('signupOrg').value;
+            const name = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            
+            if (!org || !name || !email || !password) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            currentUser = { email, password, name, org };
+            closeModal('signup');
+            showDashboard();
+        }
+
+        function showDashboard() {
+            document.getElementById('landingPage').style.display = 'none';
+            document.getElementById('dashboardWrapper').classList.add('active');
+            document.getElementById('navButtons').style.display = 'none';
+            document.getElementById('userNav').style.display = 'flex';
+            
+            // Update user info
+            if (currentUser) {
+                document.getElementById('sidebarUserName').textContent = currentUser.name;
+                document.getElementById('userAvatar').textContent = currentUser.name.charAt(0).toUpperCase();
+            }
+            
+            // Initialize dashboard charts
+            setTimeout(() => {
+                drawDashboardChart();
+            }, 100);
+        }
+
+        function goHome() {
+            if (currentUser) {
+                // If logged in, go to dashboard home
+                showDashboard();
+                switchPage('home');
+            } else {
+                // If not logged in, go to landing page
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function logout() {
+            currentUser = null;
+            document.getElementById('landingPage').style.display = 'block';
+            document.getElementById('dashboardWrapper').classList.remove('active');
+            document.getElementById('navButtons').style.display = 'flex';
+            document.getElementById('userNav').style.display = 'none';
+        }
+
+        // Page Navigation
+        function switchPage(page) {
+            // Hide all pages
+            document.querySelectorAll('.page-content').forEach(p => {
+                p.classList.remove('active');
+            });
+            
+            // Remove active from all menu items
+            document.querySelectorAll('.menu-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Show selected page
+            const pageElement = document.getElementById(page + 'Page');
+            if (pageElement) {
+                pageElement.classList.add('active');
+            } else {
+                // Show home page as default
+                document.getElementById('homePage').classList.add('active');
+            }
+            
+            // Add active to clicked menu item
+            if (event && event.target) {
+                event.target.closest('.menu-item').classList.add('active');
+            }
+        }
+
+        // Chart Functions
+        function initCharts() {
+            drawHeroChart();
+        }
+
+        function drawHeroChart() {
+            const canvas = document.getElementById('heroChart');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            const width = canvas.width = 400;
+            const height = canvas.height = 200;
+            
+            // Animated line chart
+            let frame = 0;
+            const data = [20, 35, 30, 45, 40, 55, 50, 65, 60, 75, 70, 85];
+            
+            function animate() {
+                ctx.clearRect(0, 0, width, height);
+                
+                // Draw grid
+                ctx.strokeStyle = '#e5e7eb';
+                ctx.lineWidth = 1;
+                for (let i = 0; i <= 4; i++) {
+                    const y = (height / 4) * i;
+                    ctx.beginPath();
+                    ctx.moveTo(0, y);
+                    ctx.lineTo(width, y);
+                    ctx.stroke();
+                }
+                
+                // Draw gradient
+                const gradient = ctx.createLinearGradient(0, 0, 0, height);
+                gradient.addColorStop(0, 'rgba(0, 102, 255, 0.3)');
+                gradient.addColorStop(1, 'rgba(0, 102, 255, 0)');
+                
+                // Draw filled area
+                ctx.fillStyle = gradient;
+                ctx.beginPath();
+                const pointsToShow = Math.min(Math.floor(frame / 5), data.length);
+                for (let i = 0; i < pointsToShow; i++) {
+                    const x = (width / (data.length - 1)) * i;
+                    const y = height - (data[i] / 100) * height;
+                    if (i === 0) {
+                        ctx.moveTo(x, y);
+                    } else {
+                        ctx.lineTo(x, y);
+                    }
+                }
+                if (pointsToShow > 0) {
+                    ctx.lineTo((width / (data.length - 1)) * (pointsToShow - 1), height);
+                    ctx.lineTo(0, height);
+                    ctx.closePath();
+                    ctx.fill();
+                }
+                
+                // Draw line
+                ctx.strokeStyle = '#0066ff';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                for (let i = 0; i < pointsToShow; i++) {
+                    const x = (width / (data.length - 1)) * i;
+                    const y = height - (data[i] / 100) * height;
+                    if (i === 0) {
+                        ctx.moveTo(x, y);
+                    } else {
+                        ctx.lineTo(x, y);
+                    }
+                }
+                ctx.stroke();
+                
+                // Draw points
+                for (let i = 0; i < pointsToShow; i++) {
+                    const x = (width / (data.length - 1)) * i;
+                    const y = height - (data[i] / 100) * height;
+                    
+                    ctx.fillStyle = '#ffffff';
+                    ctx.strokeStyle = '#0066ff';
+                    ctx.lineWidth = 2;
+                    ctx.beginPath();
+                    ctx.arc(x, y, 4, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.stroke();
+                }
+                
+                frame++;
+                if (frame < data.length * 5 + 30) {
+                    requestAnimationFrame(animate);
+                }
+            }
+            
+            animate();
+        }
+
+        function drawDashboardChart() {
+            const canvas = document.getElementById('dashboardChart');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            const width = canvas.width = canvas.offsetWidth || 800;
+            const height = canvas.height = 300;
+            
+            // Sample data
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'];
+            const savings = [180, 220, 195, 280, 310, 295, 340, 380, 410];
+            
+            const padding = 50;
+            const graphWidth = width - 2 * padding;
+            const graphHeight = height - 2 * padding;
+            const barWidth = graphWidth / months.length * 0.6;
+            const spacing = graphWidth / months.length;
+            
+            // Clear canvas
+            ctx.clearRect(0, 0, width, height);
+            
+            // Find max value
+            const maxSavings = Math.max(...savings);
+            
+            // Draw axes
+            ctx.strokeStyle = '#e5e7eb';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(padding, padding);
+            ctx.lineTo(padding, height - padding);
+            ctx.lineTo(width - padding, height - padding);
+            ctx.stroke();
+            
+            // Draw bars for savings
+            savings.forEach((value, i) => {
+                const barHeight = (value / maxSavings) * graphHeight;
+                const x = padding + i * spacing + spacing * 0.2;
+                const y = height - padding - barHeight;
+                
+                // Gradient for bars
+                const gradient = ctx.createLinearGradient(0, y, 0, height - padding);
+                gradient.addColorStop(0, '#0066ff');
+                gradient.addColorStop(1, '#00d4ff');
+                
+                ctx.fillStyle = gradient;
+                ctx.fillRect(x, y, barWidth, barHeight);
+                
+                // Value labels
+                ctx.fillStyle = '#0f172a';
+                ctx.font = 'bold 12px Inter, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText(' + value + 'K', x + barWidth / 2, y - 10);
+            });
+            
+            // Draw labels
+            ctx.fillStyle = '#64748b';
+            ctx.font = '12px Inter, sans-serif';
+            ctx.textAlign = 'center';
+            months.forEach((month, i) => {
+                const x = padding + i * spacing + spacing * 0.5;
+                ctx.fillText(month, x, height - padding + 20);
+            });
+        }
+
+        // Close modal on outside click
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.classList.remove('active');
+                event.target.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
