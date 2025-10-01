@@ -555,12 +555,12 @@
             </div>
             <div class="hero-stats">
                 <div class="stat-card">
-                    <div class="stat-number">$2.4B+</div>
+                    <div class="stat-number" id="heroTotalSavings">$2,400,000,000</div>
                     <div>Total Savings Generated</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number">500+</div>
-                    <div>Enterprise Clients</div>
+                    <div class="stat-number" id="heroActiveMembers">512,847</div>
+                    <div>Active Members</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-number">45%</div>
@@ -701,18 +701,6 @@
                     </div>
                 </div>
                 <div class="nav-section">
-                    <div class="nav-section-title">Pharmacy Network</div>
-                    <div class="nav-item" onclick="switchPage('pbm')">
-                        <span>⚕️</span> PBM Integration
-                    </div>
-                    <div class="nav-item" onclick="switchPage('specialty')">
-                        <span>💊</span> Specialty Pharmacy
-                    </div>
-                    <div class="nav-item" onclick="switchPage('hub')">
-                        <span>🏥</span> Pharma Hub
-                    </div>
-                </div>
-                <div class="nav-section">
                     <div class="nav-section-title">Operations</div>
                     <div class="nav-item" onclick="switchPage('claims')">
                         <span>📋</span> Claims Processing
@@ -752,6 +740,11 @@
                         <div class="stat-box-value">42%</div>
                         <div class="stat-box-change">↑ 3% from last month</div>
                     </div>
+                </div>
+
+                <div class="data-table">
+                    <h2 style="margin-bottom: 1.5rem;">Savings Tracking Over Time</h2>
+                    <canvas id="dashboardChart" width="800" height="300"></canvas>
                 </div>
 
                 <div class="data-table">
@@ -831,6 +824,11 @@
                         <div class="stat-box-value">39%</div>
                         <div class="stat-box-change">↑ 5% from benchmark</div>
                     </div>
+                </div>
+
+                <div class="data-table">
+                    <h2 style="margin-bottom: 1.5rem;">Employer Savings Tracking Over Time</h2>
+                    <canvas id="employerChart" width="800" height="300"></canvas>
                 </div>
 
                 <div class="data-table">
@@ -919,6 +917,11 @@
                 </div>
 
                 <div class="data-table">
+                    <h2 style="margin-bottom: 1.5rem;">Member Savings Tracking Over Time</h2>
+                    <canvas id="memberChart" width="800" height="300"></canvas>
+                </div>
+
+                <div class="data-table">
                     <h2 style="margin-bottom: 1.5rem;">Top Member Savings</h2>
                     <table>
                         <thead>
@@ -1004,6 +1007,11 @@
                 </div>
 
                 <div class="data-table">
+                    <h2 style="margin-bottom: 1.5rem;">Claims Processing Tracking Over Time</h2>
+                    <canvas id="claimsChart" width="800" height="300"></canvas>
+                </div>
+
+                <div class="data-table">
                     <h2 style="margin-bottom: 1.5rem;">Recent Claims</h2>
                     <table>
                         <thead>
@@ -1071,18 +1079,6 @@
                 <h1>Client Accounts</h1>
                 <p>Client account management coming soon...</p>
             </div>
-            <div id="pbm" class="dashboard-page">
-                <h1>PBM Integration</h1>
-                <p>PBM integration dashboard coming soon...</p>
-            </div>
-            <div id="specialty" class="dashboard-page">
-                <h1>Specialty Pharmacy</h1>
-                <p>Specialty pharmacy management coming soon...</p>
-            </div>
-            <div id="hub" class="dashboard-page">
-                <h1>Pharmaceutical Hub</h1>
-                <p>Pharmaceutical hub dashboard coming soon...</p>
-            </div>
             <div id="compliance" class="dashboard-page">
                 <h1>Compliance</h1>
                 <p>Compliance monitoring coming soon...</p>
@@ -1147,6 +1143,375 @@
     <script>
         // Simple state management
         let currentUser = null;
+        let savingsCounter = 2400000000;
+        let membersCounter = 512847;
+
+        // Enhanced live tracker on hero section
+        function updateHeroTrackers() {
+            // Increment savings by $100-500 every update
+            savingsCounter += Math.floor(Math.random() * 400) + 100;
+            
+            // Increment members by 1-3 every update
+            if (Math.random() > 0.7) {
+                membersCounter += Math.floor(Math.random() * 3) + 1;
+            }
+            
+            // Format and update display
+            const savingsElement = document.getElementById('heroTotalSavings');
+            const membersElement = document.getElementById('heroActiveMembers');
+            
+            if (savingsElement) {
+                savingsElement.textContent = '
+        function openLoginModal() {
+            document.getElementById('loginModal').classList.add('active');
+        }
+
+        function closeLoginModal() {
+            document.getElementById('loginModal').classList.remove('active');
+        }
+
+        function openSignupModal() {
+            document.getElementById('signupModal').classList.add('active');
+        }
+
+        function closeSignupModal() {
+            document.getElementById('signupModal').classList.remove('active');
+        }
+
+        // Authentication functions
+        function handleLogin() {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            if (email && password) {
+                currentUser = {
+                    name: 'Demo User',
+                    email: email
+                };
+                
+                closeLoginModal();
+                showDashboard();
+            }
+        }
+
+        function handleSignup() {
+            const company = document.getElementById('signupCompany').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+
+            if (company && email && password) {
+                currentUser = {
+                    name: company,
+                    email: email
+                };
+                
+                closeSignupModal();
+                showDashboard();
+            }
+        }
+
+        function showDashboard() {
+            document.getElementById('landingPage').style.display = 'none';
+            document.getElementById('dashboardWrapper').classList.add('active');
+            document.getElementById('navButtons').style.display = 'none';
+            document.getElementById('userNav').classList.add('active');
+            
+            if (currentUser) {
+                document.getElementById('userName').textContent = currentUser.name;
+                document.getElementById('sidebarUserName').textContent = currentUser.name;
+                document.getElementById('userAvatar').textContent = currentUser.name.charAt(0).toUpperCase();
+            }
+            
+            // Initialize charts after a short delay to ensure canvas elements are ready
+            setTimeout(initializeCharts, 100);
+        }
+
+        function logout() {
+            currentUser = null;
+            document.getElementById('landingPage').style.display = 'block';
+            document.getElementById('dashboardWrapper').classList.remove('active');
+            document.getElementById('navButtons').style.display = 'flex';
+            document.getElementById('userNav').classList.remove('active');
+        }
+
+        function goHome() {
+            if (currentUser) {
+                // Already logged in, do nothing or go to dashboard
+                return;
+            }
+            // Scroll to top if on landing page
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Dashboard navigation
+        function switchPage(pageId) {
+            // Remove active class from all pages
+            const pages = document.querySelectorAll('.dashboard-page');
+            pages.forEach(page => page.classList.remove('active'));
+            
+            // Remove active class from all nav items
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => item.classList.remove('active'));
+            
+            // Add active class to selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Add active class to clicked nav item
+            event.target.closest('.nav-item').classList.add('active');
+        }
+
+        // Close modals when clicking outside
+        window.onclick = function(event) {
+            const loginModal = document.getElementById('loginModal');
+            const signupModal = document.getElementById('signupModal');
+            
+            if (event.target === loginModal) {
+                closeLoginModal();
+            }
+            if (event.target === signupModal) {
+                closeSignupModal();
+            }
+        }
+    </script>
+</body>
+</html> + savingsCounter.toLocaleString();
+            }
+            if (membersElement) {
+                membersElement.textContent = membersCounter.toLocaleString();
+            }
+        }
+
+        // Start the live tracker
+        setInterval(updateHeroTrackers, 2000);
+
+        // Draw charts function
+        function drawChart(canvasId, labels, data, label, color) {
+            const canvas = document.getElementById(canvasId);
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            const width = canvas.width;
+            const height = canvas.height;
+            const padding = 60;
+            const graphWidth = width - padding * 2;
+            const graphHeight = height - padding * 2;
+            
+            // Clear canvas
+            ctx.clearRect(0, 0, width, height);
+            
+            // Find max value for scaling
+            const maxValue = Math.max(...data);
+            const minValue = Math.min(...data);
+            const range = maxValue - minValue;
+            
+            // Draw background
+            ctx.fillStyle = '#f9fafb';
+            ctx.fillRect(0, 0, width, height);
+            
+            // Draw grid lines
+            ctx.strokeStyle = '#e5e7eb';
+            ctx.lineWidth = 1;
+            for (let i = 0; i <= 5; i++) {
+                const y = padding + (graphHeight / 5) * i;
+                ctx.beginPath();
+                ctx.moveTo(padding, y);
+                ctx.lineTo(width - padding, y);
+                ctx.stroke();
+            }
+            
+            // Draw axes
+            ctx.strokeStyle = '#9ca3af';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(padding, padding);
+            ctx.lineTo(padding, height - padding);
+            ctx.lineTo(width - padding, height - padding);
+            ctx.stroke();
+            
+            // Draw line graph
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            
+            const stepX = graphWidth / (data.length - 1);
+            
+            data.forEach((value, index) => {
+                const x = padding + stepX * index;
+                const y = height - padding - ((value - minValue) / range) * graphHeight;
+                
+                if (index === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            });
+            
+            ctx.stroke();
+            
+            // Draw points
+            ctx.fillStyle = color;
+            data.forEach((value, index) => {
+                const x = padding + stepX * index;
+                const y = height - padding - ((value - minValue) / range) * graphHeight;
+                
+                ctx.beginPath();
+                ctx.arc(x, y, 4, 0, Math.PI * 2);
+                ctx.fill();
+            });
+            
+            // Draw labels
+            ctx.fillStyle = '#374151';
+            ctx.font = '12px sans-serif';
+            ctx.textAlign = 'center';
+            
+            labels.forEach((label, index) => {
+                const x = padding + stepX * index;
+                ctx.fillText(label, x, height - padding + 20);
+            });
+            
+            // Draw Y-axis values
+            ctx.textAlign = 'right';
+            for (let i = 0; i <= 5; i++) {
+                const value = maxValue - (range / 5) * i;
+                const y = padding + (graphHeight / 5) * i;
+                ctx.fillText('
+        function openLoginModal() {
+            document.getElementById('loginModal').classList.add('active');
+        }
+
+        function closeLoginModal() {
+            document.getElementById('loginModal').classList.remove('active');
+        }
+
+        function openSignupModal() {
+            document.getElementById('signupModal').classList.add('active');
+        }
+
+        function closeSignupModal() {
+            document.getElementById('signupModal').classList.remove('active');
+        }
+
+        // Authentication functions
+        function handleLogin() {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            if (email && password) {
+                currentUser = {
+                    name: 'Demo User',
+                    email: email
+                };
+                
+                closeLoginModal();
+                showDashboard();
+            }
+        }
+
+        function handleSignup() {
+            const company = document.getElementById('signupCompany').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+
+            if (company && email && password) {
+                currentUser = {
+                    name: company,
+                    email: email
+                };
+                
+                closeSignupModal();
+                showDashboard();
+            }
+        }
+
+        function showDashboard() {
+            document.getElementById('landingPage').style.display = 'none';
+            document.getElementById('dashboardWrapper').classList.add('active');
+            document.getElementById('navButtons').style.display = 'none';
+            document.getElementById('userNav').classList.add('active');
+            
+            if (currentUser) {
+                document.getElementById('userName').textContent = currentUser.name;
+                document.getElementById('sidebarUserName').textContent = currentUser.name;
+                document.getElementById('userAvatar').textContent = currentUser.name.charAt(0).toUpperCase();
+            }
+        }
+
+        function logout() {
+            currentUser = null;
+            document.getElementById('landingPage').style.display = 'block';
+            document.getElementById('dashboardWrapper').classList.remove('active');
+            document.getElementById('navButtons').style.display = 'flex';
+            document.getElementById('userNav').classList.remove('active');
+        }
+
+        function goHome() {
+            if (currentUser) {
+                // Already logged in, do nothing or go to dashboard
+                return;
+            }
+            // Scroll to top if on landing page
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Dashboard navigation
+        function switchPage(pageId) {
+            // Remove active class from all pages
+            const pages = document.querySelectorAll('.dashboard-page');
+            pages.forEach(page => page.classList.remove('active'));
+            
+            // Remove active class from all nav items
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => item.classList.remove('active'));
+            
+            // Add active class to selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Add active class to clicked nav item
+            event.target.closest('.nav-item').classList.add('active');
+        }
+
+        // Close modals when clicking outside
+        window.onclick = function(event) {
+            const loginModal = document.getElementById('loginModal');
+            const signupModal = document.getElementById('signupModal');
+            
+            if (event.target === loginModal) {
+                closeLoginModal();
+            }
+            if (event.target === signupModal) {
+                closeSignupModal();
+            }
+        }
+    </script>
+</body>
+</html> + Math.round(value / 1000) + 'K', padding - 10, y + 5);
+            }
+            
+            // Draw title
+            ctx.font = 'bold 14px sans-serif';
+            ctx.textAlign = 'left';
+            ctx.fillText(label, padding, padding - 20);
+        }
+
+        // Initialize charts when dashboard is shown
+        function initializeCharts() {
+            // Dashboard Overview Chart
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'];
+            const savingsData = [1800000, 1950000, 2100000, 2250000, 2400000, 2550000, 2700000, 2850000, 3000000, 3150000];
+            drawChart('dashboardChart', months, savingsData, 'Monthly Savings Trend', '#0066ff');
+            
+            // Employer Savings Chart
+            const employerData = [850000, 920000, 980000, 1050000, 1120000, 1180000, 1250000, 1320000, 1390000, 1460000];
+            drawChart('employerChart', months, employerData, 'Employer Savings Growth', '#10b981');
+            
+            // Member Savings Chart
+            const memberData = [450000, 480000, 510000, 540000, 570000, 600000, 630000, 660000, 690000, 720000];
+            drawChart('memberChart', months, memberData, 'Member Savings Accumulation', '#7c3aed');
+            
+            // Claims Processing Chart
+            const claimsData = [5200, 5400, 5600, 5900, 6200, 6500, 6800, 7100, 7400, 7700];
+            drawChart('claimsChart', months, claimsData, 'Claims Processed Monthly', '#f59e0b');
+        }
 
         // Modal functions
         function openLoginModal() {
