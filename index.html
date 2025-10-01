@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MedSave Pro - Enterprise Healthcare Savings Platform</title>
+    <title>MedSave Pro | Enterprise Healthcare Savings Platform</title>
     <style>
         * {
             margin: 0;
@@ -13,38 +13,38 @@
 
         :root {
             --primary: #0066ff;
-            --secondary: #7c3aed;
+            --secondary: #00d4ff;
             --success: #10b981;
             --warning: #f59e0b;
             --danger: #ef4444;
-            --dark: #1a1a2e;
-            --gray: #6b7280;
-            --light: #f3f4f6;
+            --dark: #0f172a;
+            --gray: #64748b;
+            --light: #f8fafc;
             --white: #ffffff;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.6;
             color: var(--dark);
-            overflow-x: hidden;
+            background: var(--white);
         }
 
         /* Navigation */
         nav {
+            background: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             position: fixed;
-            top: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
+            top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
         .nav-container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 1rem 2rem;
+            padding: 0 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -53,218 +53,434 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.75rem;
             font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary);
+            font-weight: 800;
             cursor: pointer;
-            text-decoration: none;
         }
 
-        .nav-buttons {
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%);
+            border-radius: 10px;
             display: flex;
-            gap: 1rem;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
             align-items: center;
         }
 
-        .btn {
-            padding: 0.75rem 1.5rem;
-            border: none;
-            border-radius: 10px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
+        .nav-link {
+            color: var(--gray);
             text-decoration: none;
-            display: inline-block;
+            font-weight: 500;
+            transition: color 0.3s;
         }
 
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 102, 255, 0.3);
-        }
-
-        .btn-outline {
-            background: transparent;
-            border: 2px solid var(--primary);
+        .nav-link:hover {
             color: var(--primary);
-        }
-
-        .btn-outline:hover {
-            background: var(--primary);
-            color: white;
         }
 
         /* Hero Section */
         .hero {
-            margin-top: 80px;
-            padding: 6rem 2rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            padding: 120px 0 80px;
+            background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
+            min-height: 600px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--gray);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .hero-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero-feature {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: white;
+            border-radius: 50px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .metric {
             text-align: center;
         }
 
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            font-weight: 800;
-        }
-
-        .hero p {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-        }
-
-        .hero-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            max-width: 1000px;
-            margin: 3rem auto 0;
-        }
-
-        .stat-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 2rem;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .stat-number {
+        .metric-value {
             font-size: 2.5rem;
             font-weight: 800;
-            margin-bottom: 0.5rem;
+            color: var(--primary);
         }
 
-        /* Solutions Section */
-        .section {
-            padding: 5rem 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
+        .metric-label {
+            color: var(--gray);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero-visual {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 4rem;
+        }
+
+        .section-badge {
+            display: inline-block;
+            background: rgba(0, 102, 255, 0.1);
+            color: var(--primary);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
+            font-size: 3rem;
             font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--dark);
         }
 
-        .solutions-grid {
+        .cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
         }
 
-        .solution-card {
-            background: white;
-            padding: 2rem;
+        .card {
+            background: var(--light);
+            padding: 2.5rem;
             border-radius: 20px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
         }
 
-        .solution-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%);
         }
 
-        .solution-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
         }
 
-        .solution-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--primary);
-        }
-
-        /* Industry Leaders Section */
-        .industry-section {
-            background: linear-gradient(to bottom, #f9fafb, #ffffff);
-            padding: 5rem 2rem;
-        }
-
-        .industry-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .industry-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-            border-top: 4px solid;
-            transition: all 0.3s ease;
-        }
-
-        .industry-card:nth-child(1) { border-top-color: #0066ff; }
-        .industry-card:nth-child(2) { border-top-color: #10b981; }
-        .industry-card:nth-child(3) { border-top-color: #7c3aed; }
-        .industry-card:nth-child(4) { border-top-color: #f59e0b; }
-
-        .industry-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
-        }
-
-        .industry-icon {
+        .card-icon {
             width: 70px;
             height: 70px;
-            border-radius: 15px;
+            background: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%);
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 2rem;
+            color: white;
             margin-bottom: 1.5rem;
         }
 
-        .industry-card:nth-child(1) .industry-icon {
-            background: linear-gradient(135deg, #0066ff, #00a8ff);
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--dark);
         }
 
-        .industry-card:nth-child(2) .industry-icon {
-            background: linear-gradient(135deg, #10b981, #34d399);
+        .card-description {
+            color: var(--gray);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
         }
 
-        .industry-card:nth-child(3) .industry-icon {
-            background: linear-gradient(135deg, #7c3aed, #a78bfa);
+        /* ROI Calculator */
+        .roi-section {
+            background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
         }
 
-        .industry-card:nth-child(4) .industry-icon {
-            background: linear-gradient(135deg, #f59e0b, #fbbf24);
+        .roi-calculator {
+            background: white;
+            padding: 3rem;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        .industry-stats {
+        .roi-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            margin-top: 1.5rem;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
         }
 
-        .stat-item {
-            text-align: center;
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--gray);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        .form-input {
+            width: 100%;
             padding: 1rem;
-            background: var(--light);
+            border: 2px solid var(--light);
             border-radius: 10px;
+            font-size: 1rem;
+            background: var(--light);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: white;
+        }
+
+        .roi-result {
+            background: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%);
+            padding: 2rem;
+            border-radius: 20px;
+            color: white;
+            margin-bottom: 2rem;
+        }
+
+        .roi-value {
+            font-size: 3rem;
+            font-weight: 800;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            text-align: center;
+        }
+
+        /* Dashboard */
+        .dashboard-wrapper {
+            display: none;
+            padding-top: 70px;
+            min-height: 100vh;
+            background: var(--light);
+        }
+
+        .dashboard-wrapper.active {
+            display: flex;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: white;
+            box-shadow: 1px 0 3px rgba(0,0,0,0.05);
+            position: fixed;
+            height: calc(100vh - 70px);
+            overflow-y: auto;
+        }
+
+        .sidebar-header {
+            padding: 2rem 1.5rem;
+            background: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%);
+            color: white;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .menu-item:hover {
+            background: var(--light);
+        }
+
+        .menu-item.active {
+            background: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%);
+            color: white;
+        }
+
+        .main-content {
+            margin-left: 280px;
+            padding: 2rem;
+            flex: 1;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--primary);
         }
 
         .stat-value {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary);
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--dark);
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .stat-change {
+            font-size: 0.85rem;
+            color: var(--success);
+            margin-top: 0.5rem;
+        }
+
+        .data-table {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            overflow-x: auto;
+            margin-top: 2rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: var(--light);
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: var(--gray);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--light);
+        }
+
+        tr:hover {
+            background: rgba(0, 102, 255, 0.05);
+        }
+
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .status-active {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+        }
+
+        .status-pending {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--warning);
         }
 
         /* Modal */
@@ -275,7 +491,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0,0,0,0.7);
             z-index: 2000;
             justify-content: center;
             align-items: center;
@@ -288,240 +504,65 @@
         .modal-content {
             background: white;
             padding: 3rem;
-            border-radius: 20px;
-            max-width: 500px;
+            border-radius: 24px;
             width: 90%;
+            max-width: 500px;
             position: relative;
-            animation: modalSlideIn 0.3s ease;
         }
 
-        @keyframes modalSlideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .close-modal {
-            position: absolute;
-            right: 1.5rem;
-            top: 1.5rem;
-            background: none;
+        /* Buttons */
+        .btn {
+            padding: 0.75rem 2rem;
             border: none;
-            font-size: 2rem;
-            cursor: pointer;
-            color: var(--gray);
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: var(--dark);
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 1rem;
-            border: 2px solid var(--light);
             border-radius: 10px;
             font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-
-        /* Dashboard */
-        .dashboard-wrapper {
-            display: none;
-            margin-top: 80px;
-        }
-
-        .dashboard-wrapper.active {
-            display: flex;
-        }
-
-        .sidebar {
-            width: 280px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            height: calc(100vh - 80px);
-            position: fixed;
-            left: 0;
-            overflow-y: auto;
-        }
-
-        .sidebar-header {
-            padding: 2rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .user-profile {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .user-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-
-        .sidebar-nav {
-            padding: 1rem 0;
-        }
-
-        .nav-section {
-            margin-bottom: 1.5rem;
-        }
-
-        .nav-section-title {
-            padding: 0 2rem;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            opacity: 0.6;
-            margin-bottom: 0.5rem;
-        }
-
-        .nav-item {
-            padding: 1rem 2rem;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
+            transition: all 0.3s;
+            display: inline-block;
         }
 
-        .nav-item:hover {
-            background: rgba(255, 255, 255, 0.1);
+        .btn-primary {
+            background: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%);
+            color: white;
         }
 
-        .nav-item.active {
-            background: rgba(255, 255, 255, 0.2);
-            border-left: 4px solid white;
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 102, 255, 0.4);
         }
 
-        .dashboard-content {
-            margin-left: 280px;
-            padding: 2rem;
-            min-height: calc(100vh - 80px);
-            background: var(--light);
-        }
-
-        .dashboard-page {
-            display: none;
-        }
-
-        .dashboard-page.active {
-            display: block;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .stat-box {
+        .btn-secondary {
             background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-        }
-
-        .stat-box-title {
-            color: var(--gray);
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-box-value {
-            font-size: 2rem;
-            font-weight: 700;
             color: var(--primary);
-            margin-bottom: 0.5rem;
+            border: 2px solid var(--primary);
         }
 
-        .stat-box-change {
-            font-size: 0.9rem;
-            color: var(--success);
+        .btn-large {
+            padding: 1.25rem 3rem;
+            font-size: 1.1rem;
         }
 
-        .data-table {
-            background: white;
-            border-radius: 15px;
-            padding: 2rem;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-            margin-top: 2rem;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th {
-            text-align: left;
-            padding: 1rem;
-            border-bottom: 2px solid var(--light);
-            font-weight: 600;
-            color: var(--gray);
-        }
-
-        td {
-            padding: 1rem;
-            border-bottom: 1px solid var(--light);
-        }
-
-        .badge {
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-
-        .badge-success {
-            background: #d1fae5;
-            color: #065f46;
-        }
-
-        .badge-warning {
-            background: #fed7aa;
-            color: #92400e;
-        }
-
-        .badge-info {
-            background: #dbeafe;
-            color: #1e40af;
-        }
-
-        .user-nav {
-            display: none;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .user-nav.active {
-            display: flex;
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-menu {
+                display: none;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .sidebar {
+                transform: translateX(-100%);
+            }
         }
     </style>
 </head>
@@ -529,17 +570,23 @@
     <!-- Navigation -->
     <nav>
         <div class="nav-container">
-            <a href="#" class="logo" onclick="goHome()">
-                <span>💊</span>
-                MedSave Pro
-            </a>
-            <div class="nav-buttons" id="navButtons">
-                <button class="btn btn-outline" onclick="openLoginModal()">Login</button>
-                <button class="btn btn-primary" onclick="openSignupModal()">Start Free Trial</button>
+            <div class="logo">
+                <div class="logo-icon">💊</div>
+                <span>MedSave Pro</span>
             </div>
-            <div class="user-nav" id="userNav">
-                <span id="userName">Demo User</span>
-                <button class="btn btn-outline" onclick="logout()">Logout</button>
+            <div class="nav-menu">
+                <a href="#solutions" class="nav-link">Solutions</a>
+                <a href="#audience" class="nav-link">For Industry</a>
+                <a href="#roi" class="nav-link">ROI Calculator</a>
+                <a href="#features" class="nav-link">Features</a>
+            </div>
+            <div id="navButtons">
+                <button class="btn btn-secondary" onclick="showLogin()">Login</button>
+                <button class="btn btn-primary" onclick="showSignup()">Start Free Trial</button>
+            </div>
+            <div id="userNav" style="display: none;">
+                <button class="btn btn-primary" onclick="goToDashboard()">Dashboard</button>
+                <button class="btn btn-secondary" onclick="doLogout()">Logout</button>
             </div>
         </div>
     </nav>
@@ -548,119 +595,216 @@
     <div id="landingPage">
         <!-- Hero Section -->
         <section class="hero">
-            <h1>Transform Healthcare Savings</h1>
-            <p>Enterprise Platform for Employers, PBMs, Specialty Pharmacies & Pharmaceutical Hubs</p>
-            <div style="margin-top: 2rem;">
-                <button class="btn btn-primary" onclick="openLoginModal()" style="font-size: 1.2rem; padding: 1rem 2rem;">Get Started Now</button>
-            </div>
-            <div class="hero-stats">
-                <div class="stat-card">
-                    <div class="stat-number" id="heroTotalSavings">$2,400,000,000</div>
-                    <div>Total Savings Generated</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="heroActiveMembers">512,847</div>
-                    <div>Active Members</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">45%</div>
-                    <div>Average Cost Reduction</div>
+            <div class="container">
+                <div class="hero-content">
+                    <div>
+                        <h1>Revolutionize Healthcare Savings Across the Industry</h1>
+                        <p class="hero-subtitle">The enterprise platform trusted by Employers, PBMs, Specialty Pharmacies, and Pharmaceutical Hubs.</p>
+                        
+                        <div class="hero-features">
+                            <div class="hero-feature">
+                                <span style="color: var(--success);">✓</span>
+                                <span>HIPAA Compliant</span>
+                            </div>
+                            <div class="hero-feature">
+                                <span style="color: var(--success);">✓</span>
+                                <span>Real-time Analytics</span>
+                            </div>
+                            <div class="hero-feature">
+                                <span style="color: var(--success);">✓</span>
+                                <span>API Integration</span>
+                            </div>
+                            <div class="hero-feature">
+                                <span style="color: var(--success);">✓</span>
+                                <span>SOC 2 Certified</span>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                            <button class="btn btn-primary btn-large" onclick="showDemo()">Schedule Demo</button>
+                            <button class="btn btn-secondary btn-large" onclick="scrollToSection('roi')">Calculate Savings</button>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric">
+                                <div class="metric-value">$2.4B+</div>
+                                <div class="metric-label">Total Savings</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value">500+</div>
+                                <div class="metric-label">Enterprise Clients</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value">45%</div>
+                                <div class="metric-label">Cost Reduction</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="hero-visual">
+                        <h3>Live Savings Tracker</h3>
+                        <canvas id="heroChart" width="400" height="200" style="width: 100%; height: 200px;"></canvas>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem;">
+                            <div style="background: var(--light); padding: 1rem; border-radius: 10px;">
+                                <div style="color: var(--gray); font-size: 0.85rem;">Today's Savings</div>
+                                <div style="font-size: 1.5rem; font-weight: 700; color: var(--success);">+$124,563</div>
+                            </div>
+                            <div style="background: var(--light); padding: 1rem; border-radius: 10px;">
+                                <div style="color: var(--gray); font-size: 0.85rem;">Active Plans</div>
+                                <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary);">8,432</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- Solutions Section -->
-        <section class="section">
-            <h2 class="section-title">Comprehensive Healthcare Solutions</h2>
-            <div class="solutions-grid">
-                <div class="solution-card">
-                    <div class="solution-icon">💰</div>
-                    <h3>Cost Optimization</h3>
-                    <p>AI-powered analytics identify savings opportunities across your entire pharmacy spend, reducing costs by up to 45% while maintaining quality care.</p>
+        <section id="solutions">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-badge">Comprehensive Solutions</div>
+                    <h2 class="section-title">Enterprise-Grade Healthcare Platform</h2>
                 </div>
-                <div class="solution-card">
-                    <div class="solution-icon">📊</div>
-                    <h3>Real-Time Analytics</h3>
-                    <p>Comprehensive dashboards provide instant visibility into savings, utilization patterns, and ROI metrics for data-driven decision making.</p>
-                </div>
-                <div class="solution-card">
-                    <div class="solution-icon">🔗</div>
-                    <h3>Network Integration</h3>
-                    <p>Seamlessly connect with PBMs, specialty pharmacies, and pharmaceutical hubs through our robust API and integration platform.</p>
-                </div>
-                <div class="solution-card">
-                    <div class="solution-icon">🛡️</div>
-                    <h3>Compliance & Security</h3>
-                    <p>HIPAA-compliant platform with SOC 2 certification ensures your healthcare data is protected with enterprise-grade security.</p>
+
+                <div class="cards-grid">
+                    <div class="card">
+                        <div class="card-icon">📊</div>
+                        <h3 class="card-title">Advanced Analytics</h3>
+                        <p class="card-description">Real-time dashboards with predictive analytics and customizable reporting.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">🔗</div>
+                        <h3 class="card-title">Seamless Integration</h3>
+                        <p class="card-description">Connect with existing PBM systems, EMRs, and pharmacy networks.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">🛡️</div>
+                        <h3 class="card-title">Compliance & Security</h3>
+                        <p class="card-description">Built with HIPAA compliance and enterprise security standards.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">🤖</div>
+                        <h3 class="card-title">AI Optimization</h3>
+                        <p class="card-description">Machine learning identifies savings opportunities automatically.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Industry Leaders Section -->
-        <section class="industry-section">
-            <div class="section">
-                <h2 class="section-title">Built for Industry Leaders</h2>
-                <div class="industry-grid">
-                    <div class="industry-card">
-                        <div class="industry-icon">🏢</div>
-                        <h3>Employers</h3>
-                        <p>Reduce employee healthcare costs while improving benefits satisfaction and retention rates.</p>
-                        <div class="industry-stats">
-                            <div class="stat-item">
-                                <div class="stat-value">$12M</div>
-                                <div>Avg Annual Savings</div>
+        <!-- Target Audience -->
+        <section id="audience" style="background: var(--light);">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-badge">Built For Industry Leaders</div>
+                    <h2 class="section-title">Tailored Solutions for Healthcare</h2>
+                </div>
+
+                <div class="cards-grid">
+                    <div class="card" style="background: white;">
+                        <div class="card-icon">🏢</div>
+                        <h3 class="card-title">Employers</h3>
+                        <p class="card-description">Reduce healthcare costs while improving employee satisfaction.</p>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding-top: 1rem;">
+                            <div style="text-align: center;">
+                                <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary);">32%</div>
+                                <div style="font-size: 0.85rem; color: var(--gray);">Cost Reduction</div>
                             </div>
-                            <div class="stat-item">
-                                <div class="stat-value">250+</div>
-                                <div>Enterprise Clients</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="industry-card">
-                        <div class="industry-icon">⚕️</div>
-                        <h3>PBMs</h3>
-                        <p>Enhance your formulary management and deliver greater value to health plan clients with advanced analytics.</p>
-                        <div class="industry-stats">
-                            <div class="stat-item">
-                                <div class="stat-value">32%</div>
-                                <div>Cost Reduction</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-value">150+</div>
-                                <div>PBM Partners</div>
+                            <div style="text-align: center;">
+                                <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary);">89%</div>
+                                <div style="font-size: 0.85rem; color: var(--gray);">Satisfaction</div>
                             </div>
                         </div>
                     </div>
-                    <div class="industry-card">
-                        <div class="industry-icon">💊</div>
-                        <h3>Specialty Pharmacies</h3>
-                        <p>Optimize specialty medication management with intelligent prior authorization and patient assistance programs.</p>
-                        <div class="industry-stats">
-                            <div class="stat-item">
-                                <div class="stat-value">$8.5M</div>
-                                <div>Avg Savings</div>
+                    <div class="card" style="background: white;">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #10b981 0%, #34d399 100%);">💊</div>
+                        <h3 class="card-title">PBMs</h3>
+                        <p class="card-description">Streamline operations and improve formulary management.</p>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding-top: 1rem;">
+                            <div style="text-align: center;">
+                                <div style="font-size: 1.5rem; font-weight: 700; color: var(--success);">5x</div>
+                                <div style="font-size: 0.85rem; color: var(--gray);">Efficiency</div>
                             </div>
-                            <div class="stat-item">
-                                <div class="stat-value">75+</div>
-                                <div>Pharmacy Partners</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="industry-card">
-                        <div class="industry-icon">🏥</div>
-                        <h3>Pharmaceutical Hubs</h3>
-                        <p>Streamline medication distribution and coordination across multiple specialty pharmacies and providers.</p>
-                        <div class="industry-stats">
-                            <div class="stat-item">
-                                <div class="stat-value">98%</div>
-                                <div>Fill Rate</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-value">25+</div>
-                                <div>Hub Partners</div>
+                            <div style="text-align: center;">
+                                <div style="font-size: 1.5rem; font-weight: 700; color: var(--success);">$450M</div>
+                                <div style="font-size: 0.85rem; color: var(--gray);">Processed</div>
                             </div>
                         </div>
                     </div>
+                    <div class="card" style="background: white;">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%);">🏥</div>
+                        <h3 class="card-title">Specialty Pharmacies</h3>
+                        <p class="card-description">Optimize specialty drug management and patient programs.</p>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding-top: 1rem;">
+                            <div style="text-align: center;">
+                                <div style="font-size: 1.5rem; font-weight: 700; color: #8b5cf6;">94%</div>
+                                <div style="font-size: 0.85rem; color: var(--gray);">Adherence</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="font-size: 1.5rem; font-weight: 700; color: #8b5cf6;">2.8x</div>
+                                <div style="font-size: 0.85rem; color: var(--gray);">ROI</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" style="background: white;">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);">🔬</div>
+                        <h3 class="card-title">Pharmaceutical Hubs</h3>
+                        <p class="card-description">Connect manufacturers with patients effectively.</p>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding-top: 1rem;">
+                            <div style="text-align: center;">
+                                <div style="font-size: 1.5rem; font-weight: 700; color: var(--warning);">15K+</div>
+                                <div style="font-size: 0.85rem; color: var(--gray);">Patients</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="font-size: 1.5rem; font-weight: 700; color: var(--warning);">98%</div>
+                                <div style="font-size: 0.85rem; color: var(--gray);">Coverage</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ROI Calculator -->
+        <section id="roi" class="roi-section">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-badge">ROI Calculator</div>
+                    <h2 class="section-title">Calculate Your Savings</h2>
+                </div>
+
+                <div class="roi-calculator">
+                    <div class="roi-grid">
+                        <div>
+                            <div class="form-group">
+                                <label class="form-label">Number of Covered Lives</label>
+                                <input type="number" class="form-input" id="coveredLives" value="5000" onchange="updateROI()">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Annual Pharmacy Spend</label>
+                                <input type="number" class="form-input" id="pharmacySpend" value="5000000" onchange="updateROI()">
+                            </div>
+                        </div>
+                        <div>
+                            <div class="roi-result">
+                                <div style="font-size: 0.9rem; opacity: 0.9;">Estimated Annual Savings</div>
+                                <div class="roi-value" id="roiValue">$1,250,000</div>
+                            </div>
+                            <button class="btn btn-primary btn-large" style="width: 100%;" onclick="showDemo()">Get Detailed Analysis</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="container">
+                <h2 style="font-size: 3rem; margin-bottom: 1.5rem;">Ready to Transform Healthcare Savings?</h2>
+                <p style="font-size: 1.25rem; opacity: 0.9; margin-bottom: 2rem;">Join 500+ leading organizations</p>
+                <div>
+                    <button class="btn btn-large" style="background: white; color: var(--primary); margin: 0.5rem;" onclick="showDemo()">Schedule Demo</button>
+                    <button class="btn btn-large" style="background: transparent; border: 2px solid white; color: white; margin: 0.5rem;">Contact Sales</button>
                 </div>
             </div>
         </section>
@@ -673,82 +817,67 @@
                 <div class="user-profile">
                     <div class="user-avatar" id="userAvatar">D</div>
                     <div>
-                        <div style="font-weight: 700;" id="sidebarUserName">Demo User</div>
-                        <div style="font-size: 0.9rem; opacity: 0.8;">Administrator</div>
+                        <h3 style="margin: 0;" id="userName">Demo User</h3>
+                        <p style="margin: 0; font-size: 0.85rem; opacity: 0.9;">Enterprise Admin</p>
                     </div>
                 </div>
             </div>
-            <nav class="sidebar-nav">
-                <div class="nav-section">
-                    <div class="nav-section-title">Main</div>
-                    <div class="nav-item active" onclick="switchPage('dashboard')">
-                        <span>📊</span> Dashboard
-                    </div>
-                    <div class="nav-item" onclick="switchPage('analytics')">
-                        <span>📈</span> Analytics
-                    </div>
+            
+            <div style="padding: 1rem 0;">
+                <div class="menu-item active" onclick="showPage('overview')">
+                    <span>📊</span>
+                    <span>Dashboard Overview</span>
                 </div>
-                <div class="nav-section">
-                    <div class="nav-section-title">Savings Management</div>
-                    <div class="nav-item" onclick="switchPage('employer')">
-                        <span>🏢</span> Employer Savings
-                    </div>
-                    <div class="nav-item" onclick="switchPage('member')">
-                        <span>👥</span> Member Savings
-                    </div>
-                    <div class="nav-item" onclick="switchPage('client')">
-                        <span>💼</span> Client Accounts
-                    </div>
+                <div class="menu-item" onclick="showPage('employers')">
+                    <span>🏢</span>
+                    <span>Employer Savings</span>
                 </div>
-                <div class="nav-section">
-                    <div class="nav-section-title">Operations</div>
-                    <div class="nav-item" onclick="switchPage('claims')">
-                        <span>📋</span> Claims Processing
-                    </div>
-                    <div class="nav-item" onclick="switchPage('compliance')">
-                        <span>🛡️</span> Compliance
-                    </div>
-                    <div class="nav-item" onclick="switchPage('settings')">
-                        <span>⚙️</span> Settings
-                    </div>
+                <div class="menu-item" onclick="showPage('members')">
+                    <span>👥</span>
+                    <span>Member Savings</span>
                 </div>
-            </nav>
+                <div class="menu-item" onclick="showPage('claims')">
+                    <span>📋</span>
+                    <span>Claims Processing</span>
+                </div>
+            </div>
         </aside>
 
-        <main class="dashboard-content">
-            <!-- Dashboard Page -->
-            <div id="dashboard" class="dashboard-page active">
+        <main class="main-content">
+            <!-- Overview Page -->
+            <div id="overviewPage">
                 <h1 style="margin-bottom: 2rem;">Dashboard Overview</h1>
+                
                 <div class="stats-grid">
-                    <div class="stat-box">
-                        <div class="stat-box-title">Total Savings</div>
-                        <div class="stat-box-value">$24.8M</div>
-                        <div class="stat-box-change">↑ 23% from last month</div>
+                    <div class="stat-card">
+                        <div class="stat-label">Total Savings YTD</div>
+                        <div class="stat-value">$24.8M</div>
+                        <div class="stat-change">↑ 23% from last month</div>
                     </div>
-                    <div class="stat-box">
-                        <div class="stat-box-title">Active Members</div>
-                        <div class="stat-box-value">12,547</div>
-                        <div class="stat-box-change">↑ 8% from last month</div>
+                    <div class="stat-card">
+                        <div class="stat-label">Active Members</div>
+                        <div class="stat-value">12,547</div>
+                        <div class="stat-change">↑ 8% from last month</div>
                     </div>
-                    <div class="stat-box">
-                        <div class="stat-box-title">Claims Processed</div>
-                        <div class="stat-box-value">8,342</div>
-                        <div class="stat-box-change">↑ 15% from last month</div>
+                    <div class="stat-card">
+                        <div class="stat-label">Claims Processed</div>
+                        <div class="stat-value">8,342</div>
+                        <div class="stat-change">↑ 15% from last month</div>
                     </div>
-                    <div class="stat-box">
-                        <div class="stat-box-title">Avg Cost Reduction</div>
-                        <div class="stat-box-value">42%</div>
-                        <div class="stat-box-change">↑ 3% from last month</div>
+                    <div class="stat-card">
+                        <div class="stat-label">Avg Cost Reduction</div>
+                        <div class="stat-value">42%</div>
+                        <div class="stat-change">↑ 3% from last month</div>
                     </div>
                 </div>
 
                 <div class="data-table">
-                    <h2 style="margin-bottom: 1.5rem;">Savings Tracking Over Time</h2>
-                    <canvas id="dashboardChart" width="800" height="300"></canvas>
+                    <h3 style="margin-bottom: 1.5rem;">Savings Tracking Over Time</h3>
+                    <canvas id="overviewChart" width="1000" height="300"></canvas>
                 </div>
 
                 <div class="data-table">
-                    <h2 style="margin-bottom: 1.5rem;">Recent Activities</h2>
+                    <h3 style="margin-bottom: 1.5rem;">Recent Activities</h3>
                     <table>
                         <thead>
                             <tr>
@@ -764,36 +893,36 @@
                                 <td>Oct 1, 2025</td>
                                 <td>John Smith</td>
                                 <td>Prescription Claim</td>
-                                <td>$450.00</td>
-                                <td><span class="badge badge-success">Approved</span></td>
+                                <td style="color: var(--success); font-weight: 600;">$450.00</td>
+                                <td><span class="status-badge status-active">Approved</span></td>
                             </tr>
                             <tr>
                                 <td>Oct 1, 2025</td>
                                 <td>Sarah Johnson</td>
                                 <td>Specialty Medication</td>
-                                <td>$2,100.00</td>
-                                <td><span class="badge badge-warning">Pending</span></td>
+                                <td style="color: var(--success); font-weight: 600;">$2,100.00</td>
+                                <td><span class="status-badge status-pending">Pending</span></td>
                             </tr>
                             <tr>
                                 <td>Sep 30, 2025</td>
                                 <td>Michael Brown</td>
                                 <td>Generic Substitution</td>
-                                <td>$85.00</td>
-                                <td><span class="badge badge-success">Approved</span></td>
+                                <td style="color: var(--success); font-weight: 600;">$85.00</td>
+                                <td><span class="status-badge status-active">Approved</span></td>
                             </tr>
                             <tr>
                                 <td>Sep 30, 2025</td>
                                 <td>Emily Davis</td>
                                 <td>Prior Authorization</td>
-                                <td>$1,500.00</td>
-                                <td><span class="badge badge-info">In Review</span></td>
+                                <td style="color: var(--success); font-weight: 600;">$1,500.00</td>
+                                <td><span class="status-badge status-pending">In Review</span></td>
                             </tr>
                             <tr>
                                 <td>Sep 29, 2025</td>
                                 <td>Robert Wilson</td>
                                 <td>Refill Request</td>
-                                <td>$125.00</td>
-                                <td><span class="badge badge-success">Approved</span></td>
+                                <td style="color: var(--success); font-weight: 600;">$125.00</td>
+                                <td><span class="status-badge status-active">Approved</span></td>
                             </tr>
                         </tbody>
                     </table>
@@ -801,38 +930,39 @@
             </div>
 
             <!-- Employer Savings Page -->
-            <div id="employer" class="dashboard-page">
+            <div id="employersPage" style="display: none;">
                 <h1 style="margin-bottom: 2rem;">Employer Savings</h1>
+                
                 <div class="stats-grid">
-                    <div class="stat-box">
-                        <div class="stat-box-title">Total Employer Savings</div>
-                        <div class="stat-box-value">$18.4M</div>
-                        <div class="stat-box-change">↑ 28% YoY</div>
+                    <div class="stat-card">
+                        <div class="stat-label">Total Employer Savings</div>
+                        <div class="stat-value">$18.4M</div>
+                        <div class="stat-change">↑ 28% YoY</div>
                     </div>
-                    <div class="stat-box">
-                        <div class="stat-box-title">Active Employers</div>
-                        <div class="stat-box-value">247</div>
-                        <div class="stat-box-change">↑ 12% from last quarter</div>
+                    <div class="stat-card">
+                        <div class="stat-label">Active Employers</div>
+                        <div class="stat-value">247</div>
+                        <div class="stat-change">↑ 12% from last quarter</div>
                     </div>
-                    <div class="stat-box">
-                        <div class="stat-box-title">Avg Savings Per Employee</div>
-                        <div class="stat-box-value">$1,847</div>
-                        <div class="stat-box-change">↑ 18% YoY</div>
+                    <div class="stat-card">
+                        <div class="stat-label">Avg Savings Per Employee</div>
+                        <div class="stat-value">$1,847</div>
+                        <div class="stat-change">↑ 18% YoY</div>
                     </div>
-                    <div class="stat-box">
-                        <div class="stat-box-title">Cost Reduction Rate</div>
-                        <div class="stat-box-value">39%</div>
-                        <div class="stat-box-change">↑ 5% from benchmark</div>
+                    <div class="stat-card">
+                        <div class="stat-label">Cost Reduction Rate</div>
+                        <div class="stat-value">39%</div>
+                        <div class="stat-change">↑ 5% from benchmark</div>
                     </div>
                 </div>
 
                 <div class="data-table">
-                    <h2 style="margin-bottom: 1.5rem;">Employer Savings Tracking Over Time</h2>
-                    <canvas id="employerChart" width="800" height="300"></canvas>
+                    <h3 style="margin-bottom: 1.5rem;">Employer Savings Tracking Over Time</h3>
+                    <canvas id="employerChart" width="1000" height="300"></canvas>
                 </div>
 
                 <div class="data-table">
-                    <h2 style="margin-bottom: 1.5rem;">Top Employer Accounts</h2>
+                    <h3 style="margin-bottom: 1.5rem;">Top Employer Accounts</h3>
                     <table>
                         <thead>
                             <tr>
@@ -849,41 +979,41 @@
                                 <td>TechCorp Industries</td>
                                 <td>Technology</td>
                                 <td>2,500</td>
-                                <td>$285,000</td>
-                                <td>$2.4M</td>
-                                <td><span class="badge badge-success">Active</span></td>
+                                <td style="color: var(--success); font-weight: 600;">$285,000</td>
+                                <td style="color: var(--success); font-weight: 600;">$2.4M</td>
+                                <td><span class="status-badge status-active">Active</span></td>
                             </tr>
                             <tr>
                                 <td>Global Manufacturing Co</td>
                                 <td>Manufacturing</td>
                                 <td>5,200</td>
-                                <td>$542,000</td>
-                                <td>$4.8M</td>
-                                <td><span class="badge badge-success">Active</span></td>
+                                <td style="color: var(--success); font-weight: 600;">$542,000</td>
+                                <td style="color: var(--success); font-weight: 600;">$4.8M</td>
+                                <td><span class="status-badge status-active">Active</span></td>
                             </tr>
                             <tr>
                                 <td>HealthFirst Systems</td>
                                 <td>Healthcare</td>
                                 <td>1,800</td>
-                                <td>$198,000</td>
-                                <td>$1.7M</td>
-                                <td><span class="badge badge-success">Active</span></td>
+                                <td style="color: var(--success); font-weight: 600;">$198,000</td>
+                                <td style="color: var(--success); font-weight: 600;">$1.7M</td>
+                                <td><span class="status-badge status-active">Active</span></td>
                             </tr>
                             <tr>
                                 <td>Financial Services LLC</td>
                                 <td>Finance</td>
                                 <td>3,100</td>
-                                <td>$325,000</td>
-                                <td>$2.9M</td>
-                                <td><span class="badge badge-success">Active</span></td>
+                                <td style="color: var(--success); font-weight: 600;">$325,000</td>
+                                <td style="color: var(--success); font-weight: 600;">$2.9M</td>
+                                <td><span class="status-badge status-active">Active</span></td>
                             </tr>
                             <tr>
                                 <td>Retail Solutions Inc</td>
                                 <td>Retail</td>
                                 <td>4,500</td>
-                                <td>$412,000</td>
-                                <td>$3.6M</td>
-                                <td><span class="badge badge-warning">Renewal Due</span></td>
+                                <td style="color: var(--success); font-weight: 600;">$412,000</td>
+                                <td style="color: var(--success); font-weight: 600;">$3.6M</td>
+                                <td><span class="status-badge status-pending">Renewal Due</span></td>
                             </tr>
                         </tbody>
                     </table>
@@ -891,38 +1021,39 @@
             </div>
 
             <!-- Member Savings Page -->
-            <div id="member" class="dashboard-page">
+            <div id="membersPage" style="display: none;">
                 <h1 style="margin-bottom: 2rem;">Member Savings</h1>
+                
                 <div class="stats-grid">
-                    <div class="stat-box">
-                        <div class="stat-box-title">Total Members</div>
-                        <div class="stat-box-value">12,547</div>
-                        <div class="stat-box-change">↑ 8% from last month</div>
+                    <div class="stat-card">
+                        <div class="stat-label">Total Members</div>
+                        <div class="stat-value">12,547</div>
+                        <div class="stat-change">↑ 8% from last month</div>
                     </div>
-                    <div class="stat-box">
-                        <div class="stat-box-title">Avg Savings Per Member</div>
-                        <div class="stat-box-value">$1,976</div>
-                        <div class="stat-box-change">↑ 14% YoY</div>
+                    <div class="stat-card">
+                        <div class="stat-label">Avg Savings Per Member</div>
+                        <div class="stat-value">$1,976</div>
+                        <div class="stat-change">↑ 14% YoY</div>
                     </div>
-                    <div class="stat-box">
-                        <div class="stat-box-title">Active Prescriptions</div>
-                        <div class="stat-box-value">28,431</div>
-                        <div class="stat-box-change">↑ 6% from last month</div>
+                    <div class="stat-card">
+                        <div class="stat-label">Active Prescriptions</div>
+                        <div class="stat-value">28,431</div>
+                        <div class="stat-change">↑ 6% from last month</div>
                     </div>
-                    <div class="stat-box">
-                        <div class="stat-box-title">Member Satisfaction</div>
-                        <div class="stat-box-value">94%</div>
-                        <div class="stat-box-change">↑ 2% from last quarter</div>
+                    <div class="stat-card">
+                        <div class="stat-label">Member Satisfaction</div>
+                        <div class="stat-value">94%</div>
+                        <div class="stat-change">↑ 2% from last quarter</div>
                     </div>
                 </div>
 
                 <div class="data-table">
-                    <h2 style="margin-bottom: 1.5rem;">Member Savings Tracking Over Time</h2>
-                    <canvas id="memberChart" width="800" height="300"></canvas>
+                    <h3 style="margin-bottom: 1.5rem;">Member Savings Tracking Over Time</h3>
+                    <canvas id="memberChart" width="1000" height="300"></canvas>
                 </div>
 
                 <div class="data-table">
-                    <h2 style="margin-bottom: 1.5rem;">Top Member Savings</h2>
+                    <h3 style="margin-bottom: 1.5rem;">Top Member Savings</h3>
                     <table>
                         <thead>
                             <tr>
@@ -940,40 +1071,40 @@
                                 <td>MB-10247</td>
                                 <td>Premium Plus</td>
                                 <td>8</td>
-                                <td>$847</td>
-                                <td>$8,420</td>
+                                <td style="color: var(--success); font-weight: 600;">$847</td>
+                                <td style="color: var(--success); font-weight: 600;">$8,420</td>
                             </tr>
                             <tr>
                                 <td>🥈</td>
                                 <td>MB-15893</td>
                                 <td>Premium Plus</td>
                                 <td>6</td>
-                                <td>$724</td>
-                                <td>$7,195</td>
+                                <td style="color: var(--success); font-weight: 600;">$724</td>
+                                <td style="color: var(--success); font-weight: 600;">$7,195</td>
                             </tr>
                             <tr>
                                 <td>🥉</td>
                                 <td>MB-09541</td>
                                 <td>Standard</td>
                                 <td>5</td>
-                                <td>$658</td>
-                                <td>$6,545</td>
+                                <td style="color: var(--success); font-weight: 600;">$658</td>
+                                <td style="color: var(--success); font-weight: 600;">$6,545</td>
                             </tr>
                             <tr>
                                 <td>4</td>
                                 <td>MB-12736</td>
                                 <td>Premium</td>
                                 <td>7</td>
-                                <td>$612</td>
-                                <td>$6,089</td>
+                                <td style="color: var(--success); font-weight: 600;">$612</td>
+                                <td style="color: var(--success); font-weight: 600;">$6,089</td>
                             </tr>
                             <tr>
                                 <td>5</td>
                                 <td>MB-18294</td>
                                 <td>Standard</td>
                                 <td>4</td>
-                                <td>$589</td>
-                                <td>$5,847</td>
+                                <td style="color: var(--success); font-weight: 600;">$589</td>
+                                <td style="color: var(--success); font-weight: 600;">$5,847</td>
                             </tr>
                         </tbody>
                     </table>
@@ -981,38 +1112,39 @@
             </div>
 
             <!-- Claims Page -->
-            <div id="claims" class="dashboard-page">
+            <div id="claimsPage" style="display: none;">
                 <h1 style="margin-bottom: 2rem;">Claims Processing</h1>
+                
                 <div class="stats-grid">
-                    <div class="stat-box">
-                        <div class="stat-box-title">Claims Processed</div>
-                        <div class="stat-box-value">8,342</div>
-                        <div class="stat-box-change">↑ 15% from last month</div>
+                    <div class="stat-card">
+                        <div class="stat-label">Claims Processed</div>
+                        <div class="stat-value">8,342</div>
+                        <div class="stat-change">↑ 15% from last month</div>
                     </div>
-                    <div class="stat-box">
-                        <div class="stat-box-title">Approved Claims</div>
-                        <div class="stat-box-value">7,891</div>
-                        <div class="stat-box-change">94.6% approval rate</div>
+                    <div class="stat-card">
+                        <div class="stat-label">Approved Claims</div>
+                        <div class="stat-value">7,891</div>
+                        <div class="stat-change">94.6% approval rate</div>
                     </div>
-                    <div class="stat-box">
-                        <div class="stat-box-title">Pending Review</div>
-                        <div class="stat-box-value">342</div>
-                        <div class="stat-box-change">Avg 2.3 days processing</div>
+                    <div class="stat-card">
+                        <div class="stat-label">Pending Review</div>
+                        <div class="stat-value">342</div>
+                        <div class="stat-change">Avg 2.3 days processing</div>
                     </div>
-                    <div class="stat-box">
-                        <div class="stat-box-title">Rejected Claims</div>
-                        <div class="stat-box-value">109</div>
-                        <div class="stat-box-change">1.3% rejection rate</div>
+                    <div class="stat-card">
+                        <div class="stat-label">Rejected Claims</div>
+                        <div class="stat-value">109</div>
+                        <div class="stat-change">1.3% rejection rate</div>
                     </div>
                 </div>
 
                 <div class="data-table">
-                    <h2 style="margin-bottom: 1.5rem;">Claims Processing Tracking Over Time</h2>
-                    <canvas id="claimsChart" width="800" height="300"></canvas>
+                    <h3 style="margin-bottom: 1.5rem;">Claims Processing Tracking Over Time</h3>
+                    <canvas id="claimsChart" width="1000" height="300"></canvas>
                 </div>
 
                 <div class="data-table">
-                    <h2 style="margin-bottom: 1.5rem;">Recent Claims</h2>
+                    <h3 style="margin-bottom: 1.5rem;">Recent Claims</h3>
                     <table>
                         <thead>
                             <tr>
@@ -1030,62 +1162,44 @@
                                 <td>John Smith</td>
                                 <td>CVS Pharmacy</td>
                                 <td>Oct 1, 2025</td>
-                                <td>$450.00</td>
-                                <td><span class="badge badge-success">Approved</span></td>
+                                <td style="color: var(--success); font-weight: 600;">$450.00</td>
+                                <td><span class="status-badge status-active">Approved</span></td>
                             </tr>
                             <tr>
                                 <td>CLM-89246</td>
                                 <td>Sarah Johnson</td>
                                 <td>Specialty Plus</td>
                                 <td>Oct 1, 2025</td>
-                                <td>$2,100.00</td>
-                                <td><span class="badge badge-warning">Pending</span></td>
+                                <td style="color: var(--success); font-weight: 600;">$2,100.00</td>
+                                <td><span class="status-badge status-pending">Pending</span></td>
                             </tr>
                             <tr>
                                 <td>CLM-89245</td>
                                 <td>Michael Brown</td>
                                 <td>Walgreens</td>
                                 <td>Sep 30, 2025</td>
-                                <td>$85.00</td>
-                                <td><span class="badge badge-success">Approved</span></td>
+                                <td style="color: var(--success); font-weight: 600;">$85.00</td>
+                                <td><span class="status-badge status-active">Approved</span></td>
                             </tr>
                             <tr>
                                 <td>CLM-89244</td>
                                 <td>Emily Davis</td>
                                 <td>MedExpress Hub</td>
                                 <td>Sep 30, 2025</td>
-                                <td>$1,500.00</td>
-                                <td><span class="badge badge-info">In Review</span></td>
+                                <td style="color: var(--success); font-weight: 600;">$1,500.00</td>
+                                <td><span class="status-badge status-pending">In Review</span></td>
                             </tr>
                             <tr>
                                 <td>CLM-89243</td>
                                 <td>Robert Wilson</td>
                                 <td>Rite Aid</td>
                                 <td>Sep 29, 2025</td>
-                                <td>$125.00</td>
-                                <td><span class="badge badge-success">Approved</span></td>
+                                <td style="color: var(--success); font-weight: 600;">$125.00</td>
+                                <td><span class="status-badge status-active">Approved</span></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-            </div>
-
-            <!-- Other Pages Placeholder -->
-            <div id="analytics" class="dashboard-page">
-                <h1>Analytics</h1>
-                <p>Advanced analytics and reporting coming soon...</p>
-            </div>
-            <div id="client" class="dashboard-page">
-                <h1>Client Accounts</h1>
-                <p>Client account management coming soon...</p>
-            </div>
-            <div id="compliance" class="dashboard-page">
-                <h1>Compliance</h1>
-                <p>Compliance monitoring coming soon...</p>
-            </div>
-            <div id="settings" class="dashboard-page">
-                <h1>Settings</h1>
-                <p>Account settings coming soon...</p>
             </div>
         </main>
     </div>
@@ -1093,199 +1207,27 @@
     <!-- Login Modal -->
     <div class="modal" id="loginModal">
         <div class="modal-content">
-            <button class="close-modal" onclick="closeLoginModal()">&times;</button>
+            <button style="position: absolute; right: 1rem; top: 1rem; background: none; border: none; font-size: 2rem; cursor: pointer;" onclick="closeLogin()">&times;</button>
             <div style="text-align: center; margin-bottom: 2rem;">
-                <div style="font-size: 3rem; margin-bottom: 1rem;">💊</div>
-                <h2 style="font-size: 2rem; margin-bottom: 0.5rem;">Welcome Back</h2>
-                <p style="color: var(--gray);">Login to access your dashboard</p>
+                <div style="width: 60px; height: 60px; margin: 0 auto 1rem; background: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%); border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: white;">💊</div>
+                <h2>Welcome Back</h2>
             </div>
             <div class="form-group">
-                <label class="form-label">Email Address</label>
-                <input type="email" class="form-input" id="loginEmail" value="demo@company.com">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-input" value="demo@company.com" id="loginEmail">
             </div>
             <div class="form-group">
                 <label class="form-label">Password</label>
-                <input type="password" class="form-input" id="loginPassword" value="password123">
+                <input type="password" class="form-input" value="password123" id="loginPassword">
             </div>
-            <button class="btn btn-primary" style="width: 100%;" onclick="handleLogin()">Login to Dashboard</button>
-            <div style="text-align: center; margin-top: 1.5rem; padding: 1rem; background: var(--light); border-radius: 10px;">
-                <p style="color: var(--gray); font-size: 0.9rem; margin: 0;">✓ Demo credentials pre-filled</p>
-                <p style="color: var(--primary); font-weight: 600; margin: 0.5rem 0 0;">Just click "Login to Dashboard"</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Signup Modal -->
-    <div class="modal" id="signupModal">
-        <div class="modal-content">
-            <button class="close-modal" onclick="closeSignupModal()">&times;</button>
-            <div style="text-align: center; margin-bottom: 2rem;">
-                <div style="font-size: 3rem; margin-bottom: 1rem;">💊</div>
-                <h2 style="font-size: 2rem; margin-bottom: 0.5rem;">Start Your Free Trial</h2>
-                <p style="color: var(--gray);">Join 500+ enterprises saving millions</p>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Company Name</label>
-                <input type="text" class="form-input" id="signupCompany" placeholder="Your Company">
-            </div>
-            <div class="form-group">
-                <label class="form-label">Email Address</label>
-                <input type="email" class="form-input" id="signupEmail" placeholder="you@company.com">
-            </div>
-            <div class="form-group">
-                <label class="form-label">Password</label>
-                <input type="password" class="form-input" id="signupPassword" placeholder="Create password">
-            </div>
-            <button class="btn btn-primary" style="width: 100%;" onclick="handleSignup()">Start Free Trial</button>
+            <button class="btn btn-primary" style="width: 100%;" onclick="doLogin()">Login to Dashboard</button>
+            <p style="text-align: center; margin-top: 1rem; color: var(--gray);">Demo credentials pre-filled</p>
         </div>
     </div>
 
     <script>
-        // Simple state management
-        let currentUser = null;
-        let savingsCounter = 2400000000;
-        let membersCounter = 512847;
-
-        // Enhanced live tracker on hero section
-        function updateHeroTrackers() {
-            // Increment savings by $100-500 every update
-            savingsCounter += Math.floor(Math.random() * 400) + 100;
-            
-            // Increment members by 1-3 every update
-            if (Math.random() > 0.7) {
-                membersCounter += Math.floor(Math.random() * 3) + 1;
-            }
-            
-            // Format and update display
-            const savingsElement = document.getElementById('heroTotalSavings');
-            const membersElement = document.getElementById('heroActiveMembers');
-            
-            if (savingsElement) {
-                savingsElement.textContent = '
-        function openLoginModal() {
-            document.getElementById('loginModal').classList.add('active');
-        }
-
-        function closeLoginModal() {
-            document.getElementById('loginModal').classList.remove('active');
-        }
-
-        function openSignupModal() {
-            document.getElementById('signupModal').classList.add('active');
-        }
-
-        function closeSignupModal() {
-            document.getElementById('signupModal').classList.remove('active');
-        }
-
-        // Authentication functions
-        function handleLogin() {
-            const email = document.getElementById('loginEmail').value;
-            const password = document.getElementById('loginPassword').value;
-
-            if (email && password) {
-                currentUser = {
-                    name: 'Demo User',
-                    email: email
-                };
-                
-                closeLoginModal();
-                showDashboard();
-            }
-        }
-
-        function handleSignup() {
-            const company = document.getElementById('signupCompany').value;
-            const email = document.getElementById('signupEmail').value;
-            const password = document.getElementById('signupPassword').value;
-
-            if (company && email && password) {
-                currentUser = {
-                    name: company,
-                    email: email
-                };
-                
-                closeSignupModal();
-                showDashboard();
-            }
-        }
-
-        function showDashboard() {
-            document.getElementById('landingPage').style.display = 'none';
-            document.getElementById('dashboardWrapper').classList.add('active');
-            document.getElementById('navButtons').style.display = 'none';
-            document.getElementById('userNav').classList.add('active');
-            
-            if (currentUser) {
-                document.getElementById('userName').textContent = currentUser.name;
-                document.getElementById('sidebarUserName').textContent = currentUser.name;
-                document.getElementById('userAvatar').textContent = currentUser.name.charAt(0).toUpperCase();
-            }
-            
-            // Initialize charts after a short delay to ensure canvas elements are ready
-            setTimeout(initializeCharts, 100);
-        }
-
-        function logout() {
-            currentUser = null;
-            document.getElementById('landingPage').style.display = 'block';
-            document.getElementById('dashboardWrapper').classList.remove('active');
-            document.getElementById('navButtons').style.display = 'flex';
-            document.getElementById('userNav').classList.remove('active');
-        }
-
-        function goHome() {
-            if (currentUser) {
-                // Already logged in, do nothing or go to dashboard
-                return;
-            }
-            // Scroll to top if on landing page
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // Dashboard navigation
-        function switchPage(pageId) {
-            // Remove active class from all pages
-            const pages = document.querySelectorAll('.dashboard-page');
-            pages.forEach(page => page.classList.remove('active'));
-            
-            // Remove active class from all nav items
-            const navItems = document.querySelectorAll('.nav-item');
-            navItems.forEach(item => item.classList.remove('active'));
-            
-            // Add active class to selected page
-            document.getElementById(pageId).classList.add('active');
-            
-            // Add active class to clicked nav item
-            event.target.closest('.nav-item').classList.add('active');
-        }
-
-        // Close modals when clicking outside
-        window.onclick = function(event) {
-            const loginModal = document.getElementById('loginModal');
-            const signupModal = document.getElementById('signupModal');
-            
-            if (event.target === loginModal) {
-                closeLoginModal();
-            }
-            if (event.target === signupModal) {
-                closeSignupModal();
-            }
-        }
-    </script>
-</body>
-</html> + savingsCounter.toLocaleString();
-            }
-            if (membersElement) {
-                membersElement.textContent = membersCounter.toLocaleString();
-            }
-        }
-
-        // Start the live tracker
-        setInterval(updateHeroTrackers, 2000);
-
-        // Draw charts function
-        function drawChart(canvasId, labels, data, label, color) {
+        // Chart drawing function
+        function drawChart(canvasId, labels, data, color) {
             const canvas = document.getElementById(canvasId);
             if (!canvas) return;
             
@@ -1296,19 +1238,17 @@
             const graphWidth = width - padding * 2;
             const graphHeight = height - padding * 2;
             
-            // Clear canvas
             ctx.clearRect(0, 0, width, height);
             
-            // Find max value for scaling
             const maxValue = Math.max(...data);
             const minValue = Math.min(...data);
             const range = maxValue - minValue;
             
-            // Draw background
+            // Background
             ctx.fillStyle = '#f9fafb';
             ctx.fillRect(0, 0, width, height);
             
-            // Draw grid lines
+            // Grid
             ctx.strokeStyle = '#e5e7eb';
             ctx.lineWidth = 1;
             for (let i = 0; i <= 5; i++) {
@@ -1319,7 +1259,7 @@
                 ctx.stroke();
             }
             
-            // Draw axes
+            // Axes
             ctx.strokeStyle = '#9ca3af';
             ctx.lineWidth = 2;
             ctx.beginPath();
@@ -1328,7 +1268,7 @@
             ctx.lineTo(width - padding, height - padding);
             ctx.stroke();
             
-            // Draw line graph
+            // Line
             ctx.strokeStyle = color;
             ctx.lineWidth = 3;
             ctx.beginPath();
@@ -1348,18 +1288,18 @@
             
             ctx.stroke();
             
-            // Draw points
+            // Points
             ctx.fillStyle = color;
             data.forEach((value, index) => {
                 const x = padding + stepX * index;
                 const y = height - padding - ((value - minValue) / range) * graphHeight;
                 
                 ctx.beginPath();
-                ctx.arc(x, y, 4, 0, Math.PI * 2);
+                ctx.arc(x, y, 5, 0, Math.PI * 2);
                 ctx.fill();
             });
             
-            // Draw labels
+            // Labels
             ctx.fillStyle = '#374151';
             ctx.font = '12px sans-serif';
             ctx.textAlign = 'center';
@@ -1369,258 +1309,120 @@
                 ctx.fillText(label, x, height - padding + 20);
             });
             
-            // Draw Y-axis values
+            // Y-axis values
             ctx.textAlign = 'right';
             for (let i = 0; i <= 5; i++) {
                 const value = maxValue - (range / 5) * i;
                 const y = padding + (graphHeight / 5) * i;
-                ctx.fillText('
-        function openLoginModal() {
-            document.getElementById('loginModal').classList.add('active');
-        }
-
-        function closeLoginModal() {
-            document.getElementById('loginModal').classList.remove('active');
-        }
-
-        function openSignupModal() {
-            document.getElementById('signupModal').classList.add('active');
-        }
-
-        function closeSignupModal() {
-            document.getElementById('signupModal').classList.remove('active');
-        }
-
-        // Authentication functions
-        function handleLogin() {
-            const email = document.getElementById('loginEmail').value;
-            const password = document.getElementById('loginPassword').value;
-
-            if (email && password) {
-                currentUser = {
-                    name: 'Demo User',
-                    email: email
-                };
-                
-                closeLoginModal();
-                showDashboard();
+                const displayValue = value >= 1000000 ? '$' + (value / 1000000).toFixed(1) + 'M' : '$' + Math.round(value / 1000) + 'K';
+                ctx.fillText(displayValue, padding - 10, y + 5);
             }
         }
 
-        function handleSignup() {
-            const company = document.getElementById('signupCompany').value;
-            const email = document.getElementById('signupEmail').value;
-            const password = document.getElementById('signupPassword').value;
-
-            if (company && email && password) {
-                currentUser = {
-                    name: company,
-                    email: email
-                };
-                
-                closeSignupModal();
-                showDashboard();
-            }
-        }
-
-        function showDashboard() {
-            document.getElementById('landingPage').style.display = 'none';
-            document.getElementById('dashboardWrapper').classList.add('active');
-            document.getElementById('navButtons').style.display = 'none';
-            document.getElementById('userNav').classList.add('active');
-            
-            if (currentUser) {
-                document.getElementById('userName').textContent = currentUser.name;
-                document.getElementById('sidebarUserName').textContent = currentUser.name;
-                document.getElementById('userAvatar').textContent = currentUser.name.charAt(0).toUpperCase();
-            }
-        }
-
-        function logout() {
-            currentUser = null;
-            document.getElementById('landingPage').style.display = 'block';
-            document.getElementById('dashboardWrapper').classList.remove('active');
-            document.getElementById('navButtons').style.display = 'flex';
-            document.getElementById('userNav').classList.remove('active');
-        }
-
-        function goHome() {
-            if (currentUser) {
-                // Already logged in, do nothing or go to dashboard
-                return;
-            }
-            // Scroll to top if on landing page
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // Dashboard navigation
-        function switchPage(pageId) {
-            // Remove active class from all pages
-            const pages = document.querySelectorAll('.dashboard-page');
-            pages.forEach(page => page.classList.remove('active'));
-            
-            // Remove active class from all nav items
-            const navItems = document.querySelectorAll('.nav-item');
-            navItems.forEach(item => item.classList.remove('active'));
-            
-            // Add active class to selected page
-            document.getElementById(pageId).classList.add('active');
-            
-            // Add active class to clicked nav item
-            event.target.closest('.nav-item').classList.add('active');
-        }
-
-        // Close modals when clicking outside
-        window.onclick = function(event) {
-            const loginModal = document.getElementById('loginModal');
-            const signupModal = document.getElementById('signupModal');
-            
-            if (event.target === loginModal) {
-                closeLoginModal();
-            }
-            if (event.target === signupModal) {
-                closeSignupModal();
-            }
-        }
-    </script>
-</body>
-</html> + Math.round(value / 1000) + 'K', padding - 10, y + 5);
-            }
-            
-            // Draw title
-            ctx.font = 'bold 14px sans-serif';
-            ctx.textAlign = 'left';
-            ctx.fillText(label, padding, padding - 20);
-        }
-
-        // Initialize charts when dashboard is shown
-        function initializeCharts() {
-            // Dashboard Overview Chart
+        // Initialize all charts
+        function initCharts() {
             const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'];
+            
+            // Overview chart
             const savingsData = [1800000, 1950000, 2100000, 2250000, 2400000, 2550000, 2700000, 2850000, 3000000, 3150000];
-            drawChart('dashboardChart', months, savingsData, 'Monthly Savings Trend', '#0066ff');
+            drawChart('overviewChart', months, savingsData, '#0066ff');
             
-            // Employer Savings Chart
+            // Employer chart
             const employerData = [850000, 920000, 980000, 1050000, 1120000, 1180000, 1250000, 1320000, 1390000, 1460000];
-            drawChart('employerChart', months, employerData, 'Employer Savings Growth', '#10b981');
+            drawChart('employerChart', months, employerData, '#10b981');
             
-            // Member Savings Chart
+            // Member chart
             const memberData = [450000, 480000, 510000, 540000, 570000, 600000, 630000, 660000, 690000, 720000];
-            drawChart('memberChart', months, memberData, 'Member Savings Accumulation', '#7c3aed');
+            drawChart('memberChart', months, memberData, '#7c3aed');
             
-            // Claims Processing Chart
+            // Claims chart
             const claimsData = [5200, 5400, 5600, 5900, 6200, 6500, 6800, 7100, 7400, 7700];
-            drawChart('claimsChart', months, claimsData, 'Claims Processed Monthly', '#f59e0b');
+            drawChart('claimsChart', months, claimsData, '#f59e0b');
         }
 
         // Modal functions
-        function openLoginModal() {
+        function showLogin() {
             document.getElementById('loginModal').classList.add('active');
         }
 
-        function closeLoginModal() {
+        function closeLogin() {
             document.getElementById('loginModal').classList.remove('active');
         }
 
-        function openSignupModal() {
-            document.getElementById('signupModal').classList.add('active');
-        }
-
-        function closeSignupModal() {
-            document.getElementById('signupModal').classList.remove('active');
-        }
-
-        // Authentication functions
-        function handleLogin() {
-            const email = document.getElementById('loginEmail').value;
-            const password = document.getElementById('loginPassword').value;
-
-            if (email && password) {
-                currentUser = {
-                    name: 'Demo User',
-                    email: email
-                };
-                
-                closeLoginModal();
-                showDashboard();
-            }
-        }
-
-        function handleSignup() {
-            const company = document.getElementById('signupCompany').value;
-            const email = document.getElementById('signupEmail').value;
-            const password = document.getElementById('signupPassword').value;
-
-            if (company && email && password) {
-                currentUser = {
-                    name: company,
-                    email: email
-                };
-                
-                closeSignupModal();
-                showDashboard();
-            }
-        }
-
-        function showDashboard() {
+        function doLogin() {
+            closeLogin();
             document.getElementById('landingPage').style.display = 'none';
             document.getElementById('dashboardWrapper').classList.add('active');
             document.getElementById('navButtons').style.display = 'none';
-            document.getElementById('userNav').classList.add('active');
+            document.getElementById('userNav').style.display = 'flex';
             
-            if (currentUser) {
-                document.getElementById('userName').textContent = currentUser.name;
-                document.getElementById('sidebarUserName').textContent = currentUser.name;
-                document.getElementById('userAvatar').textContent = currentUser.name.charAt(0).toUpperCase();
-            }
+            // Initialize charts after a brief delay
+            setTimeout(initCharts, 100);
         }
 
-        function logout() {
-            currentUser = null;
+        function doLogout() {
             document.getElementById('landingPage').style.display = 'block';
             document.getElementById('dashboardWrapper').classList.remove('active');
             document.getElementById('navButtons').style.display = 'flex';
-            document.getElementById('userNav').classList.remove('active');
+            document.getElementById('userNav').style.display = 'none';
         }
 
-        function goHome() {
-            if (currentUser) {
-                // Already logged in, do nothing or go to dashboard
-                return;
-            }
-            // Scroll to top if on landing page
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+        function goToDashboard() {
+            document.getElementById('landingPage').style.display = 'none';
+            document.getElementById('dashboardWrapper').classList.add('active');
         }
 
-        // Dashboard navigation
-        function switchPage(pageId) {
-            // Remove active class from all pages
-            const pages = document.querySelectorAll('.dashboard-page');
-            pages.forEach(page => page.classList.remove('active'));
-            
-            // Remove active class from all nav items
-            const navItems = document.querySelectorAll('.nav-item');
-            navItems.forEach(item => item.classList.remove('active'));
-            
-            // Add active class to selected page
-            document.getElementById(pageId).classList.add('active');
-            
-            // Add active class to clicked nav item
-            event.target.closest('.nav-item').classList.add('active');
+        function showSignup() {
+            alert('Start your free trial today!');
         }
 
-        // Close modals when clicking outside
-        window.onclick = function(event) {
-            const loginModal = document.getElementById('loginModal');
-            const signupModal = document.getElementById('signupModal');
-            
-            if (event.target === loginModal) {
-                closeLoginModal();
-            }
-            if (event.target === signupModal) {
-                closeSignupModal();
-            }
+        function showDemo() {
+            alert('Demo scheduled! We will contact you within 24 hours.');
         }
+
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function showPage(page) {
+            // Hide all pages
+            document.getElementById('overviewPage').style.display = 'none';
+            document.getElementById('employersPage').style.display = 'none';
+            document.getElementById('membersPage').style.display = 'none';
+            document.getElementById('claimsPage').style.display = 'none';
+            
+            // Show selected page
+            document.getElementById(page + 'Page').style.display = 'block';
+            
+            // Update active menu
+            const items = document.querySelectorAll('.menu-item');
+            items.forEach(item => item.classList.remove('active'));
+            event.target.closest('.menu-item').classList.add('active');
+        }
+
+        function updateROI() {
+            const lives = document.getElementById('coveredLives').value || 5000;
+            const spend = document.getElementById('pharmacySpend').value || 5000000;
+            const savings = Math.round(spend * 0.25);
+            document.getElementById('roiValue').textContent = '$' + savings.toLocaleString();
+        }
+
+        // Simple hero chart
+        window.onload = function() {
+            const canvas = document.getElementById('heroChart');
+            if (canvas && canvas.getContext) {
+                const ctx = canvas.getContext('2d');
+                ctx.strokeStyle = '#0066ff';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.moveTo(0, 150);
+                ctx.lineTo(100, 120);
+                ctx.lineTo(200, 140);
+                ctx.lineTo(300, 100);
+                ctx.lineTo(400, 80);
+                ctx.stroke();
+            }
+        };
     </script>
 </body>
 </html>
