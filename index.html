@@ -1342,22 +1342,37 @@
 
         // Modal functions
         function showLogin() {
-            document.getElementById('loginModal').classList.add('active');
+            const modal = document.getElementById('loginModal');
+            if (modal) {
+                modal.classList.add('active');
+            }
         }
 
         function closeLogin() {
-            document.getElementById('loginModal').classList.remove('active');
+            const modal = document.getElementById('loginModal');
+            if (modal) {
+                modal.classList.remove('active');
+            }
         }
 
         function doLogin() {
-            closeLogin();
-            document.getElementById('landingPage').style.display = 'none';
-            document.getElementById('dashboardWrapper').classList.add('active');
-            document.getElementById('navButtons').style.display = 'none';
-            document.getElementById('userNav').style.display = 'flex';
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
             
-            // Initialize charts after a brief delay
-            setTimeout(initCharts, 100);
+            if (email && password) {
+                closeLogin();
+                document.getElementById('landingPage').style.display = 'none';
+                document.getElementById('dashboardWrapper').classList.add('active');
+                document.getElementById('navButtons').style.display = 'none';
+                document.getElementById('userNav').style.display = 'flex';
+                
+                // Update user name
+                document.getElementById('userName').textContent = 'Demo User';
+                document.getElementById('userAvatar').textContent = 'D';
+                
+                // Initialize charts after a brief delay
+                setTimeout(initCharts, 100);
+            }
         }
 
         function doLogout() {
