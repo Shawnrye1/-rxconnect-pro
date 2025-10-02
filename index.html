@@ -25,25 +25,13 @@
         }
 
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
         }
 
         @keyframes float {
@@ -67,7 +55,6 @@
         nav {
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
             padding: 1rem 0;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
             position: fixed;
@@ -101,9 +88,7 @@
             transition: transform 0.3s ease;
         }
 
-        .logo:hover {
-            transform: scale(1.05);
-        }
+        .logo:hover { transform: scale(1.05); }
 
         .logo-icon {
             width: 40px;
@@ -269,9 +254,7 @@
             transition: transform 0.3s ease;
         }
 
-        .metric:hover {
-            transform: translateY(-5px);
-        }
+        .metric:hover { transform: translateY(-5px); }
 
         .metric-value {
             font-size: 3.5rem;
@@ -794,11 +777,7 @@
                 font-size: 2.5rem;
             }
 
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .cards-grid {
+            .stats-grid, .cards-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -937,61 +916,21 @@
                         <div class="card-icon">◫</div>
                         <h3 class="card-title">Employers</h3>
                         <p class="card-description">Reduce healthcare costs while improving employee satisfaction.</p>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding-top: 1.5rem;">
-                            <div style="text-align: center;">
-                                <div style="font-size: 1.8rem; font-weight: 700; color: var(--primary);">32%</div>
-                                <div style="font-size: 0.85rem; color: var(--gray);">Cost Reduction</div>
-                            </div>
-                            <div style="text-align: center;">
-                                <div style="font-size: 1.8rem; font-weight: 700; color: var(--primary);">89%</div>
-                                <div style="font-size: 0.85rem; color: var(--gray);">Satisfaction</div>
-                            </div>
-                        </div>
                     </div>
                     <div class="card" style="background: white;">
                         <div class="card-icon" style="background: linear-gradient(135deg, #10b981 0%, #34d399 100%);">◉</div>
                         <h3 class="card-title">PBMs</h3>
                         <p class="card-description">Streamline operations and improve formulary management.</p>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding-top: 1.5rem;">
-                            <div style="text-align: center;">
-                                <div style="font-size: 1.8rem; font-weight: 700; color: var(--success);">5x</div>
-                                <div style="font-size: 0.85rem; color: var(--gray);">Efficiency</div>
-                            </div>
-                            <div style="text-align: center;">
-                                <div style="font-size: 1.8rem; font-weight: 700; color: var(--success);">$450M</div>
-                                <div style="font-size: 0.85rem; color: var(--gray);">Processed</div>
-                            </div>
-                        </div>
                     </div>
                     <div class="card" style="background: white;">
                         <div class="card-icon" style="background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%);">⬢</div>
                         <h3 class="card-title">Specialty Pharmacies</h3>
                         <p class="card-description">Optimize specialty drug management and patient programs.</p>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding-top: 1.5rem;">
-                            <div style="text-align: center;">
-                                <div style="font-size: 1.8rem; font-weight: 700; color: #8b5cf6;">94%</div>
-                                <div style="font-size: 0.85rem; color: var(--gray);">Adherence</div>
-                            </div>
-                            <div style="text-align: center;">
-                                <div style="font-size: 1.8rem; font-weight: 700; color: #8b5cf6;">2.8x</div>
-                                <div style="font-size: 0.85rem; color: var(--gray);">ROI</div>
-                            </div>
-                        </div>
                     </div>
                     <div class="card" style="background: white;">
                         <div class="card-icon" style="background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);">◈</div>
                         <h3 class="card-title">Pharmaceutical Hubs</h3>
                         <p class="card-description">Connect manufacturers with patients effectively.</p>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding-top: 1.5rem;">
-                            <div style="text-align: center;">
-                                <div style="font-size: 1.8rem; font-weight: 700; color: var(--warning);">15K+</div>
-                                <div style="font-size: 0.85rem; color: var(--gray);">Patients</div>
-                            </div>
-                            <div style="text-align: center;">
-                                <div style="font-size: 1.8rem; font-weight: 700; color: var(--warning);">98%</div>
-                                <div style="font-size: 0.85rem; color: var(--gray);">Coverage</div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -1103,58 +1042,6 @@
                     <h3 style="margin-bottom: 1.5rem;">Savings Tracking Over Time</h3>
                     <canvas id="overviewChart" width="1000" height="300"></canvas>
                 </div>
-
-                <div class="data-table">
-                    <h3 style="margin-bottom: 1.5rem;">Recent Activities</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Date</th>
-                                <th>Member</th>
-                                <th>Action</th>
-                                <th>Amount</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Oct 1, 2025</td>
-                                <td>John Smith</td>
-                                <td>Prescription Claim</td>
-                                <td style="color: var(--success); font-weight: 600;">$450.00</td>
-                                <td><span class="status-badge status-active">Approved</span></td>
-                            </tr>
-                            <tr>
-                                <td>Oct 1, 2025</td>
-                                <td>Sarah Johnson</td>
-                                <td>Specialty Medication</td>
-                                <td style="color: var(--success); font-weight: 600;">$2,100.00</td>
-                                <td><span class="status-badge status-pending">Pending</span></td>
-                            </tr>
-                            <tr>
-                                <td>Sep 30, 2025</td>
-                                <td>Michael Brown</td>
-                                <td>Generic Substitution</td>
-                                <td style="color: var(--success); font-weight: 600;">$85.00</td>
-                                <td><span class="status-badge status-active">Approved</span></td>
-                            </tr>
-                            <tr>
-                                <td>Sep 30, 2025</td>
-                                <td>Emily Davis</td>
-                                <td>Prior Authorization</td>
-                                <td style="color: var(--success); font-weight: 600;">$1,500.00</td>
-                                <td><span class="status-badge status-pending">In Review</span></td>
-                            </tr>
-                            <tr>
-                                <td>Sep 29, 2025</td>
-                                <td>Robert Wilson</td>
-                                <td>Refill Request</td>
-                                <td style="color: var(--success); font-weight: 600;">$125.00</td>
-                                <td><span class="status-badge status-active">Approved</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
             </div>
 
             <div id="employersPage" style="display: none;">
@@ -1256,8 +1143,8 @@
     </div>
 
     <div class="modal" id="loginModal">
-        <div class="modal-content" id="loginModalContent">
-            <button id="closeModalBtn" style="position: absolute; right: 1.5rem; top: 1.5rem; background: none; border: none; font-size: 2rem; cursor: pointer; color: var(--gray); transition: color 0.2s ease;">&times;</button>
+        <div class="modal-content">
+            <button id="closeModalBtn" style="position: absolute; right: 1.5rem; top: 1.5rem; background: none; border: none; font-size: 2rem; cursor: pointer; color: var(--gray);">×</button>
             <div style="text-align: center; margin-bottom: 2rem;">
                 <div style="width: 70px; height: 70px; margin: 0 auto 1rem; background: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%); border-radius: 18px; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; color: white; font-weight: 700; box-shadow: 0 12px 32px rgba(0, 102, 255, 0.35);">◈</div>
                 <h2 style="font-size: 2.2rem; margin-bottom: 0.5rem;">Welcome Back</h2>
@@ -1265,11 +1152,11 @@
             </div>
             <div class="form-group">
                 <label class="form-label">Email</label>
-                <input type="email" class="form-input" value="demo@company.com" id="loginEmail">
+                <input type="email" class="form-input" value="demo@company.com">
             </div>
             <div class="form-group">
                 <label class="form-label">Password</label>
-                <input type="password" class="form-input" value="password123" id="loginPassword">
+                <input type="password" class="form-input" value="password123">
             </div>
             <button class="btn btn-primary" id="loginSubmitBtn" style="width: 100%;">Login to Dashboard</button>
             <p style="text-align: center; margin-top: 1rem; color: var(--gray); font-size: 0.9rem;">Demo credentials pre-filled</p>
@@ -1277,274 +1164,273 @@
     </div>
 
     <script>
-        // Core utility functions
-        const App = {
-            init: function() {
-                this.attachEventListeners();
-                this.initNavbarScroll();
-                this.drawHeroChart();
-            },
+        (function() {
+            const App = {
+                init: function() {
+                    this.attachEventListeners();
+                    this.initNavbarScroll();
+                    this.drawHeroChart();
+                },
 
-            attachEventListeners: function() {
-                // Login/Logout buttons
-                const loginBtn = document.getElementById('loginBtn');
-                const logoutBtn = document.getElementById('logoutBtn');
-                const dashboardBtn = document.getElementById('dashboardBtn');
-                const loginSubmitBtn = document.getElementById('loginSubmitBtn');
-                const closeModalBtn = document.getElementById('closeModalBtn');
-
-                if (loginBtn) loginBtn.addEventListener('click', () => this.showModal());
-                if (logoutBtn) logoutBtn.addEventListener('click', () => this.doLogout());
-                if (dashboardBtn) dashboardBtn.addEventListener('click', () => this.goToDashboard());
-                if (loginSubmitBtn) loginSubmitBtn.addEventListener('click', () => this.doLogin());
-                if (closeModalBtn) closeModalBtn.addEventListener('click', () => this.closeModal());
-
-                // Modal backdrop click
-                const modal = document.getElementById('loginModal');
-                if (modal) {
-                    modal.addEventListener('click', (e) => {
-                        if (e.target.id === 'loginModal') this.closeModal();
+                attachEventListeners: function() {
+                    const self = this;
+                    
+                    document.getElementById('loginBtn').addEventListener('click', function() { self.showModal(); });
+                    document.getElementById('logoutBtn').addEventListener('click', function() { self.doLogout(); });
+                    document.getElementById('dashboardBtn').addEventListener('click', function() { self.goToDashboard(); });
+                    document.getElementById('loginSubmitBtn').addEventListener('click', function() { self.doLogin(); });
+                    document.getElementById('closeModalBtn').addEventListener('click', function() { self.closeModal(); });
+                    
+                    document.getElementById('loginModal').addEventListener('click', function(e) {
+                        if (e.target.id === 'loginModal') self.closeModal();
                     });
-                }
 
-                // Navigation links
-                const navLinks = document.querySelectorAll('[data-scroll]');
-                navLinks.forEach(link => {
-                    link.addEventListener('click', (e) => {
-                        const section = e.target.getAttribute('data-scroll');
-                        this.scrollToSection(section);
+                    document.querySelectorAll('[data-scroll]').forEach(function(link) {
+                        link.addEventListener('click', function(e) {
+                            const section = e.target.getAttribute('data-scroll');
+                            self.scrollToSection(section);
+                        });
                     });
-                });
 
-                // Dashboard menu items
-                const menuItems = document.querySelectorAll('.menu-item');
-                menuItems.forEach(item => {
-                    item.addEventListener('click', (e) => {
-                        const page = e.currentTarget.getAttribute('data-page');
-                        this.showPage(page);
+                    document.querySelectorAll('.menu-item').forEach(function(item) {
+                        item.addEventListener('click', function(e) {
+                            const page = e.currentTarget.getAttribute('data-page');
+                            self.showPage(page);
+                        });
                     });
-                });
 
-                // ROI calculator inputs
-                const coveredLives = document.getElementById('coveredLives');
-                const pharmacySpend = document.getElementById('pharmacySpend');
-                if (coveredLives) coveredLives.addEventListener('input', () => this.updateROI());
-                if (pharmacySpend) pharmacySpend.addEventListener('input', () => this.updateROI());
+                    document.getElementById('coveredLives').addEventListener('input', function() { self.updateROI(); });
+                    document.getElementById('pharmacySpend').addEventListener('input', function() { self.updateROI(); });
 
-                // CTA buttons
-                const scheduleDemoBtn = document.getElementById('scheduleDemoBtn');
-                const calcSavingsBtn = document.getElementById('calcSavingsBtn');
-                const signupBtn = document.getElementById('signupBtn');
-                const getAnalysisBtn = document.getElementById('getAnalysisBtn');
-                const ctaDemoBtn = document.getElementById('ctaDemoBtn');
-                const contactSalesBtn = document.getElementById('contactSalesBtn');
+                    document.getElementById('scheduleDemoBtn').addEventListener('click', function() { self.showDemo(); });
+                    document.getElementById('calcSavingsBtn').addEventListener('click', function() { self.scrollToSection('roi'); });
+                    document.getElementById('signupBtn').addEventListener('click', function() { self.showSignup(); });
+                    document.getElementById('getAnalysisBtn').addEventListener('click', function() { self.showDemo(); });
+                    document.getElementById('ctaDemoBtn').addEventListener('click', function() { self.showDemo(); });
+                    document.getElementById('contactSalesBtn').addEventListener('click', function() { self.contactSales(); });
+                },
 
-                if (scheduleDemoBtn) scheduleDemoBtn.addEventListener('click', () => this.showDemo());
-                if (calcSavingsBtn) calcSavingsBtn.addEventListener('click', () => this.scrollToSection('roi'));
-                if (signupBtn) signupBtn.addEventListener('click', () => this.showSignup());
-                if (getAnalysisBtn) getAnalysisBtn.addEventListener('click', () => this.showDemo());
-                if (ctaDemoBtn) ctaDemoBtn.addEventListener('click', () => this.showDemo());
-                if (contactSalesBtn) contactSalesBtn.addEventListener('click', () => this.contactSales());
-            },
-
-            initNavbarScroll: function() {
-                window.addEventListener('scroll', () => {
-                    const navbar = document.getElementById('navbar');
-                    if (navbar) {
+                initNavbarScroll: function() {
+                    window.addEventListener('scroll', function() {
+                        const navbar = document.getElementById('navbar');
                         if (window.scrollY > 50) {
                             navbar.classList.add('scrolled');
                         } else {
                             navbar.classList.remove('scrolled');
                         }
+                    });
+                },
+
+                showModal: function() {
+                    document.getElementById('loginModal').classList.add('active');
+                },
+
+                closeModal: function() {
+                    document.getElementById('loginModal').classList.remove('active');
+                },
+
+                doLogin: function() {
+                    this.closeModal();
+                    document.getElementById('landingPage').style.display = 'none';
+                    document.getElementById('dashboardWrapper').classList.add('active');
+                    document.getElementById('navButtons').style.display = 'none';
+                    document.getElementById('userNav').style.display = 'flex';
+                    
+                    const self = this;
+                    setTimeout(function() { self.initCharts(); }, 100);
+                },
+
+                doLogout: function() {
+                    document.getElementById('landingPage').style.display = 'block';
+                    document.getElementById('dashboardWrapper').classList.remove('active');
+                    document.getElementById('navButtons').style.display = 'flex';
+                    document.getElementById('userNav').style.display = 'none';
+                },
+
+                goToDashboard: function() {
+                    document.getElementById('landingPage').style.display = 'none';
+                    document.getElementById('dashboardWrapper').classList.add('active');
+                },
+
+                scrollToSection: function(id) {
+                    const element = document.getElementById(id);
+                    if (element) {
+                        element.scrollIntoView({ behavior: 'smooth' });
                     }
-                });
-            },
+                },
 
-            showModal: function() {
-                const modal = document.getElementById('loginModal');
-                if (modal) modal.classList.add('active');
-            },
+                showPage: function(pageName) {
+                    const pages = ['overview', 'employers', 'members', 'claims'];
+                    pages.forEach(function(page) {
+                        const pageEl = document.getElementById(page + 'Page');
+                        if (pageEl) pageEl.style.display = 'none';
+                    });
 
-            closeModal: function() {
-                const modal = document.getElementById('loginModal');
-                if (modal) modal.classList.remove('active');
-            },
+                    const targetPage = document.getElementById(pageName + 'Page');
+                    if (targetPage) targetPage.style.display = 'block';
 
-            doLogin: function() {
-                this.closeModal();
-                document.getElementById('landingPage').style.display = 'none';
-                document.getElementById('dashboardWrapper').classList.add('active');
-                document.getElementById('navButtons').style.display = 'none';
-                document.getElementById('userNav').style.display = 'flex';
-                setTimeout(() => this.initCharts(), 100);
-            },
+                    document.querySelectorAll('.menu-item').forEach(function(item) {
+                        item.classList.remove('active');
+                    });
+                    
+                    const activeItem = document.querySelector('[data-page="' + pageName + '"]');
+                    if (activeItem) activeItem.classList.add('active');
+                },
 
-            doLogout: function() {
-                document.getElementById('landingPage').style.display = 'block';
-                document.getElementById('dashboardWrapper').classList.remove('active');
-                document.getElementById('navButtons').style.display = 'flex';
-                document.getElementById('userNav').style.display = 'none';
-            },
+                updateROI: function() {
+                    const lives = parseInt(document.getElementById('coveredLives').value) || 5000;
+                    const spend = parseInt(document.getElementById('pharmacySpend').value) || 5000000;
+                    const savings = Math.round(spend * 0.25);
+                    document.getElementById('roiValue').textContent = '$' + savings.toLocaleString();
+                },
 
-            goToDashboard: function() {
-                document.getElementById('landingPage').style.display = 'none';
-                document.getElementById('dashboardWrapper').classList.add('active');
-            },
+                showDemo: function() {
+                    alert('Demo scheduled! We will contact you within 24 hours.');
+                },
 
-            scrollToSection: function(id) {
-                const element = document.getElementById(id);
-                if (element) {
-                    element.scrollIntoView({ behavior: 'smooth' });
-                }
-            },
+                showSignup: function() {
+                    alert('Start your free trial today!');
+                },
 
-            showPage: function(pageName) {
-                // Hide all pages
-                const pages = ['overview', 'employers', 'members', 'claims'];
-                pages.forEach(page => {
-                    const pageEl = document.getElementById(page + 'Page');
-                    if (pageEl) pageEl.style.display = 'none';
-                });
+                contactSales: function() {
+                    alert('Our sales team will contact you shortly!');
+                },
 
-                // Show selected page
-                const targetPage = document.getElementById(pageName + 'Page');
-                if (targetPage) targetPage.style.display = 'block';
+                drawHeroChart: function() {
+                    const canvas = document.getElementById('heroChart');
+                    if (!canvas) return;
 
-                // Update active menu item
-                const menuItems = document.querySelectorAll('.menu-item');
-                menuItems.forEach(item => item.classList.remove('active'));
-                
-                const activeItem = document.querySelector(`[data-page="${pageName}"]`);
-                if (activeItem) activeItem.classList.add('active');
-            },
-
-            updateROI: function() {
-                const lives = parseInt(document.getElementById('coveredLives').value) || 5000;
-                const spend = parseInt(document.getElementById('pharmacySpend').value) || 5000000;
-                const savings = Math.round(spend * 0.25);
-                const roiValue = document.getElementById('roiValue');
-                if (roiValue) {
-                    roiValue.textContent = '$' + savings.toLocaleString();
-                }
-            },
-
-            showDemo: function() {
-                alert('Demo scheduled! We will contact you within 24 hours.');
-            },
-
-            showSignup: function() {
-                alert('Start your free trial today!');
-            },
-
-            contactSales: function() {
-                alert('Our sales team will contact you shortly!');
-            },
-
-            drawHeroChart: function() {
-                const canvas = document.getElementById('heroChart');
-                if (!canvas || !canvas.getContext) return;
-
-                const ctx = canvas.getContext('2d');
-                const width = canvas.width;
-                const height = canvas.height;
-
-                ctx.strokeStyle = '#0066ff';
-                ctx.lineWidth = 3;
-                ctx.beginPath();
-                ctx.moveTo(0, 150);
-                ctx.lineTo(100, 120);
-                ctx.lineTo(200, 140);
-                ctx.lineTo(300, 100);
-                ctx.lineTo(400, 80);
-                ctx.stroke();
-
-                // Add dots
-                ctx.fillStyle = '#0066ff';
-                [0, 100, 200, 300, 400].forEach((x, i) => {
-                    const yValues = [150, 120, 140, 100, 80];
+                    const ctx = canvas.getContext('2d');
+                    ctx.strokeStyle = '#0066ff';
+                    ctx.lineWidth = 3;
                     ctx.beginPath();
-                    ctx.arc(x, yValues[i], 4, 0, Math.PI * 2);
-                    ctx.fill();
-                });
-            },
-
-            drawChart: function(canvasId, labels, data, color) {
-                const canvas = document.getElementById(canvasId);
-                if (!canvas || !canvas.getContext) return;
-
-                const ctx = canvas.getContext('2d');
-                const width = canvas.width;
-                const height = canvas.height;
-                const padding = 60;
-                const graphWidth = width - padding * 2;
-                const graphHeight = height - padding * 2;
-
-                ctx.clearRect(0, 0, width, height);
-
-                const maxValue = Math.max(...data);
-                const minValue = Math.min(...data);
-                const range = maxValue - minValue || 1;
-
-                // Background
-                ctx.fillStyle = '#f9fafb';
-                ctx.fillRect(0, 0, width, height);
-
-                // Grid lines
-                ctx.strokeStyle = '#e5e7eb';
-                ctx.lineWidth = 1;
-                for (let i = 0; i <= 5; i++) {
-                    const y = padding + (graphHeight / 5) * i;
-                    ctx.beginPath();
-                    ctx.moveTo(padding, y);
-                    ctx.lineTo(width - padding, y);
+                    ctx.moveTo(0, 150);
+                    ctx.lineTo(100, 120);
+                    ctx.lineTo(200, 140);
+                    ctx.lineTo(300, 100);
+                    ctx.lineTo(400, 80);
                     ctx.stroke();
-                }
 
-                // Axes
-                ctx.strokeStyle = '#9ca3af';
-                ctx.lineWidth = 2;
-                ctx.beginPath();
-                ctx.moveTo(padding, padding);
-                ctx.lineTo(padding, height - padding);
-                ctx.lineTo(width - padding, height - padding);
-                ctx.stroke();
-
-                // Data line
-                ctx.strokeStyle = color;
-                ctx.lineWidth = 3;
-                ctx.beginPath();
-
-                const stepX = graphWidth / (data.length - 1);
-
-                data.forEach((value, index) => {
-                    const x = padding + stepX * index;
-                    const y = height - padding - ((value - minValue) / range) * graphHeight;
-
-                    if (index === 0) {
-                        ctx.moveTo(x, y);
-                    } else {
-                        ctx.lineTo(x, y);
+                    ctx.fillStyle = '#0066ff';
+                    var xPositions = [0, 100, 200, 300, 400];
+                    var yPositions = [150, 120, 140, 100, 80];
+                    for (var i = 0; i < xPositions.length; i++) {
+                        ctx.beginPath();
+                        ctx.arc(xPositions[i], yPositions[i], 4, 0, Math.PI * 2);
+                        ctx.fill();
                     }
-                });
+                },
 
-                ctx.stroke();
+                drawChart: function(canvasId, labels, data, color) {
+                    const canvas = document.getElementById(canvasId);
+                    if (!canvas) return;
 
-                // Data points
-                ctx.fillStyle = color;
-                data.forEach((value, index) => {
-                    const x = padding + stepX * index;
-                    const y = height - padding - ((value - minValue) / range) * graphHeight;
+                    const ctx = canvas.getContext('2d');
+                    const width = canvas.width;
+                    const height = canvas.height;
+                    const padding = 60;
+                    const graphWidth = width - padding * 2;
+                    const graphHeight = height - padding * 2;
 
+                    ctx.clearRect(0, 0, width, height);
+
+                    const maxValue = Math.max.apply(null, data);
+                    const minValue = Math.min.apply(null, data);
+                    const range = maxValue - minValue || 1;
+
+                    ctx.fillStyle = '#f9fafb';
+                    ctx.fillRect(0, 0, width, height);
+
+                    ctx.strokeStyle = '#e5e7eb';
+                    ctx.lineWidth = 1;
+                    for (var i = 0; i <= 5; i++) {
+                        var y = padding + (graphHeight / 5) * i;
+                        ctx.beginPath();
+                        ctx.moveTo(padding, y);
+                        ctx.lineTo(width - padding, y);
+                        ctx.stroke();
+                    }
+
+                    ctx.strokeStyle = '#9ca3af';
+                    ctx.lineWidth = 2;
                     ctx.beginPath();
-                    ctx.arc(x, y, 5, 0, Math.PI * 2);
-                    ctx.fill();
-                });
+                    ctx.moveTo(padding, padding);
+                    ctx.lineTo(padding, height - padding);
+                    ctx.lineTo(width - padding, height - padding);
+                    ctx.stroke();
 
-                // Labels
-                ctx.fillStyle = '#374151';
-                ctx.font = '12px sans-serif';
-                ctx.textAlign = 'center';
+                    ctx.strokeStyle = color;
+                    ctx.lineWidth = 3;
+                    ctx.beginPath();
 
-                labels.forEach((label, index) => {
-                    const x = padding + stepX * index;
-                    ctx.fillText(label, x, height - padding + 20);
+                    const stepX = graphWidth / (data.length - 1);
+
+                    for (var j = 0; j < data.length; j++) {
+                        var x = padding + stepX * j;
+                        var yVal = height - padding - ((data[j] - minValue) / range) * graphHeight;
+
+                        if (j === 0) {
+                            ctx.moveTo(x, yVal);
+                        } else {
+                            ctx.lineTo(x, yVal);
+                        }
+                    }
+
+                    ctx.stroke();
+
+                    ctx.fillStyle = color;
+                    for (var k = 0; k < data.length; k++) {
+                        var xPos = padding + stepX * k;
+                        var yPos = height - padding - ((data[k] - minValue) / range) * graphHeight;
+
+                        ctx.beginPath();
+                        ctx.arc(xPos, yPos, 5, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+
+                    ctx.fillStyle = '#374151';
+                    ctx.font = '12px sans-serif';
+                    ctx.textAlign = 'center';
+
+                    for (var m = 0; m < labels.length; m++) {
+                        var xLabel = padding + stepX * m;
+                        ctx.fillText(labels[m], xLabel, height - padding + 20);
+                    }
+
+                    ctx.textAlign = 'right';
+                    for (var n = 0; n <= 5; n++) {
+                        var value = maxValue - (range / 5) * n;
+                        var yAxis = padding + (graphHeight / 5) * n;
+                        var displayValue = value >= 1000000 
+                            ? '$' + (value / 1000000).toFixed(1) + 'M' 
+                            : '$' + Math.round(value / 1000) + 'K';
+                        ctx.fillText(displayValue, padding - 10, yAxis + 5);
+                    }
+                },
+
+                initCharts: function() {
+                    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'];
+
+                    const savingsData = [1800000, 1950000, 2100000, 2250000, 2400000, 2550000, 2700000, 2850000, 3000000, 3150000];
+                    this.drawChart('overviewChart', months, savingsData, '#0066ff');
+
+                    const employerData = [850000, 920000, 980000, 1050000, 1120000, 1180000, 1250000, 1320000, 1390000, 1460000];
+                    this.drawChart('employerChart', months, employerData, '#10b981');
+
+                    const memberData = [450000, 480000, 510000, 540000, 570000, 600000, 630000, 660000, 690000, 720000];
+                    this.drawChart('memberChart', months, memberData, '#7c3aed');
+
+                    const claimsData = [5200, 5400, 5600, 5900, 6200, 6500, 6800, 7100, 7400, 7700];
+                    this.drawChart('claimsChart', months, claimsData, '#f59e0b');
+                }
+            };
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', function() { App.init(); });
+            } else {
+                App.init();
+            }
+        })();
+    </script>
+</body>
+</html>
