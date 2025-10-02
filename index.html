@@ -347,8 +347,12 @@
 
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(4, minmax(0, 1fr));
             gap: 2.5rem;
+        }
+
+        .cards-grid > * {
+            min-width: 0;
         }
 
         .card {
@@ -790,8 +794,8 @@
                 <a href="#roi" class="nav-link">ROI Calculator</a>
             </div>
             <div id="navButtons">
-                <button class="btn btn-secondary" onclick="showLogin()">Login</button>
-                <button class="btn btn-primary" onclick="showSignup()">Start Free Trial</button>
+                <button class="btn btn-secondary" onclick="window.showLogin()">Login</button>
+                <button class="btn btn-primary" onclick="window.showSignup()">Start Free Trial</button>
             </div>
             <div id="userNav" style="display: none;">
                 <button class="btn btn-primary" onclick="goToDashboard()">Dashboard</button>
