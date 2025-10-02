@@ -1630,10 +1630,26 @@
                     ctx.lineTo(400, 80);
                     ctx.stroke();
                 }
+                
+                console.log('Page loaded successfully');
             } catch(e) {
-                console.log('Initialization completed');
+                console.error('Initialization error:', e);
             }
         };
+        
+        // Make sure functions are globally available - execute immediately
+        window.showLogin = showLogin;
+        window.closeLogin = closeLogin;
+        window.doLogin = doLogin;
+        window.doLogout = doLogout;
+        window.goToDashboard = goToDashboard;
+        window.showSignup = showSignup;
+        window.showDemo = showDemo;
+        window.scrollToSection = scrollToSection;
+        window.showPage = showPage;
+        window.updateROI = updateROI;
+        
+        console.log('Functions attached:', typeof window.showLogin);
     </script>
 </body>
 </html>
