@@ -1031,19 +1031,19 @@
             
             <div style="padding: 1rem 0;">
                 <div class="menu-item active" onclick="showPage('overview')">
-                    <span>▣</span>
+                    <span style="font-size: 1.2rem;">▣</span>
                     <span>Dashboard Overview</span>
                 </div>
                 <div class="menu-item" onclick="showPage('employers')">
-                    <span>◫</span>
+                    <span style="font-size: 1.2rem;">◫</span>
                     <span>Employer Savings</span>
                 </div>
                 <div class="menu-item" onclick="showPage('members')">
-                    <span>◉</span>
+                    <span style="font-size: 1.2rem;">◉</span>
                     <span>Member Savings</span>
                 </div>
                 <div class="menu-item" onclick="showPage('claims')">
-                    <span>◈</span>
+                    <span style="font-size: 1.2rem;">◈</span>
                     <span>Claims Processing</span>
                 </div>
             </div>
@@ -1422,7 +1422,7 @@
                 <label class="form-label">Password</label>
                 <input type="password" class="form-input" value="password123" id="loginPassword">
             </div>
-            <button class="btn btn-primary" style="width: 100%;" onclick="document.getElementById('loginModal').classList.remove('active'); document.getElementById('landingPage').style.display = 'none'; document.getElementById('dashboardWrapper').classList.add('active'); document.getElementById('navButtons').style.display = 'none'; document.getElementById('userNav').style.display = 'flex'; setTimeout(function(){ window.initCharts(); }, 100);">Login to Dashboard</button>
+            <button class="btn btn-primary" style="width: 100%;" id="loginSubmitBtn">Login to Dashboard</button>
             <p style="text-align: center; margin-top: 1rem; color: var(--gray); font-size: 0.9rem;">Demo credentials pre-filled</p>
         </div>
     </div>
