@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RxConnect Pro - Client Sales Deck</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { margin: 0; overflow: hidden; }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="w-full h-screen flex flex-col">
+        <div id="slide-container" class="flex-1 bg-white shadow-lg mx-4 my-4 rounded-lg overflow-auto relative">
+            <!-- Slides render here -->
+        </div>
+        
+        <div class="flex items-center justify-between px-8 py-4 bg-white border-t">
+            <button id="prev-btn" class="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition">
+                ← Previous
+            </button>
+            
+            <div class="flex items-center gap-4">
+                <span id="slide-counter" class="text-lg font-semibold text-gray-700"></span>
+                <div class="flex gap-2">
+                    <button id="employer-btn" class="px-4 py-2 rounded-lg font-semibold transition bg-blue-600 text-white">Employers</button>
+                    <button id="pharmacy-btn" class="px-4 py-2 rounded-lg font-semibold transition bg-gray-300 text-gray-700 hover:bg-gray-400">Pharmacies</button>
+                </div>
+                <div id="dots" class="flex gap-1"></div>
+            </div>
+            
+            <button id="next-btn" class="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition">
+                Next →
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        let audience = 'employer';
+
+        const employerSlides = [
+            // Title
+            `<div class="flex flex-col items-center justify-center h-full bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-900 text-white px-8">
+                <div class="text-center space-y-8">
+                    <h1 class="text-7xl font-bold mb-4">RxConnect Pro</h1>
+                    <p class="text-3xl font-light mb-8">AI-Powered Prescription Assistance That Actually Works</p>
+                    <p class="text-2xl bg-white/20 backdrop-blur-sm rounded-xl p-6 inline-block">For Employers</p>
+                    <div class="flex gap-8 justify-center text-lg mt-12">
+                        <div>🛡️ HIPAA Compliant</div>
+                        <div>✅ 100% Automated</div>
+                        <div>📈 85%+ Savings</div>
+                    </div>
+                </div>
+            </div>`,
+
+            // Problem
+            `<div class="p-16 space-y-8">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Your Prescription Cost Challenge</h2>
+                <div class="h-1 bg-gradient-to-r from-blue-600 to-purple-600 w-32 mb-8"></div>
+                
+                <p class="text-2xl text-gray-700 leading-relaxed">
+                    <strong>Specialty medications are crushing your benefits budget</strong> — and your employees are struggling to afford their prescriptions.
+                </p>
+                
+                <div class="grid grid-cols-2 gap-6">
+                    <div class="bg-red-50 border-l-4 border-red-500 p-6 rounded-r-lg">
+                        <h3 class="text-xl font-bold text-red-900 mb-4">The Financial Impact</h3>
+                        <ul class="space-y-3 text-gray-700">
+                            <li class="flex items-start gap-3">
+                                <span class="text-red-600 font-bold text-2xl">•</span>
+                                <span>Specialty drugs: <strong>$6,000-$12,000+ per employee annually</strong></span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-red-600 font-bold text-2xl">•</span>
+                                <span>Benefits costs rising <strong>8-12% year over year</strong></span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-red-600 font-bold text-2xl">•</span>
+                                <span>Average employer wastes <strong>$250K+ annually</strong> on avoidable Rx costs</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-red-50 border-l-4 border-red-500 p-6 rounded-r-lg">
+                        <h3 class="text-xl font-bold text-red-900 mb-4">The Employee Impact</h3>
+                        <ul class="space-y-3 text-gray-700">
+                            <li class="flex items-start gap-3">
+                                <span class="text-red-600 font-bold text-2xl">•</span>
+                                <span><strong>30% abandon prescriptions</strong> due to cost</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-red-600 font-bold text-2xl">•</span>
+                                <span>Leads to <strong>worse health outcomes & higher claims</strong></span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-red-600 font-bold text-2xl">•</span>
+                                <span><strong>Decreased productivity</strong> and increased absenteeism</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="bg-gradient-to-r from-orange-100 to-red-100 border-2 border-orange-400 rounded-lg p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Why Copay Assistance Programs Fail</h3>
+                    <div class="grid grid-cols-2 gap-6">
+                        <ul class="space-y-2 text-gray-700">
+                            <li>❌ Employees don't know programs exist</li>
+                            <li>❌ Complex enrollment (45+ minutes)</li>
+                            <li>❌ Limited call center hours & long waits</li>
+                        </ul>
+                        <ul class="space-y-2 text-gray-700">
+                            <li>❌ No proactive outreach to eligible members</li>
+                            <li>❌ Programs change constantly, hard to track</li>
+                            <li>❌ <strong>Result: Only 20-35% enrollment rate</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>`,
+
+            // Solution
+            `<div class="p-16 space-y-8">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Introducing RxConnect Pro: AI That Solves It All</h2>
+                <div class="h-1 bg-gradient-to-r from-blue-600 to-purple-600 w-32 mb-8"></div>
+                
+                <p class="text-2xl text-gray-700 leading-relaxed">
+                    <strong>100% automated prescription assistance</strong> that finds and enrolls your employees in savings programs — with zero effort from you.
+                </p>
+                
+                <div class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-8 rounded-xl">
+                    <h3 class="text-2xl font-bold mb-6">How It Works: Complete Automation</h3>
+                    <div class="grid grid-cols-3 gap-6">
+                        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6">
+                            <div class="bg-white text-blue-900 w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mb-4 mx-auto">1</div>
+                            <h4 class="font-bold text-lg mb-3 text-center">AI Identifies & Contacts</h4>
+                            <p class="text-sm text-center opacity-90">Proactively reaches out to employees on high-cost medications</p>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6">
+                            <div class="bg-white text-blue-900 w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mb-4 mx-auto">2</div>
+                            <h4 class="font-bold text-lg mb-3 text-center">Real-Time Program Matching</h4>
+                            <p class="text-sm text-center opacity-90">Searches 500+ manufacturer programs instantly</p>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6">
+                            <div class="bg-white text-blue-900 w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mb-4 mx-auto">3</div>
+                            <h4 class="font-bold text-lg mb-3 text-center">Complete Enrollment</h4>
+                            <p class="text-sm text-center opacity-90">Guides through application, submits forms, follows up automatically</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-4 gap-6">
+                    <div class="bg-gradient-to-br from-green-50 to-green-100 border-2 border-green-400 rounded-lg p-6 text-center">
+                        <p class="text-3xl font-bold text-green-700 mb-2">24/7</p>
+                        <p class="text-sm text-gray-700">Always Available</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-blue-50 to-blue-100 border-2 border-blue-400 rounded-lg p-6 text-center">
+                        <p class="text-3xl font-bold text-blue-700 mb-2">85%+</p>
+                        <p class="text-sm text-gray-700">Cost Reduction</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-purple-50 to-purple-100 border-2 border-purple-400 rounded-lg p-6 text-center">
+                        <p class="text-3xl font-bold text-purple-700 mb-2">&lt;3min</p>
+                        <p class="text-sm text-gray-700">Average Call</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-orange-50 to-orange-100 border-2 border-orange-400 rounded-lg p-6 text-center">
+                        <p class="text-3xl font-bold text-orange-700 mb-2">90%+</p>
+                        <p class="text-sm text-gray-700">Success Rate</p>
+                    </div>
+                </div>
+                
+                <div class="bg-blue-50 border-2 border-blue-400 rounded-lg p-6">
+                    <p class="text-xl text-blue-900 text-center">
+                        <strong>Your employees get help automatically.</strong> Your benefits budget gets relief immediately. Zero work required from HR.
+                    </p>
+                </div>
+            </div>`,
+
+            // ROI
+            `<div class="p-16 space-y-8">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Your Potential Savings</h2>
+                <div class="h-1 bg-gradient-to-r from-blue-600 to-purple-600 w-32 mb-8"></div>
+                
+                <p class="text-2xl text-gray-700">
+                    Calculate your annual savings with RxConnect Pro based on your employee count.
+                </p>
+                
+                <div class="bg-gradient-to-br from-green-50 to-green-100 border-2 border-green-400 rounded-xl p-8">
+                    <h3 class="text-2xl font-bold text-green-900 mb-6 text-center">Conservative Savings Estimate</h3>
+                    
+                    <div class="grid grid-cols-3 gap-6 mb-8">
+                        <div class="bg-white rounded-lg p-6 shadow-md">
+                            <p class="text-sm text-gray-600 mb-2">Your Company Size</p>
+                            <p class="text-4xl font-bold text-gray-800">1,000</p>
+                            <p class="text-sm text-gray-500 mt-1">Employees</p>
+                        </div>
+                        
+                        <div class="bg-white rounded-lg p-6 shadow-md">
+                            <p class="text-sm text-gray-600 mb-2">On Specialty Medications</p>
+                            <p class="text-4xl font-bold text-gray-800">50</p>
+                            <p class="text-sm text-gray-500 mt-1">~5% of workforce</p>
+                        </div>
+                        
+                        <div class="bg-white rounded-lg p-6 shadow-md">
+                            <p class="text-sm text-gray-600 mb-2">Avg Cost per Employee</p>
+                            <p class="text-4xl font-bold text-gray-800">$8K</p>
+                            <p class="text-sm text-gray-500 mt-1">Specialty Rx annually</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-xl p-8 text-center">
+                        <p class="text-lg mb-2 opacity-90">Your Annual Savings with RxConnect Pro</p>
+                        <p class="text-6xl font-bold mb-4">$160,000</p>
+                        <p class="text-lg opacity-90">Plus improved employee satisfaction and retention</p>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-3 gap-6">
+                    <div class="bg-white border-2 border-gray-300 rounded-lg p-6">
+                        <h4 class="font-bold text-gray-800 mb-3">Traditional Approach</h4>
+                        <ul class="space-y-2 text-sm text-gray-700">
+                            <li>• Call center: $50K+/year</li>
+                            <li>• Limited hours, long waits</li>
+                            <li>• 20-35% enrollment rate</li>
+                            <li>• High employee frustration</li>
+                        </ul>
+                        <p class="mt-4 text-2xl font-bold text-red-600">$50K/year</p>
+                    </div>
+                    
+                    <div class="bg-gradient-to-br from-blue-50 to-blue-100 border-2 border-blue-500 rounded-lg p-6">
+                        <h4 class="font-bold text-blue-900 mb-3">RxConnect Pro</h4>
+                        <ul class="space-y-2 text-sm text-gray-700">
+                            <li>• AI automation: $6K/year</li>
+                            <li>• 24/7 availability</li>
+                            <li>• 85%+
