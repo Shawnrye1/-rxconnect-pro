@@ -794,8 +794,8 @@
                 <a href="#roi" class="nav-link">ROI Calculator</a>
             </div>
             <div id="navButtons">
-                <button class="btn btn-secondary" id="loginBtn">Login</button>
-                <button class="btn btn-primary" id="signupBtn">Start Free Trial</button>
+                <button class="btn btn-secondary" id="loginBtn" onclick="document.getElementById('loginModal').classList.add('active')">Login</button>
+                <button class="btn btn-primary" id="signupBtn" onclick="alert('Start your free trial today!')">Start Free Trial</button>
             </div>
             <div id="userNav" style="display: none;">
                 <button class="btn btn-primary" onclick="goToDashboard()">Dashboard</button>
@@ -1406,9 +1406,9 @@
         </main>
     </div>
 
-    <div class="modal" id="loginModal" onclick="if(event.target.id === 'loginModal') closeLogin()">
+    <div class="modal" id="loginModal" onclick="if(event.target.id === 'loginModal') document.getElementById('loginModal').classList.remove('active')">
         <div class="modal-content" onclick="event.stopPropagation()">
-            <button style="position: absolute; right: 1.5rem; top: 1.5rem; background: none; border: none; font-size: 2rem; cursor: pointer; color: var(--gray); transition: color 0.2s ease;" onclick="closeLogin()">&times;</button>
+            <button style="position: absolute; right: 1.5rem; top: 1.5rem; background: none; border: none; font-size: 2rem; cursor: pointer; color: var(--gray); transition: color 0.2s ease;" onclick="document.getElementById('loginModal').classList.remove('active')">&times;</button>
             <div style="text-align: center; margin-bottom: 2rem;">
                 <div style="width: 70px; height: 70px; margin: 0 auto 1rem; background: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%); border-radius: 18px; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; color: white; font-weight: 700; box-shadow: 0 12px 32px rgba(0, 102, 255, 0.35);">◈</div>
                 <h2 style="font-size: 2.2rem; margin-bottom: 0.5rem;">Welcome Back</h2>
@@ -1422,7 +1422,7 @@
                 <label class="form-label">Password</label>
                 <input type="password" class="form-input" value="password123" id="loginPassword">
             </div>
-            <button class="btn btn-primary" style="width: 100%;" onclick="doLogin()">Login to Dashboard</button>
+            <button class="btn btn-primary" style="width: 100%;" onclick="document.getElementById('loginModal').classList.remove('active'); document.getElementById('landingPage').style.display = 'none'; document.getElementById('dashboardWrapper').classList.add('active'); document.getElementById('navButtons').style.display = 'none'; document.getElementById('userNav').style.display = 'flex'; setTimeout(function(){ window.initCharts(); }, 100);">Login to Dashboard</button>
             <p style="text-align: center; margin-top: 1rem; color: var(--gray); font-size: 0.9rem;">Demo credentials pre-filled</p>
         </div>
     </div>
